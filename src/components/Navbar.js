@@ -22,6 +22,14 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+
+  navBar: {
+    background : '#d50000'
+  },
+
+  loginBtn : {
+    color : 'green'
+  }
 }));
 
 export default function Navbar() {
@@ -44,7 +52,7 @@ export default function Navbar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" className={classes.navBar}>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
@@ -54,7 +62,7 @@ export default function Navbar() {
           </Typography>
           <FormGroup>
         <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
+          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" color="primary" />}
           label={auth ? 'Logout' : 'Login'}
         />
       </FormGroup>

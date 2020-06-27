@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar';
+import Menu from './components/Menu';
 import { Container,Button, Typography } from '@material-ui/core';
 import {
   BrowserRouter as Router,
@@ -12,7 +13,12 @@ import {
 function App() {
   return (
     <div >
-      <Navbar/>
+      <Router>
+        {/* <Navbar/> */}
+        <Switch>
+          <Route path='/' component={Menu}/>
+        </Switch>        
+      </Router>
     </div>
   );
 }
