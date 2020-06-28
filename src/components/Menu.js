@@ -8,18 +8,7 @@ import ControlImage from '../static/contservi.png';
 import DesincorpImage from '../static/desincorp.png';
 
 
-const sections = [
-    { title: 'Technology', url: '#' },
-    { title: 'Design', url: '#' },
-    { title: 'Culture', url: '#' },
-    { title: 'Business', url: '#' },
-    { title: 'Politics', url: '#' },
-    { title: 'Opinion', url: '#' },
-    { title: 'Science', url: '#' },
-    { title: 'Health', url: '#' },
-    { title: 'Style', url: '#' },
-    { title: 'Travel', url: '#' },
-  ];
+
 
 const featuredPosts = [
   {
@@ -52,7 +41,7 @@ const mainFeaturedPost = {
 const Menu = () =>{
     return (
         <Container maxWidth="lg">
-            <Header title="Metrobús" sections={sections} />
+            {/* <Header title="Metrobús" sections={sections} /> */}
             <main>
                 <MainFeaturedPost post={mainFeaturedPost} />
                 <Grid container spacing={4}>
