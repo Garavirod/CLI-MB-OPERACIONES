@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Menu from './components/Menu';
 import Header from './components/Header';
+import Forms from './components/Checkout';
 import { Container,Button, Typography } from '@material-ui/core';
 import {
   BrowserRouter as Router,
@@ -33,6 +34,8 @@ function App() {
         <Header title="Metrobús" sections={sections} />
         <Switch>
           <Route path='/operaciones' component={Menu}/>
+
+          <Route path='/formulario' component={Forms}/>
         </Switch>        
       </Router>
     </div>
