@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    backgroundImage: 'url(../public/mb.jpg)',
+    backgroundImage: 'url(../static/Metrobus_Mexico.png)',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -52,10 +52,7 @@ export default function MainFeaturedPost(props) {
             </Typography>
             <Typography variant="h5" color="inherit" paragraph>
               {post.description}
-            </Typography>
-            <Link variant="subtitle1" href="#">
-              {post.linkText}
-            </Link>
+            </Typography>            
           </div>
         </Grid>
       </Grid>

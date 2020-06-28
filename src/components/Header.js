@@ -8,6 +8,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Link from '@material-ui/core/Link';
+import LogoMB from '../static/Metrobus_Mexico.png'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -24,6 +25,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     flexShrink: 0,
   },
+
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),  
+    background : 'red',
+    font:'bold'
+  },
 }));
 
 export default function Header(props) {
@@ -32,8 +40,8 @@ export default function Header(props) {
 
   return (
     <React.Fragment>
-      <Toolbar className={classes.toolbar}>
-      <Avatar alt="" src="" />        
+      <Toolbar className={classes.toolbar}>      
+      <Avatar variant="square" className={classes.large}>MB</Avatar>
         <Typography
           component="h2"
           variant="h5"
@@ -50,6 +58,7 @@ export default function Header(props) {
         <Button variant="outlined" size="small">
           Log out
         </Button>
+        <Avatar alt="" src="" />
       </Toolbar>
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {sections.map((section) => (
