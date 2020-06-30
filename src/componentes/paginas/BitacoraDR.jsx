@@ -8,6 +8,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -17,18 +18,6 @@ import TextField from '@material-ui/core/TextField';
 
 
 
-/* function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Proyecto Metrobus
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-} */
 const useStyles = makeStyles((theme) => ({
 	formControl: {
 	  margin: theme.spacing(1),
@@ -261,6 +250,8 @@ const useStyles = makeStyles((theme) => ({
         />
 
 
-	</Container>	
+
+  </Container>	
+  
   );
 }

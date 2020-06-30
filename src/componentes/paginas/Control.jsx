@@ -16,21 +16,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 
 
-
-
-
-/* function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Proyecto Metrobus
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-} */
 const useStyles = makeStyles((theme) => ({
 	formControl: {
 	  margin: theme.spacing(1),
@@ -43,9 +28,198 @@ const useStyles = makeStyles((theme) => ({
 
   return (
     <Container component="main">
-		<h5>BITACORA DE DESINCORPORACIONES Y REEMPLAZOS </h5>
-		<h6>CORREDOR INSURGENTES</h6>
+		<h5>CONTROL DE SERVICIOS EN TERMINALES </h5>
+		<h6>CORREDOR EJE 1 PTE "VALLEJO"</h6>
 		<br/>
+
+	
+
+	<FormControl component="fieldset">
+      <FormLabel component="legend">Asignación:</FormLabel>
+      <RadioGroup row aria-label="position" name="position" defaultValue="top">
+        <FormControlLabel
+          value="salida"
+          control={<Radio color="primary" />}
+          label="Salida"
+          labelPlacement="salida"
+        />
+
+		<FormControlLabel
+          value="paso"
+          control={<Radio color="primary" />}
+          label="Paso"
+          labelPlacement="paso"
+        />
+
+	<FormControlLabel
+          value="llegada"
+          control={<Radio color="primary" />}
+          label="llegada"
+          labelPlacement="llegada"
+        />
+      </RadioGroup>
+    </FormControl>
+	<br/>
+
+
+	  <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="grouped-native-select">Ubicación</InputLabel>
+        <Select native defaultValue="" id="grouped-native-select">
+          <option aria-label="None" value="" />
+            <option value={1}>Indios Verdes</option>
+            <option value={2}>Insurgentes</option>
+			<option value={3}>La Joya</option>
+
+        </Select>
+      </FormControl>
+	  <br/>
+	  <br/>
+
+	  <FormControl component="fieldset">
+      <FormLabel component="legend">Sentido:</FormLabel>
+      <RadioGroup row aria-label="position" name="position" defaultValue="top">
+
+		<FormControlLabel
+          value="i17"
+          control={<Radio color="primary" />}
+          label="i17"
+          labelPlacement="i17"
+        />
+
+	<FormControlLabel
+          value="i18"
+          control={<Radio color="primary" />}
+          label="i18"
+          labelPlacement="i18"
+        />
+      </RadioGroup>
+    </FormControl>
+	<br/>
+
+	  <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="grouped-native-select">No. Económico</InputLabel>
+        <Select native defaultValue="" id="grouped-native-select">
+          <option aria-label="None" value="" />
+            <option value={1}>1041</option>
+            <option value={2}>1042</option>
+			<option value={3}>1043</option>
+            <option value={4}>1044</option>
+        </Select>
+      </FormControl>
+
+	  <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="grouped-native-select">No. Corrida</InputLabel>
+        <Select native defaultValue="" id="grouped-native-select">
+          <option aria-label="None" value="" />
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+			<option value={3}>3</option>
+            <option value={4}>4</option>
+        </Select>
+      </FormControl>
+	  <br/><br/>
+
+	  <form className={classes.container} noValidate>
+	  <TextField
+        id="time"
+        label="Hora Real"
+        type="time"
+        defaultValue="07:30"
+        className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        inputProps={{
+          step: 300, // 5 min
+        }}
+      />
+      
+    <TextField
+        id="time"
+        label="Salida"
+        type="time"
+        defaultValue="07:30"
+        className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        inputProps={{
+          step: 300, // 5 min
+        }}
+      />
+    </form>
+	<br/>
+
+  <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="grouped-native-select">Origen</InputLabel>
+        <Select native defaultValue="" id="grouped-native-select">
+          <option aria-label="None" value="" />
+            <option value={1}>Tenayuca</option>
+            <option value={2}>La Raza</option>
+			      <option value={3}>Buenavista</option>
+            <option value={4}>Hidalgo</option>
+        </Select>
+      </FormControl>
+    
+      <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="grouped-native-select">Destino</InputLabel>
+        <Select native defaultValue="" id="grouped-native-select">
+          <option aria-label="None" value="" />
+          <option value={1}>Tenayuca</option>
+            <option value={2}>La Raza</option>
+			      <option value={3}>Buenavista</option>
+            <option value={4}>Hidalgo</option>
+        </Select>
+      </FormControl>
+
+	<br/>	<br/>
+	<FormControl component="fieldset">
+      <FormLabel component="legend">Situación:</FormLabel>
+      <RadioGroup row aria-label="position" name="position" defaultValue="top">
+        <FormControlLabel
+          value="incorporacion"
+          control={<Radio color="primary" />}
+          label="Incorporación"
+          labelPlacement="incorporacion"
+        />
+
+		<FormControlLabel
+          value="desincorporación"
+          control={<Radio color="primary" />}
+          label="Desincorporación"
+          labelPlacement="desincorporación"
+        />
+
+	<FormControlLabel
+          value="ajuste"
+          control={<Radio color="primary" />}
+          label="Ajuste"
+          labelPlacement="ajuste"
+        />
+      </RadioGroup>
+    </FormControl>
+	<br/>
+
+  <form className={classes.root} noValidate autoComplete="off">
+      <TextField id="Kilometraje-basic" label="Kilometraje" />
+    </form>
+    <br/>
+
+    <form className={classes.root} noValidate autoComplete="off">
+      <TextField id="credmb-basic" label="Cred. MB" />
+    </form>
+
+      <br/><br/>
+      <TextField
+          id="outlined-multiline-static"
+          label="Observaciones"
+          multiline
+          rows={5}
+          defaultValue="..."
+          variant="outlined"
+        />
+
+
 	</Container>	
   );
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { makeStyles, Hidden} from '@material-ui/core';
 import SideBar from './SideBar';
 import Cajon from './Cajon';
-import Control from '../paginas/Control';
+import Control from '../paginas/BitacoraDR';
 import Routes from '../../Routes';
 
 const estilo = makeStyles(theme =>({
@@ -13,7 +13,7 @@ const estilo = makeStyles(theme =>({
     content: {
         flexGrow: 1,
         backgroundColor: 'white',
-        padding: theme.spacing(3),
+        padding: theme.spacing(1),
     },
 }));
 

@@ -15,8 +15,7 @@ const useStyles = makeStyles((theme) => ({
 
   return (
     <Container component="main">
-		<h5>JUSTIFICACIÓN SEMANA </h5>
-		<h6>CORREDOR INSURGENTES</h6>
+		<h5>!Bienvenido Gabriel Gaspar! </h5>
 		<br/>
   </Container>	
   
