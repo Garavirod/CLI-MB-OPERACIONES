@@ -40,7 +40,14 @@ const Lista = () => {
                     </ListItemIcon>
                 </ListItem>
 
-                
+                <ListItem button>
+                    <ListItemIcon>
+                        <ListAltIcon/>
+                        <a href="/reportes">
+                            <ListItemText primary="Reportes"/>
+                        </a>
+                    </ListItemIcon>
+                </ListItem>
             </List>
             </Router>
 

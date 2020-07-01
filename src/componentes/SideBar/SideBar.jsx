@@ -21,11 +21,17 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up('sm')]: {
             width: `calc(100% - ${240}px)`,
             marginLeft: 240,
+            background:'#4caf50'
         },
         backgroundColor: theme.palette.error.dark,
+        
     },
     badge: {
         color: theme.palette.success.main,
+    },
+
+    backMB:{
+        background:'#4caf50'
     }
 }))
 
@@ -44,7 +50,7 @@ const SideBar = (props) => {
                     JUD Operación Técnica y Estadística
                 </Typography>
                     <IconButton color="inherit">
-                        <Badge color="secondary" variant="dot">
+                        <Badge className={classes.backMB} variant="dot">
                             <SaveIcon />
                         </Badge>
                     </IconButton>
