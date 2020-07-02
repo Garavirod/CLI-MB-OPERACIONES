@@ -8,7 +8,8 @@ import Levantamiento from './componentes/paginas/Levantamiento';
 import Control from './componentes/paginas/Control';
 import BitacoraDR from './componentes/paginas/BitacoraDR';
 import Principal from './componentes/paginas/Principal';
-import Reportes from './componentes/paginas/Reportes';
+// import Reportes from './componentes/paginas/Reportes';
+import MainReportes from './componentes/paginas/MainReportes'
 const Routes = () => {
     return ( 
         <Router>
@@ -22,7 +23,7 @@ const Routes = () => {
                 </Route>
                 <Route path="/ControlDeServicios" component={Control} exact>
                 </Route>
-                <Route path='/reportes' component={Reportes}/>                                
+                <Route path='/reportes/' component={MainReportes}/>                                
             </div>
         </Router>
      );
