@@ -76,28 +76,12 @@ const columns = [
     },
 ];
 
-function createData(fecha, corrida, economico, hora,lugar, descripcion,) {
-    // const density = population / size;
-    // const num = population / size;
-  return { fecha, corrida, economico, hora, lugar, descripcion};
-}
+// function createData(fecha, corrida, economico, hora,lugar, descripcion,) {
+//     // const density = population / size;
+//     // const num = population / size;
+//   return { fecha, corrida, economico, hora, lugar, descripcion};
+// }
 
-const rows = [
-//   createData('23-12-19', 21, 143, '23:12','TEPALCATES','APOYO'),
-{fecha:'23-12-19', corrida:21, economico:345, hora:'12:43', lugar:'TEPALCATES',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
-{fecha:'23-12-19', corrida:21, economico:345, hora:'12:43', lugar:'TEPALCATES',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
-{fecha:'23-12-19', corrida:21, economico:345, hora:'12:43', lugar:'TEPALCATES',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
-{fecha:'23-12-19', corrida:21, economico:345, hora:'12:43', lugar:'TEPALCATES',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
-{fecha:'23-12-19', corrida:21, economico:345, hora:'12:43', lugar:'TEPALCATES',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
-{fecha:'23-12-19', corrida:21, economico:345, hora:'12:43', lugar:'TEPALCATES',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
-{fecha:'23-12-19', corrida:21, economico:345, hora:'12:43', lugar:'TEPALCATES',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
-{fecha:'23-12-19', corrida:21, economico:345, hora:'12:43', lugar:'TEPALCATES',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
-{fecha:'23-12-19', corrida:21, economico:345, hora:'12:43', lugar:'TEPALCATES',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
-{fecha:'23-12-19', corrida:21, economico:345, hora:'12:43', lugar:'TEPALCATES',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
-{fecha:'23-12-19', corrida:21, economico:345, hora:'12:43', lugar:'TEPALCATES',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
-{fecha:'23-12-19', corrida:21, economico:345, hora:'12:43', lugar:'TEPALCATES',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
-
-];
 
 const useStyles = makeStyles({
   root: {
@@ -114,10 +98,12 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Reportes() {
+export default function Reportes(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const { data, title } = props;
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -132,7 +118,7 @@ export default function Reportes() {
       <Container maxWidth="md" fixed>
         <Typography component="div">
         <Box textAlign="center" m={1} fontSize="h3.fontSize">
-        Apoyos
+        {title}
       </Box>
       <Button
         variant="contained"
@@ -160,7 +146,7 @@ export default function Reportes() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+            {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {
@@ -184,7 +170,7 @@ export default function Reportes() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
