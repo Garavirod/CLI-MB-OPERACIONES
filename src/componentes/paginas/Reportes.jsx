@@ -87,13 +87,6 @@ const informes = [
   {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
   {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
   {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
-  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
-  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
-  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
-  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
-  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
-  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
-  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
 ]
 
 // function createData(fecha, corrida, economico, hora,lugar, descripcion,) {
