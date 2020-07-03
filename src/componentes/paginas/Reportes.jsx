@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import Button from '@material-ui/core/Button';
+import ModalList from './ModalList';
 
 const columns = [
     // El id tiene que llamrse igul que la variable que rcive el createData
@@ -75,6 +76,25 @@ const columns = [
         format: (value) => value.toFixed(3),
     },
 ];
+
+const informes = [
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+  {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
+]
 
 // function createData(fecha, corrida, economico, hora,lugar, descripcion,) {
 //     // const density = population / size;
@@ -155,7 +175,7 @@ export default function Reportes(props) {
                       <TableCell key={column.id} align={column.align}>
                         {
                             column.label === 'Informe' ? 
-                            <Button size="small" color="primary" className={classes.margin}>Ver lista</Button>
+                            <ModalList data={informes}/>
                             : (column.format && typeof value === 'number' ? column.format(value) : value)
                         }                                                                                           
                       </TableCell>
