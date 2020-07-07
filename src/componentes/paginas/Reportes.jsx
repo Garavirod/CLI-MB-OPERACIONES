@@ -96,6 +96,98 @@ const informes = [
 // }
 
 
+const columns1 = [
+  // El id tiene que llamrse igul que la variable que rcive el createData
+  { id: 'fecha', label: 'Fecha', minWidth: 170 },
+  { id: 'corrida', label: 'Corrida', minWidth: 100 },
+  {
+    id: 'economico',
+    label: 'Económico',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'hora',
+    label: 'Hora)',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'lugar',
+    label: 'Lugar',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toFixed(2),
+  },
+  {
+      id: 'descripcion',
+      label: 'Descripción',
+      minWidth: 170,
+      align: 'right',
+      format: (value) => value.toFixed(3),
+  },
+  {
+      id: 'infrome',
+      label: 'Informe',
+      minWidth: 170,
+      align: 'right',
+      format: (value) => value.toFixed(3),
+  },
+  {
+      id: 'total',
+      label: 'Total KM',
+      minWidth: 170,
+      align: 'right',
+      format: (value) => value.toFixed(3),
+  },
+  {
+      id: 'validar',
+      label: 'Validar',
+      minWidth: 170,
+      align: 'right',
+      format: (value) => value.toFixed(3),
+  },
+  {
+      id: 'obs',
+      label: 'Observación',
+      minWidth: 170,
+      align: 'right',
+      format: (value) => value.toFixed(3),
+  },
+];
+
+// COLUMNOS 2
+const columns2 = [
+  // El id tiene que llamrse igul que la variable que rcive el createData
+  { id: 'numRegla', label: 'Nombre reglA', minWidth: 170 },
+  { id: 'regla', label: 'Regla', minWidth: 100 },
+  {
+    id: 'deduc',
+    label: 'Deducciones',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'referencia',
+    label: 'Referencia',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'rubro',
+    label: 'Rubro',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toFixed(2),
+  },
+];
+
+
+
 const useStyles = makeStyles({
   root: {
     width: '130%',
@@ -116,6 +208,12 @@ export default function Reportes(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const { data, title } = props;
+  var columns;
+  if(title == 'Reglas'){
+    columns = columns2;
+  }else{
+    columns = columns1;
+  }
 
 
   const handleChangePage = (event, newPage) => {

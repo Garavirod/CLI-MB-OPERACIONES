@@ -17,8 +17,8 @@ const sections = [
     { title: 'Incumplimientos', url: '/reportes/incumplimientos' },
     { title: 'Afectaciones', url: '/reportes/afectaciones' },
     { title: 'Deducciones', url: '/reportes/deducciones' },
-    { title: 'Rsumen 1', url: '/reportes' },
-    { title: 'Rsumen 2', url: '/reportes' },
+    { title: 'Reglas (RO)', url: '/reportes/reglas' },
+    // { title: 'Rsumen 2', url: '/reportes' },
   ];
 
   const apoyos = [
@@ -72,6 +72,39 @@ const sections = [
         
     ];
 
+    const deducciones = [
+        //   createData('23-12-19', 21, 143, '23:12','TEPALCATES','APOYO'),
+        {fecha:'15-10-18', corrida:21, economico:345, hora:'12:43', lugar:'Dr. Galvez',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
+        {fecha:'15-10-18', corrida:21, economico:345, hora:'12:43', lugar:'Dr. Galvez',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
+        {fecha:'15-10-18', corrida:21, economico:345, hora:'12:43', lugar:'Dr. Galvez',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
+        {fecha:'15-10-18', corrida:21, economico:345, hora:'12:43', lugar:'Dr. Galvez',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
+        {fecha:'15-10-18', corrida:21, economico:345, hora:'12:43', lugar:'Dr. Galvez',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
+        {fecha:'15-10-18', corrida:21, economico:345, hora:'12:43', lugar:'Dr. Galvez',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
+        {fecha:'15-10-18', corrida:21, economico:345, hora:'12:43', lugar:'Dr. Galvez',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
+        {fecha:'15-10-18', corrida:21, economico:345, hora:'12:43', lugar:'Dr. Galvez',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
+        {fecha:'15-10-18', corrida:21, economico:345, hora:'12:43', lugar:'Dr. Galvez',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
+        {fecha:'15-10-18', corrida:21, economico:345, hora:'12:43', lugar:'Dr. Galvez',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
+        {fecha:'15-10-18', corrida:21, economico:345, hora:'12:43', lugar:'Dr. Galvez',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
+        {fecha:'15-10-18', corrida:21, economico:345, hora:'12:43', lugar:'Dr. Galvez',descripcion:'APOYO', infrome:'', total:23.32, validar:'ok', obs:'Ninguna'},
+        
+    ];
+
+    const reglas = [
+        //   createData('23-12-19', 21, 143, '23:12','TEPALCATES','APOYO'),
+        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridosin la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridosin la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridosin la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridosin la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridosin la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridosin la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridosin la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridosin la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridosin la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridosin la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridosin la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridosin la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        
+    ];
     
 
 const MainReportes = ()=>{
@@ -89,10 +122,18 @@ const MainReportes = ()=>{
                 <Route path='/reportes/incumplimientos'>
                     <Reportes title="Incumplimientos" data={incumplimientos}/>
                 </Route>
+                <Route path='/reportes/reglas'>
+                    <Reportes title="Reglas" data={reglas}/>
+                </Route>
+                <Route path='/reportes/deducciones'>
+                    <Reportes title="Deducciones" data={deducciones}/>
+                </Route>
                 <Route path='/reportes/'>
-                    <h5>Bienvendo a la sección de reportes</h5>
+                    <br/><br/>
+                    <h5>Bienvenido a la sección de reportes</h5>
+                    <br/><br/>
                     <p>
-                        En esta sección podrá visualizar los datos involucrados en los fromatos de control de servicios, bitacora de incorpoeraciones y entre ontros.
+                        En esta sección podrá visualizar los datos involucrados en los formatos, tales como:  control de servicios, bitácora de incorporaciones y desincorporaciones entre ontros.
                         asi como también descargar los fromatos en PDF.
                         
                     </p>
