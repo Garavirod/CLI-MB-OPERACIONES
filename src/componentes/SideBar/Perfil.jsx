@@ -11,8 +11,8 @@ const Perfil = () => {
           minHeight: 'fit-content'
         },
         avatar: {
-          width: 100,
-          height: 100
+          width: 130,
+          height: 130
         },
         name: {
           marginTop: theme.spacing(1)
@@ -30,11 +30,14 @@ const Perfil = () => {
       />
       <Typography
         className={classes.name}
+        style={{ color: '#FFFFFF' }}
         variant="h4"
       >
         Gabriel Gaspar 
       </Typography>
-      <Typography variant="body2">Titular</Typography>
+      <Typography 
+      style={{ color: '#FFFFFF' }}
+      variant="body2">Titular</Typography>
         </div>
      );
 }

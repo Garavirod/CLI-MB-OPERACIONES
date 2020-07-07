@@ -9,6 +9,9 @@ const estilos = makeStyles(theme => ({
     },
     drawerPaper: {
         width: 240,
+        background:'#4caf50',
+        
+        
     },
     toolbar: theme.mixins.toolbar
 }))

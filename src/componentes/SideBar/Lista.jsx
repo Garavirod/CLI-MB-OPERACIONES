@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { List, ListItem, ListItemIcon, ListItemText,Typography, makeStyles } from '@material-ui/core';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import {
     BrowserRouter as Router,
@@ -7,44 +7,65 @@ import {
     Route,
     Switch,
   } from 'react-router-dom';
+
+  const useStyles = makeStyles((theme) => ({
+    icon: {
+    color: '#FFFFFF',
+    marginRight: 5,
+    }
+    }));
+
 const Lista = () => {
+    const classes=useStyles();
     return ( 
         <div>
             <Router>
 
             <List component="nav">
-                <ListItem button>
+                <ListItem button >
                     <ListItemIcon>
-                        <ListAltIcon/>
+                        <ListAltIcon className={classes.icon}/>
                         <a href="/JustificacionSemana">
-                            <ListItemText primary="Justificación Semana"/>
+                        <ListItemText
+                                    disableTypography
+                                    primary={<Typography variant="h5" style={{ color: '#FFFFFF' }}>Justificación Semana</Typography>}
+                                />
                         </a>
                     </ListItemIcon>
                 </ListItem>
 
                 <ListItem button>
                     <ListItemIcon>
-                        <ListAltIcon/>
+                    <ListAltIcon className={classes.icon}/>
                         <a href="/ControlDeServicios">
-                            <ListItemText primary="Control de Servicio"/>
+                        <ListItemText
+                                    disableTypography
+                                    primary={<Typography variant="h5" style={{ color: '#FFFFFF' }}>Control de Servicios</Typography>}
+                                />
                         </a>
                     </ListItemIcon>
                 </ListItem>
 
                 <ListItem button>
                     <ListItemIcon>
-                        <ListAltIcon/>
+                    <ListAltIcon className={classes.icon}/>
                         <a href="/BitacordaDR">
-                            <ListItemText primary="BitacoraDR"/>
+                        <ListItemText
+                                    disableTypography
+                                    primary={<Typography variant="h5" style={{ color: '#FFFFFF' }}>Desincorporaciones</Typography>}
+                                />
                         </a>
                     </ListItemIcon>
                 </ListItem>
 
                 <ListItem button>
                     <ListItemIcon>
-                        <ListAltIcon/>
+                    <ListAltIcon className={classes.icon}/>
                         <a href="/reportes">
-                            <ListItemText primary="Reportes"/>
+                        <ListItemText
+                                    disableTypography
+                                    primary={<Typography variant="h5" style={{ color: '#FFFFFF' }}>Reportes</Typography>}
+                                />
                         </a>
                     </ListItemIcon>
                 </ListItem>

@@ -1,24 +1,33 @@
 import React from 'react';
-import {withStyles, makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
-	formControl: {
+  root: {
+    '& > *': {
 	  margin: theme.spacing(1),
-	  minWidth: 120,
-	},
-  }));
-  
-  export default function GroupedSelect() {
-	const classes = useStyles();
+	  
+    },
+  },
+}));
+
+export default function ContainedButtons() {
+  const classes = useStyles();
 
   return (
-    <Container component="main">
-		<h5>JUSTIFICACIÓN SEMANA </h5>
-		<h6>CORREDOR INSURGENTES</h6>
-		<br/>
-  </Container>	
-  
+    <div className={classes.root}>
+      <Button variant="contained" color="primary">
+        Primary
+      </Button>
+      <Button variant="contained" color="secondary">
+        Secondary
+      </Button>
+      <Button variant="contained" disabled>
+        Disabled
+      </Button>
+      <Button variant="contained" color="primary" href="#contained-buttons">
+        Link
+      </Button>
+    </div>
   );
 }

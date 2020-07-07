@@ -1,8 +1,7 @@
 import React from 'react'
-import { AppBar, Toolbar, Typography, IconButton, Badge } from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, Badge } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { makeStyles } from '@material-ui/styles';
+import { Avatar, Typography, makeStyles } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 
 
@@ -46,10 +45,13 @@ const SideBar = (props) => {
                         onClick={() => props.handleDrawerToggle()}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" color="inherit" className={classes.title}>
+                    <Typography variant="h4" color="inherit" className={classes.title}>
                     JUD Operación Técnica y Estadística
                 </Typography>
-                    <IconButton color="inherit">
+                <img src="/images/avatars/imagen2.png" width="240" height="50" ></img>
+                
+         
+                    <IconButton  color="inherit">
                         <Badge className={classes.backMB} variant="dot">
                             <SaveIcon />
                         </Badge>
