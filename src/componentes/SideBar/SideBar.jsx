@@ -3,6 +3,7 @@ import { AppBar, Toolbar, IconButton, Badge } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Avatar, Typography, makeStyles } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 
 
 const useStyles = makeStyles(theme => ({
@@ -48,9 +49,12 @@ const SideBar = (props) => {
                     <Typography variant="h4" color="inherit" className={classes.title}>
                     JUD Operación Técnica y Estadística
                 </Typography>
-                <img src="/images/avatars/imagen2.png" width="240" height="50" ></img>
-                
-         
+                <img src="/images/avatars/imagen2.png" width="240" height="50" ></img>                         
+                <IconButton  color="inherit">
+                        <Badge className={classes.backMB} variant="dot">
+                            <NotificationsIcon />
+                        </Badge>
+                    </IconButton>
                     <IconButton  color="inherit">
                         <Badge className={classes.backMB} variant="dot">
                             <SaveIcon />
