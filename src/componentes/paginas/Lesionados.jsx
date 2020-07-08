@@ -6,6 +6,15 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import Container from '@material-ui/core/Container';
 import { Divider } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import SendIcon from '@material-ui/icons/Send';
+import AddIcon from '@material-ui/icons/Add';
+
+
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,14 +29,16 @@ export default function FormPropsTextFields() {
   const classes = useStyles();
 
   return (
-
     <Container component="main">
-		<h5>LESIONADOS</h5>
+		<h5>LESIONADOS Y ATROPELLADOS</h5>
 		<br/>
+
     <form className={classes.root} noValidate autoComplete="off">
       <div>
-        <TextField required id="standard-required" label="Requerido" defaultValue="Folio Bitacora" />
-        <TextField disabled id="standard-disabled" label="Folio asignado por el sistema " defaultValue="0001" />
+        <TextField disabled id="standard-disabled" label="Folio Evento " defaultValue="0001" />
+        <TextField disabled id="standard-disabled" label="Folio Registro " defaultValue="0001" />
+        <TextField required id="standard" label="Folio Bitácora Roja" defaultValue="" />
+        <br/>
         <TextField
         id="date"
         label="Fecha"
@@ -51,125 +62,287 @@ export default function FormPropsTextFields() {
           step: 300, // 5 min
         }}
       />
+
+      <TextField
+              id="time"
+              label="Hora de Informe al Centro de Control "
+              type="time"
+              defaultValue="00:20"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
+            />
+
+      <TextField
+              id="time"
+              label="Tiempo de Respuesta del Centro de Control "
+              type="time"
+              defaultValue="00:20"
+              className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              inputProps={{
+                step: 300, // 5 min
+              }}
+            />
+            
+      </div>
+    </form>
 <br/>
     <Divider></Divider>
     <h6>DATOS DEL AFECTADO</h6>
+    <br/>
+    <form className={classes.root} noValidate autoComplete="off">
     <div>
-    </div>
+      <FormControl component="fieldset">
+        <FormLabel component="legend">Estatus:</FormLabel>
+          <RadioGroup row aria-label="position" name="position" defaultValue="top">
+            <FormControlLabel
+              value="Atropellado"
+              control={<Radio color="primary" />}
+              label="Atropellado"
+              labelPlacement="Atropellado"
+            />
 
-      <TextField
-          id="filled-helperText"
-          label="Nombre          "
-          defaultValue=""
-          helperText="Comenzando por Apellidos"
-          
-        />   
-      <TextField
-          id="standard-number"
-          label="Edad"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
+            <FormControlLabel
+              value="Lesionado"
+              control={<Radio color="primary" />}
+              label="Lesionado"
+              labelPlacement="Lesionado"
+            />
+          </RadioGroup>
+        </FormControl>
+        </div>
+        </form>
+        <br/>
+        <form className={classes.root} noValidate autoComplete="off">
+        <div>
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">Sexo</InputLabel>
+                <Select native defaultValue="" id="grouped-native-select">
+                  <option aria-label="None" value="      " />
+                    <option value={1}>Maculino</option>
+                    <option value={2}>Femenino</option>
+                    <option value={3}>Otro</option>
+                </Select>
+            </FormControl >
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">Estado</InputLabel>
+              <Select native defaultValue="" id="grouped-native-select">
+                <option aria-label="None" value="      " />
+                  <option value={1}>Vivo</option>
+                  <option value={2}>Muerto</option>
+              </Select>
+          </FormControl >
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">Seguro del afectado</InputLabel>
+              <Select native defaultValue="" id="grouped-native-select">
+                <option aria-label="None" value="      " />
+                  <option value={1}>No Aplica </option>
+                  <option value={2}>No Arribo </option>
+                  <option value={3}>No Solicitado </option>
+                  <option value={4}>No Se Harán Responsables</option>
+                  <option value={5}>ANA</option>
+                  <option value={6}>AXXA</option>
+                  <option value={7}>Otro</option>
+              </Select>
+          </FormControl >
+  </div>
+        <br/>
+        <TextField standard id="standard" label="Apellido Paterno" defaultValue="" />
+        <TextField standard id="standard" label="Apellido Materno" defaultValue="" />
+        <TextField standard id="standard" label="Nombre(s)" defaultValue="" />
+        <TextField standard id="standard" label="Edad" defaultValue="" />
+        
+    </form>
+    
+    <br/><br/>
+    <Divider></Divider>
+    <h6>DATOS DE LA ESTACIÓN </h6>
+    <br/>
+    <form className={classes.root} noValidate autoComplete="off">
+      <div>
+        <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">Linea</InputLabel>
+            <Select native defaultValue=" " id="12">
+              <option aria-label="None" value=" " />
+              <option value={1}>REFORMA </option>
+              <option value={2}>REP. DEL SALVADOR Y BOLIVAR </option>
+              <option value={3}>5 DE MAYO 43</option>
+              <option value={4}>INDIOS VERDES </option>
+            </Select>
+          </FormControl>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">Corredor</InputLabel>
+            <Select native defaultValue="            " id="13">
+              <option aria-label="None" value="          " />
+              <option value={1}>7</option>
+              <option value={2}>26</option>
+              <option value={3}>57</option>
+              <option value={4}>71</option>
+            </Select>
+          </FormControl>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">Estacion</InputLabel>
+            <Select native defaultValue="" id="14">
+              <option aria-label="None" value="  " />
+              <option value={1}>CCA</option>
+              <option value={2}>MIVSA</option>
+              <option value={3}>CISA</option>
+              <option value={4}>CITEMSA</option>
+            </Select>
+          </FormControl>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">Tramo</InputLabel>
+            <Select native defaultValue="            " id="15">
+              <option aria-label="None" value="            " />
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+            </Select>
+          </FormControl>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">Tipo de Incidente</InputLabel>
+            <Select native defaultValue="            " id="16">
+              <option aria-label="None" value="            " />
+              <option value={1}>Juan Perez</option>
+              <option value={2}>1028</option>
+              <option value={3}>Roberto Hernandez</option>
+              <option value={4}>1098</option>
+            </Select>
+          </FormControl>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">Incidente</InputLabel>
+            <Select native defaultValue="            " id="17">
+              <option aria-label="None" value="            " />
+              <option value={1}>P-O</option>
+              <option value={2}>N-S</option>
+              <option value={3}>O-P</option>
+              <option value={4}>S-N</option>
+            </Select>
+          </FormControl>
       </div>
     </form>
     <br/>
-    <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="grouped-native-select">Genero</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="      " />
-            <option value={1}>Maculino</option>
-            <option value={2}>Femenino</option>
-            <option value={3}>Otro</option>
-        </Select>
-    </FormControl >
-    <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="grouped-native-select">Estado</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="      " />
-            <option value={1}>Vivo</option>
-            <option value={2}>Muerto</option>
-        </Select>
-    </FormControl >
-   
-    <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="grouped-native-select">Estado</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="      " />
-            <option value={1}>Vivo</option>
-            <option value={2}>Muerto</option>
-        </Select>
-    </FormControl >
+    <Divider></Divider>
+    <h6>DATOS DE LA UNIDAD </h6>
+    <br/>
+    <form className={classes.root} noValidate autoComplete="off">
+      <div>
+        <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">No. Económico</InputLabel>
+            <Select native defaultValue="            " id="12">
+              <option aria-label="None" value="         " />
+              <option value={1}>1041</option>
+              <option value={2}>1042</option>
+              <option value={3}>1043</option>
+              <option value={4}>1044</option>
+            </Select>
+          </FormControl>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">Bloque</InputLabel>
+            <Select native defaultValue="            " id="13">
+              <option aria-label="None" value="          " />
+              <option value={1}>7</option>
+              <option value={2}>26</option>
+              <option value={3}>57</option>
+              <option value={4}>71</option>
+            </Select>
+          </FormControl>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">Empresa</InputLabel>
+            <Select native defaultValue="" id="14">
+              <option aria-label="None" value="  " />
+              <option value={1}>CCA</option>
+              <option value={2}>MIVSA</option>
+              <option value={3}>CISA</option>
+              <option value={4}>CITEMSA</option>
+            </Select>
+          </FormControl>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">Linea</InputLabel>
+            <Select native defaultValue="            " id="15">
+              <option aria-label="None" value="            " />
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+            </Select>
+          </FormControl>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+       
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">Seguro Unidad</InputLabel>
+            <Select native defaultValue="            " id="18">
+              <option aria-label="None" value="            " />
+              <option value={1}>Qualitas</option>
+              <option value={2}>Afirme</option>
+              <option value={3}>ANA</option>
+              <option value={4}>No arriba</option>
+            </Select>
+          </FormControl>
+      </div>
+    </form>
+    <br/>
+
+    <Divider></Divider>
+    <h6>AMBULANCIA </h6>
+    <form className={classes.root} noValidate autoComplete="off">
+      <div>
+        <TextField  id="standard" label="Operadora de Ambulancia" defaultValue="" />
+        <TextField  id="standard" label="Num. Ambulancia" defaultValue="" />
+        <TextField  id="standard" label="Paramedico" defaultValue="" />
+        <TextField  id="standard" label="Diagnostico" defaultValue="" />
+        <TextField  id="standard" label="Pase Medico" defaultValue="" />
+        <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">Traslado a Hospital </InputLabel>
+            <Select native defaultValue="             " id="17">
+              <option aria-label="None" value="                 " />
+              <option value={1}>No</option>
+              <option value={2}>San Joseph</option>
+              <option value={3}>Dalinde</option>
+            </Select>
+          </FormControl>
+          <br/>
+      </div>
+    </form>
     <br/><br/>
-    <Divider></Divider>
-    <h6>UBICACION </h6>
     <div>
-    <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="grouped-native-select">Ubicación</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="" />
-            <option value={1}>Calle </option>
-            <option value={2}>Interseccion</option>
-            <option value={3}>Estacion</option>
-            <option value={3}>Otro</option>
-        </Select>
-      </FormControl>
-    </div>
-    <div>
-    <TextField  id="standard" label="Direccion" defaultValue="" />
-    <TextField  id="standard" label="Colonia" defaultValue="" />
-    <br/>
-    <TextField  id="standard" label="Coordenadas X" defaultValue="" />
-    <TextField  id="standard" label="Coordenadas Y" defaultValue="" />
-    </div>
-    <br/>
-
-
-    <Divider></Divider>
-    <h6>DESCRIPCION DE LOS HECHOS </h6>
-    <div>
-    <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="grouped-native-select">Quien Paga</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="" />
-            <option value={1}>Metrobus </option>
-            <option value={2}>Empresa Operadora</option>
-            <option value={3}>Cada quien con sus daños</option>
-            <option value={3}>Se trasladan al MP</option>
-            <option value={3}>Se da a la fuga particular</option>
-        </Select>
-      </FormControl>
+    <Button
+        variant="contained"
+        color="red"
+        className={classes.bgPDF}
+        startIcon={ < AddIcon />}
+        >
+        Agregar registro al evento
+      </Button>
       &nbsp;&nbsp;
-      <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="grouped-native-select">Intervino Seguro</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="       " />
-            <option value={1}>Si </option>
-            <option value={2}>No</option>
-        </Select>
-      </FormControl>
+      &nbsp;&nbsp;
+      <Button
+        variant="contained"
+        color="red"
+        className={classes.bgPDF}
+        startIcon={ <SendIcon />}>
+        Enviar
+      </Button>
+     
     </div>
-    <div>
-    <TextField  id="standard" label="Direccion" defaultValue="" />
-    <TextField  id="standard" label="Colonia" defaultValue="" />
-    <br/>
-    <TextField  id="standard" label="Coordenadas X" defaultValue="" />
-    <TextField  id="standard" label="Coordenadas Y" defaultValue="" />
-    <br/><br/>
-    <TextField
-          id="outlined-multiline-static"
-          label="Observaciones"
-          multiline
-          rows={5}
-          defaultValue="..."
-          variant="outlined"
-        />
-    </div>
-
-
-
-
     
     </Container>	
 

@@ -6,6 +6,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import Container from '@material-ui/core/Container';
 import { Divider } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import SendIcon from '@material-ui/icons/Send';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,8 +29,10 @@ export default function FormPropsTextFields() {
 		<br/>
     <form className={classes.root} noValidate autoComplete="off">
       <div>
-        <TextField required id="standard-required" label="Requerido" defaultValue="Folio Bitacora" />
-        <TextField disabled id="standard-disabled" label="Folio asignado por el sistema " defaultValue="0001" />
+        <TextField disabled id="standard-disabled" label="Folio Evento " defaultValue="0001" />
+        <TextField disabled id="standard-disabled" label="Folio Registro " defaultValue="0001" />
+        <TextField required id="standard" label="Folio Bitácora Roja" defaultValue="" />
+        <br/>
         <TextField
         id="date"
         label="Fecha"
@@ -60,7 +65,7 @@ export default function FormPropsTextFields() {
     <br/>
     <div>
     <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="grouped-native-select">Genero</InputLabel>
+      <InputLabel htmlFor="grouped-native-select">Sexo</InputLabel>
         <Select native defaultValue="" id="grouped-native-select">
           <option aria-label="None" value="      " />
             <option value={1}>Maculino</option>
@@ -240,7 +245,8 @@ export default function FormPropsTextFields() {
           <option aria-label="None" value="                      " />
             <option value={1}>Alcance de unidad MB hacia el particular</option>
             <option value={2}>Particular se pasa el semaforo</option>
-            <option value={2}>Corte de circulacion por parte del particular</option>
+            <option value={3}>Corte de circulacion por parte del particular</option>
+            <option value={4}>Otro</option>
         </Select>
     </FormControl >
     </div>
@@ -260,10 +266,27 @@ export default function FormPropsTextFields() {
           variant="outlined"
         />
     </div>
-
-
-
-
+    <br/><br/>
+    <div>
+    <Button
+        variant="contained"
+        color="red"
+        className={classes.bgPDF}
+        startIcon={ < AddIcon />}
+        >
+        Agregar registro al evento
+      </Button>
+      &nbsp;&nbsp;
+      &nbsp;&nbsp;
+      <Button
+        variant="contained"
+        color="red"
+        className={classes.bgPDF}
+        startIcon={ <SendIcon />}>
+        Enviar
+      </Button>
+     
+    </div>
     
     </Container>	
 

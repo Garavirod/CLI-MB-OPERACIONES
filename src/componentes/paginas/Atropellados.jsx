@@ -1,271 +1,167 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import Container from '@material-ui/core/Container';
-import { Divider } from '@material-ui/core';
+import TreeView from '@material-ui/lab/TreeView';
+import TreeItem from '@material-ui/lab/TreeItem';
+import Typography from '@material-ui/core/Typography';
+import MailIcon from '@material-ui/icons/Mail';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Label from '@material-ui/icons/Label';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import InfoIcon from '@material-ui/icons/Info';
+import ForumIcon from '@material-ui/icons/Forum';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
-const useStyles = makeStyles((theme) => ({
+const useTreeItemStyles = makeStyles((theme) => ({
   root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: '25ch',
+    color: theme.palette.text.secondary,
+    '&:hover > $content': {
+      backgroundColor: theme.palette.action.hover,
     },
+    '&:focus > $content, &$selected > $content': {
+      backgroundColor: `var(--tree-view-bg-color, ${theme.palette.grey[400]})`,
+      color: 'var(--tree-view-color)',
+    },
+    '&:focus > $content $label, &:hover > $content $label, &$selected > $content $label': {
+      backgroundColor: 'transparent',
+    },
+  },
+  content: {
+    color: theme.palette.text.secondary,
+    borderTopRightRadius: theme.spacing(2),
+    borderBottomRightRadius: theme.spacing(2),
+    paddingRight: theme.spacing(1),
+    fontWeight: theme.typography.fontWeightMedium,
+    '$expanded > &': {
+      fontWeight: theme.typography.fontWeightRegular,
+    },
+  },
+  group: {
+    marginLeft: 0,
+    '& $content': {
+      paddingLeft: theme.spacing(2),
+    },
+  },
+  expanded: {},
+  selected: {},
+  label: {
+    fontWeight: 'inherit',
+    color: 'inherit',
+  },
+  labelRoot: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0.5, 0),
+  },
+  labelIcon: {
+    marginRight: theme.spacing(1),
+  },
+  labelText: {
+    fontWeight: 'inherit',
+    flexGrow: 1,
   },
 }));
 
-export default function FormPropsTextFields() {
+function StyledTreeItem(props) {
+  const classes = useTreeItemStyles();
+  const { labelText, labelIcon: LabelIcon, labelInfo, color, bgColor, ...other } = props;
+
+  return (
+    <TreeItem
+      label={
+        <div className={classes.labelRoot}>
+          <LabelIcon color="inherit" className={classes.labelIcon} />
+          <Typography variant="body2" className={classes.labelText}>
+            {labelText}
+          </Typography>
+          <Typography variant="caption" color="inherit">
+            {labelInfo}
+          </Typography>
+        </div>
+      }
+      style={{
+        '--tree-view-color': color,
+        '--tree-view-bg-color': bgColor,
+      }}
+      classes={{
+        root: classes.root,
+        content: classes.content,
+        expanded: classes.expanded,
+        selected: classes.selected,
+        group: classes.group,
+        label: classes.label,
+      }}
+      {...other}
+    />
+  );
+}
+
+StyledTreeItem.propTypes = {
+  bgColor: PropTypes.string,
+  color: PropTypes.string,
+  labelIcon: PropTypes.elementType.isRequired,
+  labelInfo: PropTypes.string,
+  labelText: PropTypes.string.isRequired,
+};
+
+const useStyles = makeStyles({
+  root: {
+    height: 264,
+    flexGrow: 1,
+    maxWidth: 400,
+  },
+});
+
+export default function GmailTreeView() {
   const classes = useStyles();
 
   return (
-
-    <Container component="main">
-		<h5>ATROPELLADOS</h5>
-		<br/>
-    <form className={classes.root} noValidate autoComplete="off">
-      <div>
-        <TextField required id="standard-required" label="Requerido" defaultValue="Folio Bitacora" />
-        <TextField disabled id="standard-disabled" label="Folio asignado por el sistema " defaultValue="0001" />
-        <TextField
-        id="date"
-        label="Fecha"
-        type="date"
-        defaultValue="2020-05-24"
-        className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <TextField
-        id="time"
-        label="Hora "
-        type="time"
-        defaultValue="07:30"
-        className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        inputProps={{
-          step: 300, // 5 min
-        }}
-      />
-<br/>
-    <Divider></Divider>
-    <h6>DATOS DEL AFECTADO</h6>
-    <div>
-    </div>
-
-      <TextField
-          id="filled-helperText"
-          label="Nombre          "
-          defaultValue=""
-          helperText="Comenzando por Apellidos"
-          
-        />   
-      <TextField
-          id="standard-number"
-          label="Edad"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
+    <TreeView
+      className={classes.root}
+      defaultExpanded={['3']}
+      defaultCollapseIcon={<ArrowDropDownIcon />}
+      defaultExpandIcon={<ArrowRightIcon />}
+      defaultEndIcon={<div style={{ width: 24 }} />}
+    >
+      <StyledTreeItem nodeId="1" labelText="All Mail" labelIcon={MailIcon} />
+      <StyledTreeItem nodeId="2" labelText="Trash" labelIcon={DeleteIcon} />
+      <StyledTreeItem nodeId="3" labelText="Categories" labelIcon={Label}>
+        <StyledTreeItem
+          nodeId="5"
+          labelText="Social"
+          labelIcon={SupervisorAccountIcon}
+          labelInfo="90"
+          color="#1a73e8"
+          bgColor="#e8f0fe"
         />
-      </div>
-    </form>
-    <br/>
-    <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="grouped-native-select">Genero</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="      " />
-            <option value={1}>Maculino</option>
-            <option value={2}>Femenino</option>
-            <option value={3}>Otro</option>
-        </Select>
-    </FormControl >
-    <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="grouped-native-select">Estado</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="      " />
-            <option value={1}>Vivo</option>
-            <option value={2}>Muerto</option>
-        </Select>
-    </FormControl >
-   
-    <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="grouped-native-select">Estado</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="      " />
-            <option value={1}>Vivo</option>
-            <option value={2}>Muerto</option>
-        </Select>
-    </FormControl >
-    <br/><br/>
-    <Divider></Divider>
-    <h6>DATOS DEL VEHICULO PARTICULAR</h6>
-    <div>
-    <TextField  id="standard" label="Marca" defaultValue="" />
-    <TextField  id="standard" label="Submarca" defaultValue="" />
-    <TextField  id="standard" label="Año" defaultValue="" />
-    <TextField  id="standard" label="Color" defaultValue="" />
-    <TextField  id="standard" label="Placa" defaultValue="" />
-    <TextField  id="standard" label="Seguro" defaultValue="" />
-    </div>
-    <br/>
-    <Divider></Divider>
-    <h6>DATOS DE LA UNIDAD </h6>
-    <br/>
-    <div>
-    <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="grouped-native-select">No. Económico</InputLabel>
-        <Select native defaultValue="            " id="grouped-native-select">
-          <option aria-label="None" value="         " />
-            <option value={1}>1041</option>
-            <option value={2}>1042</option>
-			<option value={3}>1043</option>
-            <option value={4}>1044</option>
-        </Select>
-      </FormControl>
-  
-
-	  <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="grouped-native-select">Bloque</InputLabel>
-        <Select native defaultValue="            " id="grouped-native-select">
-          <option aria-label="None" value="          " />
-            <option value={1}>7</option>
-            <option value={2}>26</option>
-			<option value={3}>57</option>
-            <option value={4}>71</option>
-        </Select>
-      </FormControl>
-    
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="grouped-native-select">Empresa</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="  " />
-            <option value={1}>CCA</option>
-            <option value={2}>MIVSA</option>
-			<option value={3}>CISA</option>
-            <option value={4}>CITEMSA</option>
-        </Select>
-      </FormControl>
-      <br/>
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="grouped-native-select">Linea</InputLabel>
-        <Select native defaultValue="            " id="grouped-native-select">
-          <option aria-label="None" value="            " />
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-			<option value={3}>3</option>
-            <option value={4}>4</option>
-        </Select>
-      </FormControl>
-      
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="grouped-native-select">Operador</InputLabel>
-        <Select native defaultValue="            " id="grouped-native-select">
-          <option aria-label="None" value="            " />
-            <option value={1}>Juan Perez</option>
-            <option value={2}>1028</option>
-			<option value={3}>Roberto Hernandez</option>
-            <option value={4}>1098</option>
-        </Select>
-      </FormControl>
-      
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="grouped-native-select">Sentido</InputLabel>
-        <Select native defaultValue="            " id="grouped-native-select">
-          <option aria-label="None" value="            " />
-            <option value={1}>P-O</option>
-            <option value={2}>N-S</option>
-			<option value={3}>O-P</option>
-            <option value={4}>S-N</option>
-        </Select>
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="grouped-native-select">Seguro Unidad</InputLabel>
-        <Select native defaultValue="            " id="grouped-native-select">
-          <option aria-label="None" value="            " />
-            <option value={1}>Qualitas</option>
-            <option value={2}>Afirme</option>
-			<option value={3}>ANA</option>
-            <option value={4}>No arriba</option>
-        </Select>
-      </FormControl>
-    </div>
-    <br/>
-    <Divider></Divider>
-    <h6>UBICACION </h6>
-    <div>
-    <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="grouped-native-select">Ubicación</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="" />
-            <option value={1}>Calle </option>
-            <option value={2}>Interseccion</option>
-            <option value={3}>Estacion</option>
-            <option value={3}>Otro</option>
-        </Select>
-      </FormControl>
-    </div>
-    <div>
-    <TextField  id="standard" label="Direccion" defaultValue="" />
-    <TextField  id="standard" label="Colonia" defaultValue="" />
-    <br/>
-    <TextField  id="standard" label="Coordenadas X" defaultValue="" />
-    <TextField  id="standard" label="Coordenadas Y" defaultValue="" />
-    </div>
-    <br/>
-
-
-    <Divider></Divider>
-    <h6>DESCRIPCION DE LOS HECHOS </h6>
-    <div>
-    <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="grouped-native-select">Quien Paga</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="" />
-            <option value={1}>Metrobus </option>
-            <option value={2}>Empresa Operadora</option>
-            <option value={3}>Cada quien con sus daños</option>
-            <option value={3}>Se trasladan al MP</option>
-            <option value={3}>Se da a la fuga particular</option>
-        </Select>
-      </FormControl>
-      &nbsp;&nbsp;
-      <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="grouped-native-select">Intervino Seguro</InputLabel>
-        <Select native defaultValue="" id="grouped-native-select">
-          <option aria-label="None" value="       " />
-            <option value={1}>Si </option>
-            <option value={2}>No</option>
-        </Select>
-      </FormControl>
-    </div>
-    <div>
-    <TextField  id="standard" label="Direccion" defaultValue="" />
-    <TextField  id="standard" label="Colonia" defaultValue="" />
-    <br/>
-    <TextField  id="standard" label="Coordenadas X" defaultValue="" />
-    <TextField  id="standard" label="Coordenadas Y" defaultValue="" />
-    <br/><br/>
-    <TextField
-          id="outlined-multiline-static"
-          label="Observaciones"
-          multiline
-          rows={5}
-          defaultValue="..."
-          variant="outlined"
+        <StyledTreeItem
+          nodeId="6"
+          labelText="Updates"
+          labelIcon={InfoIcon}
+          labelInfo="2,294"
+          color="#e3742f"
+          bgColor="#fcefe3"
         />
-    </div>
-
-
-
-
-    
-    </Container>	
-
-
+        <StyledTreeItem
+          nodeId="7"
+          labelText="Forums"
+          labelIcon={ForumIcon}
+          labelInfo="3,566"
+          color="#a250f5"
+          bgColor="#f3e8fd"
+        />
+        <StyledTreeItem
+          nodeId="8"
+          labelText="Promotions"
+          labelIcon={LocalOfferIcon}
+          labelInfo="733"
+          color="#3c8039"
+          bgColor="#e6f4ea"
+        />
+      </StyledTreeItem>
+      <StyledTreeItem nodeId="4" labelText="History" labelIcon={Label} />
+    </TreeView>
   );
 }
