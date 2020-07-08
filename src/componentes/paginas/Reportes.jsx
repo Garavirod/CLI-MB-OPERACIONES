@@ -226,7 +226,7 @@ export default function Reportes(props) {
   };
 
   return (
-      <Container maxWidth="md" fixed>
+      <Container  fixed>
         <Typography component="div">
         <Box textAlign="center" m={1} fontSize="h3.fontSize">
         {title}

@@ -11,7 +11,7 @@ const estilo = makeStyles(theme =>({
     toolbar: theme.mixins.toolbar,
     content: {
         flexGrow: 0,
-        backgroundColor: 'white',
+        backgroundColor: '#f4f6f8',
         padding: theme.spacing(1),
     },
 }));

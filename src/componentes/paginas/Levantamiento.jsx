@@ -16,18 +16,11 @@ export default function ContainedButtons() {
 
   return (
     <div className={classes.root}>
-      <Button variant="contained" color="primary">
-        Primary
-      </Button>
-      <Button variant="contained" color="secondary">
-        Secondary
-      </Button>
-      <Button variant="contained" disabled>
-        Disabled
-      </Button>
-      <Button variant="contained" color="primary" href="#contained-buttons">
-        Link
-      </Button>
+       
+		<h5>JUSTIFICACIÓN SEMANA </h5>
+		<h6>CORREDOR EJE 1 PTE "VALLEJO"</h6>
+		<br/>
+
     </div>
   );
 }

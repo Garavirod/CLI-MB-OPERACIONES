@@ -1,7 +1,8 @@
 import React from 'react'
-import { Drawer, makeStyles,Divider } from '@material-ui/core'
+import { Drawer, makeStyles,Divider ,Typography} from '@material-ui/core'
 import Lista from './Lista';
 import Perfil from './Perfil';
+
 const estilos = makeStyles(theme => ({
     drawer: {
         width: 240,
@@ -9,11 +10,17 @@ const estilos = makeStyles(theme => ({
     },
     drawerPaper: {
         width: 240,
-        background:'#4caf50',
-        
-        
+        backgroundColor: '#4caf50',
     },
-    toolbar: theme.mixins.toolbar
+    toolbar: theme.mixins.toolbar,
+    divider: {
+        marginBottom: 26
+    },
+    areas: {
+        marginTop: 16,
+        marginBottom: 10,
+
+    }
 }))
 const Cajon = (props) => {
 
@@ -29,10 +36,15 @@ const Cajon = (props) => {
             variant={props.variant}
             open={props.open}
             onClose={props.onClose ? props.onClose: null}>
-
-                <div className={classes.toolbar}></div>
+        
+        <div className={classes.areas}>
+        <Typography variant="h3" align="center" style={{ color: '#FFFFFF' }}>
+           JUD Operaciones
+        </Typography>
+        </div>
+        
                 <Perfil/>
-                <div className={classes.toolbar}></div>
+                <div className={classes.divider}></div>
                 <Divider/>
                 <Lista/>
             </Drawer>
