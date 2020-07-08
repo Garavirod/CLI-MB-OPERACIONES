@@ -72,7 +72,7 @@ const Lista = () => {
                 <ListItem button>
                     <ListItemIcon>
                         <ListAltIcon className={classes.icon}/>
-                        <a href="/MenuAccidentes">
+                        <a href="/Prueba1">
                         <ListItemText
                                     disableTypography
                                     primary={<Typography variant="h5" style={{ color: '#FFFFFF' }}>Accidentes</Typography>}

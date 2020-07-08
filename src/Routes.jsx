@@ -14,6 +14,7 @@ import Atropellados from './componentes/paginas/Atropellados';
 import MenuAccidentes from './componentes/paginas/MenuAccidentes';
 import Lesionados from './componentes/paginas/Lesionados';
 import Colisiones from './componentes/paginas/Colisiones';
+import Prueba1 from './componentes/paginas/Prueba1';
 const Routes = () => {
     return ( 
         <Router>
@@ -34,7 +35,7 @@ const Routes = () => {
                 </Route> 
                 <Route path='/colisiones/' component={Colisiones}exactç>
                 </Route>
-                <Route path='/MenuAccidentes/' component={MenuAccidentes}exact>
+                <Route path='/Prueba1/' component={Prueba1}exact>
                 </Route>                                                 
             </div>
         </Router>
