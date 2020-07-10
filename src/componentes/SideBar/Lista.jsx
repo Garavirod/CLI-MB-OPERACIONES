@@ -69,6 +69,17 @@ const Lista = () => {
                         </a>
                     </ListItemIcon>
                 </ListItem>
+                <ListItem button>
+                    <ListItemIcon>
+                        <ListAltIcon className={classes.icon}/>
+                        <a href="/MenuAccidentes">
+                        <ListItemText
+                                    disableTypography
+                                    primary={<Typography variant="h5" style={{ color: '#FFFFFF' }}>Accidentes</Typography>}
+                                    />
+                        </a>
+                    </ListItemIcon>
+                </ListItem>
             </List>
             </Router>
 
