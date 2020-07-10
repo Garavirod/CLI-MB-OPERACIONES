@@ -42,19 +42,7 @@ export default function Header(props) {
   const { sections, title } = props;
 
   return (
-    <React.Fragment>
-      <Toolbar className={classes.toolbar}>      
-        <Typography
-          component="h2"
-          variant="h5"
-          color="inherit"
-          align="center"
-          noWrap
-          className={classes.toolbarTitle}
-        >
-          {title}
-        </Typography>
-      </Toolbar>
+    <React.Fragment> 
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {sections.map((section) => (
           <Link

@@ -109,7 +109,7 @@ const sections = [
 
 const MainReportes = ()=>{
     return (
-        <Container maxWidth="lg" fixed>
+        <Container maxWidth="md" fixed>
         <Router>
             <Header title="Reportes" sections={sections} />
             <Switch>                
