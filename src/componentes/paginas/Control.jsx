@@ -225,16 +225,6 @@ const useStyles = makeStyles((theme) => ({
         <br/> <br/><br/>
 
 <div>
-    <Button
-        variant="contained"
-        color="red"
-        className={classes.bgPDF}
-        startIcon={ < AddIcon />}
-        >
-        Agregar registro al evento
-      </Button>
-      &nbsp;&nbsp;
-      &nbsp;&nbsp;
       <Button
         variant="contained"
         color="red"
