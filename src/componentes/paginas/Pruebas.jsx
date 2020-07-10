@@ -1,63 +1,130 @@
 import React from 'react';
+import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
+import Container from '@material-ui/core/Container';
+import { Divider } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import SendIcon from '@material-ui/icons/Send';
+import AddIcon from '@material-ui/icons/Add';
+
+
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
+
 
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
   },
 }));
 
-export default function SimpleSelect() {
+export default function FormPropsTextFields() {
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
 
   return (
+    <Container component="main">
+    <Divider></Divider>
+    <h6>REPORTES DE ACCIDENTES</h6>
+    <br/>
+    <form className={classes.root} noValidate autoComplete="off">
     <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-helper-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={age}
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-        <FormHelperText>Some important helper text</FormHelperText>
-      </FormControl>
-      
+      <FormControl component="fieldset">
+        <FormLabel component="legend">Incidente:</FormLabel>
+          <RadioGroup row aria-label="position" name="position" defaultValue="top">
+            <FormControlLabel
+              value="Atropellado"
+              control={<Radio color="primary" />}
+              label="Atropellado"
+              labelPlacement="Atropellado"
+            />
+
+            <FormControlLabel
+              value="Lesionado"
+              control={<Radio color="primary" />}
+              label="Lesionado"
+              labelPlacement="Lesionado"
+            />
+            <FormControlLabel
+              value="Colisión"
+              control={<Radio color="primary" />}
+              label="Colisión"
+              labelPlacement="Lesionado"
+            />
+          </RadioGroup>
+        </FormControl>
+        </div>
+        </form>
+        <br/>
+        <Divider></Divider>
+    <h6>CRITERIOS DE BÚSQUEDA</h6>
+    <br/>
+    <form className={classes.root} noValidate autoComplete="on">
+    <div>
+      <FormControl component="fieldset">
+        <FormLabel component="legend">Seleccione los criterios de búsqueda:</FormLabel>
+          <RadioGroup row aria-label="position" name="position" defaultValue="top">
+            <FormControlLabel
+              value="Fecha"
+              control={<Radio color="primary" />}
+              label="Fecha"
+              labelPlacement="Fecha"
+            />
+
+            <FormControlLabel
+              value="Estación"
+              control={<Radio color="primary" />}
+              label="Estación"
+              labelPlacement="Estación"
+            />
+            <FormControlLabel
+              value="Sexo"
+              control={<Radio color="primary" />}
+              label="Sexo"
+              labelPlacement="Sexo"
+            />
+            <FormControlLabel
+              value="Operador"
+              control={<Radio color="primary" />}
+              label="Operador"
+              labelPlacement="Operador"
+            />
+            <FormControlLabel
+              value="Hora"
+              control={<Radio color="primary" />}
+              label="Hora"
+              labelPlacement="Hora"
+            />
+            <FormControlLabel
+              value="Empresa Operadora"
+              control={<Radio color="primary" />}
+              label="Empresa Operadora"
+              labelPlacement="Empresa Operadora"
+            />
+          </RadioGroup>
+        </FormControl>
+        </div>
+        </form>
+        <br/>
+    
+        <Button
+        variant="contained"
         
-    </div>
+        className={classes.bgPDF}
+        startIcon={ <PictureAsPdfIcon />}        
+      >
+        Descargar
+      </Button>
+    </Container>	
+
+
   );
 }
