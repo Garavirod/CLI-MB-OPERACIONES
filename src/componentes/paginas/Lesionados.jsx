@@ -418,12 +418,8 @@ export default function FormPropsTextFields() {
             <InputLabel htmlFor="grouped-native-select">A quién corresponde el seguro</InputLabel>
               <Select native defaultValue="" id="grouped-native-select">
                 <option aria-label="None" value="      " />
-                  <option value={1}>No Aplica </option>
-                  <option value={2}>No Arribo </option>
-                  <option value={3}>No Solicitado </option>
-                  <option value={4}>No Se Harán Responsables</option>
-                  <option value={5}>ANA</option>
-                  <option value={6}>AXXA</option>
+                  <option value={1}>Particular</option>
+                  <option value={2}>MB</option>
                   <option value={7}>Otro</option>
               </Select>
           </FormControl >
