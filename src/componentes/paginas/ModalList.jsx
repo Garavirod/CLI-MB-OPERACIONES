@@ -22,6 +22,7 @@ export default function ModalList(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const {data} = props;
+  let kmTotal = data[0].costo*(data.length);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -51,11 +52,15 @@ export default function ModalList(props) {
           <div className={classes.paper}>
             <h4 id="transition-modal-title">Lista de informes</h4>
             {
-                data.map((informe,index)=>
-                
-            <p id="transition-modal-description" key={index}>{informe.datos} - {informe.costo}</p>
+                data.map((informe,index, kmTotal)=>                  
+                    <p id="transition-modal-description" key={index} >{informe.datos} - {informe.costo}</p>
+                    // kmTotal = kmTotal + informe.costo
+
+                                        
                 )
+
             }
+              <p> <b>KM Total : {kmTotal}</b> </p>
           </div>
         </Fade>
       </Modal>

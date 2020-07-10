@@ -15,7 +15,20 @@ import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import Button from '@material-ui/core/Button';
 import ModalList from './ModalList';
 
-const informes = [
+const incum = [
+  {datos:'INCUMPLE PARQUE HUNDIDO A INDIOS VERDES', costo:4.18},
+  {datos:'INCUMPLE PARQUE HUNDIDO A INDIOS VERDES', costo:4.18},
+  {datos:'INCUMPLE PARQUE HUNDIDO A INDIOS VERDES', costo:4.18},
+  {datos:'INCUMPLE PARQUE HUNDIDO A INDIOS VERDES', costo:4.18},
+  {datos:'INCUMPLE PARQUE HUNDIDO A INDIOS VERDES', costo:4.18},
+  {datos:'INCUMPLE PARQUE HUNDIDO A INDIOS VERDES', costo:4.18},
+  {datos:'INCUMPLE PARQUE HUNDIDO A INDIOS VERDES', costo:4.18},
+  {datos:'INCUMPLE PARQUE HUNDIDO A INDIOS VERDES', costo:4.18},
+  {datos:'INCUMPLE PARQUE HUNDIDO A INDIOS VERDES', costo:4.18},
+]
+
+
+const cump = [
   {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
   {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
   {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
@@ -26,6 +39,7 @@ const informes = [
   {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
   {datos:'CUMPLE COLONIA DEL VALLE A EL CAMINERO', costo:13.28},
 ]
+
 
 // function createData(fecha, corrida, economico, hora,lugar, descripcion,) {
 //     // const density = population / size;
@@ -47,7 +61,7 @@ const columns1 = [
   },
   {
     id: 'hora',
-    label: 'Hora)',
+    label: 'Hora',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
@@ -146,12 +160,14 @@ export default function Reportes(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const { data, title } = props;
-  var columns;
+  var columns;  
   if(title == 'Reglas'){
     columns = columns2;
   }else{
     columns = columns1;
   }
+
+  var informes = (title == 'Afectaciones' || title == 'Incumplimientos') ? incum : cump;
 
 
   const handleChangePage = (event, newPage) => {

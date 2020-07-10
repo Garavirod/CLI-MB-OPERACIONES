@@ -91,18 +91,18 @@ const sections = [
 
     const reglas = [
         //   createData('23-12-19', 21, 143, '23:12','TEPALCATES','APOYO'),
-        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridos en la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
-        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridos en la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
-        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridos en la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
-        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridos en la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
-        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridos en la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
-        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridos en la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
-        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridos en la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
-        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridos en la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
-        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridos en la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
-        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridos en la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
-        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridos en la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
-        {numRegla:'42-24', regla:'Cambiar la ruta de su recorridos en la autorización de METROBUS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de sus recorridos en la autorización de METROBÚS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de sus recorridos en la autorización de METROBÚS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de sus recorridos en la autorización de METROBÚS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de sus recorridos en la autorización de METROBÚS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de sus recorridos en la autorización de METROBÚS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de sus recorridos en la autorización de METROBÚS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de sus recorridos en la autorización de METROBÚS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de sus recorridos en la autorización de METROBÚS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de sus recorridos en la autorización de METROBÚS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de sus recorridos en la autorización de METROBÚS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de sus recorridos en la autorización de METROBÚS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
+        {numRegla:'42-24', regla:'Cambiar la ruta de sus recorridos en la autorización de METROBÚS', deduc:1, referencia:'Definidos en el esquema operativo', rubro:'ccm'},
         
     ];
     
@@ -133,8 +133,8 @@ const MainReportes = ()=>{
                     <h5>Bienvenido a la sección de reportes</h5>
                     <br/><br/>
                     <p>
-                        En esta sección podrá visualizar los datos involucrados en los formatos, tales como:  control de servicios, bitácora de incorporaciones y desincorporaciones entre ontros.
-                        asi como también descargar los fromatos en PDF.
+                        En esta sección podrá visualizar los datos involucrados en los formatos, tales como:  control de servicios, bitácora de incorporaciones y desincorporaciones entre otros.
+                        así como también descargar los formatos en PDF.
                         
                     </p>
                 </Route>                 
