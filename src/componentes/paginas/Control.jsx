@@ -14,6 +14,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import SendIcon from '@material-ui/icons/Send';
+import AddIcon from '@material-ui/icons/Add';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -218,6 +222,27 @@ const useStyles = makeStyles((theme) => ({
           defaultValue="..."
           variant="outlined"
         />
+        <br/> <br/><br/>
+
+<div>
+    <Button
+        variant="contained"
+        color="red"
+        className={classes.bgPDF}
+        startIcon={ < AddIcon />}
+        >
+        Agregar registro al evento
+      </Button>
+      &nbsp;&nbsp;
+      &nbsp;&nbsp;
+      <Button
+        variant="contained"
+        color="red"
+        className={classes.bgPDF}
+        startIcon={ <SendIcon />}>
+        Enviar
+      </Button>
+    </div>
 
 
 	</Container>	
