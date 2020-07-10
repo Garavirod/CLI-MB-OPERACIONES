@@ -217,7 +217,7 @@ export default function FormPropsTextFields() {
           </FormControl>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="grouped-native-select">Estacion</InputLabel>
+            <InputLabel htmlFor="grouped-native-select">Estación</InputLabel>
             <Select native defaultValue="" id="14">
               <option aria-label="None" value="  " />
               <option value={1}>INSTITUTO POLITÉCNICO NACIONAL</option>
@@ -359,9 +359,9 @@ export default function FormPropsTextFields() {
       <div>
         <TextField  id="standard" label="Empresa Operadora de Ambulancia" defaultValue="" />
         <TextField  id="standard" label="Num. Eco. o Placa Ambulancia" defaultValue="" />
-        <TextField  id="standard" label="Paramedico" defaultValue="" />
-        <TextField  id="standard" label="Diagnostico" defaultValue="" />
-        <TextField  id="standard" label="Pase Medico" defaultValue="" />
+        <TextField  id="standard" label="Paramédico" defaultValue="" />
+        <TextField  id="standard" label="Diagnóstico" defaultValue="" />
+        <TextField  id="standard" label="Pase Médico" defaultValue="" />
         <TextField  id="standard" label="Traslado a hospital (Cuál en su caso)" defaultValue="" />
       </div>
     </form>
