@@ -180,7 +180,7 @@ export default function FormPropsTextFields() {
     </div>
     <br/>
     <Divider></Divider>
-    <h6>UBICACIóN </h6>
+    <h6>UBICACIÓN </h6>
     <div>
     <FormControl className={classes.formControl}>
       <InputLabel htmlFor="grouped-native-select">Ubicación</InputLabel>
@@ -204,7 +204,7 @@ export default function FormPropsTextFields() {
 
 
     <Divider></Divider>
-    <h6>DESCRIPCIóN DE LOS HECHOS </h6>
+    <h6>DESCRIPCIÓN DE LOS HECHOS </h6>
     <div>
     <FormControl className={classes.formControl}>
       <InputLabel htmlFor="grouped-native-select">Quien Paga</InputLabel>
