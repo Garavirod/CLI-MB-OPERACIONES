@@ -86,7 +86,7 @@ export default function FormPropsTextFields() {
     
     <br/><br/>
     <Divider></Divider>
-    <h6>DATOS DEL VEHICULO PARTICULAR</h6>
+    <h6>DATOS DEL VEHÍCULO PARTICULAR</h6>
     <div>
     <TextField  id="standard" label="Marca" defaultValue="" />&nbsp;&nbsp;
     <TextField  id="standard" label="Submarca" defaultValue="" />&nbsp;&nbsp;
@@ -135,7 +135,7 @@ export default function FormPropsTextFields() {
       </FormControl>
       <br/>
       <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="grouped-native-select">Linea</InputLabel>
+        <InputLabel htmlFor="grouped-native-select">Lìnea</InputLabel>
         <Select native defaultValue="            " id="grouped-native-select">
           <option aria-label="None" value="            " />
             <option value={1}>1</option>
@@ -194,7 +194,7 @@ export default function FormPropsTextFields() {
       </FormControl>
     </div>
     <div>
-    <TextField  id="standard" label="Direccion" defaultValue="" />
+    <TextField  id="standard" label="Dirección" defaultValue="" />
     <TextField  id="standard" label="Colonia" defaultValue="" />
     <br/>
     <TextField  id="standard" label="Coordenadas X" defaultValue="" />
@@ -207,12 +207,12 @@ export default function FormPropsTextFields() {
     <h6>DESCRIPCIÓN DE LOS HECHOS </h6>
     <div>
     <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="grouped-native-select">Quien Paga</InputLabel>
+      <InputLabel htmlFor="grouped-native-select">Quién Paga</InputLabel>
         <Select native defaultValue=" " id="grouped-native-select">
           <option aria-label="None" value=" " />
             <option value={1}>Metrobus </option>
             <option value={2}>Empresa Operadora</option>
-            <option value={3}>Cada quien con sus daños</option>
+            <option value={3}>Cada quién con sus daños</option>
             <option value={3}>Se trasladan al MP</option>
             <option value={3}>Se da a la fuga particular</option>
         </Select>
@@ -251,7 +251,7 @@ export default function FormPropsTextFields() {
     </FormControl >
     </div>
     <div>
-    <TextField  id="standard" label="Direccion" defaultValue="" />
+    <TextField  id="standard" label="Dirección" defaultValue="" />
     <TextField  id="standard" label="Colonia" defaultValue="" />
     <br/>
     <TextField  id="standard" label="Coordenadas X" defaultValue="" />
