@@ -41,8 +41,7 @@ export default function FormPropsTextFields() {
   }
 
   const sendData = (event) =>{
-    const url = "http://localhost:5000/colisionados/registro-evento";
-        
+    const url = "http://localhost:5000/colisionados/registro-evento";        
     event.preventDefault();
     if(
       this.fecha !== '' &&
