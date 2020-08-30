@@ -29,7 +29,7 @@ export default function SimpleBottomNavigation() {
       className={classes.root}
     >
       <BottomNavigationAction 
-      label="Colisiones" 
+      label="Eventos" 
       icon={<DriveEtaIcon />} 
       a href="/Colisiones"
       />
