@@ -9,6 +9,8 @@ import { Divider } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import AddIcon from '@material-ui/icons/Add';
+import { useState } from 'react';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +23,54 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormPropsTextFields() {
   const classes = useStyles();
+
+  const [eventoData] = useState({
+    fecha: '',
+    hora: '',
+    tipo_incidente: '',
+    incidente: '',
+    descripcion : '',
+    tramo : '',
+    operador: '',
+    bitacora: ''
+  });
+
+  const handleInputchange = (e) =>{
+    this.eventoData[e.target.name] = e.target.value;
+    console.log(this.eventoData);
+  }
+
+  const sendData = (event) =>{
+    const url = "http://localhost:5000/colisionados/registro-evento";
+        
+    event.preventDefault();
+    if(
+      this.fecha !== '' &&
+      this.hora !== '' &&
+      this.tipo_incidente !== '' &&
+      this.incidente !== '' &&
+      this.descripcion !== '' &&
+      this.tramo !== '' &&
+      this.operador !== '' &&
+      this.bitacora !== '' 
+      ){
+        axios.post(url, dataEvento)
+        .then(res=>{
+          console.log("Datos mandados", res);
+        })
+        .catch(err=>{
+          console.log("Datos no mandados", err);
+        });
+    }else{
+        alert("Campos vacios");
+    }
+  }
+
+
+  const sendData  = (event) =>{
+    event.preventDefault();
+
+  }
 
   return (
 
