@@ -7,6 +7,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
 
 const useStyles = makeStyles({
@@ -58,14 +60,15 @@ export default function ListaEventos() {
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
-            <TableCell align="right">Fecha</TableCell>
-            <TableCell align="right">Hora</TableCell>
-            <TableCell align="right">Tipo incidente</TableCell>
-            <TableCell align="right">Incidente</TableCell>
-            <TableCell align="right">Tramo</TableCell>
-            <TableCell align="right">Operador</TableCell>
-            <TableCell align="right">Bitacora</TableCell>
-            <TableCell align="right">Descripcion</TableCell>
+            <TableCell align="center">Fecha</TableCell>
+            <TableCell align="center">Hora</TableCell>
+            <TableCell align="center">Tipo incidente</TableCell>
+            <TableCell align="center">Incidente</TableCell>
+            <TableCell align="center">Tramo</TableCell>
+            <TableCell align="center">Operador</TableCell>
+            <TableCell align="center">Bitacora</TableCell>
+            <TableCell align="center">Descripcion</TableCell>
+            <TableCell align="center">Borrar</TableCell>
 
           </TableRow>
         </TableHead>
@@ -75,14 +78,15 @@ export default function ListaEventos() {
               <TableCell component="th" scope="row">
                 {row.id}
               </TableCell>
-              <TableCell align="right">{row.fecha}</TableCell>
-              <TableCell align="right">{row.hora}</TableCell>
-              <TableCell align="right">{String(row.tipo_incidente)}</TableCell>
-              <TableCell align="right">{row.incidente}</TableCell>
-              <TableCell align="right">{row.tramo}</TableCell>
-              <TableCell align="right">{row.operador}</TableCell>
-              <TableCell align="right">{row.bitacora}</TableCell>
-              <TableCell align="right">{row.descripcion}</TableCell>
+              <TableCell align="center">{row.fecha.substr(8,2)+"-"+row.fecha.substr(5,2)+"-"+row.fecha.substr(0,4)}</TableCell>
+              <TableCell align="center">{row.hora.substr(0,5)}</TableCell>
+              <TableCell align="center">{String(row.tipo_incidente)}</TableCell>
+              <TableCell align="center">{row.incidente}</TableCell>
+              <TableCell align="center">{row.tramo}</TableCell>
+              <TableCell align="center">{row.operador}</TableCell>
+              <TableCell align="center">{row.bitacora}</TableCell>
+              <TableCell align="center">{row.descripcion}</TableCell>
+              <TableCell align="center">{<IconButton aria-label="delete"><DeleteIcon /></IconButton>}</TableCell>
             </TableRow>
           ))}
         </TableBody>

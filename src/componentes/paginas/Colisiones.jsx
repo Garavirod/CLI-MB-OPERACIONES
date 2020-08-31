@@ -84,11 +84,10 @@ export default function FormPropsTextFields() {
 
   return (
     <Container component="main">
-      <h5>EVENTO</h5>
-      <br />
+      <h5>EVENTOS</h5>
+      <h6>CREAR EVENTO</h6>
       <form className={classes.root} noValidate autoComplete="off" onSubmit={sendData}>
         <div>
-          <br />
           <TextField
             required
             id="standard"
@@ -136,8 +135,8 @@ export default function FormPropsTextFields() {
               onChange={handleInputchange}
             >
               <option defaultValue="" />
-              <option value={1}>Incidente 1</option>
-              <option value={0}>Incidente 2</option>             
+              <option value={1}>Autobús</option>
+              <option value={0}>Estación</option>             
             </Select>
           </FormControl>
           &nbsp;&nbsp;
@@ -146,13 +145,6 @@ export default function FormPropsTextFields() {
             name="incidente" 
             label="Incidente" 
             defaultValue=""
-            onChange={handleInputchange}
-            />
-          <TextField 
-            id="standard"
-            name="descripcion" 
-            label="Descripción" 
-            defaultValue="" 
             onChange={handleInputchange}
             />
           &nbsp;&nbsp;
@@ -171,7 +163,14 @@ export default function FormPropsTextFields() {
             defaultValue="" 
             onChange={handleInputchange}
           />
-          &nbsp;&nbsp;         
+          &nbsp;&nbsp;
+          <TextField 
+            id="standard"
+            name="descripcion" 
+            label="Descripción" 
+            defaultValue="" 
+            onChange={handleInputchange}
+            />         
           <br/><br/>
           <Button
             type="submit"
@@ -182,7 +181,8 @@ export default function FormPropsTextFields() {
           >
             Agregar evento
           </Button>
-          &nbsp;&nbsp; &nbsp;&nbsp;
+          <br/><br/>
+         
         </div>
       </form>    
       <ListaEventos/>
