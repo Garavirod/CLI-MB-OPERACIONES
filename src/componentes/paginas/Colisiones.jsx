@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 export default function FormPropsTextFields() {
   const classes = useStyles();
 
+  // Objeto a mapear
   const [eventoData] = useState({
     fecha: "",
     hora: "",
@@ -35,34 +36,39 @@ export default function FormPropsTextFields() {
     bitacora: "",
   });
 
+  // Función que verifica si un campo cambia su estado
   const handleInputchange = (e) => {
     eventoData[e.target.name] = e.target.value;
     console.log(eventoData);
   };
 
+  // Valida el fromulario y de no haber campos vacios manda la infromacion al servidor
   const sendData = (e) => {
+    //Evita que la petición sea mandada por defecto en GET
+    e.preventDefault(); 
+    // Url de la API
     const url = "http://localhost:5000/colisionados/registro-evento";
-    e.preventDefault();
     if (
-      this.fecha !== "" &&
-      this.hora !== "" &&
-      this.tipo_incidente !== "" &&
-      this.incidente !== "" &&
-      this.descripcion !== "" &&
-      this.tramo !== "" &&
-      this.operador !== "" &&
-      this.bitacora !== ""
+      eventoData.fecha !== "" &&
+      eventoData.hora !== "" &&
+      eventoData.tipo_incidente !== "" &&
+      eventoData.incidente !== "" &&
+      eventoData.descripcion !== "" &&
+      eventoData.tramo !== "" &&
+      eventoData.operador !== "" &&
+      eventoData.bitacora !== ""
     ) {
+      // Petición axios, manda la data ya vlidada al url definido
       axios
         .post(url, this.eventoData)
         .then((res) => {
           console.log("Datos mandados", res);
         })
         .catch((err) => {
-          console.log("Datos no mandados", err);
+          console.log("Hubo un error al guaradr el evento", err);
         });
     } else {
-      alert("Campos vacios");
+      alert("Aún qudan campo vacios");
     }
   };
 
