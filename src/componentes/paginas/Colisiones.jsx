@@ -11,6 +11,7 @@ import SendIcon from "@material-ui/icons/Send";
 import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
 import axios from "axios";
+import ListaEventos from "./ListaEventos";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,7 +48,7 @@ export default function FormPropsTextFields() {
     //Evita que la petición sea mandada por defecto en GET
     e.preventDefault(); 
     // Url de la API
-    const url = "http://localhost:5000/colisionados/registro-evento";
+    const url = "http://localhost:5000/colisiones/registro-evento";
     if (
       eventoData.fecha !== "" &&
       eventoData.hora !== "" &&
@@ -175,6 +176,7 @@ export default function FormPropsTextFields() {
           &nbsp;&nbsp; &nbsp;&nbsp;
         </div>
       </form>    
+      <ListaEventos/>
     </Container>
   );
 }
