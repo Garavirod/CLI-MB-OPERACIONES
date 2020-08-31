@@ -77,7 +77,7 @@ export default function ListaEventos() {
               </TableCell>
               <TableCell align="right">{row.fecha}</TableCell>
               <TableCell align="right">{row.hora}</TableCell>
-              <TableCell align="right">{row.tipo_incidente}</TableCell>
+              <TableCell align="right">{String(row.tipo_incidente)}</TableCell>
               <TableCell align="right">{row.incidente}</TableCell>
               <TableCell align="right">{row.tramo}</TableCell>
               <TableCell align="right">{row.operador}</TableCell>

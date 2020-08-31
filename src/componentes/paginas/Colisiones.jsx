@@ -40,7 +40,15 @@ export default function FormPropsTextFields() {
   // Función que verifica si un campo cambia su estado
   const handleInputchange = (e) => {
     eventoData[e.target.name] = e.target.value;
+    if(e.target.name === 'hora'){
+      eventoData[e.target.name] = e.target.value;
+      eventoData[e.target.name] += ":00";
+    }else{
+      eventoData[e.target.name] = e.target.value;
+    }
+
     console.log(eventoData);
+    
   };
 
   // Valida el fromulario y de no haber campos vacios manda la infromacion al servidor
@@ -61,9 +69,10 @@ export default function FormPropsTextFields() {
     ) {
       // Petición axios, manda la data ya vlidada al url definido
       axios
-        .post(url, this.eventoData)
+        .post(url, eventoData)
         .then((res) => {
           console.log("Datos mandados", res);
+          alert("Datos mandados");
         })
         .catch((err) => {
           console.log("Hubo un error al guaradr el evento", err);
