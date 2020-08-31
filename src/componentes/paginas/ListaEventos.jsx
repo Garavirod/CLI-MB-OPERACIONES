@@ -80,7 +80,8 @@ export default function ListaEventos() {
               </TableCell>
               <TableCell align="center">{row.fecha.substr(8,2)+"-"+row.fecha.substr(5,2)+"-"+row.fecha.substr(0,4)}</TableCell>
               <TableCell align="center">{row.hora.substr(0,5)}</TableCell>
-              <TableCell align="center">{String(row.tipo_incidente)}</TableCell>
+              <TableCell align="center">{
+              String(row.tipo_incidente)}</TableCell>
               <TableCell align="center">{row.incidente}</TableCell>
               <TableCell align="center">{row.tramo}</TableCell>
               <TableCell align="center">{row.operador}</TableCell>

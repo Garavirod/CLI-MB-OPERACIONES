@@ -12,6 +12,7 @@ import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
 import axios from "axios";
 import ListaEventos from "./ListaEventos";
+import Afectado from "./Afectado";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -184,7 +185,8 @@ export default function FormPropsTextFields() {
           <br/><br/>
          
         </div>
-      </form>    
+      </form>   
+      <Afectado/> 
       <ListaEventos/>
     </Container>
   );
