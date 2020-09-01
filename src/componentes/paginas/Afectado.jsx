@@ -49,11 +49,11 @@ export default function FormPropsTextFields() {
       afectadoData.edad !== "" &&
       afectadoData.nombre !== "" &&
       afectadoData.status !== "" &&
-      afectadoData.fk_Afectado !== ""
+      afectadoData.fk_evento !== ""
     ) {
       // Petición axios, manda la data ya vlidada al url definido
       axios
-        .post(url, afectadoData)
+        .post(url.concat(afectadoData.fk_evento), afectadoData)
         .then((res) => {
           console.log("Datos mandados", res);
           alert("Datos mandados");
@@ -62,7 +62,7 @@ export default function FormPropsTextFields() {
           console.log("Hubo un error al guardar el Afectado", err);
         });
     } else {
-      alert("Aún qudan campo vacios");
+      alert("Aún quedan campo vacios afectados");
     }
   };
 
