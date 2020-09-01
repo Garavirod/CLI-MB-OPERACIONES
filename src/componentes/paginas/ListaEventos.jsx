@@ -53,6 +53,15 @@ export default function ListaEventos() {
     });
 }
 
+  const deleteEvento = async (evento)=>{
+    const url = `http://localhost:5000/colisiones/borra-evento/${evento}`;
+    axios.delete(url)
+    .then(res =>{
+      console.log("delete: " + res);
+      getEventos();
+    })
+  }
+
 
   return (
     <TableContainer component={Paper}>
@@ -87,11 +96,11 @@ export default function ListaEventos() {
               <TableCell align="center">{row.operador}</TableCell>
               <TableCell align="center">{row.bitacora}</TableCell>
               <TableCell align="center">{row.descripcion}</TableCell>
-              <TableCell align="center">{<IconButton aria-label="delete"><DeleteIcon /></IconButton>}</TableCell>
+              <TableCell align="center">{<IconButton aria-label="delete" onClick={() =>deleteEvento(row.id)} ><DeleteIcon /></IconButton>}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer> 
   );
 }
