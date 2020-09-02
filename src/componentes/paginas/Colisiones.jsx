@@ -16,6 +16,10 @@ import ListaAfectados from "./ListaAfectados";
 import ListaDatosSeguro from "./ListaDatosSeguro";
 import Afectado from "./Afectado";
 import DatosSeguro from "./DatosSeguro";
+import Ambulancia from "./Ambulancia";
+import ListaAmbulancia from "./ListaAmbulancia";
+import Traslado from "./TrasladoHospital";
+import ListaTraslado from "./ListaTrasladoHospital";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -196,6 +200,12 @@ export default function FormPropsTextFields() {
       <br/><br/> 
       <DatosSeguro/>
       <ListaDatosSeguro/>  
+      <br/><br/>
+      <Ambulancia/>
+      <ListaAmbulancia/>
+      <br/><br/>
+      <Traslado/>
+      <ListaTraslado/>
     </Container>
   );
 }
