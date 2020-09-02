@@ -13,6 +13,7 @@ import { useState } from "react";
 import axios from "axios";
 import ListaEventos from "./ListaEventos";
 import ListaAfectados from "./ListaAfectados";
+import ListaDatosSeguro from "./ListaDatosSeguro";
 import Afectado from "./Afectado";
 import DatosSeguro from "./DatosSeguro";
 
@@ -193,7 +194,8 @@ export default function FormPropsTextFields() {
       <Afectado/> 
       <ListaAfectados/>
       <br/><br/> 
-      <DatosSeguro/> 
+      <DatosSeguro/>
+      <ListaDatosSeguro/>  
     </Container>
   );
 }

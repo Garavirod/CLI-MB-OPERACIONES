@@ -100,7 +100,7 @@ export default function FormPropsTextFields() {
           <TextField
             id="standard"
             label="Tiempo Respuesta"
-            defaultValue=""
+            defaultValue="00:00:00"
             name="tiempoRespuesta"
             onChange={handleInputchange}
           />
@@ -149,7 +149,7 @@ export default function FormPropsTextFields() {
             className={classes.bgPDF}
             startIcon={<AddIcon />}
           >
-            Agregar datosSeguro
+            Agregar Seguro
           </Button>
           <br/><br/>
          
