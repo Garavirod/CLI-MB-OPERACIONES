@@ -62,6 +62,19 @@ export default function ListaAfectados() {
     })
   }
 
+  const validaSexo = (sex)=>{
+    if (sex==true)
+   return "Masculino"
+    else
+    return "Femenino" 
+  }
+  const validaEstado = (stat)=>{
+    if (stat==true)
+   return "Vivo"
+    else
+    return "Muerto" 
+  }
+
 
   return (
     <TableContainer component={Paper}>
@@ -71,7 +84,7 @@ export default function ListaAfectados() {
             <TableCell>ID</TableCell>
             <TableCell align="center">Nombre</TableCell>
             <TableCell align="center">Edad</TableCell>
-            <TableCell align="center">Sexo</TableCell>
+            <TableCell align="center">Género</TableCell>
             <TableCell align="center">Estado</TableCell>
             <TableCell align="center">Evento</TableCell>
             <TableCell align="center">Borrar</TableCell>
@@ -87,8 +100,8 @@ export default function ListaAfectados() {
               </TableCell>
               <TableCell align="center">{row.nombre}</TableCell>
               <TableCell align="center">{row.edad}</TableCell>
-              <TableCell align="center">{ String(row.sexo)}</TableCell>
-              <TableCell align="center">{ String(row.status)}</TableCell>
+              <TableCell align="center">{ validaSexo(row.sexo)}</TableCell>
+              <TableCell align="center">{ validaEstado(row.status)}</TableCell>
               <TableCell align="center">{row.fk_evento}</TableCell>
               <TableCell align="center">{<IconButton aria-label="delete" onClick={() =>deleteEvento(row.id)} ><DeleteIcon /></IconButton>}</TableCell>
             </TableRow>
