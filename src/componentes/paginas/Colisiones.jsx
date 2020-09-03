@@ -20,6 +20,10 @@ import Ambulancia from "./Ambulancia";
 import ListaAmbulancia from "./ListaAmbulancia";
 import Traslado from "./TrasladoHospital";
 import ListaTraslado from "./ListaTrasladoHospital";
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -92,7 +96,7 @@ export default function FormPropsTextFields() {
 
   return (
     <Container component="main">
-      <h5>EVENTOS</h5>
+      <h5>LESIONADOS Y ATROPELLADOS</h5>
       <h6>CREAR EVENTO</h6>
       <form className={classes.root} noValidate autoComplete="off" onSubmit={sendData}>
         <div>
@@ -104,6 +108,7 @@ export default function FormPropsTextFields() {
             name="bitacora"
             onChange={handleInputchange}
           />
+          
           <TextField
             id="date"
             label="Fecha"
@@ -131,9 +136,10 @@ export default function FormPropsTextFields() {
               step: 300, // 5 min
             }}
           />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="grouped-native-select">
-              Tipo Incidente
+              Linea
             </InputLabel>
             <Select
               native
@@ -143,19 +149,31 @@ export default function FormPropsTextFields() {
               onChange={handleInputchange}
             >
               <option defaultValue="" />
-              <option value={1}>Autobús</option>
-              <option value={0}>Estación</option>             
+              <option value={1}>Linea 1</option>
+              <option value={0}>Linea 2</option>
+              <option value={0}>Linea 2</option>           
             </Select>
           </FormControl>
-          &nbsp;&nbsp;
-          <TextField 
-            id="standard" 
-            name="incidente" 
-            label="Incidente" 
-            defaultValue=""
-            onChange={handleInputchange}
-            />
-          &nbsp;&nbsp;
+
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">
+              Estación
+            </InputLabel>
+            <Select
+              native
+              defaultValue=""
+              id="grouped-native-select"
+              name="tipo_incidente"
+              onChange={handleInputchange}
+            >
+              <option defaultValue="" />
+              <option value={1}>Estación 1</option>
+              <option value={0}>Estación 2</option>
+              <option value={0}>Estación 2</option>           
+            </Select>
+          </FormControl>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <TextField 
             id="standard" 
             name="tramo" 
@@ -163,15 +181,52 @@ export default function FormPropsTextFields() {
             defaultValue="" 
             onChange={handleInputchange}
           />
-          &nbsp;&nbsp;
+
+          <br/>
+          <TextField 
+            id="standard" 
+            name="economico" 
+            label="Económico" 
+            defaultValue=""
+            onChange={handleInputchange}
+            />
           <TextField 
             id="standard"
             name="operador" 
             label="Operador" 
             defaultValue="" 
             onChange={handleInputchange}
-          />
+          />          
           &nbsp;&nbsp;
+
+          <FormControl component="fieldset" name="tipo_incidente">
+          <FormLabel component="legend">Tipo incidente:</FormLabel>
+            <RadioGroup row aria-label="position" defaultValue="top">
+              <FormControlLabel
+                value="1"
+                control={<Radio color="primary" />}
+                label="Lesiónado"
+                labelPlacement="Lesión"
+              />
+              
+              <FormControlLabel
+                value="0"
+                control={<Radio color="primary" />}
+                label="Atropellado"
+                labelPlacement="Atropellado"
+              />
+            </RadioGroup>
+        </FormControl>
+        &nbsp;&nbsp;
+          <TextField 
+            id="standard" 
+            name="incidente" 
+            label="Incidente" 
+            defaultValue=""
+            onChange={handleInputchange}
+            />
+          
+          &nbsp;
           <TextField 
             id="standard"
             name="descripcion" 
