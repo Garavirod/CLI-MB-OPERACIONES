@@ -125,7 +125,7 @@ export default function FormPropsTextFields() {
               step: 300, // 5 min
             }}
           />
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="grouped-native-select">
               Linea
@@ -186,27 +186,26 @@ export default function FormPropsTextFields() {
             defaultValue="" 
             onChange={handleInputchange}
           />          
-          &nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-          <FormControl component="fieldset"  name="tipo_incidente">
-          <FormLabel component="legend">Tipo incidente:</FormLabel>
-            <RadioGroup row aria-label="position"  defaultValue="top">
-              <FormControlLabel
-                value="TRUE"
-                control={<Radio color="primary" />}
-                label="Lesiónado"
-                labelPlacement="tipo_incidente"
-              />
-              
-              <FormControlLabel
-                value="FALSE"
-                control={<Radio color="primary" />}
-                label="Atropellado"
-                labelPlacement="tipo_incidente"
-              />
-            </RadioGroup>
-        </FormControl>
-        &nbsp;&nbsp;
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="grouped-native-select">
+              Tipo incidente
+            </InputLabel>
+            <Select
+              native
+              defaultValue=""
+              id="grouped-native-select"
+              name="tipo_incidente"
+              onChange={handleInputchange}
+            >
+              <option defaultValue="" />
+              <option value={1}>Lesionado</option>
+              <option value={0}>Atropellado</option>          
+            </Select>
+          </FormControl>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <TextField 
             id="standard" 
             name="incidente" 
