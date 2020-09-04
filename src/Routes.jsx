@@ -14,6 +14,7 @@ import Pruebas from './componentes/paginas/Pruebas';
 import MenuAccidentes from './componentes/paginas/MenuAccidentes';
 import Lesionados from './componentes/paginas/Lesionados';
 import Colisiones from './componentes/paginas/Colisiones';
+import LyAv2 from './componentes/paginas/LyAv2';
 
 const Routes = () => {
     return ( 
@@ -34,6 +35,8 @@ const Routes = () => {
                 <Route path='/lesionados/' component={Lesionados}exact>
                 </Route> 
                 <Route path='/colisiones/' component={Colisiones}exactç>
+                </Route>
+                <Route path='/lesionadosv2/' component={LyAv2}exactç>
                 </Route>
                 <Route path='/MenuAccidentes/' component={MenuAccidentes}exact>
                 </Route>                                               

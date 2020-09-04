@@ -5,21 +5,10 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import Container from "@material-ui/core/Container";
-import { Divider } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import SendIcon from "@material-ui/icons/Send";
 import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
 import axios from "axios";
-import ListaEventos from "./ListaEventos";
-import ListaAfectados from "./ListaAfectados";
-import ListaDatosSeguro from "./ListaDatosSeguro";
-import Afectado from "./Afectado";
-import DatosSeguro from "./DatosSeguro";
-import Ambulancia from "./Ambulancia";
-import ListaAmbulancia from "./ListaAmbulancia";
-import Traslado from "./TrasladoHospital";
-import ListaTraslado from "./ListaTrasladoHospital";
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -248,19 +237,7 @@ export default function FormPropsTextFields() {
          
         </div>
       </form>
-      <ListaEventos/>  
-      <br/><br/> 
-      <Afectado/> 
-      <ListaAfectados/>
-      <br/><br/> 
-      <DatosSeguro/>
-      <ListaDatosSeguro/>  
-      <br/><br/>
-      <Ambulancia/>
-      <ListaAmbulancia/>
-      <br/><br/>
-      <Traslado/>
-      <ListaTraslado/>
+     
     </Container>
   );
 }

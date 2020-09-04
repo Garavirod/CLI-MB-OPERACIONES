@@ -38,6 +38,13 @@ export default function SimpleBottomNavigation() {
       icon={<LocalHospitalIcon />}
       a href="/lesionados"
       />
+
+      <BottomNavigationAction 
+      label="LyA v2" 
+      icon={<LocalHospitalIcon />}
+      a href="/lesionadosv2"
+      />
+
       <BottomNavigationAction 
       label="Reportes" 
       icon={<ReportIcon />}
