@@ -10,6 +10,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+
 import Evento from "./Evento";
 import Afectado from "./Afectado";
 import DatosSeguro from "./DatosSeguro";
@@ -32,10 +37,14 @@ export default function FormPropsTextFields() {
 
   return (
     <Container component="main">
-      
-      <Evento/> 
+
+    <Card className={classes.root}>
+      <CardContent>
+      <Evento/>
       <Afectado/>
-      
+      </CardContent>
+    </Card> 
+   
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
