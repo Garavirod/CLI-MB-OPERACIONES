@@ -8,8 +8,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CreateIcon from '@material-ui/icons/Create';
 import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   table: {
@@ -85,6 +87,7 @@ export default function ListaEventos() {
             <TableCell align="center">Bitacora</TableCell>
             <TableCell align="center">Descripcion</TableCell>
             <TableCell align="center">Borrar</TableCell>
+            <TableCell align="center">Agregar registro</TableCell>
 
           </TableRow>
         </TableHead>
@@ -103,6 +106,11 @@ export default function ListaEventos() {
               <TableCell align="center">{row.bitacora}</TableCell>
               <TableCell align="center">{row.descripcion}</TableCell>
               <TableCell align="center">{<IconButton aria-label="delete" onClick={() =>deleteEvento(row.id)} ><DeleteIcon /></IconButton>}</TableCell>
+              <TableCell align="center">
+                <Link className="" to={`/add-register/${row.id}`}> 
+                  <IconButton aria-label="add"><CreateIcon /></IconButton>
+                </Link>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -110,3 +118,4 @@ export default function ListaEventos() {
     </TableContainer> 
   );
 }
+

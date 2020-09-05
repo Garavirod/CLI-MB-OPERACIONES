@@ -120,17 +120,7 @@ export default function FormPropsTextFields() {
               <option value={0}>Muerto</option>             
             </Select>
           </FormControl>
-
-         
-          &nbsp;&nbsp;
-          <TextField 
-            id="standard"
-            name="fk_evento" 
-            label="IdEvento" 
-            defaultValue="" 
-            onChange={handleInputchange}
-            />         
-          <br/><br/>
+          <br/><br/>                 
           <Button
             type="submit"
             variant="contained"
