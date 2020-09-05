@@ -12,13 +12,8 @@ import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
 import axios from "axios";
 import ListaEventos from "./ListaEventos";
-import ListaAfectados from "./ListaAfectados";
 import ListaDatosSeguro from "./ListaDatosSeguro";
-import Afectado from "./Afectado";
-import DatosSeguro from "./DatosSeguro";
-import Ambulancia from "./Ambulancia";
 import ListaAmbulancia from "./ListaAmbulancia";
-import Traslado from "./TrasladoHospital";
 import ListaTraslado from "./ListaTrasladoHospital";
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -248,18 +243,15 @@ export default function FormPropsTextFields() {
          
         </div>
       </form>
-      <ListaEventos/>  
+      <ListaEventos/>        
       <br/><br/> 
-      <Afectado/> 
-      <ListaAfectados/>
-      <br/><br/> 
-      <DatosSeguro/>
+      
       <ListaDatosSeguro/>  
       <br/><br/>
-      <Ambulancia/>
+     
       <ListaAmbulancia/>
       <br/><br/>
-      <Traslado/>
+      
       <ListaTraslado/>
     </Container>
   );

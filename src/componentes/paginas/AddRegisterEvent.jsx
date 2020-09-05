@@ -10,6 +10,9 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 // Components
 import Afectado from "./Afectado";
+import DatosSeguro from "./DatosSeguro";
+import Ambulancia from "./Ambulancia";
+import Traslado from "./TrasladoHospital";
 
 // Styles
 
@@ -44,7 +47,7 @@ export const AddRegisterEvent = () => {
             <Typography className={classes.heading}>Afectados</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Afectado/>
+            <Afectado />
           </AccordionDetails>
         </Accordion>
         <Accordion>
@@ -56,13 +59,48 @@ export const AddRegisterEvent = () => {
             <Typography className={classes.heading}>Datos de seguro</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
+            <DatosSeguro />
           </AccordionDetails>
         </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography className={classes.heading}>Datos de ambulancia</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Ambulancia />
+          </AccordionDetails>
+        </Accordion>
+        {/* Traslado */}
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography className={classes.heading}>Traslado</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Traslado />
+          </AccordionDetails>
+        </Accordion>
+        {/* DATOS DE AUTOMOVIL */}
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography className={classes.heading}>Datos de automovil</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Traslado />
+          </AccordionDetails>
+        </Accordion>
+        {/* DESABLE */}
         <Accordion disabled>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
