@@ -14,7 +14,6 @@ import Pruebas from './componentes/paginas/Pruebas';
 import MenuAccidentes from './componentes/paginas/MenuAccidentes';
 import Lesionados from './componentes/paginas/Lesionados';
 import Colisiones from './componentes/paginas/Colisiones';
-import LyAv2 from './componentes/paginas/LyAv2';
 import { AddRegisterEvent } from './componentes/paginas/AddRegisterEvent';
 import ListaAfectados from './componentes/paginas/ListaAfectados';
 import ListaDatosSeguro from "./componentes/paginas/ListaDatosSeguro";
@@ -40,9 +39,7 @@ const Routes = () => {
                 <Route path='/lesionados/' component={Lesionados}exact>
                 </Route> 
                 <Route path='/colisiones/' component={Colisiones}exactç>
-                </Route>
-                <Route path='/lesionadosv2/' component={LyAv2}exactç>
-                </Route>
+                </Route>                
                 <Route path='/MenuAccidentes/' component={MenuAccidentes}exact>
                 </Route>
                 <Route exact path="/add-register/:idEvento" component={AddRegisterEvent} />                                               
