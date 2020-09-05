@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
 import axios from "axios";
+import { useParams,Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormPropsTextFields() {
   const classes = useStyles();
+
+  const {idEvento} = useParams();
 
   // Objeto a mapear
   const [TrasladoHospitalData] = useState({
@@ -102,7 +105,7 @@ export default function FormPropsTextFields() {
             Agregar Traslado 
           </Button>
           <br/><br/>
-         
+          <Link to={`/traslados/${idEvento}`}> ver registros</Link>         
         </div>
       </form>   
      

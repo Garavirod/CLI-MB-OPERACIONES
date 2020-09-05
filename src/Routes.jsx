@@ -16,6 +16,10 @@ import Lesionados from './componentes/paginas/Lesionados';
 import Colisiones from './componentes/paginas/Colisiones';
 import LyAv2 from './componentes/paginas/LyAv2';
 import { AddRegisterEvent } from './componentes/paginas/AddRegisterEvent';
+import ListaAfectados from './componentes/paginas/ListaAfectados';
+import ListaDatosSeguro from "./componentes/paginas/ListaDatosSeguro";
+import ListaAmbulancia from "./componentes/paginas/ListaAmbulancia";
+import ListaTraslado from "./componentes/paginas/ListaTrasladoHospital";
 
 const Routes = () => {
     return ( 
@@ -42,6 +46,10 @@ const Routes = () => {
                 <Route path='/MenuAccidentes/' component={MenuAccidentes}exact>
                 </Route>
                 <Route exact path="/add-register/:idEvento" component={AddRegisterEvent} />                                               
+                <Route exact path="/afectados/:idEvento" component={ListaAfectados} />                                               
+                <Route exact path="/ambulancias/:idEvento" component={ListaAmbulancia} />                                               
+                <Route exact path="/traslados/:idEvento" component={ListaTraslado} />                                                                                                            
+                <Route exact path="/seguros/:idEvento" component={ListaDatosSeguro} />                                                                                                            
             </div>
         </Router>
      );

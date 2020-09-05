@@ -7,7 +7,6 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
 // Components
 import Afectado from "./Afectado";
 import DatosSeguro from "./DatosSeguro";
@@ -44,6 +43,7 @@ export const AddRegisterEvent = () => {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
+            {/* AfFECTADOS */}
             <Typography className={classes.heading}>Afectados</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -56,6 +56,7 @@ export const AddRegisterEvent = () => {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
+              {/* SEGURO */}
             <Typography className={classes.heading}>Datos de seguro</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -68,7 +69,9 @@ export const AddRegisterEvent = () => {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography className={classes.heading}>Datos de ambulancia</Typography>
+            <Typography className={classes.heading}>
+              Datos de ambulancia
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Ambulancia />
@@ -94,7 +97,9 @@ export const AddRegisterEvent = () => {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography className={classes.heading}>Datos de automovil</Typography>
+            <Typography className={classes.heading}>
+              Datos de automovil
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Traslado />

@@ -9,6 +9,10 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
 import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+import IconButton from '@material-ui/core/IconButton';
+// Icons
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormPropsTextFields() {
   const classes = useStyles();
+  const {idEvento} = useParams();
 
   // Objeto a mapear
   const [afectadoData] = useState({
@@ -131,6 +136,8 @@ export default function FormPropsTextFields() {
             Agregar Afectado
           </Button>
           <br/><br/>
+
+          <Link to={`/afectados/${idEvento}`}> ver registros</Link>
          
         </div>
       </form>   

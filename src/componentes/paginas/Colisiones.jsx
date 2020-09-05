@@ -5,20 +5,15 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import Container from "@material-ui/core/Container";
-import { Divider } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import SendIcon from "@material-ui/icons/Send";
 import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
 import axios from "axios";
 import ListaEventos from "./ListaEventos";
-import ListaDatosSeguro from "./ListaDatosSeguro";
-import ListaAmbulancia from "./ListaAmbulancia";
-import ListaTraslado from "./ListaTrasladoHospital";
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormLabel from "@material-ui/core/FormLabel";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,21 +42,20 @@ export default function FormPropsTextFields() {
   // Función que verifica si un campo cambia su estado
   const handleInputchange = (e) => {
     eventoData[e.target.name] = e.target.value;
-    if(e.target.name === 'hora'){
+    if (e.target.name === "hora") {
       eventoData[e.target.name] = e.target.value;
       eventoData[e.target.name] += ":00";
-    }else{
+    } else {
       eventoData[e.target.name] = e.target.value;
     }
 
     console.log(eventoData);
-    
   };
 
   // Valida el fromulario y de no haber campos vacios manda la infromacion al servidor
   const sendData = (e) => {
     //Evita que la petición sea mandada por defecto en GET
-    e.preventDefault(); 
+    e.preventDefault();
     // Url de la API
     const url = "http://localhost:5000/colisiones/registro-evento";
     if (
@@ -93,7 +87,12 @@ export default function FormPropsTextFields() {
     <Container component="main">
       <h5>LESIONADOS Y ATROPELLADOS</h5>
       <h6>CREAR EVENTO</h6>
-      <form className={classes.root} noValidate autoComplete="off" onSubmit={sendData}>
+      <form
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+        onSubmit={sendData}
+      >
         <div>
           <TextField
             required
@@ -103,7 +102,6 @@ export default function FormPropsTextFields() {
             name="bitacora"
             onChange={handleInputchange}
           />
-          
           <TextField
             id="date"
             label="Fecha"
@@ -133,9 +131,7 @@ export default function FormPropsTextFields() {
           />
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="grouped-native-select">
-              Linea
-            </InputLabel>
+            <InputLabel htmlFor="grouped-native-select">Linea</InputLabel>
             <Select
               native
               defaultValue=""
@@ -146,15 +142,12 @@ export default function FormPropsTextFields() {
               <option defaultValue="" />
               <option value={1}>Linea 1</option>
               <option value={0}>Linea 2</option>
-              <option value={0}>Linea 2</option>           
+              <option value={0}>Linea 2</option>
             </Select>
           </FormControl>
-
           &nbsp;&nbsp;&nbsp;&nbsp;
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="grouped-native-select">
-              Estación
-            </InputLabel>
+            <InputLabel htmlFor="grouped-native-select">Estación</InputLabel>
             <Select
               native
               defaultValue=""
@@ -165,45 +158,43 @@ export default function FormPropsTextFields() {
               <option defaultValue="" />
               <option value={1}>Estación 1</option>
               <option value={0}>Estación 2</option>
-              <option value={0}>Estación 2</option>           
+              <option value={0}>Estación 2</option>
             </Select>
           </FormControl>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <TextField 
-            id="standard" 
-            name="tramo" 
-            label="Tramo" 
-            defaultValue="" 
-            onChange={handleInputchange}
-          />
-
-          <br/>
-          <TextField 
-            id="standard" 
-            name="economico" 
-            label="Económico" 
+          <TextField
+            id="standard"
+            name="tramo"
+            label="Tramo"
             defaultValue=""
             onChange={handleInputchange}
-            />
-          <TextField 
+          />
+          <br />
+          <TextField
             id="standard"
-            name="operador" 
-            label="Operador" 
-            defaultValue="" 
+            name="economico"
+            label="Económico"
+            defaultValue=""
             onChange={handleInputchange}
-          />          
+          />
+          <TextField
+            id="standard"
+            name="operador"
+            label="Operador"
+            defaultValue=""
+            onChange={handleInputchange}
+          />
           &nbsp;&nbsp;
-
-          <FormControl component="fieldset"  name="tipo_incidente">
-          <FormLabel component="legend">Tipo incidente:</FormLabel>
-            <RadioGroup row aria-label="position"  defaultValue="top">
+          <FormControl component="fieldset" name="tipo_incidente">
+            <FormLabel component="legend">Tipo incidente:</FormLabel>
+            <RadioGroup row aria-label="position" defaultValue="top">
               <FormControlLabel
                 value="TRUE"
                 control={<Radio color="primary" />}
                 label="Lesiónado"
                 labelPlacement="tipo_incidente"
               />
-              
+
               <FormControlLabel
                 value="FALSE"
                 control={<Radio color="primary" />}
@@ -211,25 +202,25 @@ export default function FormPropsTextFields() {
                 labelPlacement="tipo_incidente"
               />
             </RadioGroup>
-        </FormControl>
-        &nbsp;&nbsp;
-          <TextField 
-            id="standard" 
-            name="incidente" 
-            label="Incidente" 
+          </FormControl>
+          &nbsp;&nbsp;
+          <TextField
+            id="standard"
+            name="incidente"
+            label="Incidente"
             defaultValue=""
             onChange={handleInputchange}
-            />
-          
+          />
           &nbsp;
-          <TextField 
+          <TextField
             id="standard"
-            name="descripcion" 
-            label="Descripción" 
-            defaultValue="" 
+            name="descripcion"
+            label="Descripción"
+            defaultValue=""
             onChange={handleInputchange}
-            />         
-          <br/><br/>
+          />
+          <br />
+          <br />
           <Button
             type="submit"
             variant="contained"
@@ -239,20 +230,13 @@ export default function FormPropsTextFields() {
           >
             Agregar evento
           </Button>
-          <br/><br/>
-         
+          <br />
+          <br />
         </div>
       </form>
-      <ListaEventos/>        
-      <br/><br/> 
-      
-      <ListaDatosSeguro/>  
-      <br/><br/>
-     
-      <ListaAmbulancia/>
-      <br/><br/>
-      
-      <ListaTraslado/>
+      <ListaEventos />
+      <br />
+      <br />
     </Container>
   );
 }

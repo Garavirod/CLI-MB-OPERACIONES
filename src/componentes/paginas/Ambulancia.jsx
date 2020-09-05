@@ -1,14 +1,12 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
 import axios from "axios";
+import { useParams, Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormPropsTextFields() {
   const classes = useStyles();
-
+  const {idEvento} = useParams();
   // Objeto a mapear
   const [ambulanciaData] = useState({
     tiempoLLegada: "",
@@ -105,41 +103,6 @@ export default function FormPropsTextFields() {
             name="ambulancia"
             onChange={handleInputchange}
           />  
-          
-         {/* <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="grouped-native-select">
-             Género
-            </InputLabel>
-            <Select
-              native
-              defaultValue=""
-              id="grouped-native-select"
-              name="sexo"
-              onChange={handleInputchange}
-            >
-              <option defaultValue="" />
-              <option value={1}>Masculino</option>
-              <option value={0}>Femenino</option>             
-            </Select>
-  </FormControl>
-          &nbsp;&nbsp;
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="grouped-native-select">
-             Estado
-            </InputLabel>
-            <Select
-              native
-              defaultValue=""
-              id="grouped-native-select"
-              name="status"
-              onChange={handleInputchange}
-            >
-              <option defaultValue="" />
-              <option value={1}>Vivo</option>
-              <option value={0}>Muerto</option>             
-            </Select>
-          </FormControl>*/}
-
           <TextField 
             id="standard"
             name="ecoPlaca" 
@@ -182,7 +145,7 @@ export default function FormPropsTextFields() {
             Agregar Ambulancia
           </Button>
           <br/><br/>
-         
+          <Link to={`/ambulancias/${idEvento}`}> ver registros</Link>
         </div>
       </form>   
      
