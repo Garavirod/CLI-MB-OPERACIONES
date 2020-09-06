@@ -28,7 +28,6 @@ export default function FormPropsTextFields() {
     ecoPlaca: "",
     paramedico: "",
     diagnostico: "",
-    fk_evento: "",
   });
 
   // Función que verifica si un campo cambia su estado
@@ -43,7 +42,7 @@ export default function FormPropsTextFields() {
     //Evita que la petición sea mandada por defecto en GET
     e.preventDefault(); 
     // Url de la API
-    const url = "http://localhost:5000/colisiones/registro-datosAmbulancia/";
+    const url = `http://localhost:5000/lesionados/registro-datosAmbulancia/${idEvento}`;
     if (
       ambulanciaData.tiempoLLegada !== "" &&
       ambulanciaData.tiempoRespuesta !== "" &&
@@ -54,7 +53,7 @@ export default function FormPropsTextFields() {
     ) {
       // Petición axios, manda la data ya vlidada al url definido
       axios
-        .post(url.concat(ambulanciaData.fk_evento), ambulanciaData)
+        .post(url, ambulanciaData)
         .then((res) => {
           console.log("Datos mandados", res);
           alert("Datos mandados");
@@ -126,14 +125,7 @@ export default function FormPropsTextFields() {
             defaultValue="" 
             onChange={handleInputchange}
             />
-          &nbsp;&nbsp;
-          <TextField 
-            id="standard"
-            name="fk_evento" 
-            label="IdEvento" 
-            defaultValue="" 
-            onChange={handleInputchange}
-            />         
+          &nbsp;&nbsp;         
           <br/><br/>
           <Button
             type="submit"

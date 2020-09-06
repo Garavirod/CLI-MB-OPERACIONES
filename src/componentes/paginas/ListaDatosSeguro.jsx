@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
   table: {
@@ -34,6 +35,7 @@ const rows = [
 
 export default function ListadatosSeguros() {
   const classes = useStyles();
+  const {idEvento} = useParams();
 
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -42,7 +44,7 @@ export default function ListadatosSeguros() {
 
 
   const getdatosSeguros = async ()=>{
-    const url ="http://localhost:5000/colisiones/datoseguros";
+    const url =`http://localhost:5000/lesionados/datoseguros/${idEvento}`;
     axios.get(url)
     .then(res=>{
         setData(res.data.data);
@@ -54,7 +56,7 @@ export default function ListadatosSeguros() {
 }
 
   const deleteEvento = async (datosSeguro)=>{
-    const url = `http://localhost:5000/colisiones/borra-datos-seguro/${datosSeguro}`;
+    const url = `http://localhost:5000/lesionados/borra-datos-seguro/${datosSeguro}`;
     axios.delete(url)
     .then(res =>{
       console.log("delete: " + res);

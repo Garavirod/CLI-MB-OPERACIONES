@@ -53,7 +53,7 @@ export default function FormPropsTextFields() {
     //Evita que la petición sea mandada por defecto en GET
     e.preventDefault(); 
     // Url de la API
-    const url = "http://localhost:5000/colisiones/registro-datosSeguro/1";
+    const url = `http://localhost:5000/lesionados/registro-datosSeguro/${idEvento}`;
     if (
       datosSeguroData.horaArribo !== "" &&
       datosSeguroData.tiempoRespuesta !== "" &&
@@ -64,7 +64,7 @@ export default function FormPropsTextFields() {
     ) {
       // Petición axios, manda la data ya vlidada al url definido
       axios
-        .post(url.concat(datosSeguroData.fk_evento), datosSeguroData)
+        .post(url, datosSeguroData)
         .then((res) => {
           console.log("DatosSeguro mandados", res);
           alert("DatosSeguro mandados");

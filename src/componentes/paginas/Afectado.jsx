@@ -32,8 +32,7 @@ export default function FormPropsTextFields() {
     sexo: "",
     edad: "",
     nombre: "",
-    status: "",
-    fk_Afectado: "",
+    status: "",    
   });
 
   // Función que verifica si un campo cambia su estado
@@ -48,17 +47,16 @@ export default function FormPropsTextFields() {
     //Evita que la petición sea mandada por defecto en GET
     e.preventDefault(); 
     // Url de la API
-    const url = "http://localhost:5000/colisiones/registro-afectado/";
+    const url = `http://localhost:5000/lesionados/registro-afectado/${idEvento}`;
     if (
       afectadoData.sexo !== "" &&
       afectadoData.edad !== "" &&
       afectadoData.nombre !== "" &&
-      afectadoData.status !== "" &&
-      afectadoData.fk_evento !== ""
+      afectadoData.status !== ""      
     ) {
       // Petición axios, manda la data ya vlidada al url definido
       axios
-        .post(url.concat(afectadoData.fk_evento), afectadoData)
+        .post(url, afectadoData)
         .then((res) => {
           console.log("Datos mandados", res);
           alert("Datos mandados");

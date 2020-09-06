@@ -57,7 +57,7 @@ export default function FormPropsTextFields() {
     //Evita que la petición sea mandada por defecto en GET
     e.preventDefault();
     // Url de la API
-    const url = "http://localhost:5000/colisiones/registro-evento";
+    const url = "http://localhost:5000/lesionados/registro-evento";
     if (
       eventoData.fecha !== "" &&
       eventoData.hora !== "" &&

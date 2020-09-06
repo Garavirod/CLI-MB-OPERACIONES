@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
   table: {
@@ -35,6 +36,8 @@ const rows = [
 export default function ListaAmbulancia() {
   const classes = useStyles();
 
+  const {idEvento} = useParams();
+  
   const [data, setData] = useState([]);
   useEffect(() => {
     getAmbulancias();
@@ -42,7 +45,7 @@ export default function ListaAmbulancia() {
 
 
   const getAmbulancias = async ()=>{
-    const url ="http://localhost:5000/colisiones/datosambulancias";
+    const url =`http://localhost:5000/lesionados/datosambulancias/${idEvento}`;
     axios.get(url)
     .then(res=>{
         setData(res.data.data);
@@ -54,7 +57,7 @@ export default function ListaAmbulancia() {
 }
 
   const deleteAmbulanica = async (evento)=>{
-    const url = `http://localhost:5000/colisiones/borra-datos-ambulancia/${evento}`;
+    const url = `http://localhost:5000/lesionados/borra-datos-ambulancia/${evento}`;
     axios.delete(url)
     .then(res =>{
       console.log("delete: " + res);

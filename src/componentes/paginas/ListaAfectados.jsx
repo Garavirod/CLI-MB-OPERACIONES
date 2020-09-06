@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
   table: {
@@ -35,6 +36,8 @@ const rows = [
 export default function ListaAfectados() {
   const classes = useStyles();
 
+  const {idEvento} = useParams()
+
   const [data, setData] = useState([]);
   useEffect(() => {
     getAfectados();
@@ -42,7 +45,7 @@ export default function ListaAfectados() {
 
 
   const getAfectados = async ()=>{
-    const url ="http://localhost:5000/colisiones/afectados";
+    const url =`http://localhost:5000/lesionados/afectados/${idEvento}`;
     axios.get(url)
     .then(res=>{
         setData(res.data.data);
@@ -54,7 +57,7 @@ export default function ListaAfectados() {
 }
 
   const deleteEvento = async (afectado)=>{
-    const url = `http://localhost:5000/colisiones/borra-afectado/${afectado}`;
+    const url = `http://localhost:5000/lesionados/borra-afectado/${afectado}`;
     axios.delete(url)
     .then(res =>{
       console.log("delete: " + res);
