@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormPropsTextFields() {
   const classes = useStyles();
-  const {idEvento} = useParams();
+  const {idAfectado,idEvento} = useParams();
   // Objeto a mapear
   const [ambulanciaData] = useState({
     tiempoLLegada: "",
@@ -28,6 +28,7 @@ export default function FormPropsTextFields() {
     ecoPlaca: "",
     paramedico: "",
     diagnostico: "",
+    idAfectado:idAfectado
   });
 
   // Función que verifica si un campo cambia su estado

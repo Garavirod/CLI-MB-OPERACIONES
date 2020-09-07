@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
   table: {
@@ -35,6 +36,7 @@ const rows = [
 export default function ListaTraslado() {
   const classes = useStyles();
 
+  const {idEvento} = useParams();
   const [data, setData] = useState([]);
   useEffect(() => {
     getTraslados();
@@ -42,7 +44,7 @@ export default function ListaTraslado() {
 
 
   const getTraslados = async ()=>{
-    const url ="http://localhost:5000/lesionados/traslados";
+    const url =`http://localhost:5000/lesionados/traslados/${idEvento}`;
     axios.get(url)
     .then(res=>{
         setData(res.data.data);
@@ -70,6 +72,7 @@ export default function ListaTraslado() {
             <TableCell>ID</TableCell>
             <TableCell align="center">Nombre hospital</TableCell>
             <TableCell align="center">Pase medico</TableCell>
+            <TableCell align="center">Eliminar</TableCell>
         
           </TableRow>
         </TableHead>

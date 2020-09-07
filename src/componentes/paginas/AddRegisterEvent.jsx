@@ -10,8 +10,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 // Components
 import Afectado from "./Afectado";
 import DatosSeguro from "./DatosSeguro";
-import Ambulancia from "./Ambulancia";
-import Traslado from "./TrasladoHospital";
 
 // Styles
 
@@ -62,49 +60,7 @@ export const AddRegisterEvent = () => {
           <AccordionDetails>
             <DatosSeguro />
           </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography className={classes.heading}>
-              Datos de ambulancia
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Ambulancia />
-          </AccordionDetails>
-        </Accordion>
-        {/* Traslado */}
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography className={classes.heading}>Traslado</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Traslado />
-          </AccordionDetails>
-        </Accordion>
-        {/* DATOS DE AUTOMOVIL */}
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography className={classes.heading}>
-              Datos de automovil
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Traslado />
-          </AccordionDetails>
-        </Accordion>
+        </Accordion>        
         {/* DESABLE */}
         <Accordion disabled>
           <AccordionSummary

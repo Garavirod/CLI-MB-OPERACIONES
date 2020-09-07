@@ -19,9 +19,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormPropsTextFields() {
   const classes = useStyles();
-
-  const {idAfectado} = useParams();
-  const {idEvento} = useParams();
+  
+  const {idAfectado,idEvento} = useParams();
 
   // Objeto a mapear
   const [TrasladoHospitalData] = useState({
@@ -41,7 +40,7 @@ export default function FormPropsTextFields() {
     //Evita que la petición sea mandada por defecto en GET
     e.preventDefault(); 
     // Url de la API
-    const url = `http://localhost:5000/colisiones/registro-trasladoHospital/${idAfectado}`;
+    const url = `http://localhost:5000/lesionados/registro-trasladoHospital/${idAfectado}`;
     if (
       TrasladoHospitalData.nombreHospital !== "" &&
       TrasladoHospitalData.paseMedico !== ""    

@@ -134,8 +134,8 @@ export default function FormPropsTextFields() {
             Agregar Afectado
           </Button>
           <br/><br/>
-
-          <Link to={`/afectados/${idEvento}`}> ver registros</Link>
+          <p>Para agregar traslados y datos de ambulancia dar clck en <i>registrso de afectados</i></p>
+          <Link to={`/afectados/${idEvento}`}>registros de afectados</Link>
          
         </div>
       </form>   

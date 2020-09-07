@@ -10,8 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
-
+import { useParams, Link } from "react-router-dom";
+import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -36,7 +36,7 @@ const rows = [
 export default function ListaAfectados() {
   const classes = useStyles();
 
-  const {idEvento} = useParams()
+  const {idEvento} = useParams();
 
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -90,6 +90,7 @@ export default function ListaAfectados() {
             <TableCell align="center">Género</TableCell>
             <TableCell align="center">Estado</TableCell>
             <TableCell align="center">Evento</TableCell>
+            <TableCell align="center">Agregar traslado</TableCell>
             <TableCell align="center">Borrar</TableCell>
             
 
@@ -106,6 +107,11 @@ export default function ListaAfectados() {
               <TableCell align="center">{ validaSexo(row.sexo)}</TableCell>
               <TableCell align="center">{ validaEstado(row.status)}</TableCell>
               <TableCell align="center">{row.fk_evento}</TableCell>
+              <TableCell align="center">
+              <Link className="" to={`/add-register-traslado/${row.id}/${idEvento}`}> 
+                  <IconButton aria-label="add"><AirportShuttleIcon /></IconButton>
+                </Link>
+              </TableCell>
               <TableCell align="center">{<IconButton aria-label="delete" onClick={() =>deleteEvento(row.id)} ><DeleteIcon /></IconButton>}</TableCell>
             </TableRow>
           ))}

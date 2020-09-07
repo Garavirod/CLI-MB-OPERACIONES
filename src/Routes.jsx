@@ -19,6 +19,7 @@ import ListaAfectados from './componentes/paginas/ListaAfectados';
 import ListaDatosSeguro from "./componentes/paginas/ListaDatosSeguro";
 import ListaAmbulancia from "./componentes/paginas/ListaAmbulancia";
 import ListaTraslado from "./componentes/paginas/ListaTrasladoHospital";
+import { FormTraslado } from './componentes/paginas/Formtraslado';
 
 const Routes = () => {
     return ( 
@@ -47,6 +48,7 @@ const Routes = () => {
                 <Route exact path="/ambulancias/:idEvento" component={ListaAmbulancia} />                                               
                 <Route exact path="/traslados/:idEvento" component={ListaTraslado} />                                                                                                            
                 <Route exact path="/seguros/:idEvento" component={ListaDatosSeguro} />                                                                                                            
+                <Route exact path="/add-register-traslado/:idAfectado/:idEvento" component={FormTraslado} />                                                                                                            
             </div>
         </Router>
      );
