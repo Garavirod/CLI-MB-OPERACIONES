@@ -44,7 +44,7 @@ export default function ListaTraslado() {
 
 
   const getTraslados = async ()=>{
-    const url =`http://localhost:5000/lesionados/traslados/${idEvento}`;
+    const url =`/lesionados/traslados/${idEvento}`;
     axios.get(url)
     .then(res=>{
         setData(res.data.data);
@@ -56,7 +56,7 @@ export default function ListaTraslado() {
 }
 
   const deleteTraslado = async (traslado)=>{
-    const url = `http://localhost:5000/lesionados/borra-traslado-hospital/${traslado}`;
+    const url = `/lesionados/borra-traslado-hospital/${traslado}`;
     axios.delete(url)
     .then(res =>{
       console.log("delete: " + res);

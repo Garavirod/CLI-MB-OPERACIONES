@@ -45,7 +45,7 @@ export default function ListaAfectados() {
 
 
   const getAfectados = async ()=>{
-    const url =`http://localhost:5000/lesionados/afectados/${idEvento}`;
+    const url =`/lesionados/afectados/${idEvento}`;
     axios.get(url)
     .then(res=>{
         setData(res.data.data);
@@ -57,7 +57,7 @@ export default function ListaAfectados() {
 }
 
   const deleteEvento = async (afectado)=>{
-    const url = `http://localhost:5000/lesionados/borra-afectado/${afectado}`;
+    const url = `/lesionados/borra-afectado/${afectado}`;
     axios.delete(url)
     .then(res =>{
       console.log("delete: " + res);

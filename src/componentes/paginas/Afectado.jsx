@@ -47,7 +47,7 @@ export default function FormPropsTextFields() {
     //Evita que la petición sea mandada por defecto en GET
     e.preventDefault(); 
     // Url de la API
-    const url = `http://localhost:5000/lesionados/registro-afectado/${idEvento}`;
+    const url = `/lesionados/registro-afectado/${idEvento}`;
     if (
       afectadoData.sexo !== "" &&
       afectadoData.edad !== "" &&

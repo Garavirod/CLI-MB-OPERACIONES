@@ -45,7 +45,7 @@ export default function ListaAmbulancia() {
 
 
   const getAmbulancias = async ()=>{
-    const url =`http://localhost:5000/lesionados/datosambulancias/${idEvento}`;
+    const url =`/lesionados/datosambulancias/${idEvento}`;
     axios.get(url)
     .then(res=>{
         setData(res.data.data);
@@ -57,7 +57,7 @@ export default function ListaAmbulancia() {
 }
 
   const deleteAmbulanica = async (evento)=>{
-    const url = `http://localhost:5000/lesionados/borra-datos-ambulancia/${evento}`;
+    const url = `/lesionados/borra-datos-ambulancia/${evento}`;
     axios.delete(url)
     .then(res =>{
       console.log("delete: " + res);

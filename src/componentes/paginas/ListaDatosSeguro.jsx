@@ -44,7 +44,7 @@ export default function ListadatosSeguros() {
 
 
   const getdatosSeguros = async ()=>{
-    const url =`http://localhost:5000/lesionados/datoseguros/${idEvento}`;
+    const url =`/lesionados/datoseguros/${idEvento}`;
     axios.get(url)
     .then(res=>{
         setData(res.data.data);
@@ -56,7 +56,7 @@ export default function ListadatosSeguros() {
 }
 
   const deleteEvento = async (datosSeguro)=>{
-    const url = `http://localhost:5000/lesionados/borra-datos-seguro/${datosSeguro}`;
+    const url = `/lesionados/borra-datos-seguro/${datosSeguro}`;
     axios.delete(url)
     .then(res =>{
       console.log("delete: " + res);
