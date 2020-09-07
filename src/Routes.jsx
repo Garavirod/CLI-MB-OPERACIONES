@@ -37,9 +37,9 @@ const Routes = () => {
                 <Route path='/reportes/' component={MainReportes}/>
                 <Route path='/pruebas' component={Pruebas}exact>
                 </Route> 
-                <Route path='/lesionados/' component={Lesionados}exact>
+                <Route path='/lesionados-form/' component={Lesionados}exact>
                 </Route> 
-                <Route path='/colisiones/' component={Colisiones}exactç>
+                <Route path='/colisiones-form/' component={Colisiones}exactç>
                 </Route>                
                 <Route path='/MenuAccidentes/' component={MenuAccidentes}exact>
                 </Route>

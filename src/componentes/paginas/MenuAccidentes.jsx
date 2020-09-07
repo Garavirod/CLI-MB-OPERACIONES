@@ -29,14 +29,14 @@ export default function SimpleBottomNavigation() {
       className={classes.root}
     >
       <BottomNavigationAction 
-      label="Eventos" 
+      label="Lesionados" 
       icon={<DriveEtaIcon />} 
-      a href="/Colisiones"
+      a href="/lesionados-form"
       />
       <BottomNavigationAction 
-      label="Lesionados y Atropellados" 
+      label="Colisiones" 
       icon={<LocalHospitalIcon />}
-      a href="/lesionados"
+      a href="/colisiones-form"
       />
 
       <BottomNavigationAction 
