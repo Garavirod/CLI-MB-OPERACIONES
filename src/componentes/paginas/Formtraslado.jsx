@@ -9,7 +9,7 @@ export const FormTraslado = (req,res) =>{
     const {idAfectado, idEvento} = useParams();
     return (
         <div>
-            holla {idAfectado} del evento {idEvento}
+            Afectado: {idAfectado} del evento: {idEvento}
             <Ambulancia />
             <Traslado />
 
