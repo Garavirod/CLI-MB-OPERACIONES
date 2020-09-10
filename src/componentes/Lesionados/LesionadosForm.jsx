@@ -11,6 +11,7 @@ import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import { useHookForm } from "../../hooks/hookFrom";
 import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
+import { validateForm } from "../../functions/validateFrom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -76,17 +77,8 @@ export const LesionadosForm = () => {
     //Evita que la petición sea mandada por defecto en GET
     e.preventDefault();
     // Url de la API
-    const url = "/lesionados/registro-evento";
-    if (
-      fecha !== "" &&
-      hora !== "" &&
-      tipo_incidente !== "" &&
-      incidente !== "" &&
-      descripcion !== "" &&
-      tramo !== "" &&
-      operador !== "" &&
-      bitacora !== ""
-    ) {
+    const url = "/lesionados/registro-evento";    
+    if (validateForm(values)) {
       // Petición axios, manda la data ya vlidada al url definido
       axios
         .post(url, values)
@@ -97,7 +89,7 @@ export const LesionadosForm = () => {
         .catch((err) => {
           CustomSwalError();
           console.log("Hubo un error al guaradr el evento", err);
-        });
+        });      
     } else {
       CustomSwalEmptyFrom();
     }
