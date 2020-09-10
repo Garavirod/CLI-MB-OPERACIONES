@@ -2,19 +2,14 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
-import { useState } from "react";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
+import { useHookForm } from "../../hooks/hookFrom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,29 +36,39 @@ export const LesionadosForm = () => {
   const classes = useStyles();
 
   // Objeto a mapear
-  const [eventoData] = useState({
-    fecha: "",
-    hora: "",
+  const initial_evento = {
+    linea: "",
+    estacion: "",
+    fecha: "2020-12-10",
+    hora: "12:00",
     tipo_incidente: "",
     incidente: "",
     descripcion: "",
     tramo: "",
     operador: "",
     bitacora: "",
-  });
-
-  // Función que verifica si un campo cambia su estado
-  const handleInputchange = (e) => {
-    eventoData[e.target.name] = e.target.value;
-    if (e.target.name === "hora") {
-      eventoData[e.target.name] = e.target.value;
-      eventoData[e.target.name] += ":00";
-    } else {
-      eventoData[e.target.name] = e.target.value;
-    }
-
-    console.log(eventoData);
+    economico: "",
   };
+
+  // Hook personalizado con el evento inicial
+  const [values, handleInputChange] = useHookForm(initial_evento);
+
+  // desestructuando el values del hook
+  const {
+    linea,
+    estacion,
+    fecha,
+    hora,
+    tipo_incidente,
+    incidente,
+    descripcion,
+    tramo,
+    operador,
+    bitacora,
+    economico,
+  } = values;
+
+  console.log(values);
 
   // Valida el fromulario y de no haber campos vacios manda la infromacion al servidor
   const sendData = (e) => {
@@ -72,18 +77,18 @@ export const LesionadosForm = () => {
     // Url de la API
     const url = "/lesionados/registro-evento";
     if (
-      eventoData.fecha !== "" &&
-      eventoData.hora !== "" &&
-      eventoData.tipo_incidente !== "" &&
-      eventoData.incidente !== "" &&
-      eventoData.descripcion !== "" &&
-      eventoData.tramo !== "" &&
-      eventoData.operador !== "" &&
-      eventoData.bitacora !== ""
+      fecha !== "" &&
+      hora !== "" &&
+      tipo_incidente !== "" &&
+      incidente !== "" &&
+      descripcion !== "" &&
+      tramo !== "" &&
+      operador !== "" &&
+      bitacora !== ""
     ) {
       // Petición axios, manda la data ya vlidada al url definido
       axios
-        .post(url, eventoData)
+        .post(url, values)
         .then((res) => {
           console.log("Datos mandados", res);
           alert("Datos mandados");
@@ -101,10 +106,8 @@ export const LesionadosForm = () => {
       <Grid container spacing={2}>
         {/* header */}
         <Grid item lg={12}>
-          <Paper className={classes.paper}>
             <h5>Lesionados y atropellados</h5>
-            <h6>Crear evento nuevo</h6>
-          </Paper>
+            <h6>Crear evento nuevo</h6>          
         </Grid>
 
         <Grid item lg={12}>
@@ -116,7 +119,6 @@ export const LesionadosForm = () => {
               onSubmit={sendData}
             >
               <Grid container spacing={3}>
-                
                 <Grid item lg={4}>
                   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="grouped-native-select">
@@ -124,14 +126,13 @@ export const LesionadosForm = () => {
                     </InputLabel>
                     <Select
                       native
-                      defaultValue=""
+                      value={linea}
                       id="grouped-native-select"
-                      name="tipo_incidente"
-                      onChange={handleInputchange}
+                      name="linea"
+                      onChange={handleInputChange}
                     >
                       <option defaultValue="" />
-                      <option value={1}>Linea 1</option>
-                      <option value={0}>Linea 2</option>
+                      <option value={1}>Liena 1</option>
                       <option value={0}>Linea 2</option>
                     </Select>
                   </FormControl>
@@ -139,19 +140,18 @@ export const LesionadosForm = () => {
                 <Grid item lg={4}>
                   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="grouped-native-select">
-                      Estación
+                      Estacion
                     </InputLabel>
                     <Select
                       native
-                      defaultValue=""
+                      value={estacion}
                       id="grouped-native-select"
-                      name="tipo_incidente"
-                      onChange={handleInputchange}
+                      name="estacion"
+                      onChange={handleInputChange}
                     >
                       <option defaultValue="" />
-                      <option value={1}>Estación 1</option>
-                      <option value={0}>Estación 2</option>
-                      <option value={0}>Estación 2</option>
+                      <option value={1}>Estacion 1</option>
+                      <option value={0}>Estacion 2</option>
                     </Select>
                   </FormControl>
                 </Grid>
@@ -162,14 +162,14 @@ export const LesionadosForm = () => {
                     </InputLabel>
                     <Select
                       native
-                      defaultValue=""
+                      value={tipo_incidente}
                       id="grouped-native-select"
                       name="tipo_incidente"
-                      onChange={handleInputchange}
+                      onChange={handleInputChange}
                     >
                       <option defaultValue="" />
-                      <option value={1}>Atropellado</option>
-                      <option value={0}>Lesionado</option>
+                      <option value={0}>Atropellado</option>
+                      <option value={1}>Lesionado</option>
                     </Select>
                   </FormControl>
                 </Grid>
@@ -178,9 +178,9 @@ export const LesionadosForm = () => {
                     required
                     id="standard"
                     label="Folio Bitácora Roja"
-                    defaultValue=""
+                    value={bitacora}
                     name="bitacora"
-                    onChange={handleInputchange}
+                    onChange={handleInputChange}
                   />
                 </Grid>
                 <Grid item lg={4}>
@@ -189,8 +189,8 @@ export const LesionadosForm = () => {
                     label="Fecha"
                     name="fecha"
                     type="date"
-                    onChange={handleInputchange}
-                    defaultValue="2020-05-24"
+                    onChange={handleInputChange}
+                    value={fecha}
                     className={classes.textField}
                     InputLabelProps={{
                       shrink: true,
@@ -203,8 +203,8 @@ export const LesionadosForm = () => {
                     label="Hora "
                     type="time"
                     name="hora"
-                    onChange={handleInputchange}
-                    defaultValue="07:30"
+                    onChange={handleInputChange}
+                    value={hora}
                     className={classes.textField}
                     InputLabelProps={{
                       shrink: true,
@@ -219,8 +219,8 @@ export const LesionadosForm = () => {
                     id="standard"
                     name="tramo"
                     label="Tramo"
-                    defaultValue=""
-                    onChange={handleInputchange}
+                    value={tramo}
+                    onChange={handleInputChange}
                   />
                 </Grid>
                 <Grid item lg={4}>
@@ -228,8 +228,8 @@ export const LesionadosForm = () => {
                     id="standard"
                     name="economico"
                     label="Económico"
-                    defaultValue=""
-                    onChange={handleInputchange}
+                    value={economico}
+                    onChange={handleInputChange}
                   />
                 </Grid>
                 <Grid item lg={4}>
@@ -237,8 +237,8 @@ export const LesionadosForm = () => {
                     id="standard"
                     name="operador"
                     label="Operador"
-                    defaultValue=""
-                    onChange={handleInputchange}
+                    value={operador}
+                    onChange={handleInputChange}
                   />
                 </Grid>
                 <Grid item lg={4}>
@@ -246,8 +246,8 @@ export const LesionadosForm = () => {
                     id="standard"
                     name="incidente"
                     label="Incidente"
-                    defaultValue=""
-                    onChange={handleInputchange}
+                    value={incidente}
+                    onChange={handleInputChange}
                   />
                 </Grid>
                 <Grid item lg={4}>
@@ -255,15 +255,14 @@ export const LesionadosForm = () => {
                     id="standard"
                     name="descripcion"
                     label="Descripción"
-                    defaultValue=""
-                    onChange={handleInputchange}
+                    value={descripcion}
+                    onChange={handleInputChange}
                   />
                 </Grid>
                 <Grid item lg={12}>
                   <Button
                     type="submit"
-                    variant="contained"
-                    color="red"
+                    variant="contained"                    
                     className={classes.bgPDF}
                     startIcon={<AddIcon />}
                   >
