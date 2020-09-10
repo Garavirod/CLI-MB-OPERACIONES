@@ -1,32 +1,27 @@
 import React from 'react'
-import {BrowserRouter as Router,
-Switch,
-Route,
-Link,
-withRouter} from 'react-router-dom'
-import Levantamiento from './componentes/paginas/Levantamiento';
-import Control from './componentes/paginas/Control';
-import BitacoraDR from './componentes/paginas/BitacoraDR';
-import Principal from './componentes/paginas/Principal';
-// import Reportes from './componentes/paginas/Reportes';
-import MainReportes from './componentes/paginas/MainReportes';
-import Pruebas from './componentes/paginas/Pruebas';
-import MenuAccidentes from './componentes/paginas/MenuAccidentes';
-import Lesionados from './componentes/paginas/Lesionados';
-import Colisiones from './componentes/paginas/Colisiones';
-import { AddRegisterEvent } from './componentes/paginas/AddRegisterEvent';
-import ListaAfectados from './componentes/paginas/ListaAfectados';
-import ListaDatosSeguro from "./componentes/paginas/ListaDatosSeguro";
-import ListaAmbulancia from "./componentes/paginas/ListaAmbulancia";
-import ListaTraslado from "./componentes/paginas/ListaTrasladoHospital";
-import { FormTraslado } from './componentes/paginas/Formtraslado';
+import {BrowserRouter as Router,Route,withRouter} from 'react-router-dom'
+import Levantamiento from './componentes/Levantamientos/Levantamiento';
+import Control from './componentes/Bitacoras/Control';
+import BitacoraDR from './componentes/Bitacoras/BitacoraDR';
+import MainReportes from './componentes/JustSemana/MainReportes';
+import Pruebas from './componentes/Lesionados/Pruebas';
+import { MenuAccidentesScreen } from './componentes/Lesionados/MenuAccidentes';
+import Lesionados from './componentes/Lesionados/Lesionados';
+import Colisiones from './componentes/Colisiones/Colisiones';
+import { AddRegisterEvent } from './componentes/Lesionados/AddRegisterEvent';
+import ListaAfectados from './componentes/Lesionados/ListaAfectados';
+import ListaDatosSeguro from "./componentes/Lesionados/ListaDatosSeguro";
+import ListaAmbulancia from "./componentes/Lesionados/ListaAmbulancia";
+import ListaTraslado from "./componentes/Lesionados/ListaTrasladoHospital";
+import { FormTraslado } from './componentes/Lesionados/Formtraslado';
+import Bienvenida from './componentes/Main/Principal';
 
 const Routes = () => {
     return ( 
         <Router>
             <div>
             <hr/>
-                <Route path="/" component={Principal} exact>
+                <Route path="/" component={Bienvenida} exact>
                 </Route>
                 <Route path="/JustificacionSemana" component={Levantamiento} exact>
                 </Route>
@@ -41,7 +36,7 @@ const Routes = () => {
                 </Route> 
                 <Route path='/colisiones-form/' component={Colisiones}exactç>
                 </Route>                
-                <Route path='/MenuAccidentes/' component={MenuAccidentes}exact>
+                <Route path='/MenuAccidentes/' component={MenuAccidentesScreen}exact>
                 </Route>
                 <Route exact path="/add-register/:idEvento" component={AddRegisterEvent} />                                               
                 <Route exact path="/afectados/:idEvento" component={ListaAfectados} />                                               
