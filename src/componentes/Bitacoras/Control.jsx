@@ -1,10 +1,7 @@
 import React from 'react';
-import {withStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import TableCell from '@material-ui/core/TableCell';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -16,7 +13,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
-import AddIcon from '@material-ui/icons/Add';
+
 
 
 
@@ -35,9 +32,6 @@ const useStyles = makeStyles((theme) => ({
 		<h5>CONTROL DE SERVICIOS EN TERMINALES </h5>
 		<h6>CORREDOR EJE 1 PTE "VALLEJO"</h6>
 		<br/>
-
-	
-
 	<FormControl component="fieldset">
       <FormLabel component="legend">Asignación:</FormLabel>
       <RadioGroup row aria-label="position" name="position" defaultValue="top">

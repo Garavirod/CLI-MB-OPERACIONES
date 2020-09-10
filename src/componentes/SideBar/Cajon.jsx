@@ -33,7 +33,7 @@ const Cajon = (props) => {
                 paper: classes.drawerPaper,
             }}
             anchor="left"
-            variant={props.variant}
+            
             open={props.open}
             onClose={props.onClose ? props.onClose: null}>
         

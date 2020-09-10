@@ -10,9 +10,6 @@ import AddIcon from "@material-ui/icons/Add";
 import { useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import IconButton from '@material-ui/core/IconButton';
-// Icons
-import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const useStyles = makeStyles((theme) => ({
   root: {

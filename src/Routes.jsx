@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router,Route,withRouter} from 'react-router-dom'
+import {BrowserRouter as Router,Route} from 'react-router-dom'
 import Levantamiento from './componentes/Levantamientos/Levantamiento';
 import Control from './componentes/Bitacoras/Control';
 import BitacoraDR from './componentes/Bitacoras/BitacoraDR';

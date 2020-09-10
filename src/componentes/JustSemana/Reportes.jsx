@@ -161,13 +161,13 @@ export default function Reportes(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const { data, title } = props;
   var columns;  
-  if(title == 'Reglas'){
+  if(title === 'Reglas'){
     columns = columns2;
   }else{
     columns = columns1;
   }
 
-  var informes = (title == 'Afectaciones' || title == 'Incumplimientos') ? incum : cump;
+  var informes = (title === 'Afectaciones' || title === 'Incumplimientos') ? incum : cump;
 
 
   const handleChangePage = (event, newPage) => {

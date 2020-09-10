@@ -5,9 +5,7 @@ import Header from './Header';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Link,
-    NavLink
+    Route
   } from "react-router-dom";
 
 

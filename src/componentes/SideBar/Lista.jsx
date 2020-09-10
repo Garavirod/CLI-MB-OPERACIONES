@@ -3,9 +3,6 @@ import { List, ListItem, ListItemIcon, ListItemText,Typography, makeStyles } fro
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import {
     BrowserRouter as Router,
-    Link,
-    Route,
-    Switch,
   } from 'react-router-dom';
 
   const useStyles = makeStyles((theme) => ({

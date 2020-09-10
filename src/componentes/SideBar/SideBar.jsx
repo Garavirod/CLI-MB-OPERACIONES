@@ -66,7 +66,7 @@ const SideBar = (props) => {
                     </IconButton>
                     <Typography variant="h6" color="black" className={classes.title} >
                        
-                        <img src="/images/avatars/ImagenColor2.png" width="240" height="50" ></img>
+                        <img src="/images/avatars/ImagenColor2.png" width="240" height="50" alt={"Avatar"}></img>
                     </Typography>
 
                     <IconButton color="black">
