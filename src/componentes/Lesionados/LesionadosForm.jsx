@@ -10,6 +10,8 @@ import AddIcon from "@material-ui/icons/Add";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import { useHookForm } from "../../hooks/hookFrom";
+import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,7 +71,6 @@ export const LesionadosForm = () => {
   } = values;
 
   console.log(values);
-
   // Valida el fromulario y de no haber campos vacios manda la infromacion al servidor
   const sendData = (e) => {
     //Evita que la petición sea mandada por defecto en GET
@@ -90,14 +91,15 @@ export const LesionadosForm = () => {
       axios
         .post(url, values)
         .then((res) => {
-          console.log("Datos mandados", res);
-          alert("Datos mandados");
+          console.log("Datos mandados", res);                
+          CustomSwalSave();            
         })
         .catch((err) => {
+          CustomSwalError();
           console.log("Hubo un error al guaradr el evento", err);
         });
     } else {
-      alert("Aún qudan campo vacios");
+      CustomSwalEmptyFrom();
     }
   };
 

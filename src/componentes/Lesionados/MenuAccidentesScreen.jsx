@@ -30,7 +30,7 @@ const Menu = [
     descripcion:
       "En esta sección se pueden llevar a cabo los registros de los eventos que abarcan atropellamientos o lesiones",
     imgName: "accident",
-    src:'/lesionados-form'
+    src:'/eventos'
   },
   {
     tagname: "Reportes y estadísticas",

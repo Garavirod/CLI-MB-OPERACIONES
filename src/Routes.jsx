@@ -14,7 +14,7 @@ import ListaAmbulancia from "./componentes/Lesionados/ListaAmbulancia";
 import ListaTraslado from "./componentes/Lesionados/ListaTrasladoHospital";
 import { FormTraslado } from './componentes/Lesionados/Formtraslado';
 import Bienvenida from './componentes/Main/Principal';
-import { LeasionadosScreen } from './componentes/Lesionados/LesionadosScreen';
+import { EventosScreen } from './componentes/Lesionados/EventosScreen';
 import { LesionadosForm } from './componentes/Lesionados/LesionadosForm';
 
 const Routes = () => {
@@ -33,7 +33,7 @@ const Routes = () => {
                 <Route path='/reportes/' component={MainReportes}/>
                 <Route path='/pruebas' component={Pruebas}exact>
                 </Route> 
-                <Route path='/lesionados-form/' component={LeasionadosScreen}exact>
+                <Route path='/eventos/' component={EventosScreen}exact>
                 </Route> 
                 <Route path='/colisiones-form/' component={Colisiones}exactç>
                 </Route>                

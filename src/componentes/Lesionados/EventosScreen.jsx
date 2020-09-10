@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export const LeasionadosScreen = () => {
+export const EventosScreen = () => {
   const classes = useStyles();
 
   return (

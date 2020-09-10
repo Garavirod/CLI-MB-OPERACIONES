@@ -12,6 +12,7 @@ import CreateIcon from '@material-ui/icons/Create';
 import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { CustomSwalDelete } from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles({
   table: {
@@ -42,11 +43,8 @@ export default function ListaEventos() {
 
   const deleteEvento = async (evento)=>{
     const url = `/lesionados/borra-evento/${evento}`;
-    axios.delete(url)
-    .then(res =>{
-      console.log("delete: " + res);
-      getEventos();
-    })
+    CustomSwalDelete(url);
+    getEventos();    
   }
 
   const tipoIncident = (incident)=>{
