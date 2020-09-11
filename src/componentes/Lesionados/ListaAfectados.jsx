@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
 import { useParams, Link } from "react-router-dom";
 import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
+import { CustomSwalDelete } from "../../functions/customSweetAlert";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
 
 export default function ListaAfectados() {
   const classes = useStyles();
-
+  // Parametros por url
   const {idEvento} = useParams();
 
   const [data, setData] = useState([]);
@@ -43,11 +44,9 @@ export default function ListaAfectados() {
 
   const deleteEvento = async (afectado)=>{
     const url = `/lesionados/borra-afectado/${afectado}`;
-    axios.delete(url)
-    .then(res =>{
-      console.log("delete: " + res);
+    CustomSwalDelete(url).then(()=>{      
       getAfectados();
-    })
+    });   
   }
 
   const validaSexo = (sex)=>{
@@ -63,7 +62,6 @@ export default function ListaAfectados() {
     return "Muerto" 
   }
 
-
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -76,9 +74,7 @@ export default function ListaAfectados() {
             <TableCell align="center">Estado</TableCell>
             <TableCell align="center">Evento</TableCell>
             <TableCell align="center">Agregar traslado</TableCell>
-            <TableCell align="center">Borrar</TableCell>
-            
-
+            <TableCell align="center">Borrar</TableCell>            
           </TableRow>
         </TableHead>
         <TableBody>
