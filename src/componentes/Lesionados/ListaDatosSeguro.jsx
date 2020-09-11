@@ -9,9 +9,11 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { CustomSwalDelete } from "../../functions/customSweetAlert";
 import { httpGetData } from "../../functions/httpRequest";
+import Grid from "@material-ui/core/Grid";
+
 
 const useStyles = makeStyles({
   table: {
@@ -45,45 +47,64 @@ export default function ListadatosSeguros() {
   };
 
   return (
-    <TableContainer component={Paper} className="animate__animated animate__fadeIn">
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell align="center">Hora</TableCell>
-            <TableCell align="center">Tiempo Respuesta</TableCell>
-            <TableCell align="center">Seguro</TableCell>
-            <TableCell align="center">Corresponde</TableCell>
-            <TableCell align="center">Nombre Ajustador</TableCell>
-            <TableCell align="center">Unidad Seguro</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                {row.id}
-              </TableCell>
-              <TableCell align="center">{row.horaArribo}</TableCell>
-              <TableCell align="center">{row.tiempoRespuesta}</TableCell>
-              <TableCell align="center">{row.seguro}</TableCell>
-              <TableCell align="center">{row.corresponde}</TableCell>
-              <TableCell align="center">{row.nombreAjustador}</TableCell>
-              <TableCell align="center">{row.unidadSeguro}</TableCell>
-              <TableCell align="center">
-                {
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => deleteEvento(row.id)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                }
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      <Grid container spacing={2}>
+        <Grid item lg={12}>
+          <h4>Lista de seguros registardos en el evento {idEvento}</h4>
+        </Grid>
+        <Grid item lg={6}>
+          <Link to={`/add-register/${idEvento}`}>Registar seguro u afectado</Link>
+        </Grid>
+        <Grid item lg={6}>
+          <Link to={"/eventos"}>Lista de eventos</Link>
+        </Grid>
+        <Grid item lg={12}>
+          <TableContainer
+            component={Paper}
+            className="animate__animated animate__fadeIn"
+          >
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>ID</TableCell>
+                  <TableCell align="center">Hora</TableCell>
+                  <TableCell align="center">Tiempo Respuesta</TableCell>
+                  <TableCell align="center">Seguro</TableCell>
+                  <TableCell align="center">Corresponde</TableCell>
+                  <TableCell align="center">Nombre Ajustador</TableCell>
+                  <TableCell align="center">Unidad Seguro</TableCell>
+                  <TableCell align="center">Borrar</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data.map((row) => (
+                  <TableRow key={row.id}>
+                    <TableCell component="th" scope="row">
+                      {row.id}
+                    </TableCell>
+                    <TableCell align="center">{row.horaArribo}</TableCell>
+                    <TableCell align="center">{row.tiempoRespuesta}</TableCell>
+                    <TableCell align="center">{row.seguro}</TableCell>
+                    <TableCell align="center">{row.corresponde}</TableCell>
+                    <TableCell align="center">{row.nombreAjustador}</TableCell>
+                    <TableCell align="center">{row.unidadSeguro}</TableCell>
+                    <TableCell align="center">
+                      {
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => deleteEvento(row.id)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      }
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+      </Grid>
+    </div>
   );
 }

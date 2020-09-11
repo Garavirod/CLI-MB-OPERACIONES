@@ -9,12 +9,15 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
-import axios from "axios";
+import Grid from "@material-ui/core/Grid";
 import { useParams, Link } from "react-router-dom";
 import AirportShuttleIcon from "@material-ui/icons/AirportShuttle";
 import { CustomSwalDelete } from "../../functions/customSweetAlert";
 import { httpGetData } from "../../functions/httpRequest";
 const useStyles = makeStyles({
+  gridRoot: {
+    flexGrow: 1,
+  },
   table: {
     minWidth: 650,
   },
@@ -54,55 +57,75 @@ export default function ListaAfectados() {
   };
 
   return (
-    <TableContainer component={Paper} className="animate__animated animate__fadeIn">
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell align="center">Nombre</TableCell>
-            <TableCell align="center">Edad</TableCell>
-            <TableCell align="center">Género</TableCell>
-            <TableCell align="center">Estado</TableCell>
-            <TableCell align="center">Evento</TableCell>
-            <TableCell align="center">Agregar traslado</TableCell>
-            <TableCell align="center">Borrar</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.id}
-              </TableCell>
-              <TableCell align="center">{row.nombre}</TableCell>
-              <TableCell align="center">{row.edad}</TableCell>
-              <TableCell align="center">{validaSexo(row.sexo)}</TableCell>
-              <TableCell align="center">{validaEstado(row.status)}</TableCell>
-              <TableCell align="center">{row.fk_evento}</TableCell>
-              <TableCell align="center">
-                <Link
-                  className=""
-                  to={`/add-register-traslado/${row.id}/${idEvento}`}
-                >
-                  <IconButton aria-label="add">
-                    <AirportShuttleIcon />
-                  </IconButton>
-                </Link>
-              </TableCell>
-              <TableCell align="center">
-                {
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => deleteEvento(row.id)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                }
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div className={classes.gridRoot}>
+      <Grid container spacing={2}>
+        <Grid item lg={12}>
+          <h4>Lista de afectados registrados en el evento {idEvento}</h4>
+        </Grid>
+        <Grid item lg={6}>
+          <Link to={`/add-register/${idEvento}`}>Registrar afectado o seguro</Link>
+        </Grid>
+        <Grid item lg={6}>
+          <Link to={"/eventos"}>Lista de eventos</Link>
+        </Grid>
+        <Grid item lg={12}>
+          <TableContainer
+            component={Paper}
+            className="animate__animated animate__fadeIn"
+          >
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>ID</TableCell>
+                  <TableCell align="center">Nombre</TableCell>
+                  <TableCell align="center">Edad</TableCell>
+                  <TableCell align="center">Género</TableCell>
+                  <TableCell align="center">Estado</TableCell>
+                  <TableCell align="center">Evento</TableCell>
+                  <TableCell align="center">Agregar traslado</TableCell>
+                  <TableCell align="center">Borrar</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data.map((row) => (
+                  <TableRow key={row.name}>
+                    <TableCell component="th" scope="row">
+                      {row.id}
+                    </TableCell>
+                    <TableCell align="center">{row.nombre}</TableCell>
+                    <TableCell align="center">{row.edad}</TableCell>
+                    <TableCell align="center">{validaSexo(row.sexo)}</TableCell>
+                    <TableCell align="center">
+                      {validaEstado(row.status)}
+                    </TableCell>
+                    <TableCell align="center">{row.fk_evento}</TableCell>
+                    <TableCell align="center">
+                      <Link
+                        className=""
+                        to={`/add-register-traslado/${row.id}/${idEvento}`}
+                      >
+                        <IconButton aria-label="add">
+                          <AirportShuttleIcon />
+                        </IconButton>
+                      </Link>
+                    </TableCell>
+                    <TableCell align="center">
+                      {
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => deleteEvento(row.id)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      }
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+      </Grid>
+    </div>
   );
 }

@@ -13,6 +13,7 @@ import { Link, useParams } from "react-router-dom";
 import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
 import { useHookForm } from "../../hooks/hookFrom";
 import { validateForm } from "../../functions/validateFrom";
+import { httpPostData } from "../../functions/httpRequest";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,15 +62,11 @@ export default function FormPropsTextFields() {
     const url = `/lesionados/registro-afectado/${idEvento}`;
     if (validateForm(values)) {
       // Petición axios, manda la data ya vlidada al url definido
-      axios
-        .post(url, values)
-        .then((res) => {          
-          CustomSwalSave();
-        })
-        .catch((err) => {
-          console.log("Hubo un error al guardar el Afectado", err);
-          CustomSwalError();
-        });
+      const success = httpPostData(url,values);
+      if(success)
+        CustomSwalSave();
+      else
+        CustomSwalError();
     } else {
       CustomSwalEmptyFrom();
     }
