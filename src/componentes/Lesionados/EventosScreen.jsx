@@ -8,6 +8,7 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import CreateIcon from '@material-ui/icons/Create';
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -50,7 +51,7 @@ export const EventosScreen = () => {
           </Paper>
         </Grid>
         <Grid item lg={12} className="animate__animated animate__fadeIn">
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper}>            
             <ListaEventos />
           </Paper>
         </Grid>
