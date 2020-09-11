@@ -4,7 +4,7 @@ import { httpDeleteData } from './httpRequest';
 export const CustomSwalDelete= async (endpoint)=>{    
     await swal({
         title: "¿Seguro que deseas borrar la información?",
-        text: "Una vez eliminada no se podrá recuperar la infromación",
+        text: "Una vez eliminada no se podrá recuperar",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -13,12 +13,12 @@ export const CustomSwalDelete= async (endpoint)=>{
         if (willDelete) {
             const r = httpDeleteData(endpoint);
             if(r){
-              swal("Infromación eliminada", {icon: "success"});  
+              swal("Información eliminada", {icon: "success"});  
             }else{              
               CustomSwalError();
             }                                     
         } else {
-          swal("Infromación salvada");          
+          swal("Información salvada");          
         }
       });       
 }

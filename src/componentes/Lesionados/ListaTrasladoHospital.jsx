@@ -12,6 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { httpGetData } from "../../functions/httpRequest";
+import { CustomSwalDelete } from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles({
   table: {
@@ -37,10 +38,7 @@ export default function ListaTraslado() {
 
   const deleteTraslado = async (traslado) => {
     const url = `/lesionados/borra-traslado-hospital/${traslado}`;
-    axios.delete(url).then((res) => {
-      console.log("delete: " + res);
-      getTraslados();
-    });
+    CustomSwalDelete(url).then(()=>getTraslados());
   };
 
   return (
@@ -56,7 +54,7 @@ export default function ListaTraslado() {
         </TableHead>
         <TableBody>
           {data.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.id}>
               <TableCell component="th" scope="row">
                 {row.id}
               </TableCell>
