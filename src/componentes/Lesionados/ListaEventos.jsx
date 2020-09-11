@@ -31,30 +31,27 @@ export default function ListaEventos() {
 
   const getEventos = async ()=>{
     const url ="/lesionados/eventos";
-    axios.get(url)
+    await axios.get(url)
     .then(res=>{
-        setData(res.data.data);
-        console.log("ESTA EL DATA RECUPERADA",res.data);
+        setData(res.data.data);        
     })
     .catch(err=>{
         console.log("Error en en la petición >:", err);
     });
 }
 
-  const deleteEvento = async (evento)=>{
-    const url = `/lesionados/borra-evento/${evento}`;
-    CustomSwalDelete(url);
-    getEventos();    
+  const deleteEvento = async (idevento)=>{
+    const url = `/lesionados/borra-evento/${idevento}`;
+    CustomSwalDelete(url).then(()=>{
+      getEventos();  
+    });    
+    
   }
 
   const tipoIncident = (incident)=>{
-    if (incident===true)
-   return "Autobús"
-    else
-    return "Estación" 
+    return  (incident===true) ? "Autobús" : "Estación";
   }
-
-
+  
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -76,7 +73,7 @@ export default function ListaEventos() {
         </TableHead>
         <TableBody>
           {data.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.id}>
               <TableCell component="th" scope="row">
                 {row.id}
               </TableCell>

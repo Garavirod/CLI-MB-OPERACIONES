@@ -1,10 +1,10 @@
 import swal from 'sweetalert';
 import axios from 'axios';
 
-export const CustomSwalDelete=(endpoint)=>{    
-    swal({
+export const CustomSwalDelete= async (endpoint)=>{    
+    await swal({
         title: "¿Seguro que deseas borrar la información?",
-        text: "Una vez eliminado no se podrá recuperar la infromación",
+        text: "Una vez eliminada no se podrá recuperar la infromación",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -12,16 +12,16 @@ export const CustomSwalDelete=(endpoint)=>{
       .then((willDelete) => {
         if (willDelete) {
             axios.delete(endpoint)
-            .then(res =>{
-                swal("Infromación eliminada", {icon: "success",});              
+            .then(() =>{
+                swal("Infromación eliminada", {icon: "success"});                              
             }).catch(err=>{
+                console.log(err);
                 CustomSwalError();
-            });                    
-          
+            });                              
         } else {
           swal("Infromación salvada");          
         }
-      });      
+      });       
 }
 
 

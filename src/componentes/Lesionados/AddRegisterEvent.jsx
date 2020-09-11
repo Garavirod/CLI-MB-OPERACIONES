@@ -32,7 +32,7 @@ export const AddRegisterEvent = () => {
 
   return (
     <div>
-      <h3>Agregar registro al evento {idEvento}</h3>
+      <h4>Agregar registros al evento {idEvento}</h4>
       <hr />
       <div className={classes.root}>
         <Accordion>

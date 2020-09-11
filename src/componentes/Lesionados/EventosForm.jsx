@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const LesionadosForm = () => {
+export const EventosForm = () => {
   const classes = useStyles();
 
   // Objeto a mapear

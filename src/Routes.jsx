@@ -15,7 +15,7 @@ import ListaTraslado from "./componentes/Lesionados/ListaTrasladoHospital";
 import { FormTraslado } from './componentes/Lesionados/Formtraslado';
 import Bienvenida from './componentes/Main/Principal';
 import { EventosScreen } from './componentes/Lesionados/EventosScreen';
-import { LesionadosForm } from './componentes/Lesionados/LesionadosForm';
+import { EventosForm } from './componentes/Lesionados/EventosForm';
 
 const Routes = () => {
     return ( 
@@ -44,7 +44,7 @@ const Routes = () => {
                 <Route exact path="/ambulancias/:idEvento" component={ListaAmbulancia} />                                               
                 <Route exact path="/traslados/:idEvento" component={ListaTraslado} />                                                                                                            
                 <Route exact path="/seguros/:idEvento" component={ListaDatosSeguro} />                                                                                                            
-                <Route exact path="/lesiones-form" component={LesionadosForm} />                                                                                                            
+                <Route exact path="/lesiones-form" component={EventosForm} />                                                                                                            
                 <Route exact path="/add-register-traslado/:idAfectado/:idEvento" component={FormTraslado} />                                                                                                            
             </div>
         </Router>
