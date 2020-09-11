@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 // Accordion
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
@@ -33,6 +33,7 @@ export const AddRegisterEvent = () => {
   return (
     <div>
       <h4>Agregar registros al evento {idEvento}</h4>
+      <Link to={"/eventos"}>Lista de eventos</Link>
       <hr />
       <div className={classes.root}>
         <Accordion>

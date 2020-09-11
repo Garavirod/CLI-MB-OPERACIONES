@@ -21,8 +21,8 @@ export const FormTraslado = () => {
   const classes = useStyles();
   const { idAfectado, idEvento } = useParams();
   return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
+    <div className={classes.root} className="animate__animated animate__fadeInRight">
+      <Grid container spacing={2}>
         <Grid item lg={12}>
           <h4>
             Afectado: {idAfectado} del evento: {idEvento}

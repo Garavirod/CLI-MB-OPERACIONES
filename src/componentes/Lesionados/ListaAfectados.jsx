@@ -54,7 +54,7 @@ export default function ListaAfectados() {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className="animate__animated animate__fadeIn">
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>

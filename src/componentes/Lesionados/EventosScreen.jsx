@@ -49,7 +49,7 @@ export const EventosScreen = () => {
             </Typography>
           </Paper>
         </Grid>
-        <Grid item lg={12}>
+        <Grid item lg={12} className="animate__animated animate__fadeIn">
           <Paper className={classes.paper}>
             <ListaEventos />
           </Paper>

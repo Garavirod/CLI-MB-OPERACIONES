@@ -12,6 +12,7 @@ import { useHookForm } from "../../hooks/hookFrom";
 import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
 import { validateForm } from "../../functions/validateFrom";
 import { httpPostData } from "../../functions/httpRequest";
+import { Link } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -91,12 +92,15 @@ export const EventosForm = () => {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} className="animate__animated animate__fadeInRight">
       <Grid container spacing={2}>
         {/* header */}
         <Grid item lg={12}>
             <h5>Lesionados y atropellados</h5>
             <h6>Crear evento nuevo</h6>          
+        </Grid>
+        <Grid item lg={12}>
+          <Link to={"/eventos"}>Lista de eventos</Link>
         </Grid>
 
         <Grid item lg={12}>
