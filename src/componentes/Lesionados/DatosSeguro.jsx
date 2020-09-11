@@ -4,9 +4,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
-import { useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
+import { useHookForm } from "../../hooks/hookFrom";
+import { validateForm } from "../../functions/validateFrom";
+import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,142 +22,143 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormPropsTextFields() {
   const classes = useStyles();
-
-  const {idEvento} = useParams();
+  // Parámetros por url
+  const { idEvento } = useParams();
   // Objeto a mapear
-  const [datosSeguroData] = useState({
-    horaArribo: "",
-    tiempoRespuesta: "",
+  const initial_datosSeguroData = {
+    horaArribo: "12:00",
+    tiempoRespuesta: "00:00:00",
     seguro: "",
     corresponde: "",
     nombreAjustador: "",
     unidadSeguro: "",
-  });
+  };
 
-    // Función que verifica si un campo cambia su estado
-    const handleInputchange = (e) => {
-      datosSeguroData[e.target.name] = e.target.value;
-      if(e.target.name === 'horaArribo'){
-        datosSeguroData[e.target.name] = e.target.value;
-        datosSeguroData[e.target.name] += ":00";
-      }else{
-        datosSeguroData[e.target.name] = e.target.value;
-      }
-  
-      console.log(datosSeguroData);
-      
-    };
+  // Usando el hook personalizado
+  const [values, handleInputChange] = useHookForm(initial_datosSeguroData);
+
+  // Desestructurando el response del hook
+  const {
+    horaArribo,
+    tiempoRespuesta,
+    seguro,
+    corresponde,
+    nombreAjustador,
+    unidadSeguro
+  } = values;
 
   // Valida el fromulario y de no haber campos vacios manda la infromacion al servidor
   const sendData = (e) => {
     //Evita que la petición sea mandada por defecto en GET
-    e.preventDefault(); 
+    e.preventDefault();
     // Url de la API
     const url = `/lesionados/registro-datosSeguro/${idEvento}`;
-    if (
-      datosSeguroData.horaArribo !== "" &&
-      datosSeguroData.tiempoRespuesta !== "" &&
-      datosSeguroData.seguro !== "" &&
-      datosSeguroData.corresponde !== "" &&
-      datosSeguroData.nombreAjustador !== "" &&
-      datosSeguroData.unidadSeguro !== ""
-    ) {
+    if (validateForm(values)) {
       // Petición axios, manda la data ya vlidada al url definido
       axios
-        .post(url, datosSeguroData)
+        .post(url, values)
         .then((res) => {
           console.log("DatosSeguro mandados", res);
-          alert("DatosSeguro mandados");
+          CustomSwalSave();
         })
         .catch((err) => {
+          CustomSwalError();
           console.log("Hubo un error al guardar el datosSeguro", err);
         });
     } else {
-      alert("Aún quedan campo vacios datosSeguros");
+      CustomSwalEmptyFrom();
     }
   };
 
   return (
-    <Container component="main">
-      <h6>CREAR Datos Seguro</h6>
-      <form className={classes.root} noValidate autoComplete="off" onSubmit={sendData}>
+    <Container component="main">      
+      <form
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+        onSubmit={sendData}
+      >
         <div>
-
-        <TextField
-            id="time"
-            label="Hora "
-            type="time"
-            name="horaArribo"
-            onChange={handleInputchange}
-            defaultValue="07:30"
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            inputProps={{
-              step: 300, // 5 min
-            }}
-          />
-
-          <TextField
-            id="standard"
-            label="Tiempo Respuesta"
-            defaultValue="00:00:00"
-            name="tiempoRespuesta"
-            onChange={handleInputchange}
-          />
-
-          <TextField
-            id="standard"
-            label="Seguro"
-            defaultValue=""
-            name="seguro"
-            onChange={handleInputchange}
-          />
-          &nbsp;&nbsp;
-
-          <TextField
-            id="standard"
-            label="Corresponde"
-            defaultValue=""
-            name="corresponde"
-            onChange={handleInputchange}
-          />
-          &nbsp;&nbsp;
-
-          <TextField
-            id="standard"
-            label="Nombre Ajustador"
-            defaultValue=""
-            name="nombreAjustador"
-            onChange={handleInputchange}
-          />
-          &nbsp;&nbsp;
-
-          <TextField
-            id="standard"
-            label="Unidad Seguro"
-            defaultValue=""
-            name="unidadSeguro"
-            onChange={handleInputchange}
-          />
-          &nbsp;&nbsp;
-                
-          <br/><br/>
-          <Button
-            type="submit"
-            variant="contained"
-            color="red"
-            className={classes.bgPDF}
-            startIcon={<AddIcon />}
-          >
-            Agregar Seguro
-          </Button>
-          <br/><br/>
-          <Link to={`/seguros/${idEvento}`}> ver registros</Link>
+          <Grid container spacing={3}>
+            <Grid item lg={4}>
+              <TextField
+                id="time"
+                label="Hora "
+                type="time"
+                name="horaArribo"
+                onChange={handleInputChange}
+                value={horaArribo}
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                inputProps={{
+                  step: 300, // 5 min
+                }}
+              />
+            </Grid>
+            <Grid item lg={4}>
+              <TextField
+                id="standard"
+                label="Tiempo Respuesta"
+                value={tiempoRespuesta}
+                name="tiempoRespuesta"
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item lg={4}>
+              <TextField
+                id="standard"
+                label="Seguro"
+                value={seguro}
+                name="seguro"
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item lg={4}>
+              <TextField
+                id="standard"
+                label="Corresponde"
+                value={corresponde}
+                name="corresponde"
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item lg={4}>
+              <TextField
+                id="standard"
+                label="Nombre Ajustador"
+                value={nombreAjustador}
+                name="nombreAjustador"
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item lg={4}>
+              <TextField
+                id="standard"
+                label="Unidad Seguro"
+                value={unidadSeguro}
+                name="unidadSeguro"
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item lg={6} xs={12}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="red"
+                className={classes.bgPDF}
+                startIcon={<AddIcon />}
+              >
+                Agregar Seguro
+              </Button>
+            </Grid>
+            <Grid item lg={6} xs={12}>
+              <Link to={`/seguros/${idEvento}`}> ver registros</Link>
+            </Grid>
+          </Grid>
         </div>
-      </form>   
-     
+      </form>
     </Container>
   );
 }

@@ -9,7 +9,9 @@ export const useHookForm = (initialstate={})=>{
 
     const handleInputChange = ({target}) =>{
 
-        let val = (target==="hora") ? (target.value+":00") : (target.value);
+        let val = (target==="hora" || target==="horaArribo") ? 
+                  (target.value+":00") : 
+                  (target.value);
         setValues({
             ...values,
             [target.name]: val
