@@ -12,12 +12,17 @@ import { useParams, Link } from "react-router-dom";
 import { httpGetData } from "../../functions/httpRequest";
 import { CustomSwalDelete } from "../../functions/customSweetAlert";
 import Grid from "@material-ui/core/Grid";
-
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import { PreloadData } from "../ui/PreloadData";
 
 export default function ListaAmbulancia() {
   
 
   const { idEvento } = useParams();
+
+    // Preload
+    const [preload, setPreload] = useState(true);
 
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -28,7 +33,10 @@ export default function ListaAmbulancia() {
     const url = `/lesionados/datosambulancias/${idEvento}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
-    if (_data.success) setData(_data.data);
+    if (_data.success){
+      setData(_data.data);
+      setPreload(false);
+    } 
   };
 
   const deleteAmbulanica = async (evento) => {
@@ -49,6 +57,13 @@ export default function ListaAmbulancia() {
         </Grid>
         <Grid item lg={6}>
           <Link to={"/eventos"}>Lista de eventos</Link>
+        </Grid>
+        <Grid item lg={12}>
+        <Typography component="div" variant="h4">
+          <Box textAlign="center" m={1}>
+            <PreloadData isVisible={preload} />
+          </Box>
+        </Typography>
         </Grid>
         <Grid item lg={12}>
           <TableContainer

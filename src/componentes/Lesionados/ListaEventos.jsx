@@ -27,7 +27,7 @@ export default function ListaEventos() {
   const classes = useStyles();
 
   const [data, setData] = useState([]);
-  const [preload, setPreload] = useState("visible");
+  const [preload, setPreload] = useState(true);
   useEffect(() => {
     getEventos();
   }, []);
@@ -38,7 +38,7 @@ export default function ListaEventos() {
     const _data = await httpGetData(url);
     if (_data.success) {
       setData(_data.data);
-      setPreload("hidden");
+      setPreload(false);
     }
   };
 

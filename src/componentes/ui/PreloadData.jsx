@@ -13,9 +13,11 @@ const useStyles = makeStyles((theme) => ({
 
 export const PreloadData = (props) =>{
 const {isVisible} = props;
+
+const status = (isVisible) ? "visible" : "hidden";
  const classes = useStyles();
   return (
-    <div className={classes.root} style={{visibility:isVisible}}>  
+    <div className={classes.root} style={{visibility:status}}>  
       <h5>Cargando datos ...</h5>          
       <LinearProgress color="secondary" />
     </div>

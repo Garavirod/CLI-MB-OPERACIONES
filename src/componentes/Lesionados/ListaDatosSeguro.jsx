@@ -13,7 +13,9 @@ import { useParams, Link } from "react-router-dom";
 import { CustomSwalDelete } from "../../functions/customSweetAlert";
 import { httpGetData } from "../../functions/httpRequest";
 import Grid from "@material-ui/core/Grid";
-
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import { PreloadData } from "../ui/PreloadData";
 
 const useStyles = makeStyles({
   table: {
@@ -25,6 +27,9 @@ export default function ListadatosSeguros() {
   const classes = useStyles();
   const { idEvento } = useParams();
 
+    // Preload
+    const [preload, setPreload] = useState(true);
+
   const [data, setData] = useState([]);
   useEffect(() => {
     getdatosSeguros();
@@ -34,8 +39,9 @@ export default function ListadatosSeguros() {
     const url = `/lesionados/datoseguros/${idEvento}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
-    if (_data.success) {
+    if (_data.success){
       setData(_data.data);
+      setPreload(false);
     }
   };
 
@@ -57,6 +63,13 @@ export default function ListadatosSeguros() {
         </Grid>
         <Grid item lg={6}>
           <Link to={"/eventos"}>Lista de eventos</Link>
+        </Grid>
+        <Grid item lg={12}>
+        <Typography component="div" variant="h4">
+          <Box textAlign="center" m={1}>
+            <PreloadData isVisible={preload} />
+          </Box>
+        </Typography>
         </Grid>
         <Grid item lg={12}>
           <TableContainer

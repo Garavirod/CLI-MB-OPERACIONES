@@ -14,6 +14,9 @@ import { useParams, Link } from "react-router-dom";
 import AirportShuttleIcon from "@material-ui/icons/AirportShuttle";
 import { CustomSwalDelete } from "../../functions/customSweetAlert";
 import { httpGetData } from "../../functions/httpRequest";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import { PreloadData } from "../ui/PreloadData";
 const useStyles = makeStyles({
   gridRoot: {
     flexGrow: 1,
@@ -28,6 +31,9 @@ export default function ListaAfectados() {
   // Parametros por url
   const { idEvento } = useParams();
 
+  // Preload
+  const [preload, setPreload] = useState(true);
+  
   const [data, setData] = useState([]);
   useEffect(() => {
     getAfectados();
@@ -37,7 +43,10 @@ export default function ListaAfectados() {
     const url = `/lesionados/afectados/${idEvento}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
-    if (_data.success) setData(_data.data);
+    if (_data.success){
+      setData(_data.data);
+      setPreload(false);
+    } 
   };
 
   const deleteEvento = async (afectado) => {
@@ -67,6 +76,13 @@ export default function ListaAfectados() {
         </Grid>
         <Grid item lg={6}>
           <Link to={"/eventos"}>Lista de eventos</Link>
+        </Grid>
+        <Grid item lg={12}>
+        <Typography component="div" variant="h4">
+          <Box textAlign="center" m={1}>
+            <PreloadData isVisible={preload} />
+          </Box>
+        </Typography>
         </Grid>
         <Grid item lg={12}>
           <TableContainer
