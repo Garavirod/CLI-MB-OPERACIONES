@@ -9,9 +9,9 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { httpGetData } from "../../functions/httpRequest";
+import { CustomSwalDelete } from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles({
   table: {
@@ -38,10 +38,7 @@ export default function ListaAmbulancia() {
 
   const deleteAmbulanica = async (evento) => {
     const url = `/lesionados/borra-datos-ambulancia/${evento}`;
-    axios.delete(url).then((res) => {
-      console.log("delete: " + res);
-      getAmbulancias();
-    });
+    CustomSwalDelete(url).then(()=>getAmbulancias());        
   };
 
   return (

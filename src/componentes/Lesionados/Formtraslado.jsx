@@ -9,10 +9,9 @@ export const FormTraslado = (req,res) =>{
     const {idAfectado, idEvento} = useParams();
     return (
         <div>
-            Afectado: {idAfectado} del evento: {idEvento}
+           <h4> Afectado: {idAfectado} del evento: {idEvento}</h4>
             <Ambulancia />
             <Traslado />
-
         </div>
     );
 

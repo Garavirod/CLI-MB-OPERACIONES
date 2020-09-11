@@ -1,15 +1,30 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
-import { useState } from "react";
-import axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import { useHookForm } from "../../hooks/hookFrom";
+import { validateForm } from "../../functions/validateFrom";
+import { httpPostData } from "../../functions/httpRequest";
+import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+  div: {
+    margin: "auto",
+    textAlign: "center",
+  },
+  form: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
       width: "25ch",
@@ -19,129 +34,141 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormPropsTextFields() {
   const classes = useStyles();
-  const {idAfectado,idEvento} = useParams();
+  const { idAfectado, idEvento } = useParams();
   // Objeto a mapear
-  const [ambulanciaData] = useState({
-    tiempoLLegada: "",
-    tiempoRespuesta: "",
+  const initial_ambulancia = {
+    tiempoLLegada: "12:00", // hora
+    tiempoRespuesta: "00:00:00",
     ambulancia: "",
     ecoPlaca: "",
     paramedico: "",
     diagnostico: "",
-    idAfectado:idAfectado
-  });
-
-  // Función que verifica si un campo cambia su estado
-  const handleInputchange = (e) => {
-    ambulanciaData[e.target.name] = e.target.value;
-    console.log(ambulanciaData);
-    
+    idAfectado: idAfectado,
   };
 
+  // Hook personalizado
+  const [values,handleInputChange]=useHookForm(initial_ambulancia);
+
+  // Desestructurando el hook
+  const {
+    tiempoLLegada,
+    tiempoRespuesta,
+    ambulancia,
+    ecoPlaca,
+    paramedico,
+    diagnostico
+  } = values;
+
+  console.log(values);
+  
   // Valida el fromulario y de no haber campos vacios manda la infromacion al servidor
   const sendData = (e) => {
     //Evita que la petición sea mandada por defecto en GET
-    e.preventDefault(); 
+    e.preventDefault();
     // Url de la API
     const url = `/lesionados/registro-datosAmbulancia/${idEvento}`;
-    if (
-      ambulanciaData.tiempoLLegada !== "" &&
-      ambulanciaData.tiempoRespuesta !== "" &&
-      ambulanciaData.ambulancia !== "" &&
-      ambulanciaData.ecoPlaca !== "" &&
-      ambulanciaData.paramedico !== "" &&
-      ambulanciaData.diagnostico !== ""
-    ) {
-      // Petición axios, manda la data ya vlidada al url definido
-      axios
-        .post(url, ambulanciaData)
-        .then((res) => {
-          console.log("Datos mandados", res);
-          alert("Datos mandados");
-        })
-        .catch((err) => {
-          console.log("Hubo un error al guardar la ambulancia", err);
-        });
+    if (validateForm(values)) {
+      // Petición axios genérica por url y data
+      const success = httpPostData(url, values);
+      if(success)
+        CustomSwalSave(); 
+      else
+        CustomSwalError(); 
     } else {
-      alert("Aún quedan campo vacios afectados");
+      CustomSwalEmptyFrom();
     }
   };
 
   return (
-    <Container component="main">
-      <h6>Registrar ambulancia</h6>
-      <form className={classes.root} noValidate autoComplete="off" onSubmit={sendData}>
-        <div>
-        <TextField
-            id="time"
-            label="Tiempo Llegada"
-            type="time"
-            name="tiempoLLegada"
-            onChange={handleInputchange}
-            defaultValue="07:30"
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            inputProps={{
-              step: 300, // 5 min
-            }}
-          />
-
-          <TextField
-            id="standard"
-            label="Tiempo Respuesta"
-            defaultValue="00:00:00"
-            name="tiempoRespuesta"
-            onChange={handleInputchange}
-          />
-
-          <TextField
-            id="standard"
-            label="Ambulancia"
-            defaultValue=""
-            name="ambulancia"
-            onChange={handleInputchange}
-          />  
-          <TextField 
-            id="standard"
-            name="ecoPlaca" 
-            label="Economico/Placa Ambulancia" 
-            defaultValue="" 
-            onChange={handleInputchange}
-            />
-
-          <TextField 
-            id="standard"
-            name="paramedico" 
-            label="Paramedico" 
-            defaultValue="" 
-            onChange={handleInputchange}
-            />  
-            
-          <TextField 
-            id="standard"
-            name="diagnostico" 
-            label="Diagnostico" 
-            defaultValue="" 
-            onChange={handleInputchange}
-            />
-          &nbsp;&nbsp;         
-          <br/><br/>
-          <Button
-            type="submit"
-            variant="contained"
-            color="red"
-            className={classes.bgPDF}
-            startIcon={<AddIcon />}
+    <div className={classes.root}>
+        <Paper className={classes.paper}>
+          <h6>Registrar ambulancia</h6>
+          <form
+            className={classes.form}
+            noValidate
+            autoComplete="off"
+            onSubmit={sendData}
           >
-            Agregar Ambulancia
-          </Button>
-          <br/><br/>
-          <Link to={`/ambulancias/${idEvento}`}> ver registros</Link>
-        </div>
-      </form>   
-     
-    </Container>
+            <Grid container spacing={3}>
+            <Grid item xs={12} lg={4}>
+            <TextField
+                id="time"
+                label="Hora Llegada"
+                type="time"
+                name="tiempoLLegada"
+                onChange={handleInputChange}
+                value={tiempoLLegada}
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                inputProps={{
+                  step: 300, // 5 min
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} lg={4}>
+            <TextField
+                id="standard"
+                label="Tiempo Respuesta"
+                value={tiempoRespuesta}
+                name="tiempoRespuesta"
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item xs={12} lg={4}>
+            <TextField
+                id="standard"
+                label="Ambulancia"
+                value={ambulancia}
+                name="ambulancia"
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item xs={12} lg={4}>
+            <TextField
+                id="standard"
+                name="ecoPlaca"
+                label="Economico/Placa Ambulancia"
+                value={ecoPlaca}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item xs={12} lg={4}>
+            <TextField
+                id="standard"
+                name="paramedico"
+                label="Paramedico"
+                value={paramedico}
+                onChange={handleInputChange}
+              />            
+            </Grid>
+            <Grid item xs={12} lg={4}>
+            <TextField
+                id="standard"
+                name="diagnostico"
+                label="Diagnostico"
+                value={diagnostico}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item lg={12}>
+            <Button
+                type="submit"
+                variant="contained"                
+                className={classes.bgPDF}
+                startIcon={<AddIcon />}
+              >
+                Agregar Ambulancia
+              </Button>
+            </Grid>
+            <Grid item lg={12}>
+              <Link to={`/ambulancias/${idEvento}`}> ver registros</Link>
+            </Grid>
+            </Grid>
+          </form>
+        </Paper>
+      </div>
+
   );
 }

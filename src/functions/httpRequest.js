@@ -36,3 +36,20 @@ export const httpPostData = async (endpoint, data) =>{
     });
     return response;
 };
+
+
+// Peticiones delete
+
+export const httpDeleteData = async (endpoint) =>{
+    const response = await axios.delete(endpoint)
+    .then((res) => {
+        console.log("delete: " + res);
+        return true;        
+    })
+    .catch(err=>{
+        console.log("Error en el enpoint >: "+endpoint+" error >: "+err);
+        return false;
+    });
+
+    return response;
+}

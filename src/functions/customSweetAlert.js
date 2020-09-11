@@ -1,5 +1,5 @@
 import swal from 'sweetalert';
-import axios from 'axios';
+import { httpDeleteData } from './httpRequest';
 
 export const CustomSwalDelete= async (endpoint)=>{    
     await swal({
@@ -11,13 +11,12 @@ export const CustomSwalDelete= async (endpoint)=>{
       })
       .then((willDelete) => {
         if (willDelete) {
-            axios.delete(endpoint)
-            .then(() =>{
-                swal("Infromación eliminada", {icon: "success"});                              
-            }).catch(err=>{
-                console.log(err);
-                CustomSwalError();
-            });                              
+            const r = httpDeleteData(endpoint);
+            if(r){
+              swal("Infromación eliminada", {icon: "success"});  
+            }else{              
+              CustomSwalError();
+            }                                     
         } else {
           swal("Infromación salvada");          
         }
