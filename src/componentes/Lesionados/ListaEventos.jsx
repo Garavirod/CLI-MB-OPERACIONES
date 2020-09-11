@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CreateIcon from '@material-ui/icons/Create';
-import IconButton from '@material-ui/core/IconButton';
-import axios from 'axios';
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import DeleteIcon from "@material-ui/icons/Delete";
+import CreateIcon from "@material-ui/icons/Create";
+import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
 import { CustomSwalDelete } from "../../functions/customSweetAlert";
+import { httpGetData } from "../../functions/httpRequest";
 
 const useStyles = makeStyles({
   table: {
@@ -28,30 +28,26 @@ export default function ListaEventos() {
     getEventos();
   }, []);
 
+  const getEventos = async () => {
+    const url = "/lesionados/eventos";
+    //peticion de axios genérica por url
+    const _data = await httpGetData(url);
+    if (_data.success) {
+      setData(_data.data);
+    }
+  };
 
-  const getEventos = async ()=>{
-    const url ="/lesionados/eventos";
-    await axios.get(url)
-    .then(res=>{
-        setData(res.data.data);        
-    })
-    .catch(err=>{
-        console.log("Error en en la petición >:", err);
-    });
-}
-
-  const deleteEvento = async (idevento)=>{
+  const deleteEvento = async (idevento) => {
     const url = `/lesionados/borra-evento/${idevento}`;
-    CustomSwalDelete(url).then(()=>{
-      getEventos();  
-    });    
-    
-  }
+    CustomSwalDelete(url).then(() => {
+      getEventos();
+    });
+  };
 
-  const tipoIncident = (incident)=>{
-    return  (incident===true) ? "Autobús" : "Estación";
-  }
-  
+  const tipoIncident = (incident) => {
+    return incident === true ? "Autobús" : "Estación";
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -68,7 +64,6 @@ export default function ListaEventos() {
             <TableCell align="center">Descripcion</TableCell>
             <TableCell align="center">Borrar</TableCell>
             <TableCell align="center">Agregar registro</TableCell>
-
           </TableRow>
         </TableHead>
         <TableBody>
@@ -77,25 +72,43 @@ export default function ListaEventos() {
               <TableCell component="th" scope="row">
                 {row.id}
               </TableCell>
-              <TableCell align="center">{row.fecha.substr(8,2)+"-"+row.fecha.substr(5,2)+"-"+row.fecha.substr(0,4)}</TableCell>
-              <TableCell align="center">{row.hora.substr(0,5)}</TableCell>
-              <TableCell align="center">{tipoIncident(row.tipo_incidente)}</TableCell>
+              <TableCell align="center">
+                {row.fecha.substr(8, 2) +
+                  "-" +
+                  row.fecha.substr(5, 2) +
+                  "-" +
+                  row.fecha.substr(0, 4)}
+              </TableCell>
+              <TableCell align="center">{row.hora.substr(0, 5)}</TableCell>
+              <TableCell align="center">
+                {tipoIncident(row.tipo_incidente)}
+              </TableCell>
               <TableCell align="center">{row.incidente}</TableCell>
               <TableCell align="center">{row.tramo}</TableCell>
               <TableCell align="center">{row.operador}</TableCell>
               <TableCell align="center">{row.bitacora}</TableCell>
               <TableCell align="center">{row.descripcion}</TableCell>
-              <TableCell align="center">{<IconButton aria-label="delete" onClick={() =>deleteEvento(row.id)} ><DeleteIcon /></IconButton>}</TableCell>
               <TableCell align="center">
-                <Link className="" to={`/add-register/${row.id}`}> 
-                  <IconButton aria-label="add"><CreateIcon /></IconButton>
+                {
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => deleteEvento(row.id)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                }
+              </TableCell>
+              <TableCell align="center">
+                <Link className="" to={`/add-register/${row.id}`}>
+                  <IconButton aria-label="add">
+                    <CreateIcon />
+                  </IconButton>
                 </Link>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer> 
+    </TableContainer>
   );
 }
-

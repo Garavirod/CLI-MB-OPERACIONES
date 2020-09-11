@@ -12,6 +12,7 @@ import TextField from "@material-ui/core/TextField";
 import { useHookForm } from "../../hooks/hookFrom";
 import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
 import { validateForm } from "../../functions/validateFrom";
+import { httpPostData } from "../../functions/httpRequest";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -79,17 +80,12 @@ export const EventosForm = () => {
     // Url de la API
     const url = "/lesionados/registro-evento";    
     if (validateForm(values)) {
-      // Petición axios, manda la data ya vlidada al url definido
-      axios
-        .post(url, values)
-        .then((res) => {
-          console.log("Datos mandados", res);                
-          CustomSwalSave();            
-        })
-        .catch((err) => {
-          CustomSwalError();
-          console.log("Hubo un error al guaradr el evento", err);
-        });      
+      // Petición axios genérica por url y data
+      const success = httpPostData(url, values);
+      if(success)
+        CustomSwalSave(); 
+      else
+        CustomSwalError();          
     } else {
       CustomSwalEmptyFrom();
     }

@@ -62,7 +62,7 @@ export const AddRegisterEvent = () => {
           </AccordionDetails>
         </Accordion>        
         {/* DESABLE */}
-        <Accordion disabled>
+        {/* <Accordion disabled>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel3a-content"
@@ -72,7 +72,7 @@ export const AddRegisterEvent = () => {
               Disabled Accordion
             </Typography>
           </AccordionSummary>
-        </Accordion>
+        </Accordion> */}
       </div>
     </div>
   );

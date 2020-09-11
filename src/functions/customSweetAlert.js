@@ -49,7 +49,7 @@ export const CustomSwalError = () =>{
 
 export const CustomSwalEmptyFrom = () =>{    
     swal({
-        title: "Aun hay campos vacios",
+        title: "Aún hay campos vacios",
         text: "Verifique que se llenó el fromulario por completo",
         icon: "warning",
         buttons: true,
