@@ -6,7 +6,6 @@ import BitacoraDR from './componentes/Bitacoras/BitacoraDR';
 import MainReportes from './componentes/JustSemana/MainReportes';
 import Pruebas from './componentes/Lesionados/Pruebas';
 import { MenuAccidentesScreen } from './componentes/Lesionados/MenuAccidentesScreen';
-import Colisiones from './componentes/Colisiones/Colisiones';
 import { AddRegisterEvent } from './componentes/Lesionados/AddRegisterEvent';
 import ListaAfectados from './componentes/Lesionados/ListaAfectados';
 import ListaDatosSeguro from "./componentes/Lesionados/ListaDatosSeguro";
@@ -16,6 +15,7 @@ import { FormTraslado } from './componentes/Lesionados/Formtraslado';
 import Bienvenida from './componentes/Main/Principal';
 import { EventosScreen } from './componentes/Lesionados/EventosScreen';
 import { EventosForm } from './componentes/Lesionados/EventosForm';
+import { EventosScreenColisiones } from './componentes/Colisiones/EventosScreenColisiones';
 
 const Routes = () => {
     return ( 
@@ -35,7 +35,7 @@ const Routes = () => {
                 </Route> 
                 <Route path='/eventos/' component={EventosScreen}exact>
                 </Route> 
-                <Route path='/colisiones-form/' component={Colisiones}exactç>
+                <Route path='/colisiones-form/' component={EventosScreenColisiones}exact>
                 </Route>                
                 <Route path='/MenuAccidentes/' component={MenuAccidentesScreen}exact>
                 </Route>
