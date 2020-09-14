@@ -34,17 +34,17 @@ export const EventosScreenColisiones = () => {
           <Paper className={classes.paper}>
             <Typography component="div" variant="h4">
               <Box textAlign="center" m={1}>
-                Lista de eventos
+                Lista de eventos Colisiones
               </Box>
             </Typography>
             <Typography component="div">
 
               <Box textAlign="left" m={1}>
-                <Link to="/lesiones-form">
+                <Link to="/colisiones-form">
                   <span className={classes.icon}>
                       <CreateIcon/>
                   </span>
-                    Agregar evento nuevo
+                    Agregar evento Colision nuevo
                 </Link>
               </Box>
             </Typography>

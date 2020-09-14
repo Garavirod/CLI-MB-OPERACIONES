@@ -6,7 +6,6 @@ import BitacoraDR from './componentes/Bitacoras/BitacoraDR';
 import MainReportes from './componentes/JustSemana/MainReportes';
 import Pruebas from './componentes/Lesionados/Pruebas';
 import { MenuAccidentesScreen } from './componentes/Lesionados/MenuAccidentesScreen';
-import Colisiones from './componentes/Colisiones/Colisiones';
 import { AddRegisterEvent } from './componentes/Lesionados/AddRegisterEvent';
 import ListaAfectados from './componentes/Lesionados/ListaAfectados';
 import ListaDatosSeguro from "./componentes/Lesionados/ListaDatosSeguro";
@@ -17,6 +16,7 @@ import Bienvenida from './componentes/Main/Principal';
 import { EventosScreen } from './componentes/Lesionados/EventosScreen';
 import { EventosForm } from './componentes/Lesionados/EventosForm';
 import { EventosScreenColisiones } from './componentes/Colisiones/EventosScreenColisiones';
+import { EventosFormColisiones } from './componentes/Colisiones/EventosFormColisiones';
 
 const Routes = () => {
     return ( 
@@ -46,7 +46,9 @@ const Routes = () => {
                 <Route exact path="/traslados/:idEvento" component={ListaTraslado} />                                                                                                            
                 <Route exact path="/seguros/:idEvento" component={ListaDatosSeguro} />                                                                                                            
                 <Route exact path="/lesiones-form" component={EventosForm} />                                                                                                            
-                <Route exact path="/add-register-traslado/:idAfectado/:idEvento" component={FormTraslado} />                                                                                                            
+                <Route exact path="/add-register-traslado/:idAfectado/:idEvento" component={FormTraslado} />  
+
+                <Route exact path="/colisiones-form" component={EventosFormColisiones} />                                                                                                           
             </div>
         </Router>
      );

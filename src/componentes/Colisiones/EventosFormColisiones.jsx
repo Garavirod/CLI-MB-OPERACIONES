@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const EventosForm = () => {
+export const EventosFormColisiones = () => {
   const classes = useStyles();
 
   // Objeto a mapear
@@ -96,11 +96,11 @@ export const EventosForm = () => {
       <Grid container spacing={2}>
         {/* header */}
         <Grid item lg={12}>
-            <h5>Lesionados y atropellados</h5>
+            <h5>Colisiones</h5>
             <h6>Crear evento nuevo</h6>          
         </Grid>
         <Grid item lg={12}>
-          <Link to={"/eventos"}>Lista de eventos</Link>
+          <Link to={"/eventosColisiones"}>Lista de eventos Colisiones</Link>
         </Grid>
 
         <Grid item lg={12}>
@@ -125,7 +125,7 @@ export const EventosForm = () => {
                       onChange={handleInputChange}
                     >
                       <option defaultValue="" />
-                      <option value={1}>Liena 1</option>
+                      <option value={1}>Linea 1</option>
                       <option value={0}>Linea 2</option>
                     </Select>
                   </FormControl>
