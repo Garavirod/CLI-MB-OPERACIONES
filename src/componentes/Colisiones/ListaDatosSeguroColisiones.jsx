@@ -36,7 +36,7 @@ export default function ListadatosSeguros() {
   }, []);
 
   const getdatosSeguros = async () => {
-    const url = `/lesionados/datoseguros/${idEvento}`;
+    const url = `/colisiones/seguro-list/${idEvento}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
     if (_data.success){
@@ -46,7 +46,7 @@ export default function ListadatosSeguros() {
   };
 
   const deleteEvento = async (datosSeguro) => {
-    const url = `/lesionados/borra-datos-seguro/${datosSeguro}`;
+    const url = `/colisiones/delete-colision/${datosSeguro}`;
     CustomSwalDelete(url).then(() => {
       getdatosSeguros();
     });
@@ -56,13 +56,13 @@ export default function ListadatosSeguros() {
     <div>
       <Grid container spacing={2}>
         <Grid item lg={12}>
-          <h4>Lista de seguros registardos en el evento {idEvento}</h4>
+          <h4>Lista de seguros registrados en el evento colisiones {idEvento}</h4>
         </Grid>
         <Grid item lg={6}>
-          <Link to={`/add-register/${idEvento}`}>Registar seguro u afectado</Link>
+          <Link to={`/add-registerColisiones/${idEvento}`}>Registar seguro u afectado colisiones</Link>
         </Grid>
         <Grid item lg={6}>
-          <Link to={"/eventos"}>Lista de eventos</Link>
+          <Link to={"/eventosColisiones"}>Lista de eventos Colisiones</Link>
         </Grid>
         <Grid item lg={12}>
         <Typography component="div" variant="h4">
@@ -80,12 +80,10 @@ export default function ListadatosSeguros() {
               <TableHead>
                 <TableRow>
                   <TableCell>ID</TableCell>
-                  <TableCell align="center">Hora</TableCell>
-                  <TableCell align="center">Tiempo Respuesta</TableCell>
-                  <TableCell align="center">Seguro</TableCell>
-                  <TableCell align="center">Corresponde</TableCell>
-                  <TableCell align="center">Nombre Ajustador</TableCell>
-                  <TableCell align="center">Unidad Seguro</TableCell>
+                  <TableCell align="center">Aseguradora</TableCell>
+                  <TableCell align="center">Tipo de Seguro</TableCell>
+                  <TableCell align="center">Paga</TableCell>
+                  <TableCell align="center">Comentarios</TableCell>
                   <TableCell align="center">Borrar</TableCell>
                 </TableRow>
               </TableHead>
@@ -95,12 +93,10 @@ export default function ListadatosSeguros() {
                     <TableCell component="th" scope="row">
                       {row.id}
                     </TableCell>
-                    <TableCell align="center">{row.horaArribo}</TableCell>
-                    <TableCell align="center">{row.tiempoRespuesta}</TableCell>
-                    <TableCell align="center">{row.seguro}</TableCell>
-                    <TableCell align="center">{row.corresponde}</TableCell>
-                    <TableCell align="center">{row.nombreAjustador}</TableCell>
-                    <TableCell align="center">{row.unidadSeguro}</TableCell>
+                    <TableCell align="center">{row.nombre_seguro}</TableCell>
+                    <TableCell align="center">{row.tipo_seguro}</TableCell>
+                    <TableCell align="center">{row.paga}</TableCell>
+                    <TableCell align="center">{row.comentarios}</TableCell>
                     <TableCell align="center">
                       {
                         <IconButton

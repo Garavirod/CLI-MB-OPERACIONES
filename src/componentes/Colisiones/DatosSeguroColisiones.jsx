@@ -40,7 +40,7 @@ export default function FormPropsTextFields() {
     nombre_seguro,
     tipo_seguro,
     paga,
-    comentarios
+    comentarios,
   } = values;
 
   // Valida el fromulario y de no haber campos vacios manda la infromacion al servidor
@@ -54,12 +54,12 @@ export default function FormPropsTextFields() {
       axios
         .post(url, values)
         .then((res) => {
-          console.log("Datos Seguro enviados", res);
+          console.log("DatosSeguro mandados", res);
           CustomSwalSave();
         })
         .catch((err) => {
           CustomSwalError();
-          console.log("Hubo un error al guardar en datos Seguro", err);
+          console.log("Hubo un error al guardar el datosSeguro", err);
         });
     } else {
       CustomSwalEmptyFrom();
@@ -74,41 +74,42 @@ export default function FormPropsTextFields() {
         autoComplete="off"
         onSubmit={sendData}
       >
-        <div className={classes.gridRoot}>
+        <div>
           <Grid container spacing={3}>
-            <Grid item lg={3}>
+            
+            <Grid item lg={4}>
+              <TextField
+                id="standard"
+                label="Tiempo Respuesta"
+                value={nombre_seguro}
+                name="tiempoRespuesta"
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item lg={4}>
               <TextField
                 id="standard"
                 label="Seguro"
-                value={nombre_seguro}
+                value={tipo_seguro}
                 name="seguro"
                 onChange={handleInputChange}
               />
             </Grid>
-            <Grid item lg={3}>
+            <Grid item lg={4}>
               <TextField
                 id="standard"
-                label="Tipo seguro"
-                value={tipo_seguro}
-                name="Tipo seguro"
-                onChange={handleInputChange}
-              />
-            </Grid>
-            <Grid item lg={3}>
-              <TextField
-                id="standard"
-                label="Paga"
+                label="Corresponde"
                 value={paga}
-                name="Paga"
+                name="corresponde"
                 onChange={handleInputChange}
               />
             </Grid>
-            <Grid item lg={3}>
+            <Grid item lg={4}>
               <TextField
                 id="standard"
-                label="Comentarios"
+                label="Nombre Ajustador"
                 value={comentarios}
-                name="Comentarios"
+                name="nombreAjustador"
                 onChange={handleInputChange}
               />
             </Grid>
