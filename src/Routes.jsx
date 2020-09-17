@@ -7,7 +7,9 @@ import MainReportes from './componentes/JustSemana/MainReportes';
 import Pruebas from './componentes/Lesionados/Pruebas';
 import { MenuAccidentesScreen } from './componentes/Lesionados/MenuAccidentesScreen';
 import { AddRegisterEvent } from './componentes/Lesionados/AddRegisterEvent';
+import { AddRegisterEventColisiones } from './componentes/Colisiones/AddRegisterEventColisiones';
 import ListaAfectados from './componentes/Lesionados/ListaAfectados';
+import ListaAfectadosColisiones from './componentes/Colisiones/ListaAfectadosColisiones';
 import ListaDatosSeguro from "./componentes/Lesionados/ListaDatosSeguro";
 import ListaAmbulancia from "./componentes/Lesionados/ListaAmbulancia";
 import ListaTraslado from "./componentes/Lesionados/ListaTrasladoHospital";
@@ -17,7 +19,8 @@ import { EventosScreen } from './componentes/Lesionados/EventosScreen';
 import { EventosForm } from './componentes/Lesionados/EventosForm';
 import { EventosScreenColisiones } from './componentes/Colisiones/EventosScreenColisiones';
 import { EventosFormColisiones } from './componentes/Colisiones/EventosFormColisiones';
-
+import Colisiones from './componentes/Colisiones/Colisiones';
+import ListaDatosSeguroColisiones from './componentes/Colisiones/ListaDatosSeguroColisiones';
 const Routes = () => {
     return ( 
         <Router>
@@ -40,7 +43,8 @@ const Routes = () => {
                 </Route>                
                 <Route path='/MenuAccidentes/' component={MenuAccidentesScreen}exact>
                 </Route>
-                <Route exact path="/add-register/:idEvento" component={AddRegisterEvent} />                                               
+                <Route exact path="/add-register/:idEvento" component={AddRegisterEvent} />    
+                <Route exact path="/add-registerColisiones/:idEvento" component={AddRegisterEventColisiones} />                                              
                 <Route exact path="/afectados/:idEvento" component={ListaAfectados} />                                               
                 <Route exact path="/ambulancias/:idEvento" component={ListaAmbulancia} />                                               
                 <Route exact path="/traslados/:idEvento" component={ListaTraslado} />                                                                                                            
@@ -48,7 +52,10 @@ const Routes = () => {
                 <Route exact path="/lesiones-form" component={EventosForm} />                                                                                                            
                 <Route exact path="/add-register-traslado/:idAfectado/:idEvento" component={FormTraslado} />  
 
-                <Route exact path="/colisiones-form" component={EventosFormColisiones} />                                                                                                           
+                <Route exact path="/colisiones-form" component={EventosFormColisiones} />         
+                <Route exact path="/colisionesprueba" component={Colisiones} />  
+                <Route exact path="/afectadosColisiones/:idEvento" component={ListaAfectadosColisiones} />   
+                <Route exact path="/segurosColisiones/:idEvento" component={ListaDatosSeguroColisiones} />                                                                                                  
             </div>
         </Router>
      );

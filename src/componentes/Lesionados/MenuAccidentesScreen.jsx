@@ -40,7 +40,7 @@ const Menu = [
     descripcion:
       "En esta sección se pueden visualizar los históricos de accdentes y lesionados",
     imgName: "report",
-    src:'/pruebas'
+    src:'/colisionesprueba'
   },
 ];
 

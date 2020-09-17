@@ -41,17 +41,13 @@ export const EventosFormColisiones = () => {
 
   // Objeto a mapear
   const initial_evento = {
-    linea: "",
-    estacion: "",
+    sentido: "",
+    motivo: "",
+    interseccion: "",
+    colonia: "",
     fecha: "2020-12-10",
     hora: "12:00",
-    tipo_incidente: "",
-    incidente: "",
-    descripcion: "",
-    tramo: "",
-    operador: "",
-    bitacora: "",
-    economico: "",
+    
   };
 
   // Hook personalizado con el evento inicial
@@ -59,17 +55,12 @@ export const EventosFormColisiones = () => {
 
   // desestructuando el values del hook
   const {
-    linea,
-    estacion,
+    sentido,
+    motivo,
+    interseccion,
+    colonia,
     fecha,
     hora,
-    tipo_incidente,
-    incidente,
-    descripcion,
-    tramo,
-    operador,
-    bitacora,
-    economico,
   } = values;
 
   console.log(values);
@@ -78,7 +69,7 @@ export const EventosFormColisiones = () => {
     //Evita que la petición sea mandada por defecto en GET
     e.preventDefault();
     // Url de la API
-    const url = "/lesionados/registro-evento";    
+    const url = "/colisiones/datos-colision";    
     if (validateForm(values)) {
       // Petición axios genérica por url y data
       const success = httpPostData(url, values);
@@ -112,71 +103,7 @@ export const EventosFormColisiones = () => {
               onSubmit={sendData}
             >
               <Grid container spacing={3}>
-                <Grid item lg={4}>
-                  <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="grouped-native-select">
-                      Linea
-                    </InputLabel>
-                    <Select
-                      native
-                      value={linea}
-                      id="grouped-native-select"
-                      name="linea"
-                      onChange={handleInputChange}
-                    >
-                      <option defaultValue="" />
-                      <option value={1}>Linea 1</option>
-                      <option value={0}>Linea 2</option>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item lg={4}>
-                  <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="grouped-native-select">
-                      Estacion
-                    </InputLabel>
-                    <Select
-                      native
-                      value={estacion}
-                      id="grouped-native-select"
-                      name="estacion"
-                      onChange={handleInputChange}
-                    >
-                      <option defaultValue="" />
-                      <option value={1}>Estacion 1</option>
-                      <option value={0}>Estacion 2</option>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item lg={4}>
-                  <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="grouped-native-select">
-                      Tipo incidente
-                    </InputLabel>
-                    <Select
-                      native
-                      value={tipo_incidente}
-                      id="grouped-native-select"
-                      name="tipo_incidente"
-                      onChange={handleInputChange}
-                    >
-                      <option defaultValue="" />
-                      <option value={0}>Atropellado</option>
-                      <option value={1}>Lesionado</option>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item lg={4}>
-                  <TextField
-                    required
-                    id="standard"
-                    label="Folio Bitácora Roja"
-                    value={bitacora}
-                    name="bitacora"
-                    onChange={handleInputChange}
-                  />
-                </Grid>
-                <Grid item lg={4}>
+              <Grid item lg={4}>
                   <TextField
                     id="date"
                     label="Fecha"
@@ -208,50 +135,79 @@ export const EventosFormColisiones = () => {
                   />
                 </Grid>
                 <Grid item lg={4}>
-                  <TextField
-                    id="standard"
-                    name="tramo"
-                    label="Tramo"
-                    value={tramo}
-                    onChange={handleInputChange}
-                  />
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="grouped-native-select">
+                      Sentido
+                    </InputLabel>
+                    <Select
+                      native
+                      value={sentido}
+                      id="grouped-native-select"
+                      name="sentido"
+                      onChange={handleInputChange}
+                    >
+                      <option defaultValue="" />
+                      <option value={1}>sentido 1</option>
+                      <option value={0}>sentido 2</option>
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid item lg={4}>
-                  <TextField
-                    id="standard"
-                    name="economico"
-                    label="Económico"
-                    value={economico}
-                    onChange={handleInputChange}
-                  />
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="grouped-native-select">
+                      motivo
+                    </InputLabel>
+                    <Select
+                      native
+                      value={motivo}
+                      id="grouped-native-select"
+                      name="motivo"
+                      onChange={handleInputChange}
+                    >
+                      <option defaultValue="" />
+                      <option value={1}>motivo 1</option>
+                      <option value={0}>motivo 2</option>
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid item lg={4}>
-                  <TextField
-                    id="standard"
-                    name="operador"
-                    label="Operador"
-                    value={operador}
-                    onChange={handleInputChange}
-                  />
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="grouped-native-select">
+                      Interseccion
+                    </InputLabel>
+                    <Select
+                      native
+                      value={interseccion}
+                      id="grouped-native-select"
+                      name="interseccion"
+                      onChange={handleInputChange}
+                    >
+                      <option defaultValue="" />
+                      <option value={0}>interseccion 1</option>
+                      <option value={1}>interseccion 2</option>
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid item lg={4}>
-                  <TextField
-                    id="standard"
-                    name="incidente"
-                    label="Incidente"
-                    value={incidente}
-                    onChange={handleInputChange}
-                  />
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="grouped-native-select">
+                      Colonia
+                    </InputLabel>
+                    <Select
+                      native
+                      value={colonia}
+                      id="grouped-native-select"
+                      name="colonia"
+                      onChange={handleInputChange}
+                    >
+                      <option defaultValue="" />
+                      <option value={0}>colonia 1</option>
+                      <option value={1}>colonia 2</option>
+                    </Select>
+                  </FormControl>
                 </Grid>
-                <Grid item lg={4}>
-                  <TextField
-                    id="standard"
-                    name="descripcion"
-                    label="Descripción"
-                    value={descripcion}
-                    onChange={handleInputChange}
-                  />
-                </Grid>
+                
+                
                 <Grid item lg={12}>
                   <Button
                     type="submit"

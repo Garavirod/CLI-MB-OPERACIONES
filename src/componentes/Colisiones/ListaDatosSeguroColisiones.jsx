@@ -8,54 +8,62 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
-import CreateIcon from "@material-ui/icons/Create";
 import IconButton from "@material-ui/core/IconButton";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { CustomSwalDelete } from "../../functions/customSweetAlert";
 import { httpGetData } from "../../functions/httpRequest";
-import { PreloadData } from "../ui/PreloadData";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { PreloadData } from "../ui/PreloadData";
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
 
-export default function ListaEventos() {
+export default function ListadatosSeguros() {
   const classes = useStyles();
+  const { idEvento } = useParams();
+
+    // Preload
+    const [preload, setPreload] = useState(true);
 
   const [data, setData] = useState([]);
-  const [preload, setPreload] = useState(true);
   useEffect(() => {
-    getEventos();
+    getdatosSeguros();
   }, []);
 
-  const getEventos = async () => {
-    const url = "/colisiones/colisiones-list";
+  const getdatosSeguros = async () => {
+    const url = `/lesionados/datoseguros/${idEvento}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
-    if (_data.success) {
+    if (_data.success){
       setData(_data.data);
       setPreload(false);
     }
   };
 
-  const deleteEvento = async (idevento) => {
-    const url = `/colisiones/delete-colision/${idevento}`;
+  const deleteEvento = async (datosSeguro) => {
+    const url = `/lesionados/borra-datos-seguro/${datosSeguro}`;
     CustomSwalDelete(url).then(() => {
-      getEventos();
+      getdatosSeguros();
     });
-  };
-
-  const tipoIncident = (incident) => {
-    return incident === true ? "Autobús" : "Estación";
   };
 
   return (
     <div>
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
+        <Grid item lg={12}>
+          <h4>Lista de seguros registardos en el evento {idEvento}</h4>
+        </Grid>
+        <Grid item lg={6}>
+          <Link to={`/add-register/${idEvento}`}>Registar seguro u afectado</Link>
+        </Grid>
+        <Grid item lg={6}>
+          <Link to={"/eventos"}>Lista de eventos</Link>
+        </Grid>
         <Grid item lg={12}>
         <Typography component="div" variant="h4">
           <Box textAlign="center" m={1}>
@@ -64,20 +72,21 @@ export default function ListaEventos() {
         </Typography>
         </Grid>
         <Grid item lg={12}>
-          <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table">
+          <TableContainer
+            component={Paper}
+            className="animate__animated animate__fadeIn"
+          >
+            <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
                   <TableCell>ID</TableCell>
-                  <TableCell align="center">Fecha</TableCell>
                   <TableCell align="center">Hora</TableCell>
-                  <TableCell align="center">Sentido</TableCell>
-                  <TableCell align="center">Motivo</TableCell>
-                  <TableCell align="center">Interseccion</TableCell>
-                  <TableCell align="center">Colonia</TableCell>
+                  <TableCell align="center">Tiempo Respuesta</TableCell>
+                  <TableCell align="center">Seguro</TableCell>
+                  <TableCell align="center">Corresponde</TableCell>
+                  <TableCell align="center">Nombre Ajustador</TableCell>
+                  <TableCell align="center">Unidad Seguro</TableCell>
                   <TableCell align="center">Borrar</TableCell>
-                  <TableCell align="center">Agregar Registro</TableCell>
-               
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -86,20 +95,12 @@ export default function ListaEventos() {
                     <TableCell component="th" scope="row">
                       {row.id}
                     </TableCell>
-                    <TableCell align="center">
-                      {row.fecha.substr(8, 2) +
-                        "-" +
-                        row.fecha.substr(5, 2) +
-                        "-" +
-                        row.fecha.substr(0, 4)}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row.hora.substr(0, 5)}
-                    </TableCell>
-                    <TableCell align="center">{row.sentido}</TableCell>
-                    <TableCell align="center">{row.motivo}</TableCell>
-                    <TableCell align="center">{row.interseccion}</TableCell>
-                    <TableCell align="center">{row.colonia}</TableCell>
+                    <TableCell align="center">{row.horaArribo}</TableCell>
+                    <TableCell align="center">{row.tiempoRespuesta}</TableCell>
+                    <TableCell align="center">{row.seguro}</TableCell>
+                    <TableCell align="center">{row.corresponde}</TableCell>
+                    <TableCell align="center">{row.nombreAjustador}</TableCell>
+                    <TableCell align="center">{row.unidadSeguro}</TableCell>
                     <TableCell align="center">
                       {
                         <IconButton
@@ -109,13 +110,6 @@ export default function ListaEventos() {
                           <DeleteIcon />
                         </IconButton>
                       }
-                    </TableCell>
-                    <TableCell align="center">
-                      <Link className="" to={`/add-registerColisiones/${row.id}`}>
-                        <IconButton aria-label="add">
-                          <CreateIcon />
-                        </IconButton>
-                      </Link>
                     </TableCell>
                   </TableRow>
                 ))}
