@@ -80,36 +80,36 @@ export default function FormPropsTextFields() {
             <Grid item lg={4}>
               <TextField
                 id="standard"
-                label="Tiempo Respuesta"
+                label="Aseguradora"
                 value={nombre_seguro}
-                name="tiempoRespuesta"
+                name="Aseguradora"
                 onChange={handleInputChange}
               />
             </Grid>
             <Grid item lg={4}>
               <TextField
                 id="standard"
-                label="Seguro"
+                label="Tipo Seguro"
                 value={tipo_seguro}
-                name="seguro"
+                name="Tipo Seguro"
                 onChange={handleInputChange}
               />
             </Grid>
             <Grid item lg={4}>
               <TextField
                 id="standard"
-                label="Corresponde"
+                label="Paga"
                 value={paga}
-                name="corresponde"
+                name="Paga"
                 onChange={handleInputChange}
               />
             </Grid>
             <Grid item lg={4}>
               <TextField
                 id="standard"
-                label="Nombre Ajustador"
+                label="Comentarios"
                 value={comentarios}
-                name="nombreAjustador"
+                name="Comentarios"
                 onChange={handleInputChange}
               />
             </Grid>
