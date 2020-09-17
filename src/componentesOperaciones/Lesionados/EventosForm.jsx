@@ -8,10 +8,10 @@ import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import TextField from "@material-ui/core/TextField";
-import { useHookForm } from "../../hooks/hookFrom";
-import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
-import { validateForm } from "../../functions/validateFrom";
-import { httpPostData } from "../../functions/httpRequest";
+import { useHookForm } from "../../hooksOperaciones/hookFrom";
+import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functionsOperaciones/customSweetAlert";
+import { validateForm } from "../../functionsOperaciones/validateFrom";
+import { httpPostData } from "../../functionsOperaciones/httpRequest";
 import { Link } from "react-router-dom";
 
 

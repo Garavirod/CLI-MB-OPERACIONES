@@ -7,9 +7,9 @@ import AddIcon from "@material-ui/icons/Add";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
-import { useHookForm } from "../../hooks/hookFrom";
-import { validateForm } from "../../functions/validateFrom";
-import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
+import { useHookForm } from "../../hooksOperaciones/hookFrom";
+import { validateForm } from "../../functionsOperaciones/validateFrom";
+import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functionsOperaciones/customSweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -9,10 +9,10 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import Grid from "@material-ui/core/Grid";
 import { Link, useParams } from "react-router-dom";
-import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
-import { useHookForm } from "../../hooks/hookFrom";
-import { validateForm } from "../../functions/validateFrom";
-import { httpPostData } from "../../functions/httpRequest";
+import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functionsOperaciones/customSweetAlert";
+import { useHookForm } from "../../hooksOperaciones/hookFrom";
+import { validateForm } from "../../functionsOperaciones/validateFrom";
+import { httpPostData } from "../../functionsOperaciones/httpRequest";
 
 const useStyles = makeStyles((theme) => ({
   root: {
