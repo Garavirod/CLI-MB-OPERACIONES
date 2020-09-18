@@ -55,7 +55,6 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" exact path="/automovilColisiones/:idEvento" component={ListaAutomovilColisiones}/>
                 <PrivateRoute role="Operaciones" exact path="/segurosColisiones/:idEvento" component={ListaDatosSeguroColisiones}/>
                 <PrivateRoute role="Operaciones" exact path="/colisiones-form" component={EventosFormColisiones}/>
-
                 {/* LOGIN */}
                 <Route path="/denied" component={Denied} exact/>
                 <Route path="/RecuperarC" component={RecuperarC} exact/>
