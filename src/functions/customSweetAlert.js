@@ -26,8 +26,8 @@ export const CustomSwalDelete= async (endpoint)=>{
 
 export const CustomSwalSave = () =>{    
     swal({
-        title: "Infromación grabada",
-        text: "Los cambios han sido grbados exitosamente",
+        title: "Información grabada",
+        text: "Los cambios han sido grabados exitosamente",
         icon: "success",
         buttons: true,
         dangerMode: false,

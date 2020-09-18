@@ -17,14 +17,8 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { PreloadData } from "../ui/PreloadData";
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
 
-export default function ListaDatosAutomovil() {
-  const classes = useStyles();
+export default function ListaDatosAutomovil() {  
   const { idEvento } = useParams();
 
     // Preload

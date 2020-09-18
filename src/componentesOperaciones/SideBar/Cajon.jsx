@@ -39,7 +39,7 @@ const Cajon = (props) => {
         
         <div className={classes.areas}>
         <Typography variant="h3" align="center" style={{ color: '#FFFFFF' }}>
-           JUD Operaciones
+           Gerencia de Operaciones
         </Typography>
         </div>
         

@@ -29,7 +29,7 @@ export default function DatosAutomovilColisiones() {
   const { idEvento } = useParams();
   // Objeto a mapear
   const initial_datosAutomovilData= {
-    sexo_contuctor: "",
+    sexo: "",
     marca: "",
     submarca: "",
     color: "",
@@ -41,7 +41,7 @@ export default function DatosAutomovilColisiones() {
 
   // Desestructurando el response del hook
   const {
-    sexo_contuctor,
+    sexo,
     marca,
     submarca,
     color,
@@ -84,12 +84,12 @@ export default function DatosAutomovilColisiones() {
           <Grid container spacing={4}>
           <Grid item lg={4}>
               <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="grouped-native-select">Género</InputLabel>
+                <InputLabel htmlFor="grouped-native-select">Género conductor</InputLabel>
                 <Select
                   native
-                  value={sexo_contuctor}
+                  value={sexo}
                   id="grouped-native-select"
-                  name="sexo_contuctor"
+                  name="sexo"
                   onChange={handleInputChange}
                 >
                   <option defaultValue="" />

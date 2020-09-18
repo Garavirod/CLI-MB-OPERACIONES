@@ -8,61 +8,53 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
+import CreateIcon from "@material-ui/icons/Create";
 import IconButton from "@material-ui/core/IconButton";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CustomSwalDelete } from "../../functions/customSweetAlert";
 import { httpGetData } from "../../functions/httpRequest";
+import { PreloadData } from "../ui/PreloadData";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import { PreloadData } from "../ui/PreloadData";
-
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
 
-export default function ListadatosSeguros() {
+export default function ListaEventos() {
   const classes = useStyles();
-  const { idEvento } = useParams();
-
-    // Preload
-    const [preload, setPreload] = useState(true);
 
   const [data, setData] = useState([]);
+  const [preload, setPreload] = useState(true);
   useEffect(() => {
-    getdatosSeguros();
+    getEventos();
   }, []);
 
-  const getdatosSeguros = async () => {
-    const url = `/colisiones/seguro-list/${idEvento}`;
+  const getEventos = async () => {
+    const url = "/colisiones/colisiones-list";
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
-    if (_data.success){
+    if (_data.success) {
       setData(_data.data);
       setPreload(false);
     }
   };
 
-  const deleteSeguro = async (idSeguro) => {
-    const url = `/colisiones/delete-seguro/${idSeguro}`;
+  const deleteEvento = async (idevento) => {
+    const url = `/colisiones/delete-colision/${idevento}`;
     CustomSwalDelete(url).then(() => {
-      getdatosSeguros();
+      getEventos();
     });
   };
 
+
   return (
     <div>
-      <Grid container spacing={2}>
-        <Grid item lg={12}>
-          <h4>Lista de seguros registrados en el evento colisiones {idEvento}</h4>
-        </Grid>
-        <Grid item lg={6}>
-          <Link to={`/add-registerColisiones/${idEvento}`}>Registar seguro, afectado o Automóvil colisiones</Link>
-        </Grid>
-        <Grid item lg={6}>
-          <Link to={"/eventosColisiones"}>Lista de eventos Colisiones</Link>
+      <Grid container spacing={3}>
+      <Grid item lg={6}>
+          <Link to={`/colisiones-form`}>Nuevo evento de colisión</Link>
         </Grid>
         <Grid item lg={12}>
         <Typography component="div" variant="h4">
@@ -72,20 +64,20 @@ export default function ListadatosSeguros() {
         </Typography>
         </Grid>
         <Grid item lg={12}>
-          <TableContainer
-            component={Paper}
-            className="animate__animated animate__fadeIn"
-          >
-            <Table aria-label="simple table">
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
                   <TableCell>ID</TableCell>
-                  <TableCell align="center">Género</TableCell>
-                  <TableCell align="center">Marca</TableCell>
-                  <TableCell align="center">Submarca</TableCell>
-                  <TableCell align="center">Color</TableCell>
-                  <TableCell align="center">Placa</TableCell>
+                  <TableCell align="center">Fecha</TableCell>
+                  <TableCell align="center">Hora</TableCell>
+                  <TableCell align="center">Sentido</TableCell>
+                  <TableCell align="center">Motivo</TableCell>
+                  <TableCell align="center">Intersección</TableCell>
+                  <TableCell align="center">Colonia</TableCell>
                   <TableCell align="center">Borrar</TableCell>
+                  <TableCell align="center">Agregar Registro</TableCell>
+               
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -94,19 +86,36 @@ export default function ListadatosSeguros() {
                     <TableCell component="th" scope="row">
                       {row.id}
                     </TableCell>
-                    <TableCell align="center">{row.nombre_seguro}</TableCell>
-                    <TableCell align="center">{row.tipo_seguro}</TableCell>
-                    <TableCell align="center">{row.paga}</TableCell>
-                    <TableCell align="center">{row.comentarios}</TableCell>
+                    <TableCell align="center">
+                      {row.fecha.substr(8, 2) +
+                        "-" +
+                        row.fecha.substr(5, 2) +
+                        "-" +
+                        row.fecha.substr(0, 4)}
+                    </TableCell>
+                    <TableCell align="center">
+                      {row.hora.substr(0, 5)}
+                    </TableCell>
+                    <TableCell align="center">{row.sentido}</TableCell>
+                    <TableCell align="center">{row.motivo}</TableCell>
+                    <TableCell align="center">{row.interseccion}</TableCell>
+                    <TableCell align="center">{row.colonia}</TableCell>
                     <TableCell align="center">
                       {
                         <IconButton
                           aria-label="delete"
-                          onClick={() => deleteSeguro(row.id)}
+                          onClick={() => deleteEvento(row.id)}
                         >
                           <DeleteIcon />
                         </IconButton>
                       }
+                    </TableCell>
+                    <TableCell align="center">
+                      <Link className="" to={`/add-registerColisiones/${row.id}`}>
+                        <IconButton aria-label="add">
+                          <CreateIcon />
+                        </IconButton>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))}

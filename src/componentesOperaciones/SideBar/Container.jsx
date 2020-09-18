@@ -2,7 +2,7 @@ import React from 'react'
 import { makeStyles, Hidden} from '@material-ui/core';
 import SideBar from './SideBar';
 import Cajon from './Cajon';
-import Routes from '../../Routes';
+import Routes from '../../RoutesOperaciones';
 
 const estilo = makeStyles(theme =>({
     root: {

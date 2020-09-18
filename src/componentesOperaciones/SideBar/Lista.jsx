@@ -1,6 +1,8 @@
 import React from 'react';
 import { List, ListItem, ListItemIcon, ListItemText,Typography, makeStyles } from '@material-ui/core';
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {Logout} from "../../functions";
 import {
     BrowserRouter as Router,
   } from 'react-router-dom';
@@ -77,6 +79,17 @@ const Lista = () => {
                         </a>
                     </ListItemIcon>
                 </ListItem>
+
+                <ListItem button>
+                    <ListItemIcon onClick={()=>Logout()}>
+                        <ExitToAppIcon className={classes.icon}/>
+                            <ListItemText
+                                    disableTypography
+                                    primary={<Typography variant="h5" style={{ color: '#FFFFFF' }}>Cerrar Sesion</Typography>}
+                                />
+                    </ListItemIcon>
+                </ListItem>
+
             </List>
             </Router>
 
