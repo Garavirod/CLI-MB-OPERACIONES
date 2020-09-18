@@ -79,8 +79,7 @@ export default function ListadatosSeguros() {
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell align="center">Género</TableCell>
+                  <TableCell>ID</TableCell>                  
                   <TableCell align="center">Marca</TableCell>
                   <TableCell align="center">Submarca</TableCell>
                   <TableCell align="center">Color</TableCell>
@@ -93,7 +92,7 @@ export default function ListadatosSeguros() {
                   <TableRow key={row.id}>
                     <TableCell component="th" scope="row">
                       {row.id}
-                    </TableCell>
+                    </TableCell>                   
                     <TableCell align="center">{row.nombre_seguro}</TableCell>
                     <TableCell align="center">{row.tipo_seguro}</TableCell>
                     <TableCell align="center">{row.paga}</TableCell>
