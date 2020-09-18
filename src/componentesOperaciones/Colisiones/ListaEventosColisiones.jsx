@@ -33,7 +33,7 @@ export default function ListaEventos() {
   }, []);
 
   const getEventos = async () => {
-    const url = "/lesionados/eventos";
+    const url = "/colisiones/colisiones-list";
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
     if (_data.success) {
@@ -43,19 +43,19 @@ export default function ListaEventos() {
   };
 
   const deleteEvento = async (idevento) => {
-    const url = `/lesionados/borra-evento/${idevento}`;
+    const url = `/colisiones/delete-colision/${idevento}`;
     CustomSwalDelete(url).then(() => {
       getEventos();
     });
   };
 
-  const tipoIncident = (incident) => {
-    return incident === true ? "Autobús" : "Estación";
-  };
 
   return (
     <div>
       <Grid container spacing={3}>
+      <Grid item lg={6}>
+          <Link to={`/colisiones-form`}>Nuevo evento de colisión</Link>
+        </Grid>
         <Grid item lg={12}>
         <Typography component="div" variant="h4">
           <Box textAlign="center" m={1}>
@@ -71,14 +71,13 @@ export default function ListaEventos() {
                   <TableCell>ID</TableCell>
                   <TableCell align="center">Fecha</TableCell>
                   <TableCell align="center">Hora</TableCell>
-                  <TableCell align="center">Tipo incidente</TableCell>
-                  <TableCell align="center">Incidente</TableCell>
-                  <TableCell align="center">Tramo</TableCell>
-                  <TableCell align="center">Operador</TableCell>
-                  <TableCell align="center">Bitacora</TableCell>
-                  <TableCell align="center">Descripcion</TableCell>
+                  <TableCell align="center">Sentido</TableCell>
+                  <TableCell align="center">Motivo</TableCell>
+                  <TableCell align="center">Intersección</TableCell>
+                  <TableCell align="center">Colonia</TableCell>
                   <TableCell align="center">Borrar</TableCell>
-                  <TableCell align="center">Agregar registro</TableCell>
+                  <TableCell align="center">Agregar Registro</TableCell>
+               
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -97,14 +96,10 @@ export default function ListaEventos() {
                     <TableCell align="center">
                       {row.hora.substr(0, 5)}
                     </TableCell>
-                    <TableCell align="center">
-                      {tipoIncident(row.tipo_incidente)}
-                    </TableCell>
-                    <TableCell align="center">{row.incidente}</TableCell>
-                    <TableCell align="center">{row.tramo}</TableCell>
-                    <TableCell align="center">{row.operador}</TableCell>
-                    <TableCell align="center">{row.bitacora}</TableCell>
-                    <TableCell align="center">{row.descripcion}</TableCell>
+                    <TableCell align="center">{row.sentido}</TableCell>
+                    <TableCell align="center">{row.motivo}</TableCell>
+                    <TableCell align="center">{row.interseccion}</TableCell>
+                    <TableCell align="center">{row.colonia}</TableCell>
                     <TableCell align="center">
                       {
                         <IconButton
@@ -116,7 +111,7 @@ export default function ListaEventos() {
                       }
                     </TableCell>
                     <TableCell align="center">
-                      <Link className="" to={`/add-register/${row.id}`}>
+                      <Link className="" to={`/add-registerColisiones/${row.id}`}>
                         <IconButton aria-label="add">
                           <CreateIcon />
                         </IconButton>

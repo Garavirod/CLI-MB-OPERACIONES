@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -8,29 +9,37 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
-import { useParams, Link } from "react-router-dom";
-import { httpGetData } from "../../functions/httpRequest";
-import { CustomSwalDelete } from "../../functions/customSweetAlert";
 import Grid from "@material-ui/core/Grid";
+import { useParams, Link } from "react-router-dom";
+import { CustomSwalDelete } from "../../functions/customSweetAlert";
+import { httpGetData } from "../../functions/httpRequest";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { PreloadData } from "../ui/PreloadData";
+const useStyles = makeStyles({
+  gridRoot: {
+    flexGrow: 1,
+  },
+  table: {
+    minWidth: 650,
+  },
+});
 
-export default function ListaAmbulancia() {
-  
-
+export default function ListaAfectadosColisiones() {
+  const classes = useStyles();
+  // Parametros por url
   const { idEvento } = useParams();
 
-    // Preload
-    const [preload, setPreload] = useState(true);
-
+  // Preload
+  const [preload, setPreload] = useState(true);
+  
   const [data, setData] = useState([]);
   useEffect(() => {
-    getAmbulancias();
+    getAfectados();
   }, []);
 
-  const getAmbulancias = async () => {
-    const url = `/lesionados/datosambulancias/${idEvento}`;
+  const getAfectados = async () => {
+    const url = `/colisiones/lesionados-list/${idEvento}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
     if (_data.success){
@@ -39,24 +48,30 @@ export default function ListaAmbulancia() {
     } 
   };
 
-  const deleteAmbulanica = async (evento) => {
-    const url = `/lesionados/borra-datos-ambulancia/${evento}`;
-    CustomSwalDelete(url).then(() => getAmbulancias());
+  const deleteLesionado = async (idLesionado) => {
+    const url = `/colisiones/delete-lesionada/${idLesionado}`;
+    CustomSwalDelete(url).then(() => {
+      getAfectados();
+    });
   };
 
+  const validaSexo = (sex) => {
+    if (sex == true) return "Masculino";
+    else return "Femenino";
+  };
+ 
+
   return (
-    <div>
-      <Grid container spacing={3}>
+    <div className={classes.gridRoot}>
+      <Grid container spacing={2}>
         <Grid item lg={12}>
-          <h4>Lista de ambulancias registradas en el evento {idEvento}</h4>
+          <h4>Lista de afectados registrados en el evento colisiones {idEvento}</h4>
         </Grid>
         <Grid item lg={6}>
-          <Link to={`/afectados/${idEvento}`}>
-            Registar ambulancia u traslado
-          </Link>
+          <Link to={`/add-registerColisiones/${idEvento}`}>Registrar afectado o seguro colisiones</Link>
         </Grid>
         <Grid item lg={6}>
-          <Link to={"/eventos"}>Lista de eventos</Link>
+          <Link to={"/eventosColisiones"}>Lista de eventos Colisiones</Link>
         </Grid>
         <Grid item lg={12}>
         <Typography component="div" variant="h4">
@@ -73,13 +88,10 @@ export default function ListaAmbulancia() {
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell align="center">Tiempo Llegada</TableCell>
-                  <TableCell align="center">Tiempo Respuesta</TableCell>
-                  <TableCell align="center">Ambulancia</TableCell>
-                  <TableCell align="center">Economico Ambulancia</TableCell>
-                  <TableCell align="center">Paramedico</TableCell>
-                  <TableCell align="center">Diagnóstico</TableCell>
+                  <TableCell>ID Lesionado</TableCell>
+                  <TableCell>Evento Colisión</TableCell>
+                  <TableCell align="center">Tipo Lesionado</TableCell>
+                  <TableCell align="center">Género</TableCell>
                   <TableCell align="center">Borrar</TableCell>
                 </TableRow>
               </TableHead>
@@ -89,21 +101,15 @@ export default function ListaAmbulancia() {
                     <TableCell component="th" scope="row">
                       {row.id}
                     </TableCell>
-                    <TableCell align="center">
-                      {row.tiempoLLegada.substr(0, 5)}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row.tiempoRespuesta.substr(0, 5)}
-                    </TableCell>
-                    <TableCell align="center">{row.ambulancia}</TableCell>
-                    <TableCell align="center">{row.ecoPlaca}</TableCell>
-                    <TableCell align="center">{row.paramedico}</TableCell>
-                    <TableCell align="center">{row.diagnostico}</TableCell>
+                    <TableCell align="center">{row.fk_colision}</TableCell>
+                    <TableCell align="center">{row.tipo_lesionado}</TableCell>
+                    <TableCell align="center">{validaSexo(row.sexo)}</TableCell>
+                  
                     <TableCell align="center">
                       {
                         <IconButton
                           aria-label="delete"
-                          onClick={() => deleteAmbulanica(row.id)}
+                          onClick={() => deleteLesionado(row.id)}
                         >
                           <DeleteIcon />
                         </IconButton>

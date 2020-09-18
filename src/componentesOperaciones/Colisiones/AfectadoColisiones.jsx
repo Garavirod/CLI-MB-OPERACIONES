@@ -1,5 +1,4 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -35,9 +34,7 @@ export default function FormPropsTextFields() {
   // Objeto a mapear
   const initial_afectado = {
     sexo: "",
-    edad: "",
-    nombre: "",
-    status: ""
+    tipo_lesionado: ""
   };
   
   // Utilizando el hook personalizado
@@ -46,9 +43,7 @@ export default function FormPropsTextFields() {
   // Desestructurando el Hook response
   const {
     sexo,
-    edad,
-    nombre,
-    status
+    tipo_lesionado
   } = values;
 
   console.log(values);
@@ -58,7 +53,7 @@ export default function FormPropsTextFields() {
     //Evita que la petición sea mandada por defecto en GET
     e.preventDefault();
     // Url de la API
-    const url = `/lesionados/registro-afectado/${idEvento}`;
+    const url = `/colisiones/datos-lesionado/${idEvento}`;
     if (validateForm(values)) {
       // Petición axios, manda la data ya vlidada al url definido
       const success = httpPostData(url,values);
@@ -82,22 +77,20 @@ export default function FormPropsTextFields() {
         <div className={classes.gridRoot}>
           <Grid container spacing={3}>
             <Grid item lg={3}>
-              <TextField
-                id="standard"
-                label="Nombre"
-                value={nombre}
-                name="nombre"
-                onChange={handleInputChange}
-              />
-            </Grid>
-            <Grid item lg={3}>
-              <TextField
-                id="standard"
-                label="Edad"
-                value={edad}
-                name="edad"
-                onChange={handleInputChange}
-              />
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="grouped-native-select">Lesionado</InputLabel>
+                <Select
+                  native
+                  value={tipo_lesionado}
+                  id="grouped-native-select"
+                  name="tipo_lesionado"
+                  onChange={handleInputChange}
+                >
+                  <option defaultValue="" />
+                  <option value={'Particular'}>Particular</option>
+                  <option value={'Usuario'}>Usuario</option>
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item lg={3}>
               <FormControl className={classes.formControl}>
@@ -115,22 +108,7 @@ export default function FormPropsTextFields() {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item lg={3}>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="grouped-native-select">Estado</InputLabel>
-                <Select
-                  native
-                  value={status}
-                  id="grouped-native-select"
-                  name="status"
-                  onChange={handleInputChange}
-                >
-                  <option defaultValue="" />
-                  <option value={1}>Vivo</option>
-                  <option value={0}>Muerto</option>
-                </Select>
-              </FormControl>
-            </Grid>
+          
             <Grid item lg={12}>
               <Button
                 type="submit"
@@ -138,15 +116,15 @@ export default function FormPropsTextFields() {
                 className={classes.bgPDF}
                 startIcon={<AddIcon />}
               >
-                Agregar Afectado
+                Agregar Afectado Colisiones
               </Button>
             </Grid>
             <Grid item lg={12}>
               <p>
-                Para agregar traslados y datos de ambulancia dar clck en
-                <i>'registrso de afectados'</i>
+                Para agregar..
+                <i>'registro de afectados por colision'</i>
               </p>
-              <Link to={`/afectados/${idEvento}`}>registros de afectados</Link>
+              <Link to={`/afectadosColisiones/${idEvento}`}>registros de afectados Colisiones</Link>
             </Grid>
           </Grid>
         </div>

@@ -6,7 +6,6 @@ import BitacoraDR from './componentesOperaciones/Bitacoras/BitacoraDR';
 import MainReportes from './componentesOperaciones/JustSemana/MainReportes';
 import Pruebas from './componentesOperaciones/Lesionados/Pruebas';
 import { MenuAccidentesScreen } from './componentesOperaciones/Lesionados/MenuAccidentesScreen';
-import Colisiones from './componentesOperaciones/Colisiones/Colisiones';
 import { AddRegisterEvent } from './componentesOperaciones/Lesionados/AddRegisterEvent';
 import ListaAfectados from './componentesOperaciones/Lesionados/ListaAfectados';
 import ListaDatosSeguro from "./componentesOperaciones/Lesionados/ListaDatosSeguro";
@@ -23,8 +22,12 @@ import RecuperarC from './componentesOperaciones/Login/RecuperarC'
 import PrivateRoute from './PrivateRoute'
 import RootRoute from './RootRoute'
 import Denied from './componentesOperaciones/Login/Denied';
-
-
+import ListaEventosColisiones from "./componentesOperaciones/Colisiones/ListaEventosColisiones";
+import {AddRegisterEventColisiones} from "./componentesOperaciones/Colisiones/AddRegisterEventColisiones";
+import ListaAfectadosColisiones from './componentesOperaciones/Colisiones/ListaAfectadosColisiones';
+import ListaAutomovilColisiones from "./componentesOperaciones/Colisiones/ListaAutomovilColisiones";
+import ListaDatosSeguroColisiones from "./componentesOperaciones/Colisiones/ListaDatosSeguroColisiones";
+import {EventosFormColisiones} from "./componentesOperaciones/Colisiones/EventosFormColisiones";
 const Routes = () => {
     return ( 
         <Router>
@@ -36,8 +39,7 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" path="/ControlDeServicios" component={Control} exact/>
                 <PrivateRoute role="Operaciones" path='/reportes/' component={MainReportes}/>
                 <PrivateRoute role="Operaciones" path='/pruebas' component={Pruebas}exact/> 
-                <PrivateRoute role="Operaciones" path='/eventos/' component={EventosScreen}exact/> 
-                <PrivateRoute role="Operaciones" path='/colisiones-form/' component={Colisiones}exactç/>                
+                <PrivateRoute role="Operaciones" path='/eventos/' component={EventosScreen}exact/>                              
                 <PrivateRoute role="Operaciones" path='/MenuAccidentes/' component={MenuAccidentesScreen}exact/>
                 <PrivateRoute role="Operaciones" exact path="/add-register/:idEvento" component={AddRegisterEvent} />                                               
                 <PrivateRoute role="Operaciones" exact path="/afectados/:idEvento" component={ListaAfectados} />                                               
@@ -46,6 +48,15 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" exact path="/seguros/:idEvento" component={ListaDatosSeguro} />                                                                                                            
                 <PrivateRoute role="Operaciones" exact path="/lesiones-form" component={EventosForm} />                                                                                                            
                 <PrivateRoute role="Operaciones" exact path="/add-register-traslado/:idAfectado/:idEvento" component={FormTraslado} />
+                {/* COLISIONES */}
+                <PrivateRoute role="Operaciones" path='/eventosColisiones/' component={ListaEventosColisiones}exact />
+                <PrivateRoute role="Operaciones" exact path="/add-registerColisiones/:idEvento" component={AddRegisterEventColisiones}/>
+                <PrivateRoute role="Operaciones" exact path="/afectadosColisiones/:idEvento" component={ListaAfectadosColisiones}/>
+                <PrivateRoute role="Operaciones" exact path="/automovilColisiones/:idEvento" component={ListaAutomovilColisiones}/>
+                <PrivateRoute role="Operaciones" exact path="/segurosColisiones/:idEvento" component={ListaDatosSeguroColisiones}/>
+                <PrivateRoute role="Operaciones" exact path="/colisiones-form" component={EventosFormColisiones}/>
+
+                {/* LOGIN */}
                 <Route path="/denied" component={Denied} exact/>
                 <Route path="/RecuperarC" component={RecuperarC} exact/>
                 <Route path="/SignUp" component={Signup} exact/>

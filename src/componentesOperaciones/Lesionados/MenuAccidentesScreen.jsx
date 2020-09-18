@@ -24,7 +24,7 @@ const Menu = [
     descripcion:
       "En esta sección se pueden llevar a cabo los registros de los eventos que abarcan colisiones o accidentes",
     imgName: "crash",
-    src:'colisiones-form'
+    src:'/eventosColisiones'
   },
   {
     id:2,
@@ -40,7 +40,7 @@ const Menu = [
     descripcion:
       "En esta sección se pueden visualizar los históricos de accdentes y lesionados",
     imgName: "report",
-    src:'/pruebas'
+    src:'/colisionesprueba'
   },
 ];
 

@@ -6,10 +6,10 @@ import AddIcon from "@material-ui/icons/Add";
 import { useParams, Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import { useHookForm } from "../../hooksOperaciones/hookFrom";
-import { validateForm } from "../../functionsOperaciones/validateFrom";
-import { httpPostData } from "../../functionsOperaciones/httpRequest";
-import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functionsOperaciones/customSweetAlert";
+import { useHookForm } from "../../hooks/hookFrom";
+import { validateForm } from "../../functions/validateFrom";
+import { httpPostData } from "../../functions/httpRequest";
+import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
