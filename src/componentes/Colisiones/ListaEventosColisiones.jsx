@@ -49,9 +49,6 @@ export default function ListaEventos() {
     });
   };
 
-  const tipoIncident = (incident) => {
-    return incident === true ? "Autobús" : "Estación";
-  };
 
   return (
     <div>
@@ -73,7 +70,7 @@ export default function ListaEventos() {
                   <TableCell align="center">Hora</TableCell>
                   <TableCell align="center">Sentido</TableCell>
                   <TableCell align="center">Motivo</TableCell>
-                  <TableCell align="center">Interseccion</TableCell>
+                  <TableCell align="center">Intersección</TableCell>
                   <TableCell align="center">Colonia</TableCell>
                   <TableCell align="center">Borrar</TableCell>
                   <TableCell align="center">Agregar Registro</TableCell>

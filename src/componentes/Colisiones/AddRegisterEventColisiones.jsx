@@ -10,6 +10,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 // Components
 import AfectadoColisiones from "./AfectadoColisiones";
 import DatosSeguroColisiones from "./DatosSeguroColisiones";
+import DatosAutomovilColisiones from "./DatosAutomovilColisiones";
 
 // Styles
 
@@ -33,7 +34,7 @@ export const AddRegisterEventColisiones = () => {
   return (
     <div>
       <h4>Agregar registros al evento colisiones {idEvento}</h4>
-      <Link to={"/eventosColisiones"}>Lista de eventos Colisiones</Link>
+      <Link to={"/eventosColisiones"}>Lista de eventos colisiones</Link>
       <hr />
       <div className={classes.root}>
         <Accordion>
@@ -43,12 +44,27 @@ export const AddRegisterEventColisiones = () => {
             id="panel1a-header"
           >
             {/* AfFECTADOS */}
-            <Typography className={classes.heading}>Afectado Colisiones</Typography>
+            <Typography className={classes.heading}>Afectado colisiones</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <AfectadoColisiones/>
           </AccordionDetails>
         </Accordion>
+      
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            {/* Automovil */}
+            <Typography className={classes.heading}>Automovil colisiones</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <DatosAutomovilColisiones/>
+          </AccordionDetails>
+        </Accordion>
+
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -56,12 +72,12 @@ export const AddRegisterEventColisiones = () => {
             id="panel2a-header"
           >
               {/* SEGURO */}
-            <Typography className={classes.heading}>Datos de seguro Colisiones</Typography>
+            <Typography className={classes.heading}>Datos de seguro colisiones</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <DatosSeguroColisiones />
           </AccordionDetails>
-        </Accordion>        
+        </Accordion> 
         {/* DESABLE */}
         {/* <Accordion disabled>
           <AccordionSummary

@@ -21,6 +21,7 @@ import { EventosScreenColisiones } from './componentes/Colisiones/EventosScreenC
 import { EventosFormColisiones } from './componentes/Colisiones/EventosFormColisiones';
 import Colisiones from './componentes/Colisiones/Colisiones';
 import ListaDatosSeguroColisiones from './componentes/Colisiones/ListaDatosSeguroColisiones';
+import ListaAutomovilColisiones from './componentes/Colisiones/ListaAutomovilColisiones';
 const Routes = () => {
     return ( 
         <Router>
@@ -56,6 +57,7 @@ const Routes = () => {
                 <Route exact path="/colisionesprueba" component={Colisiones} />  
                 <Route exact path="/afectadosColisiones/:idEvento" component={ListaAfectadosColisiones} />   
                 <Route exact path="/segurosColisiones/:idEvento" component={ListaDatosSeguroColisiones} />                                                                                                  
+                <Route exact path="/automovilColisiones/:idEvento" component={ListaAutomovilColisiones} />
             </div>
         </Router>
      );

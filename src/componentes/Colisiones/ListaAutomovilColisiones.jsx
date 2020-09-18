@@ -9,69 +9,60 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
-import Grid from "@material-ui/core/Grid";
 import { useParams, Link } from "react-router-dom";
 import { CustomSwalDelete } from "../../functions/customSweetAlert";
 import { httpGetData } from "../../functions/httpRequest";
+import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { PreloadData } from "../ui/PreloadData";
+
 const useStyles = makeStyles({
-  gridRoot: {
-    flexGrow: 1,
-  },
   table: {
     minWidth: 650,
   },
 });
 
-export default function ListaAfectadosColisiones() {
+export default function ListaDatosAutomovil() {
   const classes = useStyles();
-  // Parametros por url
   const { idEvento } = useParams();
 
-  // Preload
-  const [preload, setPreload] = useState(true);
-  
+    // Preload
+    const [preload, setPreload] = useState(true);
+
   const [data, setData] = useState([]);
   useEffect(() => {
-    getAfectados();
+    getdatosAutomovil();
   }, []);
 
-  const getAfectados = async () => {
-    const url = `/colisiones/lesionados-list/${idEvento}`;
+  const getdatosAutomovil = async () => {
+    const url = `/colisiones/automovil-list/${idEvento}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
     if (_data.success){
       setData(_data.data);
       setPreload(false);
-    } 
+    }
   };
 
-  const deleteLesionado = async (idLesionado) => {
-    const url = `/colisiones/delete-lesionada/${idLesionado}`;
+  const deleteAutomovil = async (idAutomovil) => {
+    const url = `/colisiones/delete-automovil/${idAutomovil}`;
     CustomSwalDelete(url).then(() => {
-      getAfectados();
+      getdatosAutomovil();
     });
   };
 
-  const validaSexo = (sex) => {
-    if (sex == true) return "Masculino";
-    else return "Femenino";
-  };
- 
-
   return (
-    <div className={classes.gridRoot}>
+    <div>
       <Grid container spacing={2}>
         <Grid item lg={12}>
-          <h4>Lista de afectados registrados en el evento colisiones {idEvento}</h4>
+          <h4>Lista de seguros registrados en el evento de colisión No. {idEvento}</h4>
         </Grid>
         <Grid item lg={6}>
-          <Link to={`/add-registerColisiones/${idEvento}`}>Registrar afectado o seguro colisiones</Link>
+          <Link to={`/add-registerColisiones/${idEvento}`}>Registar seguro o afectado de colisiones</Link>
         </Grid>
         <Grid item lg={6}>
-          <Link to={"/eventosColisiones"}>Lista de eventos Colisiones</Link>
+          <Link to={"/eventosColisiones"}>Lista de eventos colisiones</Link>
         </Grid>
         <Grid item lg={12}>
         <Typography component="div" variant="h4">
@@ -88,10 +79,12 @@ export default function ListaAfectadosColisiones() {
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>ID Lesionado</TableCell>
-                  <TableCell>Evento Colisión</TableCell>
-                  <TableCell align="center">Tipo Lesionado</TableCell>
+                  <TableCell>ID</TableCell>
                   <TableCell align="center">Género</TableCell>
+                  <TableCell align="center">Marca</TableCell>
+                  <TableCell align="center">Submarca</TableCell>
+                  <TableCell align="center">Color</TableCell>
+                  <TableCell align="center">Placa</TableCell>
                   <TableCell align="center">Borrar</TableCell>
                 </TableRow>
               </TableHead>
@@ -101,15 +94,16 @@ export default function ListaAfectadosColisiones() {
                     <TableCell component="th" scope="row">
                       {row.id}
                     </TableCell>
-                    <TableCell align="center">{row.fk_colision}</TableCell>
-                    <TableCell align="center">{row.tipo_lesionado}</TableCell>
-                    <TableCell align="center">{validaSexo(row.sexo)}</TableCell>
-                  
+                    <TableCell align="center">{row.sexo_contuctor}</TableCell>
+                    <TableCell align="center">{row.marca}</TableCell>
+                    <TableCell align="center">{row.submarca}</TableCell>
+                    <TableCell align="center">{row.color}</TableCell>
+                    <TableCell align="center">{row.placa}</TableCell>
                     <TableCell align="center">
                       {
                         <IconButton
                           aria-label="delete"
-                          onClick={() => deleteLesionado(row.id)}
+                          onClick={() => deleteAutomovil(row.id)}
                         >
                           <DeleteIcon />
                         </IconButton>
