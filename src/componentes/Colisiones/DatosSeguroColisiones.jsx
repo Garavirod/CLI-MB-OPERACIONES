@@ -82,7 +82,7 @@ export default function FormPropsTextFields() {
                 id="standard"
                 label="Aseguradora"
                 value={nombre_seguro}
-                name="Aseguradora"
+                name="nombre_seguro"
                 onChange={handleInputChange}
               />
             </Grid>
@@ -91,7 +91,7 @@ export default function FormPropsTextFields() {
                 id="standard"
                 label="Tipo Seguro"
                 value={tipo_seguro}
-                name="Tipo Seguro"
+                name="tipo_seguro"
                 onChange={handleInputChange}
               />
             </Grid>
@@ -100,7 +100,7 @@ export default function FormPropsTextFields() {
                 id="standard"
                 label="Paga"
                 value={paga}
-                name="Paga"
+                name="paga"
                 onChange={handleInputChange}
               />
             </Grid>
@@ -109,7 +109,7 @@ export default function FormPropsTextFields() {
                 id="standard"
                 label="Comentarios"
                 value={comentarios}
-                name="Comentarios"
+                name="comentarios"
                 onChange={handleInputChange}
               />
             </Grid>

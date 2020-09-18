@@ -45,8 +45,8 @@ export default function ListadatosSeguros() {
     }
   };
 
-  const deleteEvento = async (datosSeguro) => {
-    const url = `/colisiones/delete-colision/${datosSeguro}`;
+  const deleteSeguro = async (idSeguro) => {
+    const url = `/colisiones/delete-seguro/${idSeguro}`;
     CustomSwalDelete(url).then(() => {
       getdatosSeguros();
     });
@@ -101,7 +101,7 @@ export default function ListadatosSeguros() {
                       {
                         <IconButton
                           aria-label="delete"
-                          onClick={() => deleteEvento(row.id)}
+                          onClick={() => deleteSeguro(row.id)}
                         >
                           <DeleteIcon />
                         </IconButton>

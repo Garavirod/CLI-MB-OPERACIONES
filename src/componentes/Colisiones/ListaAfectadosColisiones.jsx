@@ -49,8 +49,8 @@ export default function ListaAfectadosColisiones() {
     } 
   };
 
-  const deleteEvento = async (afectado) => {
-    const url = `/colisiones/delete-colision/${idEvento}`;
+  const deleteLesionado = async (idLesionado) => {
+    const url = `/colisiones/delete-lesionada/${idLesionado}`;
     CustomSwalDelete(url).then(() => {
       getAfectados();
     });
@@ -111,7 +111,7 @@ export default function ListaAfectadosColisiones() {
                       {
                         <IconButton
                           aria-label="delete"
-                          onClick={() => deleteEvento(row.id)}
+                          onClick={() => deleteLesionado(row.id)}
                         >
                           <DeleteIcon />
                         </IconButton>
