@@ -92,8 +92,9 @@ export default function ListaAfectadosColisiones() {
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell align="center">Tipo lesionado</TableCell>
+                  <TableCell>ID Lesionado</TableCell>
+                  <TableCell>Evento Colisión</TableCell>
+                  <TableCell align="center">Tipo Lesionado</TableCell>
                   <TableCell align="center">Género</TableCell>
                   <TableCell align="center">Borrar</TableCell>
                 </TableRow>
@@ -104,6 +105,7 @@ export default function ListaAfectadosColisiones() {
                     <TableCell component="th" scope="row">
                       {row.id}
                     </TableCell>
+                    <TableCell align="center">{row.fk_colision}</TableCell>
                     <TableCell align="center">{row.tipo_lesionado}</TableCell>
                     <TableCell align="center">{validaSexo(row.sexo)}</TableCell>
                   

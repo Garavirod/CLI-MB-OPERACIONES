@@ -80,6 +80,7 @@ export default function ListadatosSeguros() {
               <TableHead>
                 <TableRow>
                   <TableCell>ID</TableCell>
+                  <TableCell>ID Evento Colisión</TableCell>
                   <TableCell align="center">Aseguradora</TableCell>
                   <TableCell align="center">Tipo de Seguro</TableCell>
                   <TableCell align="center">Paga</TableCell>
@@ -93,6 +94,7 @@ export default function ListadatosSeguros() {
                     <TableCell component="th" scope="row">
                       {row.id}
                     </TableCell>
+                    <TableCell align="center">{idEvento}</TableCell>
                     <TableCell align="center">{row.nombre_seguro}</TableCell>
                     <TableCell align="center">{row.tipo_seguro}</TableCell>
                     <TableCell align="center">{row.paga}</TableCell>

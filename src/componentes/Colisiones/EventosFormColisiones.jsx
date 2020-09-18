@@ -147,8 +147,12 @@ export const EventosFormColisiones = () => {
                       onChange={handleInputChange}
                     >
                       <option defaultValue="" />
-                      <option value={1}>sentido 1</option>
-                      <option value={0}>sentido 2</option>
+                      <option value={'Norte-Poniente'}>Norte-Poniente</option>
+                      <option value={'Norte-Sur'}>Norte-Sur</option>
+                      <option value={'Oeste-Poniente'}>Oeste-Poniente</option>
+                      <option value={'Poniente-Norte'}>Poniente-Norte</option>
+                      <option value={'Poniente-Oeste'}>Poniente-Oeste</option>
+                      <option value={'Sur-Norte'}>Sur-Norte</option>
                     </Select>
                   </FormControl>
                 </Grid>
@@ -165,8 +169,12 @@ export const EventosFormColisiones = () => {
                       onChange={handleInputChange}
                     >
                       <option defaultValue="" />
-                      <option value={1}>motivo 1</option>
-                      <option value={0}>motivo 2</option>
+                      <option value={'Unidad de MB choca por hacer maniobras'}>Unidad de MB choca por hacer maniobras</option>
+                      <option value={'Corte de circulación de parte del particular (cuando particular invade carril de MB)'}>Corte de circulación de parte del particular (cuando particular invade carril de MB)</option>
+                      <option value={'Particular se pasa el semáforo'}>Particular se pasa el semáforo </option>
+                      <option value={'Alcance del particular contra unidad de MB'}>Alcance del particular contra unidad de MB</option>
+                      <option value={'MB se pasa el semáforo'}>MB se pasa el semáforo</option>
+                      <option value={'Alcance de unidad de MB hacia el particular'}>Alcance de unidad de MB hacia el particular</option>
                     </Select>
                   </FormControl>
                 </Grid>
@@ -183,8 +191,11 @@ export const EventosFormColisiones = () => {
                       onChange={handleInputChange}
                     >
                       <option defaultValue="" />
-                      <option value={0}>interseccion 1</option>
-                      <option value={1}>interseccion 2</option>
+                      <option value={'100 Metros y Vallejo'}>100 Metros y Vallejo</option>
+                      <option value={'20 De Noviembre y El Salvador'}>20 De Noviembre y El Salvador</option>
+                      <option value={'5 De Febrero y San Juan De Aragón'}>5 De Febrero y San Juan De Aragón</option>
+                      <option value={'5 De Febrero y Zumarraga'}>5 De Febrero y Zumarraga</option>
+                      <option value={'Antonio Caso y Av. Insurgentes'}>Antonio Caso y Av. Insurgentes</option>
                     </Select>
                   </FormControl>
                 </Grid>
@@ -201,8 +212,9 @@ export const EventosFormColisiones = () => {
                       onChange={handleInputChange}
                     >
                       <option defaultValue="" />
-                      <option value={0}>colonia 1</option>
-                      <option value={1}>colonia 2</option>
+                      <option value={'San Rafael'}>San Rafael</option>
+                      <option value={'Centro'}>Centro</option>
+                      <option value={'Colonia Del Valle'}>Colonia Del Valle</option>
                     </Select>
                   </FormControl>
                 </Grid>

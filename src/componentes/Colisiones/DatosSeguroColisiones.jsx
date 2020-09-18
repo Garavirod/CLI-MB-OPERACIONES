@@ -10,6 +10,9 @@ import Grid from "@material-ui/core/Grid";
 import { useHookForm } from "../../hooks/hookFrom";
 import { validateForm } from "../../functions/validateFrom";
 import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,35 +77,59 @@ export default function FormPropsTextFields() {
         autoComplete="off"
         onSubmit={sendData}
       >
-        <div>
-          <Grid container spacing={3}>
-            
+        
+        <div className={classes.gridRoot}>
+          <Grid container spacing={4}>
             <Grid item lg={4}>
-              <TextField
-                id="standard"
-                label="Aseguradora"
-                value={nombre_seguro}
-                name="nombre_seguro"
-                onChange={handleInputChange}
-              />
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="grouped-native-select">Aseguradora</InputLabel>
+                <Select
+                  native
+                  value={nombre_seguro}
+                  id="grouped-native-select"
+                  name="nombre_seguro"
+                  onChange={handleInputChange}
+                >
+                  <option defaultValue="" />
+                  <option value={'Mapfre'}>Mapfre</option>
+                  <option value={'Qualitas'}>Qualitas</option>
+                  <option value={'General de Seguros'}>General de Seguros</option>
+                  <option value={'No Arriba'}>No Arriba</option>
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item lg={4}>
-              <TextField
-                id="standard"
-                label="Tipo Seguro"
-                value={tipo_seguro}
-                name="tipo_seguro"
-                onChange={handleInputChange}
-              />
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="grouped-native-select">Tipo Seguro</InputLabel>
+                <Select
+                  native
+                  value={tipo_seguro}
+                  id="grouped-native-select"
+                  name="tipo_seguro"
+                  onChange={handleInputChange}
+                >
+                  <option defaultValue="" />
+                  <option value={'Unidad MB'}>Unidad MB</option>
+                  <option value={'Particular'}>Particular</option>
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item lg={4}>
-              <TextField
-                id="standard"
-                label="Paga"
-                value={paga}
-                name="paga"
-                onChange={handleInputChange}
-              />
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="grouped-native-select">Quién paga</InputLabel>
+                <Select
+                  native
+                  value={paga}
+                  id="grouped-native-select"
+                  name="paga"
+                  onChange={handleInputChange}
+                >
+                  <option defaultValue="" />
+                  <option value={'Empresa Operadora'}>Empresa Operadora</option>
+                  <option value={'Cada quién con sus daños'}>Cada quién con sus daños</option>
+                  <option value={'Se da a la fuga el particular'}>Se da a la fuga el particular</option>
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item lg={4}>
               <TextField

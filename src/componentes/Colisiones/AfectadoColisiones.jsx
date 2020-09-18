@@ -78,15 +78,21 @@ export default function FormPropsTextFields() {
         <div className={classes.gridRoot}>
           <Grid container spacing={3}>
             <Grid item lg={3}>
-              <TextField
-                id="standard"
-                label="tipo_lesionado"
-                value={tipo_lesionado}
-                name="tipo_lesionado"
-                onChange={handleInputChange}
-              />
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="grouped-native-select">Lesionado</InputLabel>
+                <Select
+                  native
+                  value={tipo_lesionado}
+                  id="grouped-native-select"
+                  name="tipo_lesionado"
+                  onChange={handleInputChange}
+                >
+                  <option defaultValue="" />
+                  <option value={'Particular'}>Particular</option>
+                  <option value={'Usuario'}>Usuario</option>
+                </Select>
+              </FormControl>
             </Grid>
-            
             <Grid item lg={3}>
               <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="grouped-native-select">Género</InputLabel>
