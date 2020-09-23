@@ -28,6 +28,7 @@ import ListaAfectadosColisiones from './componentesOperaciones/Colisiones/ListaA
 import ListaAutomovilColisiones from "./componentesOperaciones/Colisiones/ListaAutomovilColisiones";
 import ListaDatosSeguroColisiones from "./componentesOperaciones/Colisiones/ListaDatosSeguroColisiones";
 import {EventosFormColisiones} from "./componentesOperaciones/Colisiones/EventosFormColisiones";
+import { FormDesincorporaciones } from './componentesOperaciones/Desincorporaciones/FormulariosDesinc';
 const Routes = () => {
     return ( 
         <Router>
@@ -35,7 +36,7 @@ const Routes = () => {
                 <RootRoute path="/"  exact/>
                 <PrivateRoute role="Operaciones" path="/Bienvenida" component={Bienvenida} exact/>
                 <PrivateRoute role="Operaciones" path="/JustificacionSemana" component={Levantamiento} exact/>
-                <PrivateRoute role="Operaciones" path="/BitacordaDR" component={BitacoraDR} exact/>
+                <PrivateRoute role="Operaciones" path="/BitacordaDR" component={FormDesincorporaciones} exact/>
                 <PrivateRoute role="Operaciones" path="/ControlDeServicios" component={Control} exact/>
                 <PrivateRoute role="Operaciones" path='/reportes/' component={MainReportes}/>
                 <PrivateRoute role="Operaciones" path='/pruebas' component={Pruebas}exact/> 
