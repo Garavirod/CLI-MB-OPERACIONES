@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Grid, Paper, Typography } from "@material-ui/core";
+import Tab from "./Tab";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +36,7 @@ export const TabListasComponent = () => {
               Listado de folios abiertos / incumplimientos / cumplimeintos
             </Typography>
           </Paper>
+          <Tab/>
         </Grid>
       </Grid>
     </Container>
