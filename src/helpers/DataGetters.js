@@ -17,6 +17,38 @@ export const getFolios = () =>{
 }
 
 
+export const getJornadas = ()  =>{
+    const jornadas = [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+    ];
+    return jornadas;
+}
+
+
+export const getSolicitudes = () =>{
+    const solicitudes = [
+        "Mantenimiento E.O",
+        "Operaciones E.O",
+        "Metrobús regulación",
+        "Metrobús mantenimiento"
+    ]
+    return solicitudes;
+}
+
 export const getLineas = () =>{
 
     // Lineas
@@ -76,6 +108,66 @@ export const getInfromantes = () =>{
     ];
 
     return informa;
+}
+
+
+export const getEstacionesByLinea = (estacion) =>{
+    // Estaciones de la linea 1
+    const estaciones = [
+        "Estación 1",
+        "Estación 2",
+        "Estación 3",
+        "Estación 4",
+        "Estación 5",
+        "Estación 6",
+        "Estación 7",
+        "Estación 8",
+        "Estación 9",
+        "Estación 10",
+        "Estación 11",
+        "Estación 12",
+        "Estación 13",
+        "Estación 14",
+        "Estación 15",
+        "Estación 16",
+        "Estación 17",
+        "Estación 18",
+        "Estación 19",
+    ];
+
+    return estaciones;
+};
+
+
+export const getEmpOpbyEco = (eco) =>{
+    return ["CISA"];
+}
+
+
+export const getEconómicos = () =>{
+    const economicos = [
+        "Eco 2313",
+        "Eco 2323",
+        "Eco 2333",
+        "Eco 2343",
+        "Eco 2353",
+        "Eco 2363",
+        "Eco 2373",
+        "Eco 2383",
+        "Eco 2393",
+        "Eco 2310",
+        "Eco 2311",
+        "Eco 2312",
+        "Eco 2313",
+        "Eco 2314",
+        "Eco 2315",
+        "Eco 2316",
+        "Eco 2317",
+        "Eco 2318",
+        "Eco 2319",
+    ];
+
+    return economicos;
 }
 
 export const getEstaciones = () =>{

@@ -14,7 +14,15 @@ import {
   Radio,
   Container,
 } from "@material-ui/core";
-import { getFolios, getLineas } from "../../helpers/DataGetters";
+import {
+  getLineas,
+  getJornadas,
+  getSolicitudes,
+  getEstacionesByLinea,
+  getEconomicos,
+  getEmpOpbyEco,
+  getInfromantes,
+} from "../../helpers/DataGetters";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,8 +64,15 @@ export const DesincorporacionComp = (props) => {
     edoFolio,
   } = valuesDes;
 
-  const folios = getFolios();
+  // Data inputs
   const lineas = getLineas();
+  const jornadas = getJornadas();
+  const solicitudes = getSolicitudes();
+  const infromantes = getInfromantes();
+  const estaciones = getEstacionesByLinea("Linea 1");
+  const economicos = getEconomicos();
+  const empresaOp = getEmpOpbyEco("1232");
+
   return (
     <Container className={classes.root}>
       <Grid container spancing={3}>
@@ -100,7 +115,7 @@ export const DesincorporacionComp = (props) => {
                 name: "solicita",
               }}
             >
-              {folios.map((it) => (
+              {solicitudes.map((it) => (
                 <option key={it} value={it}>
                   {it}
                 </option>
@@ -120,7 +135,7 @@ export const DesincorporacionComp = (props) => {
                 name: "informa",
               }}
             >
-              {folios.map((it) => (
+              {infromantes.map((it) => (
                 <option key={it} value={it}>
                   {it}
                 </option>
@@ -140,7 +155,7 @@ export const DesincorporacionComp = (props) => {
                 name: "estacion",
               }}
             >
-              {folios.map((it) => (
+              {estaciones.map((it) => (
                 <option key={it} value={it}>
                   {it}
                 </option>
@@ -160,7 +175,7 @@ export const DesincorporacionComp = (props) => {
                 name: "economico",
               }}
             >
-              {folios.map((it) => (
+              {economicos.map((it) => (
                 <option key={it} value={it}>
                   {it}
                 </option>
@@ -180,7 +195,7 @@ export const DesincorporacionComp = (props) => {
                 name: "empresa",
               }}
             >
-              {folios.map((it) => (
+              {empresaOp.map((it) => (
                 <option key={it} value={it}>
                   {it}
                 </option>
@@ -200,7 +215,7 @@ export const DesincorporacionComp = (props) => {
                 name: "motivo",
               }}
             >
-              {folios.map((it) => (
+              {estaciones.map((it) => (
                 <option key={it} value={it}>
                   {it}
                 </option>
@@ -282,23 +297,23 @@ export const DesincorporacionComp = (props) => {
           </FormControl>
         </Grid>
         <Grid item lg={4}>
-          {/* JORNADA */}
+          {/* ECONÓMICO */}
           <FormControl className={classes.formControl}>
-            <TextField
-              id="time"
-              name="jornada"
-              label="Jornada"
-              type="time"
+            <InputLabel>Jornada</InputLabel>
+            <Select
+              native
               value={jornada}
               onChange={handleInputChangeDes}
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
               inputProps={{
-                step: 300, // 5 min
+                name: "jornada",
               }}
-            />
+            >
+              {jornadas.map((it) => (
+                <option key={it} value={it}>
+                  {it}
+                </option>
+              ))}
+            </Select>
           </FormControl>
         </Grid>
         <Grid item lg={6} xs={12}>
@@ -371,7 +386,7 @@ export const DesincorporacionComp = (props) => {
               />
             </RadioGroup>
           </FormControl>
-        </Grid>        
+        </Grid>
       </Grid>
     </Container>
   );

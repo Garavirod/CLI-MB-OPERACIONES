@@ -13,7 +13,7 @@ export const ModelDesincorporacion = () =>{
         nombre: "",
         fecha: "2017-05-24",
         hora: "07:30",
-        jornada: "07:30",
+        jornada: "",
         observaciones: "",
         tipo: "",
         edoFolio: "",
