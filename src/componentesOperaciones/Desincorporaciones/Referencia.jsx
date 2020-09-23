@@ -5,7 +5,7 @@ import TreeView from "@material-ui/lab/TreeView";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TreeItem from "@material-ui/lab/TreeItem";
-import { getReferencias } from "../helpers/DataGetters";
+import { getReferencias } from "../../helpers/DataGetters";
 import { Paper, Typography, Container, FormControl, InputLabel, Select, Input } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({

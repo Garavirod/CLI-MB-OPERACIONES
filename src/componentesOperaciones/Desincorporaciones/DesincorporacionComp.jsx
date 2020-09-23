@@ -14,7 +14,7 @@ import {
   Radio,
   Container,
 } from "@material-ui/core";
-import { getFolios, getLineas } from "../helpers/DataGetters";
+import { getFolios, getLineas } from "../../helpers/DataGetters";
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -16,7 +16,7 @@ import {
   getEstaciones,
   getEconomicos,
   getEmpresas
- } from "../helpers/DataGetters";
+ } from "../../helpers/DataGetters";
 
 const useStyles = makeStyles((theme) => ({
   root: {

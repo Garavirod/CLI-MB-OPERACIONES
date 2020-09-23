@@ -10,13 +10,13 @@ import {
   Typography,
 } from "@material-ui/core";
 
-import { useForm } from "../hooks/useForm";
+import { useForm } from "../../hooks/useForm";
 import { DesincorporacionComp } from "./DesincorporacionComp";
 import { IncorporacionComp } from "./IncorporacionComp";
 import {
   ModelDesincorporacion,
   ModelIncorporacion,
-} from "../models/ModelsIncorporacion";
+} from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
 import { TabListasComponent } from "./TabListas";
 
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Formularios() {
+export const FormDesincorporaciones = () =>{
   const classes = useStyles();
 
   // Modelo y estructura de una Desincorporación
