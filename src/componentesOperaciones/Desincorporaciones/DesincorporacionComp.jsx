@@ -297,7 +297,7 @@ export const DesincorporacionComp = (props) => {
           </FormControl>
         </Grid>
         <Grid item lg={4}>
-          {/* ECONÓMICO */}
+          {/* JORNADA */}
           <FormControl className={classes.formControl}>
             <InputLabel>Jornada</InputLabel>
             <Select
@@ -375,14 +375,19 @@ export const DesincorporacionComp = (props) => {
               name="edoFolio"
             >
               <FormControlLabel
-                value="Abierto"
+                value="abierto"
                 control={<Radio />}
                 label="Abierto"
               />
               <FormControlLabel
-                value="Cerrado"
+                value="cerrado"
                 control={<Radio />}
                 label="Cerrado"
+              />
+              <FormControlLabel
+                value="cerrado sin incorporar"
+                control={<Radio />}
+                label="Cerrado sin incorporar"
               />
             </RadioGroup>
           </FormControl>
