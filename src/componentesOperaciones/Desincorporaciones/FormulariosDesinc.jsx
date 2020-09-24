@@ -43,7 +43,7 @@ export const FormDesincorporaciones = () =>{
     ModelIncorporacion
   );
 
-  console.log(valuesInco);
+  console.log(valuesDes);
 
   return (
     <Container maxWidth="lg" className={classes.conatiner}>

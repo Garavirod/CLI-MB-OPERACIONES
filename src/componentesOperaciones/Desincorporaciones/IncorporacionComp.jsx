@@ -35,11 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const desactivar = (entrada) => {
-    
-  if(entrada==="Retrazo")
-      return true;
-  else
-      return false;
+  return (entrada==="Retrazo") ? false: true;
 }
 
 export const IncorporacionComp = (props) => {

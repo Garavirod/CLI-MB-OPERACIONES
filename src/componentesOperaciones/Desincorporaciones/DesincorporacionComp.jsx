@@ -95,6 +95,7 @@ export const DesincorporacionComp = (props) => {
                 name: "linea",
               }}
             >
+              <option value={""}>...</option>
               {lineas.map((it) => (
                 <option key={it} value={it}>
                   {it}
@@ -115,6 +116,7 @@ export const DesincorporacionComp = (props) => {
                 name: "solicita",
               }}
             >
+              <option value={""}>...</option>
               {solicitudes.map((it) => (
                 <option key={it} value={it}>
                   {it}
@@ -135,6 +137,7 @@ export const DesincorporacionComp = (props) => {
                 name: "informa",
               }}
             >
+              <option value={""}>...</option>
               {infromantes.map((it) => (
                 <option key={it} value={it}>
                   {it}
@@ -155,6 +158,7 @@ export const DesincorporacionComp = (props) => {
                 name: "estacion",
               }}
             >
+              <option value={""}>...</option>
               {estaciones.map((it) => (
                 <option key={it} value={it}>
                   {it}
@@ -175,6 +179,7 @@ export const DesincorporacionComp = (props) => {
                 name: "economico",
               }}
             >
+              <option value={""}>...</option>
               {economicos.map((it) => (
                 <option key={it} value={it}>
                   {it}
@@ -195,6 +200,7 @@ export const DesincorporacionComp = (props) => {
                 name: "empresa",
               }}
             >
+              <option value={""}>...</option>
               {empresaOp.map((it) => (
                 <option key={it} value={it}>
                   {it}
@@ -215,6 +221,7 @@ export const DesincorporacionComp = (props) => {
                 name: "motivo",
               }}
             >
+              <option value={""}>...</option>
               {estaciones.map((it) => (
                 <option key={it} value={it}>
                   {it}
@@ -308,6 +315,7 @@ export const DesincorporacionComp = (props) => {
                 name: "jornada",
               }}
             >
+              <option value={""}>...</option>
               {jornadas.map((it) => (
                 <option key={it} value={it}>
                   {it}

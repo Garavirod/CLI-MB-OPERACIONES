@@ -1,6 +1,5 @@
 export const ModelDesincorporacion = () =>{
-    return {
-        folio: "",
+    return {        
         linea: "",
         solicita: "",
         informa: "",
@@ -16,10 +15,7 @@ export const ModelDesincorporacion = () =>{
         jornada: "",
         observaciones: "",
         tipo: "",
-        edoFolio: "",
-        tree: "",
-        ida: "",
-        regreso: ""
+        edoFolio: "",        
     }
 };
 
