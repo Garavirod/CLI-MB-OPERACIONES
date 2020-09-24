@@ -12,17 +12,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
   viewRoot: {
     height: 240,
     flexGrow: 1,
@@ -35,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   formControl: {
-    margin: theme.spacing(3),
-    minWidth: 220,
+    margin: theme.spacing(1),
+    minWidth: 120,
   },
 
   paper: {
@@ -61,16 +50,23 @@ const direeciones = [
 
 ]
 
-export default function Referencia() {
+export default function Referencia(props) {
+  // desestructurando las propiedades
+  const {valuesRef, handleInputChangeRef} = props;
 
-  const [value, setValue] = React.useState(30);
-  const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > 100) {
-      setValue(100);
-    }
-  };
+  // Desestructurando el hook
+
+  const {
+    referencia,
+    ref_ida,
+    ref_vuelta,
+    num_vuelta,
+    num_ida,
+    num_regreso,
+    tramo_desde,
+    tramo_hasta,
+  } = valuesRef;
+
 
   const referencias = getReferencias();
   const classes = useStyles();
@@ -93,14 +89,21 @@ export default function Referencia() {
                 <TreeView
                   className={classes.viewRoot}
                   defaultCollapseIcon={<ExpandMoreIcon />}
-                  defaultExpandIcon={<ChevronRightIcon />}
+                  defaultExpandIcon={<ChevronRightIcon />}                                   
                 >
                   {
                     referencias.map((ref)=>(
                       <TreeItem key={ref.id} nodeId={ref.id} label={ref.name}>
                         {
                           ref.rutas.map((it)=>(
-                            <TreeItem key={it} nodeId={it.id} label={it.name} />                        
+                            <TreeItem 
+                              key={it} 
+                              nodeId={it.id} 
+                              label={it.name}
+                              name="referencia"
+                              value={referencia}
+                              onChange={handleInputChangeRef}                                
+                            />                        
                           ))
                         }
                       </TreeItem>
@@ -111,7 +114,7 @@ export default function Referencia() {
             </Grid>
              {/* IDA */}
              <Grid item lg={6} md={12} sm={12} xs={12}>
-              <FormControl>
+              <FormControl className={classes.formControl}>
                 <InputLabel>Ida</InputLabel>
                 <Select
                   native
@@ -131,7 +134,7 @@ export default function Referencia() {
             </Grid>
             {/* REGRESO */}
             <Grid item lg={6} md={12} sm={12} xs={12}>
-              <FormControl>
+              <FormControl className={classes.formControl}>
                 <InputLabel>Vuelta</InputLabel>
                 <Select
                   native
@@ -162,66 +165,73 @@ export default function Referencia() {
             </Grid>
             {/* VUELTAS */}
             <Grid item lg={4} md={4} sm={12} xs={12}>
-              <FormControl>
+              <FormControl className={classes.formControl}>
                 <InputLabel id="demo-mutiple-name-label">Vueltas</InputLabel>
-                <Input
-                  // className={classes.input}
-                  value={value}
+                <Input                  
+                  value={num_vuelta}
+                  name="num_vuelta"
                   margin="dense"
-                  // onChange={handleInputChange}
-                  onBlur={handleBlur}
+                  onChange={handleInputChangeRef}                  
                   inputProps={{
-                    step: 10,
+                    step: 1,
                     min: 0,
-                    max: 100,
+                    max: 24,
                     type: "number",
                     "aria-labelledby": "input-slider",
+                  }}
+                  InputLabelProps={{
+                    shrink: true,
                   }}
                 />
               </FormControl>
             </Grid>
             {/* IDAS */}
             <Grid item lg={4} md={4} sm={12} xs={12}>
-              <FormControl>
+              <FormControl className={classes.formControl}>
                 <InputLabel id="demo-mutiple-name-label">Idas</InputLabel>
                 <Input
-                  // className={classes.input}
-                  value={value}
+                  value={num_ida}
+                  name="num_ida"
                   margin="dense"
-                  // onChange={handleInputChange}
-                  onBlur={handleBlur}
+                  onChange={handleInputChangeRef} 
                   inputProps={{
-                    step: 10,
+                    step: 1,
                     min: 0,
-                    max: 100,
+                    max: 24,
                     type: "number",
                     "aria-labelledby": "input-slider",
+                  }}
+                  InputLabelProps={{
+                    shrink: true,
                   }}
                 />
               </FormControl>
             </Grid>
             {/* REGRESOS */}
             <Grid item lg={4} md={4} sm={12} xs={12}>
-              <FormControl>
+              <FormControl className={classes.formControl}>
                 <InputLabel id="demo-mutiple-name-label">Regresos</InputLabel>
                 <Input
-                  value={value}
+                  value={num_regreso}
+                  name="num_regreso"
                   margin="dense"
-                  // onChange={handleInputChange}
-                  onBlur={handleBlur}
+                  onChange={handleInputChangeRef} 
                   inputProps={{
-                    step: 10,
+                    step: 1,
                     min: 0,
-                    max: 100,
+                    max: 24,
                     type: "number",
                     "aria-labelledby": "input-slider",
+                  }}
+                  InputLabelProps={{
+                    shrink: true,
                   }}
                 />
               </FormControl>
             </Grid>
             {/* TRAMO DESDE */}
             <Grid item lg={6} md={12} sm={12} xs={12}>
-              <FormControl>
+              <FormControl className={classes.formControl}>
                 <InputLabel>Desde</InputLabel>
                 <Select
                   native
@@ -241,7 +251,7 @@ export default function Referencia() {
             </Grid>
             {/* TRAMO HASTA */}
             <Grid item lg={6} md={12} sm={12} xs={12}>
-              <FormControl>
+              <FormControl className={classes.formControl}>
                 <InputLabel>Hasta</InputLabel>
                 <Select
                   native

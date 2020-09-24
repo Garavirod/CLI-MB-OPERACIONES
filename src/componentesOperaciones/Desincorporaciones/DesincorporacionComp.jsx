@@ -29,9 +29,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   formControl: {
-    margin: theme.spacing(3),
-    minWidth: 120,
-    maxWidth: 300,
+    margin: theme.spacing(2),
+    minWidth: 95,
+    maxWidth: 95,
   },
   paper: {
     padding: theme.spacing(2),

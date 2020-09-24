@@ -39,3 +39,17 @@ export const ModelIncorporacion = () =>{
 
     }
 };
+
+
+export const ModelReferencias = () =>{
+    return {
+        referencia: "",
+        ref_ida: "",
+        ref_vuelta :"",
+        num_vuelta: 0,
+        num_ida: 0,
+        num_regreso: 0,
+        tramo_desde: "-",
+        tramo_hasta:"-",
+    }
+}

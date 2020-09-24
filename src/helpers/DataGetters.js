@@ -838,6 +838,16 @@ export const getDistancias = (ruta) =>{
 
 }
 
+export const getDestinosByReferencia = (ref) =>{
+    return [
+        {
+            id: "L1",
+            ida_destino: ["El caminero", "Indios Verdes"],  
+        }
+    ]
+}
+
+
 export const getReferencias = () =>{
 
     const referenias = [
@@ -847,24 +857,22 @@ export const getReferencias = () =>{
             rutas :[
                 {
                     id: "L11",
-                    name : "01-101 A1",
-                    ida_destino: ["El caminero - IV", "Iv El"],
-                    children: []
+                    name : "01-101 A1",                                      
                 }, 
                 {
                     id: "L12",
                     name : "01-102 A2",
-                    children: []
+                    
                 }, 
                 {
                     id: "L13",
                     name : "01-103 A3",
-                    children: []
+                    
                 }, 
                 {
                     id: "L14",
                     name : "01-104 A1",
-                    children: []
+                    
                 },                            
             ]
 
@@ -876,22 +884,22 @@ export const getReferencias = () =>{
                 {
                     id: "L21",
                     name : "02-201 C1",
-                    children: []
+                    
                 }, 
                 {
                     id: "L22",
                     name : "02-202 C2",
-                    children: []
+                    
                 }, 
                 {
                     id: "L23",
                     name : "02-203 C3",
-                    children: []
+                    
                 }, 
                 {
                     id: "L24",
                     name : "02-204 C4",
-                    children: []
+                    
                 },                            
             ]
 
@@ -903,17 +911,17 @@ export const getReferencias = () =>{
                 {
                     id: "L41",
                     name : "04-401 E1 Norte",
-                    children: []
+                    
                 }, 
                 {
                     id: "L42",
                     name : "04-402 E2 Sur",
-                    children: []
+                    
                 }, 
                 {
                     id: "L43",
                     name : "04-403 E3 Norte",
-                    children: []
+                    
                 },                                    
             ]
 

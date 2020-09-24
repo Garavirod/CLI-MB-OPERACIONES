@@ -16,6 +16,7 @@ import { IncorporacionComp } from "./IncorporacionComp";
 import {
   ModelDesincorporacion,
   ModelIncorporacion,
+  ModelReferencias,
 } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
 import { TabListasComponent } from "./TabListas";
@@ -43,7 +44,13 @@ export const FormDesincorporaciones = () =>{
     ModelIncorporacion
   );
 
-  console.log(valuesInco);
+
+  // Modelo y estructura de una Referencia
+  const [valuesRef, handleInputChangeRef, resetRef] = useForm(
+    ModelReferencias
+  );
+
+  console.log(valuesRef);
 
   return (
     <Container maxWidth="lg" className={classes.conatiner}>
@@ -62,6 +69,7 @@ export const FormDesincorporaciones = () =>{
             <form>
               <CardContent>
                 <Grid container spacing={2}>
+                  {/* FORMULARIO DE DESINCORPORACIONES */}
                   <Grid item lg={6}>
                     <DesincorporacionComp
                       valuesDes={valuesDes}
@@ -70,6 +78,7 @@ export const FormDesincorporaciones = () =>{
                     />
                   </Grid>
                   <Grid item lg={6}>
+                    {/* FORMULARIO DE INCORPORACIONES */}
                     <IncorporacionComp
                       valuesInco={valuesInco}
                       handleInputChangeInc={handleInputChangeInc}
@@ -77,8 +86,14 @@ export const FormDesincorporaciones = () =>{
                     />
                   </Grid>
                   <Grid item lg={6}>
-                    <Referencia />
+                    {/* REFERENCIAS */}
+                    <Referencia
+                      valuesRef={valuesRef}
+                      handleInputChangeRef={handleInputChangeRef}
+                      resetRef={resetRef}
+                    />
                   </Grid>
+                  {/* LISTA DE REGISTROS */}
                   <Grid item lg={6}>
                     <TabListasComponent/>
                   </Grid>

@@ -23,9 +23,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   formControl: {
-    margin: theme.spacing(3),
-    minWidth: 120,
-    maxWidth: 300,
+    margin: theme.spacing(1),
+    minWidth: 95,
+    maxWidth: 95,
   },
   paper: {
     padding: theme.spacing(2),
@@ -70,16 +70,6 @@ export const IncorporacionComp = (props) => {
   const economicos = getEconomicos();
   const empresas = getEmpresas();
 
-  // Altera los valores de los inputs referente a los retrazos
-  const handleBlur = (value) => {
-    if (value === 0) {      
-      return value
-    } else  {
-      value = value+1;
-      return value;
-    }
-  };
-
   return (
     <Container className={classes.root}>
       <Grid container spancing={3}>
@@ -90,7 +80,7 @@ export const IncorporacionComp = (props) => {
             </Typography>
           </Paper>
         </Grid>
-        <Grid item lg={6} md={6} sm={6} xs={12}>
+        <Grid item lg={4} md={4} sm={4} xs={12}>
           {/* SENTIDO */}
           <FormControl className={classes.formControl}>
             <InputLabel>Sentido</InputLabel>
@@ -111,7 +101,28 @@ export const IncorporacionComp = (props) => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item lg={6} md={6} sm={6} xs={12}>
+        <Grid item lg={4} md={4} sm={4} xs={12}>
+          {/* STATUS */}
+          <FormControl className={classes.formControl}>
+            <InputLabel>Status</InputLabel>
+            <Select
+              native
+              value={status}
+              onChange={handleInputChangeInc}
+              inputProps={{
+                name: "status",
+              }}
+            >
+              <option value={""}>...</option>
+              {statusset.map((it) => (
+                <option key={it} value={it}>
+                  {it}
+                </option>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item lg={4} md={4} sm={4} xs={12}>
           {/* ENTRADA */}
           <FormControl className={classes.formControl}>
             <InputLabel>Entrada</InputLabel>
@@ -204,29 +215,7 @@ export const IncorporacionComp = (props) => {
               }}
             />
           </FormControl>
-        </Grid>
-        <Grid item lg={3} md={6} sm={6} xs={12}>
-          {/* STATUS */}
-          <FormControl className={classes.formControl}>
-            <InputLabel>Status</InputLabel>
-            <Select
-              native
-              value={status}
-              onChange={handleInputChangeInc}
-              inputProps={{
-                name: "status",
-              }}
-            >
-              <option value={""}>...</option>
-              {statusset.map((it) => (
-                <option key={it} value={it}>
-                  {it}
-                </option>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
-
+        </Grid>        
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* INFORMA */}
           <FormControl className={classes.formControl}>
