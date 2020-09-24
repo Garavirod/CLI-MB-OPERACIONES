@@ -32,6 +32,10 @@ export const ModelIncorporacion = () =>{
         hora: "07:30",                        
         sentido: "",
         entrada: "",
-        status: ""
+        status: "",
+        hra_retrazo:0,
+        min_retrazo:0,
+        seg_retrazo:0,
+
     }
 };

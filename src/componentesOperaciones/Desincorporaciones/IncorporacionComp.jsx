@@ -10,13 +10,13 @@ import {
   TextField,
   Container,
 } from "@material-ui/core";
-import {   
-  getSentido, 
+import {
+  getSentido,
   getInfromantes,
   getEstaciones,
   getEconomicos,
-  getEmpresas
- } from "../../helpers/DataGetters";
+  getEmpresas,
+} from "../../helpers/DataGetters";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,14 +29,14 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary,
   },
 }));
 
 export const desactivar = (entrada) => {
-  return (entrada==="Retrazo") ? false: true;
-}
+  return entrada === "Retrazo" ? false : true;
+};
 
 export const IncorporacionComp = (props) => {
   const classes = useStyles();
@@ -47,19 +47,21 @@ export const IncorporacionComp = (props) => {
     informa,
     estacion,
     economico,
-    empresa,        
+    empresa,
     odometro,
     credencial,
     nombre,
     fecha,
-    hora,                        
+    hora,
     sentido,
     entrada,
-    status
+    status,
+    hra_retrazo,
+    min_retrazo,
+    seg_retrazo,
   } = valuesInco;
 
-
-  // Datos de los inputs  
+  // Datos de los inputs
   const sentidos = getSentido();
   const entradas = ["En tiempo", "Retrazo"];
   const statusset = ["Incorporacion", "Desincorporacion", "Remplazo"];
@@ -67,8 +69,16 @@ export const IncorporacionComp = (props) => {
   const estaciones = getEstaciones();
   const economicos = getEconomicos();
   const empresas = getEmpresas();
-  
 
+  // Altera los valores de los inputs referente a los retrazos
+  const handleBlur = (value) => {
+    if (value === 0) {      
+      return value
+    } else  {
+      value = value+1;
+      return value;
+    }
+  };
 
   return (
     <Container className={classes.root}>
@@ -80,7 +90,7 @@ export const IncorporacionComp = (props) => {
             </Typography>
           </Paper>
         </Grid>
-        <Grid item lg={3} md={6} sm={6} xs={12}>
+        <Grid item lg={6} md={6} sm={6} xs={12}>
           {/* SENTIDO */}
           <FormControl className={classes.formControl}>
             <InputLabel>Sentido</InputLabel>
@@ -92,6 +102,7 @@ export const IncorporacionComp = (props) => {
                 name: "sentido",
               }}
             >
+              <option value={""}>...</option>
               {sentidos.map((it) => (
                 <option key={it} value={it}>
                   {it}
@@ -99,7 +110,8 @@ export const IncorporacionComp = (props) => {
               ))}
             </Select>
           </FormControl>
-        </Grid><Grid item lg={3} md={6} sm={6} xs={12}>
+        </Grid>
+        <Grid item lg={6} md={6} sm={6} xs={12}>
           {/* ENTRADA */}
           <FormControl className={classes.formControl}>
             <InputLabel>Entrada</InputLabel>
@@ -111,6 +123,7 @@ export const IncorporacionComp = (props) => {
                 name: "entrada",
               }}
             >
+              <option value={""}>...</option>
               {entradas.map((it) => (
                 <option key={it} value={it}>
                   {it}
@@ -120,25 +133,78 @@ export const IncorporacionComp = (props) => {
           </FormControl>
         </Grid>
 
-        <Grid item lg={3} md={6} sm={6} xs={12}>
-          {/* TIEMPO RETRAZO */}
+        <Grid item lg={4} md={6} sm={6} xs={12}>
+          {/* HRA RETRAZO */}
           <FormControl className={classes.formControl}>
-          <TextField 
-          disabled = {desactivar(entrada)}
-          id="camporetrazo"
-          label="Retrazo"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          
-        />
+            <TextField
+              disabled={desactivar(entrada)}
+              id="camporetrazo"
+              label="Hra de retrazo"
+              type="number"
+              name="hra_retrazo"
+              value={hra_retrazo}
+              onChange={handleInputChangeInc}
+              inputProps={{
+                step: 1,
+                min: 0,
+                max: 24,
+                type: "number",
+                "aria-labelledby": "input-slider",
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
           </FormControl>
-        </Grid> 
-
-        
-        
-       
+        </Grid>
+        <Grid item lg={4} md={6} sm={6} xs={12}>
+          {/* MIN RETRAZO */}
+          <FormControl className={classes.formControl}>
+            <TextField
+              disabled={desactivar(entrada)}
+              id="camporetrazo"
+              label="Min de retrazo"
+              type="number"
+              name="min_retrazo"
+              value={min_retrazo}
+              onChange={handleInputChangeInc}
+              inputProps={{
+                step: 1,
+                min: 0,
+                max: 60,
+                type: "number",
+                "aria-labelledby": "input-slider",
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </FormControl>
+        </Grid>
+        <Grid item lg={4} md={6} sm={6} xs={12}>
+          {/* SEG RETRAZO */}
+          <FormControl className={classes.formControl}>
+            <TextField
+              disabled={desactivar(entrada)}
+              id="camporetrazo"
+              label="Seg de retrazo"
+              type="number"
+              name="seg_retrazo"
+              value={seg_retrazo}
+              onChange={handleInputChangeInc}
+              inputProps={{
+                step: 1,
+                min: 0,
+                max: 60,
+                type: "number",
+                "aria-labelledby": "input-slider",
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </FormControl>
+        </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* STATUS */}
           <FormControl className={classes.formControl}>
@@ -151,6 +217,7 @@ export const IncorporacionComp = (props) => {
                 name: "status",
               }}
             >
+              <option value={""}>...</option>
               {statusset.map((it) => (
                 <option key={it} value={it}>
                   {it}
@@ -158,11 +225,10 @@ export const IncorporacionComp = (props) => {
               ))}
             </Select>
           </FormControl>
-        </Grid>      
+        </Grid>
 
-                
         <Grid item lg={3} md={6} sm={6} xs={12}>
-          {/* INFROMA */}
+          {/* INFORMA */}
           <FormControl className={classes.formControl}>
             <InputLabel>Informa</InputLabel>
             <Select
@@ -173,6 +239,7 @@ export const IncorporacionComp = (props) => {
                 name: "informa",
               }}
             >
+              <option value={""}>...</option>
               {informantes.map((it) => (
                 <option key={it} value={it}>
                   {it}
@@ -193,6 +260,8 @@ export const IncorporacionComp = (props) => {
                 name: "estacion",
               }}
             >
+              <option value={""}>...</option>
+
               {estaciones.map((it) => (
                 <option key={it} value={it}>
                   {it}
@@ -213,6 +282,7 @@ export const IncorporacionComp = (props) => {
                 name: "empresa",
               }}
             >
+              <option value={""}>...</option>
               {empresas.map((it) => (
                 <option key={it} value={it}>
                   {it}
@@ -220,7 +290,7 @@ export const IncorporacionComp = (props) => {
               ))}
             </Select>
           </FormControl>
-        </Grid>        
+        </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* ECONÓMICO */}
           <FormControl className={classes.formControl}>
@@ -233,6 +303,7 @@ export const IncorporacionComp = (props) => {
                 name: "economico",
               }}
             >
+              <option value={""}>...</option>
               {economicos.map((it) => (
                 <option key={it} value={it}>
                   {it}
@@ -240,7 +311,7 @@ export const IncorporacionComp = (props) => {
               ))}
             </Select>
           </FormControl>
-        </Grid>        
+        </Grid>
         <Grid item lg={4}>
           {/* ODÓMETRO */}
           <FormControl className={classes.formControl}>
@@ -313,7 +384,7 @@ export const IncorporacionComp = (props) => {
               }}
             />
           </FormControl>
-        </Grid>                                
+        </Grid>
       </Grid>
     </Container>
   );
