@@ -47,7 +47,7 @@ export const FormDesincorporaciones = () =>{
 
   return (
     <Container maxWidth="lg" className={classes.conatiner}>
-      <Card>
+      <Card className="animate__animated animate__fadeInRight">
         <Grid container spacing={3}>
           <Grid item lg={12}>
             <Typography
