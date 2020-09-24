@@ -93,8 +93,8 @@ export default function DatosAutomovilColisiones() {
                   onChange={handleInputChange}
                 >
                   <option defaultValue="" />
-                  <option value={1}>Masculino</option>
-                  <option value={0}>Femenino</option>
+                  <option value={'Masculino'}>Masculino</option>
+                  <option value={'Femenino'}>Femenino</option>
                 </Select>
               </FormControl>
             </Grid>
