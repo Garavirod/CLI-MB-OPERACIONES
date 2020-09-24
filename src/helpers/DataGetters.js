@@ -1,19 +1,169 @@
 export const getFolios = () =>{
     const folios = [
-        "Oliver Hansen",
-        "Van Henry",
-        "April Tucker",
-        "Ralph Hubbard",
-        "Omar Alexander",
-        "Carlos Abbott",
-        "Miriam Wagner",
-        "Bradley Wilkerson",
-        "Virginia Andrews",
-        "Kelly Snyder",
+        {
+            id: "1",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "2",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "3",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "4",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "5",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "6",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "7",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "8",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "9",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
         
     ];
 
     return folios;
+}
+
+
+/**
+ * INCUMPLIMENTOS REALIZADOs
+ */
+
+export const getIncumplimientos = () =>{
+    const incumplimientos = [
+        {
+            id: "1",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "2",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "3",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "4",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "5",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "6",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "7",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "8",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "9",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        
+    ];
+
+    return incumplimientos;
+}
+
+/**
+ * CUMPLIMENTOS REALIZADOs
+ */
+
+export const getCumplimientos = () =>{
+    const cumplimientos = [
+        {
+            id: "1",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "2",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "3",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "4",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "5",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "6",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "7",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "8",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        {
+            id: "9",
+            fecha: "23-01-12",
+            edo:true, //Edo del folio
+        },
+        
+    ];
+
+    return cumplimientos;
 }
 
 

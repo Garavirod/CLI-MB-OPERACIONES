@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
   divTree: {
     maxHeight: 200,
+    overflow: "scroll"
   },
 
   formControl: {
@@ -88,7 +89,7 @@ export default function Referencia() {
             </Grid>           
             {/* ARBOL DE RUTAS */}
             <Grid item lg={12}>
-              <div className={classes.divTree} style={{ overflow: "scroll" }}>
+              <div className={classes.divTree}>
                 <TreeView
                   className={classes.viewRoot}
                   defaultCollapseIcon={<ExpandMoreIcon />}
