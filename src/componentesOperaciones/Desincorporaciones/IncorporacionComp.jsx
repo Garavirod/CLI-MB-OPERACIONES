@@ -34,6 +34,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+export const desactivar = (entrada) => {
+    
+  if(entrada==="Retrazo")
+      return true;
+  else
+      return false;
+}
+
 export const IncorporacionComp = (props) => {
   const classes = useStyles();
   const { valuesInco, handleInputChangeInc } = props;
@@ -114,7 +122,28 @@ export const IncorporacionComp = (props) => {
               ))}
             </Select>
           </FormControl>
-        </Grid><Grid item lg={3} md={6} sm={6} xs={12}>
+        </Grid>
+
+        <Grid item lg={3} md={6} sm={6} xs={12}>
+          {/* TIEMPO RETRAZO */}
+          <FormControl className={classes.formControl}>
+          <TextField 
+          disabled = {desactivar(entrada)}
+          id="camporetrazo"
+          label="Retrazo"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          
+        />
+          </FormControl>
+        </Grid> 
+
+        
+        
+       
+        <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* STATUS */}
           <FormControl className={classes.formControl}>
             <InputLabel>Status</InputLabel>
@@ -133,7 +162,9 @@ export const IncorporacionComp = (props) => {
               ))}
             </Select>
           </FormControl>
-        </Grid>               
+        </Grid>      
+
+                
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* INFROMA */}
           <FormControl className={classes.formControl}>
