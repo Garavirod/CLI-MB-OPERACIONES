@@ -39,11 +39,11 @@ const getDatabyLabel = (label) =>{
             data=getFolios();
             break;            
         case "Incumplimeintos":
-            tag="Incump";
+            tag="Incumplimiento";
             data= getIncumplimientos();
             break;
         case "Cumplimientos":
-            tag="cump";
+            tag="cumplimiento";
             data= getCumplimientos();   
             break;     
         default:
@@ -75,7 +75,7 @@ export const TabListComponent = (props) => {
               </ListItemAvatar>
               <ListItemText
                 primary={`${tag} - ${it.id}`}
-                secondary={`creado ${it.fecha}`}
+                secondary={`Fecha de registro: ${it.fecha}`}
               />
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete">
