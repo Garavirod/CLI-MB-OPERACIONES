@@ -302,12 +302,6 @@ export const getEstacionesByLinea = (linea) =>{
     return estaciones;
 };
 
-
-export const getEmpOpbyEco = (eco) =>{
-    return ["CISA"];
-}
-
-
 export const getEconomicos = () =>{
     const economicos = [
         "2313",
