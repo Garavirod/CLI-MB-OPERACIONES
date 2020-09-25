@@ -199,6 +199,27 @@ export const getSolicitudes = () =>{
     return solicitudes;
 }
 
+
+export const getMotivos = () =>{
+    const motivos = [
+        "Motivo 1",
+        "Motivo 2",
+        "Motivo 3",
+        "Motivo 4",
+        "Motivo 5",
+        "Motivo 6",
+        "Motivo 7",
+        "Motivo 8",
+        "Motivo 9",
+        "Motivo 10",
+        "Motivo 11",
+        "Motivo 12",
+        "Motivo 13",
+    ]
+
+    return motivos;
+}
+
 export const getLineas = () =>{
 
     // Lineas
@@ -261,30 +282,23 @@ export const getInfromantes = () =>{
 }
 
 
-export const getEstacionesByLinea = (estacion) =>{
+export const getEstacionesByLinea = (linea) =>{
     // Estaciones de la linea 1
-    const estaciones = [
-        "Estación 1",
-        "Estación 2",
-        "Estación 3",
-        "Estación 4",
-        "Estación 5",
-        "Estación 6",
-        "Estación 7",
-        "Estación 8",
-        "Estación 9",
-        "Estación 10",
-        "Estación 11",
-        "Estación 12",
-        "Estación 13",
-        "Estación 14",
-        "Estación 15",
-        "Estación 16",
-        "Estación 17",
-        "Estación 18",
-        "Estación 19",
-    ];
-
+    const estaciones = [];
+    switch (linea) {
+        case "Linea 1":
+            for(let i =1; i<=20; i++)
+                estaciones.push(`Estacion ${i} L1`);
+            break;
+        case "Linea 2":
+            for(let i =1; i<=10; i++)
+                estaciones.push(`Estacion ${i} L2`);
+            break;
+        default:
+            for(let i =1; i<=10; i++)
+                estaciones.push(`Estacion ${i} LX`);
+            break;
+    }    
     return estaciones;
 };
 
@@ -294,27 +308,27 @@ export const getEmpOpbyEco = (eco) =>{
 }
 
 
-export const getEconómicos = () =>{
+export const getEconomicos = () =>{
     const economicos = [
-        "Eco 2313",
-        "Eco 2323",
-        "Eco 2333",
-        "Eco 2343",
-        "Eco 2353",
-        "Eco 2363",
-        "Eco 2373",
-        "Eco 2383",
-        "Eco 2393",
-        "Eco 2310",
-        "Eco 2311",
-        "Eco 2312",
-        "Eco 2313",
-        "Eco 2314",
-        "Eco 2315",
-        "Eco 2316",
-        "Eco 2317",
-        "Eco 2318",
-        "Eco 2319",
+        "2313",
+        "2323",
+        "2333",
+        "2343",
+        "2353",
+        "2363",
+        "2373",
+        "2383",
+        "2393",
+        "2310",
+        "2311",
+        "2312",
+        "2313",
+        "2314",
+        "2315",
+        "2316",
+        "2317",
+        "2318",
+        "2319",
     ];
 
     return economicos;
@@ -342,27 +356,22 @@ export const getEstaciones = () =>{
 }
 
 
-export const getEconomicos = () =>{    
-    const economicos = [
-        "Económico 1",
-        "Económico 2",
-        "Económico 3",
-        "Económico 4",
-        "Económico 5",
-        "Económico 6",
-        "Económico 7",
-        "Económico 8",
-        "Económico 9",
-        "Económico 10",
-        "Económico 11",
-        "Económico 12",
-        "Económico 13",
-        "Económico 14"
-    ];
-
-    return economicos;
+export const getEmpresaByEco = (eco) =>{
+    switch (eco) {
+        case "2313":
+            return ["CISA"]
+        case "2323":
+            return ["RTP"]
+        case "2333":
+            return ["RECSA BI"]
+        case "2343":
+            return ["RTP BI"]
+        case "2353":
+            return ["CE4-17M BI"]
+        default:
+            return []
+    }
 }
-
 
 export const getEmpresas = () =>{
     const empresas = [
@@ -384,11 +393,6 @@ export const getEmpresas = () =>{
 
     return empresas;
 }
-
-export const getEstacionesbyRuta = (ruta) =>{
-    
-};
-
 
 
 export const getDistancias = (ruta) =>{

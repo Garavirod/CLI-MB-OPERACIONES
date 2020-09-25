@@ -50,7 +50,7 @@ export const FormDesincorporaciones = () =>{
     ModelReferencias
   );
 
-  console.log(valuesRef);
+  console.log(valuesDes);
 
   return (
     <Container maxWidth="lg" className={classes.conatiner}>
