@@ -1,5 +1,5 @@
 /**
- * esta función verifica si los elementos de un objeto ligado a un fromulario
+ *  esta función verifica si los elementos de un objeto ligado a un fromulario
  *  estan vacios
  * @param {object} objectData 
  */

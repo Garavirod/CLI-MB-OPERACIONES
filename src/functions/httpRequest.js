@@ -47,7 +47,7 @@ export const httpDeleteData = async (endpoint) =>{
         return true;        
     })
     .catch(err=>{
-        console.log("Error en el enpoint >: "+endpoint+" error >: "+err);
+        console.log("Error en el endpoint >: "+endpoint+" error >: "+err);
         return false;
     });
 

@@ -22,7 +22,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     overflow: "scroll", 
     maxHeight: 500,
-    maxWidth: "100%"
+    maxWidth: "100%",
+    padding:0,
+    margin:0
+    
   },
   title: {
     margin: theme.spacing(4, 0, 2),
@@ -43,7 +46,7 @@ const getDatabyLabel = (label) =>{
             data= getIncumplimientos();
             break;
         case "Cumplimientos":
-            tag="cumplimiento";
+            tag="Cumplimiento";
             data= getCumplimientos();   
             break;     
         default:
@@ -73,10 +76,19 @@ export const TabListComponent = (props) => {
                   <FolderIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText
+              {/* <ListItemText
                 primary={`${tag} - ${it.id}`}
-                secondary={`Fecha de registro: ${it.fecha}`}
-              />
+                secondary={`Fecha de registro: ${it.fecha} Ruta: ${it.ruta}`}                
+              /> */}
+              <ListItemText>
+                  <p><b>{`${tag} - ${it.id}`}</b></p>
+                  <p>Detalles</p>                                    
+                  <ul>
+                    <li>{`Ruta : ${it.ruta}`}</li>
+                    <li>{`Fecha de creacion : ${it.fecha}`}</li>
+                    <li>{`Económico : ${it.eco}`}</li>
+                  </ul>
+              </ListItemText>
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete">
                   <VisibilityIcon />

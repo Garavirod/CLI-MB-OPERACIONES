@@ -97,9 +97,6 @@ export default function Referencia(props) {
     getDatosbyReferencia(referencia);
   }, [referencia]);
 
-
-
-
   return (
     <Container className={classes.root}>
       <Grid container spacing={3}>
@@ -254,7 +251,10 @@ export default function Referencia(props) {
               </FormControl>
             </Grid>
             {/* TRAMO DESDE */}
-            <Grid item lg={6} md={12} sm={12} xs={12}>
+            <Grid item lg={12} md={12} sm={12} xs={12}>
+              <Typography>Tramos</Typography>
+            </Grid>
+            <Grid item lg={6} md={12} sm={12} xs={12}>               
               <FormControl className={classes.formControl}>
                 <InputLabel>Desde</InputLabel>
                 <Select

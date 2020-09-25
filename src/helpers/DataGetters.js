@@ -4,46 +4,64 @@ export const getFolios = () =>{
         {
             id: "1",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "2",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "3",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "4",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "5",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "6",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "7",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "8",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "9",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         
@@ -62,46 +80,64 @@ export const getIncumplimientos = () =>{
         {
             id: "1",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "2",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "3",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "4",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "5",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "6",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "7",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "8",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "9",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         
@@ -119,46 +155,64 @@ export const getCumplimientos = () =>{
         {
             id: "1",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "2",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "3",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "4",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "5",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "6",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "7",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "8",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "9",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         
@@ -873,7 +927,7 @@ export const getEstacionesByReferencia = (ref) =>{
             
             data = {
                     id: "L1",
-                    ida_destino: ["Insurgerntes", "La joya"],  
+                    destinos: ["Insurgerntes", "La joya"],  
                     estaciones :[
                         {
                             idEstacion: "1",
@@ -898,7 +952,7 @@ export const getEstacionesByReferencia = (ref) =>{
         
                     ]
                 }
-                       
+                break;     
         default:
             data = {
                 id: "L1",
@@ -956,8 +1010,8 @@ export const getReferencias = () =>{
                     
                 }, 
                 {
-                    id: "A4",
-                    name : "01-104 A1",
+                    id: "A20",
+                    name : "01-120 A20",
                     
                 },                            
             ]
@@ -1004,7 +1058,7 @@ export const getReferencias = () =>{
                     name : "04-402 E2 Sur",
                     
                 }, 
-                {
+                {                        
                     id: "L43",
                     name : "04-403 E3 Norte",
                     
