@@ -50,7 +50,13 @@ export const FormDesincorporaciones = () =>{
     ModelReferencias
   );
 
-  console.log(valuesDes);
+  // console.log(valuesDes);
+
+  const registraIncorporacion = (e) =>{
+    e.preventDefault();
+    console.log(valuesDes);
+    console.log(valuesRef);
+  }
 
   return (
     <Container maxWidth="lg" className={classes.conatiner}>
@@ -66,7 +72,7 @@ export const FormDesincorporaciones = () =>{
             </Typography>
           </Grid>
           <Grid item lg={12}>
-            <form>
+            <form onSubmit={registraIncorporacion}>
               <CardContent>
                 <Grid container spacing={2}>
                   {/* FORMULARIO DE DESINCORPORACIONES */}
@@ -100,12 +106,9 @@ export const FormDesincorporaciones = () =>{
                 </Grid>
               </CardContent>
               <CardActions>
-                <Button size="small" variant="contained" color="primary">
+                <Button type="submit" size="small" variant="contained" color="primary">
                   Guardar
-                </Button>
-                <Button size="small" variant="contained" color="primary">
-                  Cancelar
-                </Button>
+                </Button>                
                 <Button size="small" variant="contained" color="primary">
                   Nuevo folio
                 </Button>

@@ -61,7 +61,8 @@ export default function Referencia(props) {
   const { valuesRef, handleInputChangeRef } = props;
 
   // Desestructurando el hook del modelo Referencia dadas las props del hook
-  const {
+  const {     
+    ruta_referencia, 
     ref_ida,
     ref_vuelta,
     num_vuelta,
@@ -74,14 +75,15 @@ export default function Referencia(props) {
   // Variables del componente
   const [estacionesRuta, setEstacionesRuta] = useState([]); //Carga las rutas
   const [destinosRuta, setDestinosRuta] = useState([]); //Carga los destinos
-  const [referencia, setReferencia] = useState("");
 
   // Carga todas las referencias que el árbol desplegará
   const referencias = getReferencias();
 
   // La función verifica si se ha cambiado de ruta o referencia
   const handleChangeRuta = (ref) => {
-    setReferencia(ref);    
+    // Se cambia la referencia en el modelo 
+    const target = {name:"ruta_referencia", value: ref};
+    handleInputChangeRef({target});        
   };
   
   // La función consigue todas las estaciones de una ruta en específico
@@ -94,8 +96,8 @@ export default function Referencia(props) {
   // El hook effect asegura qeu solo cuando se cambie la ruta, debe cargar
   // las estaciones de dicha ruta seleccionada
   useEffect(() => {
-    getDatosbyReferencia(referencia);
-  }, [referencia]);
+    getDatosbyReferencia(ruta_referencia);
+  }, [ruta_referencia]);
 
   return (
     <Container className={classes.root}>
@@ -123,7 +125,7 @@ export default function Referencia(props) {
                         <TreeItem
                           key={it.id}
                           nodeId={it.id}
-                          label={it.name}
+                          label={it.name}                          
                           onLabelClick={() => {
                             handleChangeRuta(it.id);
                           }}
