@@ -838,13 +838,101 @@ export const getDistancias = (ruta) =>{
 
 }
 
-export const getDestinosByReferencia = (ref) =>{
-    return [
-        {
-            id: "L1",
-            ida_destino: ["El caminero", "Indios Verdes"],  
-        }
-    ]
+export const getEstacionesByReferencia = (ref) =>{
+    let data = {};
+
+    switch (ref) {
+        case "A1":
+            data = {
+                    id: "L1",
+                    destinos: ["El caminero", "Indios Verdes"],  
+                    estaciones :[
+                        {
+                            idEstacion: "1",
+                            estacion :"Estacion 1"
+                        },
+                        {
+                            idEstacion: "2",
+                            estacion :"Estacion 2"
+                        },
+                        {
+                            idEstacion: "3",
+                            estacion :"Estacion 3"
+                        },
+                        {
+                            idEstacion: "4",
+                            estacion :"Estacion 4"
+                        },
+                        {
+                            idEstacion: "5",
+                            estacion :"Estacion 5"
+                        },
+        
+                    ]
+                }
+            break;           
+        case "A20":
+            
+            data = {
+                    id: "L1",
+                    ida_destino: ["Insurgerntes", "La joya"],  
+                    estaciones :[
+                        {
+                            idEstacion: "1",
+                            estacion :"Estacion 1"
+                        },
+                        {
+                            idEstacion: "2",
+                            estacion :"Estacion 2"
+                        },
+                        {
+                            idEstacion: "3",
+                            estacion :"Estacion 3"
+                        },
+                        {
+                            idEstacion: "4",
+                            estacion :"Estacion 4"
+                        },
+                        {
+                            idEstacion: "5",
+                            estacion :"Estacion 5"
+                        },
+        
+                    ]
+                }
+                       
+        default:
+            data = {
+                id: "L1",
+                destinos: ["Inicio", "Destino"],  
+                estaciones :[
+                    {
+                        idEstacion: "1",
+                        estacion :"Estacion test 1"
+                    },
+                    {
+                        idEstacion: "2",
+                        estacion :"Estacion test 2"
+                    },
+                    {
+                        idEstacion: "3",
+                        estacion :"Estacion test 3"
+                    },
+                    {
+                        idEstacion: "4",
+                        estacion :"Estacion test 4"
+                    },
+                    {
+                        idEstacion: "5",
+                        estacion :"Estacion test 5"
+                    },
+    
+                ]
+            }
+        break;
+            
+    }
+    return data;
 }
 
 
@@ -856,21 +944,21 @@ export const getReferencias = () =>{
             name : "L01 - Linea 1 - Corredor Insurgentes (33)",
             rutas :[
                 {
-                    id: "L11",
+                    id: "A1",
                     name : "01-101 A1",                                      
                 }, 
                 {
-                    id: "L12",
+                    id: "A2",
                     name : "01-102 A2",
                     
                 }, 
                 {
-                    id: "L13",
+                    id: "A3",
                     name : "01-103 A3",
                     
                 }, 
                 {
-                    id: "L14",
+                    id: "A4",
                     name : "01-104 A1",
                     
                 },                            
@@ -882,22 +970,22 @@ export const getReferencias = () =>{
             name : "L02 - Linea 2 - Eje 4 sur (34)",
             rutas :[
                 {
-                    id: "L21",
+                    id: "C1",
                     name : "02-201 C1",
                     
                 }, 
                 {
-                    id: "L22",
+                    id: "C2",
                     name : "02-202 C2",
                     
                 }, 
                 {
-                    id: "L23",
+                    id: "C3",
                     name : "02-203 C3",
                     
                 }, 
                 {
-                    id: "L24",
+                    id: "C4",
                     name : "02-204 C4",
                     
                 },                            

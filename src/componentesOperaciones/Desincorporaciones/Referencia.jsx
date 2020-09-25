@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import TreeView from "@material-ui/lab/TreeView";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TreeItem from "@material-ui/lab/TreeItem";
-import { getReferencias } from "../../helpers/DataGetters";
-import { Paper, Typography, Container, FormControl, InputLabel, Select, Input } from "@material-ui/core";
+import {
+  getReferencias,
+  getEstacionesByReferencia,
+} from "../../helpers/DataGetters";
+import {
+  Paper,
+  Typography,
+  Container,
+  FormControl,
+  InputLabel,
+  Select,
+  TextField,
+} from "@material-ui/core";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
   divTree: {
     maxHeight: 200,
-    overflow: "scroll"
+    overflow: "scroll",
   },
 
   formControl: {
@@ -35,29 +47,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const renderTree = (nodes) => (
-//   <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
-//     {Array.isArray(nodes.children)
-//       ? nodes.children.map((node) => renderTree(node))
-//       : null}
-//   </TreeItem>
-// );
-
-
-const direeciones = [
-  "El caminero - indios verdes",
-  "Indios verdes - El caminero",
-
-]
+// Esta funcion crea los destinos (desde - hasta)
+const CreaDestinos = (dest) => {
+  const [_p1, _p2] = dest;
+  return [`${_p1} - ${_p2}`, `${_p2} - ${_p1}`];
+};
 
 export default function Referencia(props) {
-  // desestructurando las propiedades
-  const {valuesRef, handleInputChangeRef} = props;
+  // Cargamos los estilos del los inpust y componentes
+  const classes = useStyles();
 
-  // Desestructurando el hook
+  // desestructurando las propiedades del Hook
+  const { valuesRef, handleInputChangeRef } = props;
 
+  // Desestructurando el hook del modelo Referencia dadas las props del hook
   const {
-    referencia,
     ref_ida,
     ref_vuelta,
     num_vuelta,
@@ -67,9 +71,27 @@ export default function Referencia(props) {
     tramo_hasta,
   } = valuesRef;
 
-
+  // Variables del componente
+  const [estacionesRuta, setEstacionesRuta] = useState([]); //Carga las rutas
+  const [destinosRuta, setDestinosRuta] = useState(["*","**"]); //Carga los destinos
+  const [referencia, setReferencia] = useState("");
+  // Carga las referencias que el árbol desplegará
   const referencias = getReferencias();
-  const classes = useStyles();
+
+  // Al cambiar el estado de ruta, se traen las estaciones de dicha ruta
+  const handleChancgeReferencia = (ref) => {
+    setReferencia(ref);    
+  };
+
+  const getDatosbyReferencia = (ref) =>{
+    const { estaciones, destinos } = getEstacionesByReferencia(ref);
+    setEstacionesRuta(estaciones);
+    setDestinosRuta(CreaDestinos(destinos));
+  }
+
+  useEffect(() => {
+    getDatosbyReferencia(referencia);
+  }, [referencia]);
 
   return (
     <Container className={classes.root}>
@@ -82,53 +104,52 @@ export default function Referencia(props) {
                   Referencia
                 </Typography>
               </Paper>
-            </Grid>           
+            </Grid>
             {/* ARBOL DE RUTAS */}
             <Grid item lg={12}>
               <div className={classes.divTree}>
                 <TreeView
                   className={classes.viewRoot}
                   defaultCollapseIcon={<ExpandMoreIcon />}
-                  defaultExpandIcon={<ChevronRightIcon />}                                   
+                  defaultExpandIcon={<ChevronRightIcon />}
                 >
-                  {
-                    referencias.map((ref)=>(
-                      <TreeItem key={ref.id} nodeId={ref.id} label={ref.name}>
-                        {
-                          ref.rutas.map((it)=>(
-                            <TreeItem 
-                              key={it} 
-                              nodeId={it.id} 
-                              label={it.name}
-                              name="referencia"
-                              value={referencia}
-                              onChange={handleInputChangeRef}                                
-                            />                        
-                          ))
-                        }
-                      </TreeItem>
-                    ))
-                  }                  
+                  {referencias.map((ref) => (
+                    <TreeItem key={ref.id} nodeId={ref.id} label={ref.name}>
+                      {ref.rutas.map((it) => (
+                        <TreeItem
+                          key={it.id}
+                          nodeId={it.id}
+                          label={it.name}
+                          onLabelClick={() => {
+                            handleChancgeReferencia(it.id);
+                          }}
+                        />
+                      ))}
+                    </TreeItem>
+                  ))}
                 </TreeView>
               </div>
-            </Grid>
-             {/* IDA */}
-             <Grid item lg={6} md={12} sm={12} xs={12}>
+            </Grid>                     
+            {/* IDA */}
+            <Grid item lg={6} md={12} sm={12} xs={12}>
               <FormControl className={classes.formControl}>
                 <InputLabel>Ida</InputLabel>
                 <Select
                   native
+                  value={ref_ida}
+                  onChange={handleChancgeReferencia}
                   inputProps={{
-                    name: "ida"
+                    name: "ref_ida",
                   }}
-                  >
-                  {
-                    direeciones.map((it) =>(
-                      <option key={it} value={it}>
-                  {it}
-                </option>
-                    ))
-                  }
+                >
+                  <option value={""}>...</option>
+                  <option value={destinosRuta[0]}>{destinosRuta[0]}</option>
+                  <option value={destinosRuta[1]}>{destinosRuta[1]}</option>
+                  {/* {destinosRuta.map((it) => (
+                    <option key={it} value={it}>
+                      {it}
+                    </option>
+                  ))} */}
                 </Select>
               </FormControl>
             </Grid>
@@ -138,17 +159,21 @@ export default function Referencia(props) {
                 <InputLabel>Vuelta</InputLabel>
                 <Select
                   native
+                  value={ref_vuelta}
+                  onChange={handleChancgeReferencia}
                   inputProps={{
-                    name: "regreso"
+                    name: "ref_vuelta",
                   }}
-                  >
-                  {
-                    direeciones.map((it) =>(
-                      <option key={it} value={it}>
-                  {it}
-                </option>
-                    ))
-                  }
+                >
+                  <option value={""}>...</option>
+                  <option value={destinosRuta[0]}>{destinosRuta[0]}</option>
+                  <option value={destinosRuta[1]}>{destinosRuta[1]}</option>
+                  {/* <option value={""}>...</option>
+                  {destinosRuta.map((it) => (
+                    <option key={it} value={it}>
+                      {it}
+                    </option>
+                  ))} */}
                 </Select>
               </FormControl>
             </Grid>
@@ -166,16 +191,17 @@ export default function Referencia(props) {
             {/* VUELTAS */}
             <Grid item lg={4} md={4} sm={12} xs={12}>
               <FormControl className={classes.formControl}>
-                <InputLabel id="demo-mutiple-name-label">Vueltas</InputLabel>
-                <Input                  
-                  value={num_vuelta}
+                <TextField
+                  id="camporetrazo"
+                  label="Vueltas"
+                  type="number"
                   name="num_vuelta"
-                  margin="dense"
-                  onChange={handleInputChangeRef}                  
+                  value={num_vuelta}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     step: 1,
                     min: 0,
-                    max: 24,
+                    max: 100,
                     type: "number",
                     "aria-labelledby": "input-slider",
                   }}
@@ -188,16 +214,17 @@ export default function Referencia(props) {
             {/* IDAS */}
             <Grid item lg={4} md={4} sm={12} xs={12}>
               <FormControl className={classes.formControl}>
-                <InputLabel id="demo-mutiple-name-label">Idas</InputLabel>
-                <Input
-                  value={num_ida}
+                <TextField
+                  id="camporetrazo"
+                  label="Idas"
+                  type="number"
                   name="num_ida"
-                  margin="dense"
-                  onChange={handleInputChangeRef} 
+                  value={num_ida}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     step: 1,
                     min: 0,
-                    max: 24,
+                    max: 100,
                     type: "number",
                     "aria-labelledby": "input-slider",
                   }}
@@ -210,16 +237,17 @@ export default function Referencia(props) {
             {/* REGRESOS */}
             <Grid item lg={4} md={4} sm={12} xs={12}>
               <FormControl className={classes.formControl}>
-                <InputLabel id="demo-mutiple-name-label">Regresos</InputLabel>
-                <Input
-                  value={num_regreso}
+                <TextField
+                  id="camporetrazo"
+                  label="Regresos"
+                  type="number"
                   name="num_regreso"
-                  margin="dense"
-                  onChange={handleInputChangeRef} 
+                  value={num_regreso}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     step: 1,
                     min: 0,
-                    max: 24,
+                    max: 100,
                     type: "number",
                     "aria-labelledby": "input-slider",
                   }}
@@ -235,17 +263,18 @@ export default function Referencia(props) {
                 <InputLabel>Desde</InputLabel>
                 <Select
                   native
+                  value={tramo_desde}
+                  onChange={handleChancgeReferencia}
                   inputProps={{
-                    name: "tramo_desde"
+                    name: "tramo_desde",
                   }}
-                  >
-                  {
-                    direeciones.map((it) =>(
-                      <option key={it} value={it}>
-                  {it}
-                </option>
-                    ))
-                  }
+                >
+                  <option value={""}>...</option>
+                  {estacionesRuta.map((it) => (
+                    <option key={it.estacion} value={it.estacion}>
+                      {it.estacion}
+                    </option>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
@@ -255,17 +284,18 @@ export default function Referencia(props) {
                 <InputLabel>Hasta</InputLabel>
                 <Select
                   native
+                  value={tramo_hasta}
+                  onChange={handleChancgeReferencia}
                   inputProps={{
-                    name: "tramo_hasta"
+                    name: "tramo_hasta",
                   }}
-                  >
-                  {
-                    direeciones.map((it) =>(
-                      <option key={it} value={it}>
-                  {it}
-                </option>
-                    ))
-                  }
+                >
+                  <option value={""}>...</option>
+                  {estacionesRuta.map((it) => (
+                    <option key={it.estacion} value={it.estacion}>
+                      {it.estacion}
+                    </option>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
