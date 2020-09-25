@@ -1,4 +1,5 @@
 export const getFolios = () =>{
+    //Eco -ruta - tipo 
     const folios = [
         {
             id: "1",
@@ -846,7 +847,7 @@ export const getEstacionesByReferencia = (ref) =>{
                     estaciones :[
                         {
                             idEstacion: "1",
-                            estacion :"Estacion 1"
+                            estacion :"El caminero"
                         },
                         {
                             idEstacion: "2",
