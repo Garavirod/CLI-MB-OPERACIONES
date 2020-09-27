@@ -64,7 +64,7 @@ export const IncorporacionComp = (props) => {
   // Datos de los inputs
   const sentidos = getSentido();
   const entradas = ["En tiempo", "Retrazo"];
-  const statusset = ["Incorporacion", "Desincorporacion", "Remplazo"];
+  const statusset = ["Incorporacion", "Reincorporación", "Remplazo"];
   const informantes = getInfromantes();
   const estaciones = getEstaciones();
   const economicos = getEconomicos();

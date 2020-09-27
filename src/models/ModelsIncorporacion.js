@@ -1,4 +1,6 @@
-export const ModelDesincorporacion = () =>{
+import { setFechaActual } from "../helpers/utils";
+
+export const ModelDesincorporacion = () =>{    
     return {        
         linea: "",
         solicita: "",
@@ -10,12 +12,20 @@ export const ModelDesincorporacion = () =>{
         odometro: "",
         credencial: "",
         nombre: "",
-        fecha: "2017-05-24",
+        fecha: setFechaActual(), // (yy/mm/dd)
         hora: "07:30",
         jornada: "",
         observaciones: "...",
         tipo: "",
-        edoFolio: "",        
+        edoFolio: "",
+        ruta_referencia: "",
+        ref_ida: "",
+        ref_vuelta :"",
+        num_vuelta: 0,
+        num_ida: 0,
+        num_regreso: 0,
+        tramo_desde: "-",
+        tramo_hasta:"-",        
     }
 };
 
@@ -28,7 +38,7 @@ export const ModelIncorporacion = () =>{
         odometro: "",
         credencial: "",
         nombre: "",
-        fecha: "2017-05-24",
+        fecha: setFechaActual(),
         hora: "07:30",                        
         sentido: "",
         entrada: "",
