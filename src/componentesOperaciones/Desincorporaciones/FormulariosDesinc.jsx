@@ -16,7 +16,7 @@ import { IncorporacionComp } from "./IncorporacionComp";
 import {
   ModelDesincorporacion,
   ModelIncorporacion,
-  // ModelReferencias,
+  ModelReferencias,
 } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
 import { TabListasComponent } from "./TabListas";
@@ -45,16 +45,17 @@ export const FormDesincorporaciones = () =>{
   );
 
 
-  // Modelo y estructura de una Referencia
-  // const [valuesRef, handleInputChangeRef, resetRef] = useForm(
-  //   ModelReferencias
-  // );
+  // Modelo y estructura de una Referencia para un cumpli u incumpl
+  const [valuesRef, handleInputChangeRef, resetRef] = useForm(
+    ModelReferencias
+  );
 
   // console.log(valuesDes);
 
   const registraIncorporacion = (e) =>{
     e.preventDefault();
     console.log(valuesDes);
+    console.log(valuesRef);
   }
 
 
@@ -94,9 +95,9 @@ export const FormDesincorporaciones = () =>{
                   <Grid item lg={6}>
                     {/* REFERENCIAS */}
                     <Referencia
-                       valuesDes={valuesDes}
-                       handleInputChangeDes={handleInputChangeDes}
-                       resetDes={resetDes}
+                       valuesRef={valuesRef}
+                       handleInputChangeRef={handleInputChangeRef}
+                       resetRef={resetRef}
                     />
                   </Grid>
                   {/* LISTA DE REGISTROS */}

@@ -17,15 +17,7 @@ export const ModelDesincorporacion = () =>{
         jornada: "",
         observaciones: "...",
         tipo: "",
-        edoFolio: "",
-        ruta_referencia: "",
-        ref_ida: "",
-        ref_vuelta :"",
-        num_vuelta: 0,
-        num_ida: 0,
-        num_regreso: 0,
-        tramo_desde: "-",
-        tramo_hasta:"-",        
+        edoFolio: ""      
     }
 };
 
@@ -51,7 +43,7 @@ export const ModelIncorporacion = () =>{
 };
 
 
-export const ModelReferencias = () =>{
+export const ModelReferencias = () =>{ //Praa cumplimientos e incumplimientos
     return {
         ruta_referencia: "",
         ref_ida: "",
@@ -61,5 +53,6 @@ export const ModelReferencias = () =>{
         num_regreso: 0,
         tramo_desde: "-",
         tramo_hasta:"-",
+        kilometraje:0,
     }
 }

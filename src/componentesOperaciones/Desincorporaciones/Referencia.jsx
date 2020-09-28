@@ -58,7 +58,7 @@ export default function Referencia(props) {
   const classes = useStyles();
 
   // desestructurando las propiedades del Hook  
-  const { valuesDes, handleInputChangeDes } = props;
+  const { valuesRef, handleInputChangeRef } = props;
 
   // Desestructurando el hook del modelo Desinc dadas las props del hook
   const {     
@@ -70,7 +70,7 @@ export default function Referencia(props) {
     num_regreso,
     tramo_desde,
     tramo_hasta,
-  } = valuesDes;
+  } = valuesRef;
 
   // Variables del componente
   const [estacionesRuta, setEstacionesRuta] = useState([]); //Carga las rutas
@@ -83,7 +83,7 @@ export default function Referencia(props) {
   const handleChangeRuta = (ref) => {
     // Se cambia la referencia en el modelo 
     const target = {name:"ruta_referencia", value: ref};
-    handleInputChangeDes({target});        
+    handleInputChangeRef({target});        
   };
   
   // La función consigue todas las estaciones de una ruta en específico
@@ -143,7 +143,7 @@ export default function Referencia(props) {
                 <Select
                   native
                   value={ref_ida}
-                  onChange={handleInputChangeDes}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     name: "ref_ida",
                   }}
@@ -161,7 +161,7 @@ export default function Referencia(props) {
                 <Select
                   native
                   value={ref_vuelta}
-                  onChange={handleInputChangeDes}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     name: "ref_vuelta",
                   }}
@@ -192,7 +192,7 @@ export default function Referencia(props) {
                   type="number"
                   name="num_vuelta"
                   value={num_vuelta}
-                  onChange={handleInputChangeDes}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     step: 1,
                     min: 0,
@@ -215,7 +215,7 @@ export default function Referencia(props) {
                   type="number"
                   name="num_ida"
                   value={num_ida}
-                  onChange={handleInputChangeDes}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     step: 1,
                     min: 0,
@@ -238,7 +238,7 @@ export default function Referencia(props) {
                   type="number"
                   name="num_regreso"
                   value={num_regreso}
-                  onChange={handleInputChangeDes}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     step: 1,
                     min: 0,
@@ -262,7 +262,7 @@ export default function Referencia(props) {
                 <Select
                   native
                   value={tramo_desde}
-                  onChange={handleInputChangeDes}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     name: "tramo_desde",
                   }}
@@ -283,7 +283,7 @@ export default function Referencia(props) {
                 <Select
                   native
                   value={tramo_hasta}
-                  onChange={handleInputChangeDes}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     name: "tramo_hasta",
                   }}
