@@ -45,12 +45,17 @@ export const FormDesincorporaciones = () =>{
   );
 
 
-  // Modelo y estructura de una Referencia para un cumpli u incumpl
+  // Modelo y estructura de una Referencia para un cumplimiento
   const [valuesRef, handleInputChangeRef, resetRef] = useForm(
     ModelReferencias
   );
 
-  // console.log(valuesDes);
+
+  // Modelo y estructura de una Referencia para un Incumplimiento
+  // const [valuesRefInc, handleInputChangeRefInc, resetRefInc] = useForm(
+  //   ModelReferencias
+  // );
+  
 
   const registraIncorporacion = (e) =>{
     e.preventDefault();
