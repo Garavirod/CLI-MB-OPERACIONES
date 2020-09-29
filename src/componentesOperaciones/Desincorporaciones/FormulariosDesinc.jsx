@@ -20,8 +20,7 @@ import {
 } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
 import { TabListasComponent } from "./TabListas";
-import { TipoDesincorporacion } from "./TipoDesincorporacion";
-import { useEffect } from "react";
+
 
 const useStyles = makeStyles((theme) => ({
   conatiner: {
@@ -51,7 +50,7 @@ export const FormDesincorporaciones = () => {
     ModelReferencias
   );
 
-  // Modelo y estructura de una Referencia para un cumplimiento
+  // Modelo y estructura de una Referencia para un Incumplimiento
   const [valuesRef2, handleInputChangeRef2, resetRef2] = useForm(
     ModelReferencias
   );
