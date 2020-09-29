@@ -1,4 +1,4 @@
-import { setFechaActual } from "../helpers/utils";
+import { setFechaActual, setHoraActual } from "../helpers/utils";
 
 export const ModelDesincorporacion = () =>{    
     return {        
@@ -13,11 +13,11 @@ export const ModelDesincorporacion = () =>{
         credencial: "",
         nombre: "",
         fecha: setFechaActual(), // (yy/mm/dd)
-        hora: "07:30",
+        hora: setHoraActual(),
         jornada: "",
         observaciones: "...",
-        tipo: "",
-        edoFolio: ""      
+        tipo: "Incumplido",
+        edoFolio: "Abierto"      
     }
 };
 
@@ -31,7 +31,7 @@ export const ModelIncorporacion = () =>{
         credencial: "",
         nombre: "",
         fecha: setFechaActual(),
-        hora: "07:30",                        
+        hora: setHoraActual(),                        
         sentido: "",
         entrada: "",
         status: "",

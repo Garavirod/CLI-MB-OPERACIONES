@@ -12,3 +12,19 @@ export const setFechaActual = () =>{
 
     return `${year}-${month}-${day}`;
 }
+
+
+export const setHoraActual = () =>{
+    const f = new Date();
+    let hr = (f.getHours()).toString();
+    let min = (f.getMinutes()).toString();
+
+    if( parseInt(hr) <10 ){
+        hr = "0"+hr;
+    }else if (parseInt(min) < 10){
+        min = "0"+min;
+    }
+
+    return `${hr}:${min}`;
+
+}

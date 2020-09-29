@@ -398,17 +398,17 @@ export const DesincorporacionComp = (props) => {
               name="edoFolio"
             >
               <FormControlLabel
-                value="abierto"
+                value="Abierto"
                 control={<Radio />}
                 label="Abierto"
               />
               <FormControlLabel
-                value="cerrado"
+                value="Cerrado"
                 control={<Radio />}
                 label="Cerrado"
               />
               <FormControlLabel
-                value="cerrado sin incorporar"
+                value="Cerrado sin incorporar"
                 control={<Radio />}
                 label="Cerrado sin incorporar"
               />

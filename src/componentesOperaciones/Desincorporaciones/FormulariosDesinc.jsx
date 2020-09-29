@@ -20,6 +20,8 @@ import {
 } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
 import { TabListasComponent } from "./TabListas";
+import { TipoDesincorporacion } from "./TipoDesincorporacion";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   conatiner: {
@@ -31,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const FormDesincorporaciones = () =>{
+export const FormDesincorporaciones = () => {
   const classes = useStyles();
 
   // Modelo y estructura de una Desincorporación
@@ -44,25 +46,24 @@ export const FormDesincorporaciones = () =>{
     ModelIncorporacion
   );
 
-
   // Modelo y estructura de una Referencia para un cumplimiento
-  const [valuesRef, handleInputChangeRef, resetRef] = useForm(
+  const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(
     ModelReferencias
   );
 
+  // Modelo y estructura de una Referencia para un cumplimiento
+  const [valuesRef2, handleInputChangeRef2, resetRef2] = useForm(
+    ModelReferencias
+  );
 
-  // Modelo y estructura de una Referencia para un Incumplimiento
-  // const [valuesRefInc, handleInputChangeRefInc, resetRefInc] = useForm(
-  //   ModelReferencias
-  // );
-  
-
-  const registraIncorporacion = (e) =>{
+  const registraIncorporacion = (e) => {
     e.preventDefault();
     console.log(valuesDes);
-    console.log(valuesRef);
-  }
+    console.log(valuesRef1);
+    console.log(valuesRef2);
+  };
 
+  const { tipo } = valuesDes;
 
   return (
     <Container maxWidth="lg" className={classes.conatiner}>
@@ -81,40 +82,85 @@ export const FormDesincorporaciones = () =>{
             <form onSubmit={registraIncorporacion}>
               <CardContent>
                 <Grid container spacing={2}>
-                  {/* FORMULARIO DE DESINCORPORACIONES */}
                   <Grid item lg={6}>
-                    <DesincorporacionComp
-                      valuesDes={valuesDes}
-                      handleInputChangeDes={handleInputChangeDes}
-                      resetDes={resetDes}
-                    />
+                    {/* FORMULARIO DE DESINCORPORACIONES */}
+                    <Grid container spacing={2}>
+                      <Grid item lg={12}>
+                        <DesincorporacionComp
+                          valuesDes={valuesDes}
+                          handleInputChangeDes={handleInputChangeDes}
+                          resetDes={resetDes}
+                        />
+                      </Grid>
+                      <Grid item lg={12}>
+                        {/* FROMULARIO DE REFERENCIAS */}
+                        {tipo === "Afectación" ? (
+                          <div>
+                            <Referencia
+                              titulo={"Incumplimientos"}
+                              color={"#ef5350"}
+                              valuesRef={valuesRef1}
+                              handleInputChangeRef={handleInputChangeRef1}
+                              resetRef={resetRef1}
+                            />
+
+                            <Referencia
+                              titulo={"Cumplimientos"}
+                              color={"#4caf50"}
+                              valuesRef={valuesRef2}
+                              handleInputChangeRef={handleInputChangeRef2}
+                              resetRef={resetRef2}
+                            />
+                          </div>
+                        ) : tipo === "Incumplido" ? (
+                          <Referencia
+                            titulo={"Incumplimientos"}
+                            color={"#ef5350"}
+                            valuesRef={valuesRef1}
+                            handleInputChangeRef={handleInputChangeRef1}
+                            resetRef={resetRef1}
+                          />
+                        ) : tipo === "Apoyo" ? (
+                          <Referencia
+                            titulo={"Cumplimientos"}
+                            color={"#4caf50"}
+                            valuesRef={valuesRef2}
+                            handleInputChangeRef={handleInputChangeRef2}
+                            resetRef={resetRef2}
+                          />
+                        ) : (
+                          <></>
+                        )}
+                      </Grid>
+                    </Grid>
                   </Grid>
                   <Grid item lg={6}>
-                    {/* FORMULARIO DE INCORPORACIONES */}
-                    <IncorporacionComp
-                      valuesInco={valuesInco}
-                      handleInputChangeInc={handleInputChangeInc}
-                      resetInc={resetInc}
-                    />
-                  </Grid>
-                  <Grid item lg={6}>
-                    {/* REFERENCIAS */}
-                    <Referencia
-                       valuesRef={valuesRef}
-                       handleInputChangeRef={handleInputChangeRef}
-                       resetRef={resetRef}
-                    />
-                  </Grid>
-                  {/* LISTA DE REGISTROS */}
-                  <Grid item lg={6}>
-                    <TabListasComponent/>
+                    <Grid container spacing={2}>
+                      {/* FORMULARIO DE INCORPORACIONES */}
+                      <Grid item lg={12}>
+                        <IncorporacionComp
+                          valuesInco={valuesInco}
+                          handleInputChangeInc={handleInputChangeInc}
+                          resetInc={resetInc}
+                        />
+                      </Grid>
+                      {/* LISTA DE REGISTROS */}
+                      <Grid item lg={12}>
+                        <TabListasComponent />
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
               </CardContent>
               <CardActions>
-                <Button type="submit" size="small" variant="contained" color="primary">
+                <Button
+                  type="submit"
+                  size="small"
+                  variant="contained"
+                  color="primary"
+                >
                   Guardar
-                </Button>                
+                </Button>
                 <Button size="small" variant="contained" color="primary">
                   Nuevo folio
                 </Button>
@@ -125,4 +171,4 @@ export const FormDesincorporaciones = () =>{
       </Card>
     </Container>
   );
-}
+};
