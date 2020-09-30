@@ -13,10 +13,12 @@ import {
 import {
   getSentido,
   getInfromantes,
-  getEstaciones,
   getEconomicos,
   getEmpresas,
+  getEstacionesByLinea,
 } from "../../helpers/DataGetters";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +42,9 @@ export const desactivar = (entrada) => {
 
 export const IncorporacionComp = (props) => {
   const classes = useStyles();
-  const { valuesInco, handleInputChangeInc } = props;
+  // Estaciones por linea
+  const [estacioneslinea,setEstacionLinea] = useState([]);
+  const { valuesInco, valuesDes, handleInputChangeInc } = props;
 
   // desestructurando el values del hook
   const {
@@ -61,12 +65,18 @@ export const IncorporacionComp = (props) => {
     seg_retrazo,
   } = valuesInco;
 
+  // Las estaciones se basan en la linea seleccionada en la desincorporación
+  const {linea} =  valuesDes;  
+    // Cada vez que cambie el estado de la linea, se tren todas las estaciones
+    useEffect(()=>{    
+      setEstacionLinea(getEstacionesByLinea(linea));    
+    },[linea]);
+
   // Datos de los inputs
   const sentidos = getSentido();
   const entradas = ["En tiempo", "Retrazo"];
   const statusset = ["Incorporacion", "Reincorporación", "Remplazo"];
   const informantes = getInfromantes();
-  const estaciones = getEstaciones();
   const economicos = getEconomicos();
   const empresas = getEmpresas();
 
@@ -251,7 +261,7 @@ export const IncorporacionComp = (props) => {
             >
               <option value={""}>...</option>
 
-              {estaciones.map((it) => (
+              {estacioneslinea.map((it) => (
                 <option key={it} value={it}>
                   {it}
                 </option>

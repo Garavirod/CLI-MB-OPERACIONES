@@ -139,6 +139,7 @@ export const FormDesincorporaciones = () => {
                       <Grid item lg={12}>
                         <IncorporacionComp
                           valuesInco={valuesInco}
+                          valuesDes={valuesDes}
                           handleInputChangeInc={handleInputChangeInc}
                           resetInc={resetInc}
                         />
