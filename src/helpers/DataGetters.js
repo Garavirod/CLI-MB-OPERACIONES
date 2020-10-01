@@ -927,7 +927,7 @@ export const getEstacionesByReferencia = (ref) =>{
             
             data = {
                     id: "L1",
-                    destinos: ["Insurgerntes", "La joya"],  
+                    destinos: ["Insurgentes", "La joya"],  
                     estaciones :[
                         {
                             idEstacion: "1",
@@ -1069,4 +1069,57 @@ export const getReferencias = () =>{
     ]
 
     return referenias;
+}
+
+// Datos de una desincorporacion
+
+export const getDatosByFolio = (folio) =>{
+    return {        
+            linea: "Linea 1",
+            solicita: "Mantenimiento E.O",
+            informa: "ébano 2",
+            estacion: "Estacion 1 L1",
+            economico: "2323",
+            empresa: "RTP",
+            motivo: "Motivo 1",
+            odometro: "1234.45",
+            credencial: "MBCRED123",
+            nombre: "Carlos Rivera",
+            fecha: "2020-01-12", // (yy/mm/dd)
+            hora: "11:45",
+            jornada: "5",
+            observaciones: "Observación de prueba",
+            tipo: "Apoyo",
+            edoFolio: "Abierto"         
+        }    
+}
+
+
+export const getIncumplimientosByFolio = (folio) =>{
+    return{
+            ruta_referencia: "A1",
+            ref_ida: "El caminero - Indios Verdes",
+            ref_vuelta :"Indios Verdes - El caminero",
+            num_vuelta: 2,
+            num_ida: 1,
+            num_regreso: 1,
+            tramo_desde: "El caminero",
+            tramo_hasta:"Estacion 2",
+            kilometraje:12.34
+        }        
+}
+
+
+export const getCumplimientosByFolio = (folio) =>{
+    return{
+            ruta_referencia: "A20",
+            ref_ida: "Insurgentes - La joya",
+            ref_vuelta :"La joya - Insurgentes",
+            num_vuelta: 4,
+            num_ida: 2,
+            num_regreso: 2,
+            tramo_desde: "Estacion 1",
+            tramo_hasta:"Estacion 2",
+            kilometraje:23.4
+        }        
 }

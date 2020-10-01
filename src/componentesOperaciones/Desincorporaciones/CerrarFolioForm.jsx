@@ -14,14 +14,18 @@ import { useForm } from "../../hooks/useForm";
 import { DesincorporacionComp } from "./DesincorporacionComp";
 import { IncorporacionComp } from "./IncorporacionComp";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import {
-  ModelDesincorporacion,
-  ModelIncorporacion,
-  ModelReferencias,
-} from "../../models/ModelsIncorporacion";
+import { ModelIncorporacion } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
 import { useParams, Link } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
+import {
+  getDatosByFolio,
+  getCumplimientosByFolio,
+  getIncumplimientosByFolio,
+} from "../../helpers/DataGetters";
+import { useState } from "react";
+import { setFechaActual } from "../../helpers/utils";
+
 
 const useStyles = makeStyles((theme) => ({
   conatiner: {
@@ -35,13 +39,15 @@ const useStyles = makeStyles((theme) => ({
 
 export const CerrarFolioForm = () => {
   const { idFolio } = useParams();
-
+  console.log("LA FECHA ",setFechaActual());
   const classes = useStyles();
+  const [cumplimientos] = useState(getCumplimientosByFolio(idFolio));
+  const [incumplimientos] = useState(getIncumplimientosByFolio(idFolio));
+  const [folio] = useState(getDatosByFolio(idFolio));
+  const { tipo } = folio;
 
   // Modelo y estructura de una Desincorporación
-  const [valuesDes, handleInputChangeDes, resetDes] = useForm(
-    ModelDesincorporacion
-  );
+  const [valuesDes, handleInputChangeDes, resetDes] = useForm(folio);
 
   // Modelo y estructura de una Incorporación
   const [valuesInco, handleInputChangeInc, resetInc] = useForm(
@@ -49,13 +55,11 @@ export const CerrarFolioForm = () => {
   );
 
   // Modelo y estructura de una Referencia para un cumplimiento
-  const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(
-    ModelReferencias
-  );
+  const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(incumplimientos);
 
   // Modelo y estructura de una Referencia para un Incumplimiento
   const [valuesRef2, handleInputChangeRef2, resetRef2] = useForm(
-    ModelReferencias
+    cumplimientos
   );
 
   const registraIncorporacion = (e) => {
@@ -65,8 +69,7 @@ export const CerrarFolioForm = () => {
     console.log(valuesRef2);
   };
 
-  const { tipo } = valuesDes;
-
+  
   return (
     <Container maxWidth="lg" className={classes.conatiner}>
       <Card>
