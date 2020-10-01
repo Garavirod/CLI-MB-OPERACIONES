@@ -7,20 +7,22 @@ import {
   CardActions,
   Button,
   Container,
+  IconButton,
   Typography,
 } from "@material-ui/core";
 
 import { useForm } from "../../hooks/useForm";
 import { DesincorporacionComp } from "./DesincorporacionComp";
 import { IncorporacionComp } from "./IncorporacionComp";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import {
   ModelDesincorporacion,
   ModelIncorporacion,
   ModelReferencias,
 } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
-import { TabListasComponent } from "./TabListas";
-
+import { useParams, Link } from "react-router-dom";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
   conatiner: {
@@ -32,7 +34,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const FormDesincorporaciones = () => {
+export const CerrarFolioForm = () => {
+  const { idFolio } = useParams();
+
   const classes = useStyles();
 
   // Modelo y estructura de una Desincorporación
@@ -66,16 +70,28 @@ export const FormDesincorporaciones = () => {
 
   return (
     <Container maxWidth="lg" className={classes.conatiner}>
-      <Card className="animate__animated animate__fadeIn">
+      <Card>
         <Grid container spacing={3}>
           <Grid item lg={12}>
-            <Typography
-              variant="h6"
-              component="h4"
-              className={classes.headerText}
-            >
-              Incorporaciones y Desincorporaciones
-            </Typography>
+            <Alert severity="warning">
+              <Grid container spacing={2}>
+                <Grid item lg={6}>
+                  Usted está visualizando la infrormación del folio: {idFolio}
+                </Grid>
+                <Grid item lg={6}>
+                  <Typography
+                    variant="h6"
+                    component="h4"
+                    className={classes.headerText}
+                  >
+                    <Link className="" to={"/BitacordaDR"}>
+                      <ArrowBackIcon />
+                      cerrar folio sin guaradar
+                    </Link>
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Alert>
           </Grid>
           <Grid item lg={12}>
             <form onSubmit={registraIncorporacion}>
@@ -144,10 +160,6 @@ export const FormDesincorporaciones = () => {
                           resetInc={resetInc}
                         />
                       </Grid>
-                      {/* LISTA DE REGISTROS */}
-                      <Grid item lg={12}>
-                        <TabListasComponent />
-                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -159,7 +171,7 @@ export const FormDesincorporaciones = () => {
                   variant="contained"
                   color="primary"
                 >
-                  Guardar
+                  Guardar folio
                 </Button>
                 <Button size="small" variant="contained" color="primary">
                   Nuevo folio

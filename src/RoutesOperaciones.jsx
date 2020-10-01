@@ -2,7 +2,6 @@ import React from 'react'
 import {BrowserRouter as Router,Route} from 'react-router-dom'
 import Levantamiento from './componentesOperaciones/Levantamientos/Levantamiento';
 import Control from './componentesOperaciones/Bitacoras/Control';
-import BitacoraDR from './componentesOperaciones/Bitacoras/BitacoraDR';
 import MainReportes from './componentesOperaciones/JustSemana/MainReportes';
 import Pruebas from './componentesOperaciones/Lesionados/Pruebas';
 import { MenuAccidentesScreen } from './componentesOperaciones/Lesionados/MenuAccidentesScreen';
@@ -29,6 +28,7 @@ import ListaAutomovilColisiones from "./componentesOperaciones/Colisiones/ListaA
 import ListaDatosSeguroColisiones from "./componentesOperaciones/Colisiones/ListaDatosSeguroColisiones";
 import {EventosFormColisiones} from "./componentesOperaciones/Colisiones/EventosFormColisiones";
 import { FormDesincorporaciones } from './componentesOperaciones/Desincorporaciones/FormulariosDesinc';
+import { CerrarFolioForm } from './componentesOperaciones/Desincorporaciones/CerrarFolioForm';
 const Routes = () => {
     return ( 
         <Router>
@@ -56,6 +56,9 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" exact path="/automovilColisiones/:idEvento" component={ListaAutomovilColisiones}/>
                 <PrivateRoute role="Operaciones" exact path="/segurosColisiones/:idEvento" component={ListaDatosSeguroColisiones}/>
                 <PrivateRoute role="Operaciones" exact path="/colisiones-form" component={EventosFormColisiones}/>
+                {/* DESINCORPORACIONES */}
+                <PrivateRoute role="Operaciones" exact path="/cerrar-folio/:idFolio" component={CerrarFolioForm}/>
+
                 {/* LOGIN */}
                 <Route path="/denied" component={Denied} exact/>
                 <Route path="/RecuperarC" component={RecuperarC} exact/>

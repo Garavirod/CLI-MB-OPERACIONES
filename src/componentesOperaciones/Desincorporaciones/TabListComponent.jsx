@@ -9,9 +9,13 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import FolderIcon from "@material-ui/icons/Folder";
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import { getFolios, getIncumplimientos, getCumplimientos } from "../../helpers/DataGetters";
-
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import {
+  getFolios,
+  getIncumplimientos,
+  getCumplimientos,
+} from "../../helpers/DataGetters";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,12 +24,11 @@ const useStyles = makeStyles((theme) => ({
   },
   demo: {
     backgroundColor: theme.palette.background.paper,
-    overflow: "scroll", 
+    overflow: "scroll",
     maxHeight: 500,
     maxWidth: "100%",
-    padding:0,
-    margin:0
-    
+    padding: 0,
+    margin: 0,
   },
   title: {
     margin: theme.spacing(4, 0, 2),
@@ -33,40 +36,38 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Carga los datos dependiendo la etiqueta (folios/incump/cumpl)
-const getDatabyLabel = (label) =>{
-    let tag = null;
-    let data = null;
-    switch (label) {
-        case "Folios abiertos":
-            tag="Folio";
-            data=getFolios();
-            break;            
-        case "Incumplimeintos":
-            tag="Incumplimiento";
-            data= getIncumplimientos();
-            break;
-        case "Cumplimientos":
-            tag="Cumplimiento";
-            data= getCumplimientos();   
-            break;     
-        default:
-            break;
-    }
+const getDatabyLabel = (label) => {
+  let tag = null;
+  let data = null;
+  switch (label) {
+    case "Folios abiertos":
+      tag = "Folio";
+      data = getFolios();
+      break;
+    case "Incumplimeintos":
+      tag = "Incumplimiento";
+      data = getIncumplimientos();
+      break;
+    case "Cumplimientos":
+      tag = "Cumplimiento";
+      data = getCumplimientos();
+      break;
+    default:
+      break;
+  }
 
-    return [tag,data];
-}
-
+  return [tag, data];
+};
 
 export const TabListComponent = (props) => {
-  const {typeList} = props;
+  const { typeList } = props;
 
-  const [tag,data] = getDatabyLabel(typeList);
+  const [tag, data] = getDatabyLabel(typeList);
 
-  const classes = useStyles();  
-  
+  const classes = useStyles();
 
   return (
-    <Grid item lg={12}>      
+    <Grid item lg={12}>
       <div className={classes.demo}>
         <List dense={false}>
           {data.map((it) => (
@@ -81,19 +82,25 @@ export const TabListComponent = (props) => {
                 secondary={`Fecha de registro: ${it.fecha} Ruta: ${it.ruta}`}                
               /> */}
               <ListItemText>
-                  <p><b>{`${tag} - ${it.id}`}</b></p>
-                  <p>Detalles</p>                                    
-                  <ul>
-                    <li>{`Ruta : ${it.ruta}`}</li>
-                    <li>{`Fecha de creacion : ${it.fecha}`}</li>
-                    <li>{`Económico : ${it.eco}`}</li>
-                  </ul>
+                <p>
+                  <b>{`${tag} - ${it.id}`}</b>
+                </p>
+                <p>Detalles</p>
+                <ul>
+                  <li>{`Ruta : ${it.ruta}`}</li>
+                  <li>{`Fecha de creacion : ${it.fecha}`}</li>
+                  <li>{`Económico : ${it.eco}`}</li>
+                </ul>
               </ListItemText>
-              <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
-                  <VisibilityIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
+              {(typeList === "Folios abiertos") ? (
+                <ListItemSecondaryAction>
+                  <Link className="" to={`/cerrar-folio/${it.id}`}>
+                    <IconButton edge="end" aria-label="delete">
+                      <VisibilityIcon />
+                    </IconButton>
+                  </Link>
+                </ListItemSecondaryAction>
+              ) : null}
             </ListItem>
           ))}
         </List>
