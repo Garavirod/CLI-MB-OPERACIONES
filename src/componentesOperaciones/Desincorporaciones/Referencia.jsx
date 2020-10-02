@@ -142,8 +142,13 @@ export default function Referencia(props) {
                 </TreeView>
               </div>
             </Grid>
+            <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Typography variant="h6" component="h4" style={{ margin: 5 }}>
+                Ruta de referencia sleccionada : {(ruta_referencia==="")?"Ninguna":ruta_referencia}
+              </Typography> 
+            </Grid>
             {/* IDA */}
-            <Grid item lg={6} md={12} sm={12} xs={12}>
+            <Grid item lg={6} md={12} sm={12} xs={12}>                        
               <FormControl className={classes.formControl}>
                 <InputLabel>Ida</InputLabel>
                 <Select

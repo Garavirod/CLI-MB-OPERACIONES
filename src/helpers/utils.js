@@ -28,3 +28,8 @@ export const setHoraActual = () =>{
     return `${hr}:${min}`;
 
 }
+
+
+export const setKilometrajeCalculado = () =>{
+    return null;
+}

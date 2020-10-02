@@ -15,7 +15,7 @@ export const ModelDesincorporacion = () =>{
         fecha: setFechaActual(), // (yy/mm/dd)
         hora: setHoraActual(),
         jornada: "",
-        observaciones: "...",
+        observaciones: "",
         tipo: "Incumplido",
         edoFolio: "Abierto"      
     }
@@ -48,11 +48,11 @@ export const ModelReferencias = () =>{ //Praa cumplimientos e incumplimientos
         ruta_referencia: "",
         ref_ida: "",
         ref_vuelta :"",
-        num_vuelta: 0,
-        num_ida: 0,
-        num_regreso: 0,
+        num_vuelta: "0",
+        num_ida: "0",
+        num_regreso: "0",
         tramo_desde: "-",
         tramo_hasta:"-",
-        kilometraje:0,
+        kilometraje:"0",
     }
 }

@@ -20,7 +20,7 @@ import {
 } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
 import { TabListasComponent } from "./TabListas";
-
+import { validateFormExcept, validateForm } from "../../functions/validateFrom";
 
 const useStyles = makeStyles((theme) => ({
   conatiner: {
@@ -55,14 +55,52 @@ export const FormDesincorporaciones = () => {
     ModelReferencias
   );
 
-  const registraIncorporacion = (e) => {
-    e.preventDefault();
-    console.log(valuesDes);
-    console.log(valuesRef1);
-    console.log(valuesRef2);
-  };
-
   const { tipo } = valuesDes;
+
+  const registraFolio = (e) => {
+    e.preventDefault();
+    // Validamos el folio de la desincorporación
+    const isValidFolio = validateFormExcept(valuesDes, ["observaciones"]);
+    let isValidInc,isValidApo = false;
+
+    // Realizamos el POST segun la peticion
+    switch (tipo) {
+      case "Incumplido":
+        isValidInc = validateForm(valuesRef1);
+        if (isValidFolio && isValidInc) {
+          console.log(valuesDes);
+          console.log(valuesRef1);
+          //Realizar el POST
+        } else {
+          alert("Campos vacios");
+        }
+        break;
+      case "Apoyo":
+        isValidApo = validateForm(valuesRef2);
+        if (isValidFolio && isValidApo) {
+          console.log(valuesDes);
+          console.log(valuesRef2);
+          //Realizar el POST
+        } else {
+          alert("Campos vacios");
+        }
+        break;
+      case "Afectación":
+        isValidInc = validateForm(valuesRef1);
+        isValidApo = validateForm(valuesRef2);
+        if (isValidFolio && isValidApo && isValidInc) {
+          console.log(valuesDes);
+          console.log(valuesRef1);
+          console.log(valuesRef2);
+          //Realizar el POST
+        } else {
+          alert("Campos vacios");
+        }
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <Container maxWidth="lg" className={classes.conatiner}>
@@ -78,7 +116,7 @@ export const FormDesincorporaciones = () => {
             </Typography>
           </Grid>
           <Grid item lg={12}>
-            <form onSubmit={registraIncorporacion}>
+            <form onSubmit={registraFolio}>
               <CardContent>
                 <Grid container spacing={2}>
                   <Grid item lg={6}>
