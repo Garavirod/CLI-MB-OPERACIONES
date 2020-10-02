@@ -448,7 +448,8 @@ export const getDistancias = (ruta) =>{
     return [
         {
             idRuta: "A1",
-            tag_destino:"Indios Verdes-Dr. Gálvez",
+            tag_destino:"I.Verdes - Dr. Gálvez",
+            vuelta_completa:39.70, //en KM
             distancias_ida :[
                 {
                     Estacion:'I.Verdes',
@@ -682,6 +683,7 @@ export const getDistancias = (ruta) =>{
         {
             idRuta: "A20",
             tag_destino:"Insurgentes-La Joya",
+            vuelta_completa:35.10, //en KM
             distancias_ida :[
                 {
                     Estacion:'Insurgentes',
@@ -897,11 +899,11 @@ export const getEstacionesByReferencia = (ref) =>{
         case "A1":
             data = {
                     id: "L1",
-                    destinos: ["El caminero", "Indios Verdes"],  
+                    destinos: ["I. Verdes", "Dr. Galvez"],  
                     estaciones :[
                         {
                             idEstacion: "1",
-                            estacion :"El caminero"
+                            estacion :"Estacion 1"
                         },
                         {
                             idEstacion: "2",
