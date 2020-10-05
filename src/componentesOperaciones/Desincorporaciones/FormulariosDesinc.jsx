@@ -61,13 +61,13 @@ export const FormDesincorporaciones = () => {
     e.preventDefault();
     // Validamos el folio de la desincorporación
     const isValidFolio = validateFormExcept(valuesDes, ["observaciones"]);
-    let isValidInc,isValidApo = false;
+    let isValidIncum,isValidApo = false;
 
     // Realizamos el POST segun la peticion
     switch (tipo) {
       case "Incumplido":
-        isValidInc = validateForm(valuesRef1);
-        if (isValidFolio && isValidInc) {
+        isValidIncum = validateForm(valuesRef1);
+        if (isValidFolio && isValidIncum) {
           console.log(valuesDes);
           console.log(valuesRef1);
           //Realizar el POST
@@ -86,9 +86,9 @@ export const FormDesincorporaciones = () => {
         }
         break;
       case "Afectación":
-        isValidInc = validateForm(valuesRef1);
+        isValidIncum = validateForm(valuesRef1);
         isValidApo = validateForm(valuesRef2);
-        if (isValidFolio && isValidApo && isValidInc) {
+        if (isValidFolio && isValidApo && isValidIncum) {
           console.log(valuesDes);
           console.log(valuesRef1);
           console.log(valuesRef2);
