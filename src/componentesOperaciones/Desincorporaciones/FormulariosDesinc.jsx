@@ -21,6 +21,7 @@ import {
 import Referencia from "./Referencia";
 import { TabListasComponent } from "./TabListas";
 import { validateFormExcept, validateForm } from "../../functions/validateFrom";
+import { setKilometrajeCalculado } from "../../helpers/utils";
 
 const useStyles = makeStyles((theme) => ({
   conatiner: {
@@ -45,12 +46,12 @@ export const FormDesincorporaciones = () => {
     ModelIncorporacion
   );
 
-  // Modelo y estructura de una Referencia para un cumplimiento
+  // Modelo y estructura de una Referencia para un Incumplimietno
   const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(
     ModelReferencias
   );
 
-  // Modelo y estructura de una Referencia para un Incumplimiento
+  // Modelo y estructura de una Referencia para un Cumplimiento
   const [valuesRef2, handleInputChangeRef2, resetRef2] = useForm(
     ModelReferencias
   );
@@ -61,13 +62,14 @@ export const FormDesincorporaciones = () => {
     e.preventDefault();
     // Validamos el folio de la desincorporación
     const isValidFolio = validateFormExcept(valuesDes, ["observaciones"]);
-    let isValidIncum,isValidApo = false;
-
+    let isValidIncum,isValidApo = false;    
+    
     // Realizamos el POST segun la peticion
     switch (tipo) {
       case "Incumplido":
         isValidIncum = validateForm(valuesRef1);
         if (isValidFolio && isValidIncum) {
+          valuesRef1['kilometraje']=setKilometrajeCalculado(valuesRef1);                 
           console.log(valuesDes);
           console.log(valuesRef1);
           //Realizar el POST
@@ -78,6 +80,7 @@ export const FormDesincorporaciones = () => {
       case "Apoyo":
         isValidApo = validateForm(valuesRef2);
         if (isValidFolio && isValidApo) {
+          valuesRef2['kilometraje']=setKilometrajeCalculado(valuesRef2);                 
           console.log(valuesDes);
           console.log(valuesRef2);
           //Realizar el POST
@@ -87,15 +90,22 @@ export const FormDesincorporaciones = () => {
         break;
       case "Afectación":
         isValidIncum = validateForm(valuesRef1);
-        isValidApo = validateForm(valuesRef2);
-        if (isValidFolio && isValidApo && isValidIncum) {
-          console.log(valuesDes);
-          console.log(valuesRef1);
-          console.log(valuesRef2);
+        isValidApo = validateForm(valuesRef2);        
+          if((isValidFolio) && (!isValidApo && isValidIncum)){
+            valuesRef1['kilometraje']=setKilometrajeCalculado(valuesRef1);                           
+            console.log(valuesDes);
+            console.log(valuesRef1);
+
+          }else if ((isValidFolio) && (isValidApo && isValidIncum)){
+            valuesRef1['kilometraje']=setKilometrajeCalculado(valuesRef1);                           
+            valuesRef2['kilometraje']=setKilometrajeCalculado(valuesRef2);                 
+            console.log(valuesDes);
+            console.log(valuesRef1);
+            console.log(valuesRef2);
+          }else{
+            alert("Campos vacios");
+          }
           //Realizar el POST
-        } else {
-          alert("Campos vacios");
-        }
         break;
       default:
         break;

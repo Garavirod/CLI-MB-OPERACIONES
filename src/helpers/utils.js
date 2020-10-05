@@ -32,7 +32,7 @@ export const setHoraActual = () =>{
 }
 
 
-export const setKilometrajeCalculado = (referencia) =>{
+export const setKilometrajeCalculado = (referencia) =>{    
     // Desestructuramos datos de la referecnia
     const {
         ruta_referencia,
@@ -42,7 +42,7 @@ export const setKilometrajeCalculado = (referencia) =>{
         tramo_hasta
     } = referencia;
     // Kilometraje a retornar
-    const kilometraje = 0;
+    let kilometraje = 0;
     // Extraemos las distancias de la ruta seleccionada de ida y vuelta
     const distanciasData = getDistanciasByRuta(ruta_referencia);
     // Desestructuramos el obj de las distancias
@@ -58,12 +58,14 @@ export const setKilometrajeCalculado = (referencia) =>{
     
     if(parseInt(num_vuelta)===0){
         // El incumplimiento o cumplimiento fue por tramos
-        const [_distE1] = distancias.filter(e=> e['Estacion'] === tramo_desde);
-        const [_distE2] = distancias.filter(e=> e['Estacion'] === tramo_hasta);
-
+        let [_distE1] = distancias.filter(e=> e['Estacion'] === "Buenavista");
+        let [_distE2] = distancias.filter(e=> e['Estacion'] === "Durango");
+        console.log("OBJ E1",_distE1);
+        console.log("OBJ E2",_distE2);       
         // Si la estacion es la ultima (penúltima array), se considera la distancia del retorno (última array)
-        if (_distE2 === distancias[distancias.lenth - 2] ){
-            _distE2 = distancias[distancias.lenth - 1] 
+        if (_distE2 === distancias[distancias.length - 2]){
+
+            _distE2 = distancias[distancias.length - 1] 
         }
         // Se calcula el kilometraje con la diferencia de los tramos
         kilometraje = Math.abs(_distE2['Acumulado'] - _distE1['Acumulado']);
@@ -74,5 +76,5 @@ export const setKilometrajeCalculado = (referencia) =>{
         kilometraje = num_vuelta*vuelta_completa;
     }
 
-    return kilometraje;
+    return parseFloat(kilometraje.toFixed(3));
 }
