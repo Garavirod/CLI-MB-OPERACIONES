@@ -1,48 +1,67 @@
 export const getFolios = () =>{
+    //Eco -ruta - tipo 
     const folios = [
         {
             id: "1",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "2",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "3",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "4",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "5",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "6",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "7",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "8",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "9",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         
@@ -61,46 +80,64 @@ export const getIncumplimientos = () =>{
         {
             id: "1",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "2",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "3",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "4",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "5",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "6",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "7",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "8",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "9",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         
@@ -118,46 +155,64 @@ export const getCumplimientos = () =>{
         {
             id: "1",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "2",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "3",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "4",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "5",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "6",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "7",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "8",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         {
             id: "9",
             fecha: "23-01-12",
+            ruta: "A1",
+            eco: "2345",
             edo:true, //Edo del folio
         },
         
@@ -197,6 +252,27 @@ export const getSolicitudes = () =>{
         "Metrobús mantenimiento"
     ]
     return solicitudes;
+}
+
+
+export const getMotivos = () =>{
+    const motivos = [
+        "Motivo 1",
+        "Motivo 2",
+        "Motivo 3",
+        "Motivo 4",
+        "Motivo 5",
+        "Motivo 6",
+        "Motivo 7",
+        "Motivo 8",
+        "Motivo 9",
+        "Motivo 10",
+        "Motivo 11",
+        "Motivo 12",
+        "Motivo 13",
+    ]
+
+    return motivos;
 }
 
 export const getLineas = () =>{
@@ -261,60 +337,46 @@ export const getInfromantes = () =>{
 }
 
 
-export const getEstacionesByLinea = (estacion) =>{
+export const getEstacionesByLinea = (linea) =>{
     // Estaciones de la linea 1
-    const estaciones = [
-        "Estación 1",
-        "Estación 2",
-        "Estación 3",
-        "Estación 4",
-        "Estación 5",
-        "Estación 6",
-        "Estación 7",
-        "Estación 8",
-        "Estación 9",
-        "Estación 10",
-        "Estación 11",
-        "Estación 12",
-        "Estación 13",
-        "Estación 14",
-        "Estación 15",
-        "Estación 16",
-        "Estación 17",
-        "Estación 18",
-        "Estación 19",
-    ];
-
+    const estaciones = [];
+    switch (linea) {
+        case "Linea 1":
+            for(let i =1; i<=20; i++)
+                estaciones.push(`Estacion ${i} L1`);
+            break;
+        case "Linea 2":
+            for(let i =1; i<=10; i++)
+                estaciones.push(`Estacion ${i} L2`);
+            break;
+        default:
+            for(let i =1; i<=10; i++)
+                estaciones.push(`Estacion ${i} LX`);
+            break;
+    }    
     return estaciones;
 };
 
-
-export const getEmpOpbyEco = (eco) =>{
-    return ["CISA"];
-}
-
-
-export const getEconómicos = () =>{
+export const getEconomicos = () =>{
     const economicos = [
-        "Eco 2313",
-        "Eco 2323",
-        "Eco 2333",
-        "Eco 2343",
-        "Eco 2353",
-        "Eco 2363",
-        "Eco 2373",
-        "Eco 2383",
-        "Eco 2393",
-        "Eco 2310",
-        "Eco 2311",
-        "Eco 2312",
-        "Eco 2313",
-        "Eco 2314",
-        "Eco 2315",
-        "Eco 2316",
-        "Eco 2317",
-        "Eco 2318",
-        "Eco 2319",
+        "2313",
+        "2323",
+        "2333",
+        "2343",
+        "2353",
+        "2363",
+        "2373",
+        "2383",
+        "2393",
+        "2310",
+        "2311",
+        "2312",        
+        "2314",
+        "2315",
+        "2316",
+        "2317",
+        "2318",
+        "2319",
     ];
 
     return economicos;
@@ -342,27 +404,22 @@ export const getEstaciones = () =>{
 }
 
 
-export const getEconomicos = () =>{    
-    const economicos = [
-        "Económico 1",
-        "Económico 2",
-        "Económico 3",
-        "Económico 4",
-        "Económico 5",
-        "Económico 6",
-        "Económico 7",
-        "Económico 8",
-        "Económico 9",
-        "Económico 10",
-        "Económico 11",
-        "Económico 12",
-        "Económico 13",
-        "Económico 14"
-    ];
-
-    return economicos;
+export const getEmpresaByEco = (eco) =>{
+    switch (eco) {
+        case "2313":
+            return ["CISA"]
+        case "2323":
+            return ["RTP"]
+        case "2333":
+            return ["RECSA BI"]
+        case "2343":
+            return ["RTP BI"]
+        case "2353":
+            return ["CE4-17M BI"]
+        default:
+            return []
+    }
 }
-
 
 export const getEmpresas = () =>{
     const empresas = [
@@ -385,456 +442,664 @@ export const getEmpresas = () =>{
     return empresas;
 }
 
-export const getEstacionesbyRuta = (ruta) =>{
+
+export const getDistanciasByRuta = (ruta) =>{
+
+    switch (ruta) {
+        case "A1":
+            return {
+                idRuta: "A1",
+                tag_destino:"I. Verdes - Dr. Gálvez",
+                vuelta_completa:39.70, //en KM
+                distancias_ida :[
+                    {
+                        Estacion:'I. Verdes',
+                        Acumulado:0.00
+                    },{
+                        Estacion:'Dptvo. 18 Mzo.',
+                        Acumulado:1.82
+                    },{
+                        Estacion:'Euzkaro',
+                        Acumulado:22.29
+                    },{
+                        Estacion:'Potrero',
+                        Acumulado:3.10
+                    },{
+                        Estacion:'La Raza',
+                        Acumulado:4.18
+                    },{
+                        Estacion:'Circuito',
+                        Acumulado:5.02
+                    },{
+                        Estacion:'San Simón',
+                        Acumulado:5.43
+                    },{
+                        Estacion:'Manuel Glz.',
+                        Acumulado:5.88
+                    },{
+                        Estacion:'Buenavista',
+                        Acumulado:7.04
+                    },{
+                        Estacion:'El Chopo ',
+                        Acumulado:7.41
+                    },{
+                        Estacion:'Revolución',
+                        Acumulado:7.76
+                    },{
+                        Estacion:'Plaza de la República',
+                        Acumulado:8.29
+                    },{
+                        Estacion:'Reforma',
+                        Acumulado:8.64
+                    },{
+                        Estacion:'Hamburgo',
+                        Acumulado:9.27
+                    },{
+                        Estacion:'Insurgentes',
+                        Acumulado:9.70
+                    },{
+                        Estacion:'Durango',
+                        Acumulado:10.20
+                    },{
+                        Estacion:'Álvaro Obregón',
+                        Acumulado:10.56
+                    },{
+                        Estacion:'Sonora ',
+                        Acumulado:10.91
+                    },{
+                        Estacion:'Campeche',
+                        Acumulado:11.30
+                    },{
+                        Estacion:'Chilpancingo',
+                        Acumulado:11.67
+                    },{
+                        Estacion:'Nuevo León',
+                        Acumulado:12.20
+                    },{
+                        Estacion:'La Piedad ',
+                        Acumulado:12.66
+                    },{
+                        Estacion:'Poliforum',
+                        Acumulado:13.17
+                    },{
+                        Estacion:'Nápoles',
+                        Acumulado:13.59
+                    },{
+                        Estacion:'Col. del Valle',
+                        Acumulado:14.04
+                    },{
+                        Estacion:'Cd. de los Deportes',
+                        Acumulado:14.31
+                    },{
+                        Estacion:'Parque Hundido',
+                        Acumulado:14.63
+                    },{
+                        Estacion:'Félix Cuevas',
+                        Acumulado:15.18
+                    },{
+                        Estacion:'Río Churubusco',
+                        Acumulado:15.80
+                    },{
+                        Estacion:'Teatro Insurgentes',
+                        Acumulado:16.24
+                    },{
+                        Estacion:'José María Velasco',
+                        Acumulado:16.63
+                    },{
+                        Estacion:'Francia',
+                        Acumulado:16.99
+                    },{
+                        Estacion:'Olivo',
+                        Acumulado:17.42
+                    },{
+                        Estacion:'Altavista',
+                        Acumulado:17.85
+                    },{
+                        Estacion:'La Bombilla',
+                        Acumulado:18.31
+                    },{
+                        Estacion:'Dr. Gálvez',
+                        Acumulado:19.01
+                    },{
+                        Estacion:'Retorno Dr. Gálvez',
+                        Acumulado:20.51
+                    },
+                ],
+                distancias_reg: [
+                    {
+                        Estacion:'Dr. Gálvez',
+                        Acumulado:0.00
+                    },{
+                        Estacion:'La Bombilla',
+                        Acumulado:0.70
+                    },{
+                        Estacion:'Altavista',
+                        Acumulado:1.16
+                    },{
+                        Estacion:'Olivo',
+                        Acumulado:1.58
+                    },{
+                        Estacion:'Francia',
+                        Acumulado:2.01
+                    },{
+                        Estacion:'José María Velasco',
+                        Acumulado:2.37
+                    },{
+                        Estacion:'Teatro Insurgentes',
+                        Acumulado:2.76
+                    },{
+                        Estacion:'Río Churubusco',
+                        Acumulado:3.19
+                    },{
+                        Estacion:'Félix Cuevas',
+                        Acumulado:3.81
+                    },{
+                        Estacion:'Parque Hundido',
+                        Acumulado:4.37
+                    },{
+                        Estacion:'Cd. de los Deportes',
+                        Acumulado:4.69
+                    },{
+                        Estacion:'Col. del Valle',
+                        Acumulado:5.05
+                    },{
+                        Estacion:'Nápoles',
+                        Acumulado:5.50
+                    },{
+                        Estacion:'Poliforum',
+                        Acumulado:5.93
+                    },{
+                        Estacion:'La Piedad ',
+                        Acumulado:6.43
+                    },{
+                        Estacion:'Nuevo León',
+                        Acumulado:6.89
+                    },{
+                        Estacion:'CamChilpancingoinero',
+                        Acumulado:7.41
+                    },{
+                        Estacion:'Campeche',
+                        Acumulado:7.79
+                    },{
+                        Estacion:'Sonora ',
+                        Acumulado:8.18
+                    },{
+                        Estacion:'Álvaro Obregón',
+                        Acumulado:8.53
+                    },{
+                        Estacion:'Durango',
+                        Acumulado:8.89
+                    },{
+                        Estacion:'Insurgentes',
+                        Acumulado:9.29
+                    },{
+                        Estacion:'Hamburgo',
+                        Acumulado:9.83
+                    },{
+                        Estacion:'Reforma',
+                        Acumulado:10.46
+                    },{
+                        Estacion:'Plaza de la República',
+                        Acumulado:10.78
+                    },{
+                        Estacion:'Revolución',
+                        Acumulado:11.31
+                    },{
+                        Estacion:'El Chopo ',
+                        Acumulado:11.62
+                    },{
+                        Estacion:'Buenavista',
+                        Acumulado:12.06
+                    },{
+                        Estacion:'Manuel Glz.',
+                        Acumulado:13.20
+                    },{
+                        Estacion:'San Simón',
+                        Acumulado:13.66
+                    },{
+                        Estacion:'Circuito',
+                        Acumulado:14.03
+                    },{
+                        Estacion:'La Raza',
+                        Acumulado:14.90
+                    },{
+                        Estacion:'Potrero',
+                        Acumulado:15.96
+                    },{
+                        Estacion:'Euzkaro',
+                        Acumulado:16.76
+                    },{
+                        Estacion:'Dptvo. 18 Mzo.',
+                        Acumulado:17.26
+                    },{
+                        Estacion:'Indios Verdes',
+                        Acumulado:18.99
+                    },{
+                        Estacion:'Retorno Indios Verdes',
+                        Acumulado:19.19
+                    },
     
-};
-
-
-
-export const getDistancias = (ruta) =>{
-
-    return [
-        {
-            idRuta: "A1",
-            tag_destino:"Indios Verdes-Dr. Gálvez",
-            distancias_ida :[
-                {
-                    Estacion:'I.Verdes',
-                    Acumulado:0.00
-                },{
-                    Estacion:'Dptvo. 18 Mzo.',
-                    Acumulado:1.82
-                },{
-                    Estacion:'Euzkaro',
-                    Acumulado:22.29
-                },{
-                    Estacion:'Potrero',
-                    Acumulado:3.10
-                },{
-                    Estacion:'La Raza',
-                    Acumulado:4.18
-                },{
-                    Estacion:'Circuito',
-                    Acumulado:5.02
-                },{
-                    Estacion:'San Simón',
-                    Acumulado:5.43
-                },{
-                    Estacion:'Manuel Glz.',
-                    Acumulado:5.88
-                },{
-                    Estacion:'Buenavista',
-                    Acumulado:7.04
-                },{
-                    Estacion:'El Chopo ',
-                    Acumulado:7.41
-                },{
-                    Estacion:'Revolución',
-                    Acumulado:7.76
-                },{
-                    Estacion:'Plaza de la República',
-                    Acumulado:8.29
-                },{
-                    Estacion:'Reforma',
-                    Acumulado:8.64
-                },{
-                    Estacion:'Hamburgo',
-                    Acumulado:9.27
-                },{
-                    Estacion:'Insurgentes',
-                    Acumulado:9.70
-                },{
-                    Estacion:'Durango',
-                    Acumulado:10.20
-                },{
-                    Estacion:'Álvaro Obregón',
-                    Acumulado:10.56
-                },{
-                    Estacion:'Sonora ',
-                    Acumulado:10.91
-                },{
-                    Estacion:'Campeche',
-                    Acumulado:11.30
-                },{
-                    Estacion:'Chilpancingo',
-                    Acumulado:11.67
-                },{
-                    Estacion:'Nuevo León',
-                    Acumulado:12.20
-                },{
-                    Estacion:'La Piedad ',
-                    Acumulado:12.66
-                },{
-                    Estacion:'Poliforum',
-                    Acumulado:13.17
-                },{
-                    Estacion:'Nápoles',
-                    Acumulado:13.59
-                },{
-                    Estacion:'Col. del Valle',
-                    Acumulado:14.04
-                },{
-                    Estacion:'Cd. de los Deportes',
-                    Acumulado:14.31
-                },{
-                    Estacion:'Parque Hundido',
-                    Acumulado:14.63
-                },{
-                    Estacion:'Félix Cuevas',
-                    Acumulado:15.18
-                },{
-                    Estacion:'Río Churubusco',
-                    Acumulado:15.80
-                },{
-                    Estacion:'Teatro Insurgentes',
-                    Acumulado:16.24
-                },{
-                    Estacion:'José María Velasco',
-                    Acumulado:16.63
-                },{
-                    Estacion:'Francia',
-                    Acumulado:16.99
-                },{
-                    Estacion:'Olivo',
-                    Acumulado:17.42
-                },{
-                    Estacion:'Altavista',
-                    Acumulado:17.85
-                },{
-                    Estacion:'La Bombilla',
-                    Acumulado:18.31
-                },{
-                    Estacion:'Dr. Gálvez',
-                    Acumulado:19.01
-                },{
-                    Estacion:'Retorno Dr. Gálvez',
-                    Acumulado:20.51
-                },
-            ],
-            distancias_reg: [
-                {
-                    Estacion:'Dr. Gálvez',
-                    Acumulado:0.00
-                },{
-                    Estacion:'La Bombilla',
-                    Acumulado:0.70
-                },{
-                    Estacion:'Altavista',
-                    Acumulado:1.16
-                },{
-                    Estacion:'Olivo',
-                    Acumulado:1.58
-                },{
-                    Estacion:'Francia',
-                    Acumulado:2.01
-                },{
-                    Estacion:'José María Velasco',
-                    Acumulado:2.37
-                },{
-                    Estacion:'Teatro Insurgentes',
-                    Acumulado:2.76
-                },{
-                    Estacion:'Río Churubusco',
-                    Acumulado:3.19
-                },{
-                    Estacion:'Félix Cuevas',
-                    Acumulado:3.81
-                },{
-                    Estacion:'Parque Hundido',
-                    Acumulado:4.37
-                },{
-                    Estacion:'Cd. de los Deportes',
-                    Acumulado:4.69
-                },{
-                    Estacion:'Col. del Valle',
-                    Acumulado:5.05
-                },{
-                    Estacion:'Nápoles',
-                    Acumulado:5.50
-                },{
-                    Estacion:'Poliforum',
-                    Acumulado:5.93
-                },{
-                    Estacion:'La Piedad ',
-                    Acumulado:6.43
-                },{
-                    Estacion:'Nuevo León',
-                    Acumulado:6.89
-                },{
-                    Estacion:'CamChilpancingoinero',
-                    Acumulado:7.41
-                },{
-                    Estacion:'Campeche',
-                    Acumulado:7.79
-                },{
-                    Estacion:'Sonora ',
-                    Acumulado:8.18
-                },{
-                    Estacion:'Álvaro Obregón',
-                    Acumulado:8.53
-                },{
-                    Estacion:'Durango',
-                    Acumulado:8.89
-                },{
-                    Estacion:'Insurgentes',
-                    Acumulado:9.29
-                },{
-                    Estacion:'Hamburgo',
-                    Acumulado:9.83
-                },{
-                    Estacion:'Reforma',
-                    Acumulado:10.46
-                },{
-                    Estacion:'Plaza de la República',
-                    Acumulado:10.78
-                },{
-                    Estacion:'Revolución',
-                    Acumulado:11.31
-                },{
-                    Estacion:'El Chopo ',
-                    Acumulado:11.62
-                },{
-                    Estacion:'Buenavista',
-                    Acumulado:12.06
-                },{
-                    Estacion:'Manuel Glz.',
-                    Acumulado:13.20
-                },{
-                    Estacion:'San Simón',
-                    Acumulado:13.66
-                },{
-                    Estacion:'Circuito',
-                    Acumulado:14.03
-                },{
-                    Estacion:'La Raza',
-                    Acumulado:14.90
-                },{
-                    Estacion:'Potrero',
-                    Acumulado:15.96
-                },{
-                    Estacion:'Euzkaro',
-                    Acumulado:16.76
-                },{
-                    Estacion:'Dptvo. 18 Mzo.',
-                    Acumulado:17.26
-                },{
-                    Estacion:'Indios Verdes',
-                    Acumulado:18.99
-                },{
-                    Estacion:'Retorno Indios Verdes',
-                    Acumulado:19.19
-                },
-
-            ]
-        },
-        {
-            idRuta: "A20",
-            tag_destino:"Insurgentes-La Joya",
-            distancias_ida :[
-                {
-                    Estacion:'Insurgentes',
-                    Acumulado:0.00
-                },{
-                    Estacion:'Durango',
-                    Acumulado:10.20
-                },{
-                    Estacion:'Álvaro Obregón',
-                    Acumulado:10.56
-                },{
-                    Estacion:'Sonora',
-                    Acumulado:10.91
-                },{
-                    Estacion:'Campeche',
-                    Acumulado:11.30
-                },{
-                    Estacion:'Chilpancingo',
-                    Acumulado:11.67
-                },{
-                    Estacion:'Nuevo León',
-                    Acumulado:12.20
-                },{
-                    Estacion:'La Piedad ',
-                    Acumulado:12.66
-                },{
-                    Estacion:'Poliforum',
-                    Acumulado:13.17
-                },{
-                    Estacion:'Nápoles',
-                    Acumulado:13.59
-                },{
-                    Estacion:'Col. del Valle',
-                    Acumulado:14.04
-                },{
-                    Estacion:'Cd. de los Deportes',
-                    Acumulado:14.31
-                },{
-                    Estacion:'Parque Hundido',
-                    Acumulado:14.63
-                },{
-                    Estacion:'Félix Cuevas',
-                    Acumulado:15.18
-                },{
-                    Estacion:'Río Churubusco',
-                    Acumulado:15.80
-                },{
-                    Estacion:'Teatro Insurgentes',
-                    Acumulado:16.24
-                },{
-                    Estacion:'José María Velasco',
-                    Acumulado:16.63
-                },{
-                    Estacion:'Francia',
-                    Acumulado:16.99
-                },{
-                    Estacion:'Olivo',
-                    Acumulado:17.42
-                },{
-                    Estacion:'Altavista',
-                    Acumulado:17.85
-                },{
-                    Estacion:'La Bombilla',
-                    Acumulado:18.31
-                },{
-                    Estacion:'Dr. Gálvez',
-                    Acumulado:19.01
-                },{
-                    Estacion:'Ciudad Universitaria',
-                    Acumulado:21.02
-                },{
-                    Estacion:'C. Cultura Universitario',
-                    Acumulado:21.82
-                },{
-                    Estacion:'Perisur',
-                    Acumulado:23.12
-                },{
-                    Estacion:'Villa Olimpica',
-                    Acumulado:23.64
-                },{
-                    Estacion:'Corregidora',
-                    Acumulado:24.47
-                },{
-                    Estacion:'Ayuntamiento',
-                    Acumulado:24.87
-                },{
-                    Estacion:'Fuentes Brotantes',
-                    Acumulado:25.63
-                },{
-                    Estacion:'Santa Úrsula',
-                    Acumulado:26.16
-                },{
-                    Estacion:'La Joya',
-                    Acumulado:26.84
-                },{
-                    Estacion:'Retorno La Joya',
-                    Acumulado:27.32
-                },
-            ],
-            distancias_reg: [
-                {
-                    Estacion:'El Caminero',
-                    Acumulado:0.00
-                },{
-                    Estacion:'La Joya',
-                    Acumulado:0.18
-                },{
-                    Estacion:'Santa Úrsula',
-                    Acumulado:0.84
-                },{
-                    Estacion:'Fuentes Brotantes',
-                    Acumulado:1.37
-                },{
-                    Estacion:'Ayuntamiento',
-                    Acumulado:2.15
-                },{
-                    Estacion:'Corregidora',
-                    Acumulado:2.55
-                },{
-                    Estacion:'Villa Olimpica',
-                    Acumulado:3.36
-                },{
-                    Estacion:'Perisur',
-                    Acumulado:3.94
-                },{
-                    Estacion:'C. Cultural Universitario',
-                    Acumulado:5.15
-                },{
-                    Estacion:'Ciudad Universitaria',
-                    Acumulado:5.98
-                },{
-                    Estacion:'Dr. Gálvez',
-                    Acumulado:7.99
-                },{
-                    Estacion:'La Bombilla',
-                    Acumulado:8.69
-                },{
-                    Estacion:'Altavista',
-                    Acumulado:9.15
-                },{
-                    Estacion:'Olivo',
-                    Acumulado:9.57
-                },{
-                    Estacion:'Francia',
-                    Acumulado:10.00
-                },{
-                    Estacion:'José María Velasco',
-                    Acumulado:10.36
-                },{
-                    Estacion:'Teatro Insurgentes',
-                    Acumulado:10.75
-                },{
-                    Estacion:'Río Churubusco',
-                    Acumulado:11.18
-                },{
-                    Estacion:'Félix Cuevas',
-                    Acumulado:11.80
-                },{
-                    Estacion:'Parque Hundido',
-                    Acumulado:12.36
-                },{
-                    Estacion:'Cd. de los Deportes',
-                    Acumulado:12.68
-                },{
-                    Estacion:'Col. del Valle',
-                    Acumulado:13.04
-                },{
-                    Estacion:'Nápoles',
-                    Acumulado:13.49
-                },{
-                    Estacion:'Poliforum',
-                    Acumulado:13.92
-                },{
-                    Estacion:'La Piedad ',
-                    Acumulado:14.42
-                },{
-                    Estacion:'Nuevo León',
-                    Acumulado:14.88
-                },{
-                    Estacion:'Chilpancingo',
-                    Acumulado:15.40
-                },{
-                    Estacion:'Campeche',
-                    Acumulado:15.78
-                },{
-                    Estacion:'Sonora',
-                    Acumulado:16.17
-                },{
-                    Estacion:'Álvaro Obregón',
-                    Acumulado:16.52
-                },{
-                    Estacion:'Durango',
-                    Acumulado:16.88
-                },{
-                    Estacion:'Insurgentes',
-                    Acumulado:17.28
-                },{
-                    Estacion:'Retorno Insurgentes',
-                    Acumulado:17.48
-                },
-
-            ]
-        }
-    ]
-
+                ]
+            }
+            
+        case "A20":
+            return {
+                idRuta: "A20",
+                tag_destino:"Insurgentes - La Joya",
+                vuelta_completa:35.10, //en KM
+                distancias_ida :[
+                    {
+                        Estacion:'Insurgentes',
+                        Acumulado:0.00
+                    },{
+                        Estacion:'Durango',
+                        Acumulado:10.20
+                    },{
+                        Estacion:'Álvaro Obregón',
+                        Acumulado:10.56
+                    },{
+                        Estacion:'Sonora',
+                        Acumulado:10.91
+                    },{
+                        Estacion:'Campeche',
+                        Acumulado:11.30
+                    },{
+                        Estacion:'Chilpancingo',
+                        Acumulado:11.67
+                    },{
+                        Estacion:'Nuevo León',
+                        Acumulado:12.20
+                    },{
+                        Estacion:'La Piedad ',
+                        Acumulado:12.66
+                    },{
+                        Estacion:'Poliforum',
+                        Acumulado:13.17
+                    },{
+                        Estacion:'Nápoles',
+                        Acumulado:13.59
+                    },{
+                        Estacion:'Col. del Valle',
+                        Acumulado:14.04
+                    },{
+                        Estacion:'Cd. de los Deportes',
+                        Acumulado:14.31
+                    },{
+                        Estacion:'Parque Hundido',
+                        Acumulado:14.63
+                    },{
+                        Estacion:'Félix Cuevas',
+                        Acumulado:15.18
+                    },{
+                        Estacion:'Río Churubusco',
+                        Acumulado:15.80
+                    },{
+                        Estacion:'Teatro Insurgentes',
+                        Acumulado:16.24
+                    },{
+                        Estacion:'José María Velasco',
+                        Acumulado:16.63
+                    },{
+                        Estacion:'Francia',
+                        Acumulado:16.99
+                    },{
+                        Estacion:'Olivo',
+                        Acumulado:17.42
+                    },{
+                        Estacion:'Altavista',
+                        Acumulado:17.85
+                    },{
+                        Estacion:'La Bombilla',
+                        Acumulado:18.31
+                    },{
+                        Estacion:'Dr. Gálvez',
+                        Acumulado:19.01
+                    },{
+                        Estacion:'Ciudad Universitaria',
+                        Acumulado:21.02
+                    },{
+                        Estacion:'C. Cultura Universitario',
+                        Acumulado:21.82
+                    },{
+                        Estacion:'Perisur',
+                        Acumulado:23.12
+                    },{
+                        Estacion:'Villa Olimpica',
+                        Acumulado:23.64
+                    },{
+                        Estacion:'Corregidora',
+                        Acumulado:24.47
+                    },{
+                        Estacion:'Ayuntamiento',
+                        Acumulado:24.87
+                    },{
+                        Estacion:'Fuentes Brotantes',
+                        Acumulado:25.63
+                    },{
+                        Estacion:'Santa Úrsula',
+                        Acumulado:26.16
+                    },{
+                        Estacion:'La Joya',
+                        Acumulado:26.84
+                    },{
+                        Estacion:'Retorno La Joya',
+                        Acumulado:27.32
+                    },
+                ],
+                distancias_reg: [
+                    {
+                        Estacion:'El Caminero',
+                        Acumulado:0.00
+                    },{
+                        Estacion:'La Joya',
+                        Acumulado:0.18
+                    },{
+                        Estacion:'Santa Úrsula',
+                        Acumulado:0.84
+                    },{
+                        Estacion:'Fuentes Brotantes',
+                        Acumulado:1.37
+                    },{
+                        Estacion:'Ayuntamiento',
+                        Acumulado:2.15
+                    },{
+                        Estacion:'Corregidora',
+                        Acumulado:2.55
+                    },{
+                        Estacion:'Villa Olimpica',
+                        Acumulado:3.36
+                    },{
+                        Estacion:'Perisur',
+                        Acumulado:3.94
+                    },{
+                        Estacion:'C. Cultural Universitario',
+                        Acumulado:5.15
+                    },{
+                        Estacion:'Ciudad Universitaria',
+                        Acumulado:5.98
+                    },{
+                        Estacion:'Dr. Gálvez',
+                        Acumulado:7.99
+                    },{
+                        Estacion:'La Bombilla',
+                        Acumulado:8.69
+                    },{
+                        Estacion:'Altavista',
+                        Acumulado:9.15
+                    },{
+                        Estacion:'Olivo',
+                        Acumulado:9.57
+                    },{
+                        Estacion:'Francia',
+                        Acumulado:10.00
+                    },{
+                        Estacion:'José María Velasco',
+                        Acumulado:10.36
+                    },{
+                        Estacion:'Teatro Insurgentes',
+                        Acumulado:10.75
+                    },{
+                        Estacion:'Río Churubusco',
+                        Acumulado:11.18
+                    },{
+                        Estacion:'Félix Cuevas',
+                        Acumulado:11.80
+                    },{
+                        Estacion:'Parque Hundido',
+                        Acumulado:12.36
+                    },{
+                        Estacion:'Cd. de los Deportes',
+                        Acumulado:12.68
+                    },{
+                        Estacion:'Col. del Valle',
+                        Acumulado:13.04
+                    },{
+                        Estacion:'Nápoles',
+                        Acumulado:13.49
+                    },{
+                        Estacion:'Poliforum',
+                        Acumulado:13.92
+                    },{
+                        Estacion:'La Piedad ',
+                        Acumulado:14.42
+                    },{
+                        Estacion:'Nuevo León',
+                        Acumulado:14.88
+                    },{
+                        Estacion:'Chilpancingo',
+                        Acumulado:15.40
+                    },{
+                        Estacion:'Campeche',
+                        Acumulado:15.78
+                    },{
+                        Estacion:'Sonora',
+                        Acumulado:16.17
+                    },{
+                        Estacion:'Álvaro Obregón',
+                        Acumulado:16.52
+                    },{
+                        Estacion:'Durango',
+                        Acumulado:16.88
+                    },{
+                        Estacion:'Insurgentes',
+                        Acumulado:17.28
+                    },{
+                        Estacion:'Retorno Insurgentes',
+                        Acumulado:17.48
+                    },
+    
+                ]
+            }
+        default:
+            return {
+                idRuta: "AX",
+                tag_destino:"Insurgentes-La Joya",
+                vuelta_completa:35.10, //en KM
+                distancias_ida :[
+                    {
+                        Estacion:'Insurgentes',
+                        Acumulado:0.00
+                    },{
+                        Estacion:'Durango',
+                        Acumulado:10.20
+                    },{
+                        Estacion:'Álvaro Obregón',
+                        Acumulado:10.56
+                    },{
+                        Estacion:'Sonora',
+                        Acumulado:10.91
+                    },{
+                        Estacion:'Campeche',
+                        Acumulado:11.30
+                    },{
+                        Estacion:'Chilpancingo',
+                        Acumulado:11.67
+                    },{
+                        Estacion:'Nuevo León',
+                        Acumulado:12.20
+                    },{
+                        Estacion:'La Piedad ',
+                        Acumulado:12.66
+                    },{
+                        Estacion:'Poliforum',
+                        Acumulado:13.17
+                    },{
+                        Estacion:'Nápoles',
+                        Acumulado:13.59
+                    },{
+                        Estacion:'Col. del Valle',
+                        Acumulado:14.04
+                    },{
+                        Estacion:'Cd. de los Deportes',
+                        Acumulado:14.31
+                    },{
+                        Estacion:'Parque Hundido',
+                        Acumulado:14.63
+                    },{
+                        Estacion:'Félix Cuevas',
+                        Acumulado:15.18
+                    },{
+                        Estacion:'Río Churubusco',
+                        Acumulado:15.80
+                    },{
+                        Estacion:'Teatro Insurgentes',
+                        Acumulado:16.24
+                    },{
+                        Estacion:'José María Velasco',
+                        Acumulado:16.63
+                    },{
+                        Estacion:'Francia',
+                        Acumulado:16.99
+                    },{
+                        Estacion:'Olivo',
+                        Acumulado:17.42
+                    },{
+                        Estacion:'Altavista',
+                        Acumulado:17.85
+                    },{
+                        Estacion:'La Bombilla',
+                        Acumulado:18.31
+                    },{
+                        Estacion:'Dr. Gálvez',
+                        Acumulado:19.01
+                    },{
+                        Estacion:'Ciudad Universitaria',
+                        Acumulado:21.02
+                    },{
+                        Estacion:'C. Cultura Universitario',
+                        Acumulado:21.82
+                    },{
+                        Estacion:'Perisur',
+                        Acumulado:23.12
+                    },{
+                        Estacion:'Villa Olimpica',
+                        Acumulado:23.64
+                    },{
+                        Estacion:'Corregidora',
+                        Acumulado:24.47
+                    },{
+                        Estacion:'Ayuntamiento',
+                        Acumulado:24.87
+                    },{
+                        Estacion:'Fuentes Brotantes',
+                        Acumulado:25.63
+                    },{
+                        Estacion:'Santa Úrsula',
+                        Acumulado:26.16
+                    },{
+                        Estacion:'La Joya',
+                        Acumulado:26.84
+                    },{
+                        Estacion:'Retorno La Joya',
+                        Acumulado:27.32
+                    },
+                ],
+                distancias_reg: [
+                    {
+                        Estacion:'El Caminero',
+                        Acumulado:0.00
+                    },{
+                        Estacion:'La Joya',
+                        Acumulado:0.18
+                    },{
+                        Estacion:'Santa Úrsula',
+                        Acumulado:0.84
+                    },{
+                        Estacion:'Fuentes Brotantes',
+                        Acumulado:1.37
+                    },{
+                        Estacion:'Ayuntamiento',
+                        Acumulado:2.15
+                    },{
+                        Estacion:'Corregidora',
+                        Acumulado:2.55
+                    },{
+                        Estacion:'Villa Olimpica',
+                        Acumulado:3.36
+                    },{
+                        Estacion:'Perisur',
+                        Acumulado:3.94
+                    },{
+                        Estacion:'C. Cultural Universitario',
+                        Acumulado:5.15
+                    },{
+                        Estacion:'Ciudad Universitaria',
+                        Acumulado:5.98
+                    },{
+                        Estacion:'Dr. Gálvez',
+                        Acumulado:7.99
+                    },{
+                        Estacion:'La Bombilla',
+                        Acumulado:8.69
+                    },{
+                        Estacion:'Altavista',
+                        Acumulado:9.15
+                    },{
+                        Estacion:'Olivo',
+                        Acumulado:9.57
+                    },{
+                        Estacion:'Francia',
+                        Acumulado:10.00
+                    },{
+                        Estacion:'José María Velasco',
+                        Acumulado:10.36
+                    },{
+                        Estacion:'Teatro Insurgentes',
+                        Acumulado:10.75
+                    },{
+                        Estacion:'Río Churubusco',
+                        Acumulado:11.18
+                    },{
+                        Estacion:'Félix Cuevas',
+                        Acumulado:11.80
+                    },{
+                        Estacion:'Parque Hundido',
+                        Acumulado:12.36
+                    },{
+                        Estacion:'Cd. de los Deportes',
+                        Acumulado:12.68
+                    },{
+                        Estacion:'Col. del Valle',
+                        Acumulado:13.04
+                    },{
+                        Estacion:'Nápoles',
+                        Acumulado:13.49
+                    },{
+                        Estacion:'Poliforum',
+                        Acumulado:13.92
+                    },{
+                        Estacion:'La Piedad ',
+                        Acumulado:14.42
+                    },{
+                        Estacion:'Nuevo León',
+                        Acumulado:14.88
+                    },{
+                        Estacion:'Chilpancingo',
+                        Acumulado:15.40
+                    },{
+                        Estacion:'Campeche',
+                        Acumulado:15.78
+                    },{
+                        Estacion:'Sonora',
+                        Acumulado:16.17
+                    },{
+                        Estacion:'Álvaro Obregón',
+                        Acumulado:16.52
+                    },{
+                        Estacion:'Durango',
+                        Acumulado:16.88
+                    },{
+                        Estacion:'Insurgentes',
+                        Acumulado:17.28
+                    },{
+                        Estacion:'Retorno Insurgentes',
+                        Acumulado:17.48
+                    },
+    
+                ]
+            }
+    }
+    
 
 }
 
@@ -845,7 +1110,7 @@ export const getEstacionesByReferencia = (ref) =>{
         case "A1":
             data = {
                     id: "L1",
-                    destinos: ["El caminero", "Indios Verdes"],  
+                    destinos: ["I. Verdes", "Dr. Gálvez"],  
                     estaciones :[
                         {
                             idEstacion: "1",
@@ -875,7 +1140,7 @@ export const getEstacionesByReferencia = (ref) =>{
             
             data = {
                     id: "L1",
-                    ida_destino: ["Insurgerntes", "La joya"],  
+                    destinos: ["Insurgentes", "La Joya"],  
                     estaciones :[
                         {
                             idEstacion: "1",
@@ -900,7 +1165,7 @@ export const getEstacionesByReferencia = (ref) =>{
         
                     ]
                 }
-                       
+                break;     
         default:
             data = {
                 id: "L1",
@@ -958,8 +1223,8 @@ export const getReferencias = () =>{
                     
                 }, 
                 {
-                    id: "A4",
-                    name : "01-104 A1",
+                    id: "A20",
+                    name : "01-120 A20",
                     
                 },                            
             ]
@@ -1006,7 +1271,7 @@ export const getReferencias = () =>{
                     name : "04-402 E2 Sur",
                     
                 }, 
-                {
+                {                        
                     id: "L43",
                     name : "04-403 E3 Norte",
                     
@@ -1017,4 +1282,57 @@ export const getReferencias = () =>{
     ]
 
     return referenias;
+}
+
+// Datos de una desincorporacion
+
+export const getDatosByFolio = (folio) =>{
+    return {        
+            linea: "Linea 1",
+            solicita: "Mantenimiento E.O",
+            informa: "ébano 2",
+            estacion: "Estacion 1 L1",
+            economico: "2323",
+            empresa: "RTP",
+            motivo: "Motivo 1",
+            odometro: "1234.45",
+            credencial: "MBCRED123",
+            nombre: "Carlos Rivera",
+            fecha: "2020-01-12", // (yy/mm/dd)
+            hora: "11:45",
+            jornada: "5",
+            observaciones: "Observación de prueba",
+            tipo: "Apoyo",
+            edoFolio: "Abierto"         
+        }    
+}
+
+
+export const getIncumplimientosByFolio = (folio) =>{
+    return{
+            ruta_referencia: "A1",
+            ref_ida: "El caminero - Indios Verdes",
+            ref_vuelta :"Indios Verdes - El caminero",
+            num_vuelta: 2,
+            num_ida: 1,
+            num_regreso: 1,
+            tramo_desde: "El caminero",
+            tramo_hasta:"Estacion 2",
+            kilometraje:12.34
+        }        
+}
+
+
+export const getCumplimientosByFolio = (folio) =>{
+    return{
+            ruta_referencia: "A20",
+            ref_ida: "Insurgentes - La joya",
+            ref_vuelta :"La joya - Insurgentes",
+            num_vuelta: 4,
+            num_ida: 2,
+            num_regreso: 2,
+            tramo_desde: "Estacion 1",
+            tramo_hasta:"Estacion 2",
+            kilometraje:23.4
+        }        
 }

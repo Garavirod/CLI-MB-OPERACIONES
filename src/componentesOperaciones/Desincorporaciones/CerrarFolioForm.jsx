@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -13,19 +13,19 @@ import {
 import { useForm } from "../../hooks/useForm";
 import { DesincorporacionComp } from "./DesincorporacionComp";
 import { IncorporacionComp } from "./IncorporacionComp";
-import {
-  ModelDesincorporacion,
-  ModelIncorporacion,
-  ModelReferencias,
-} from "../../models/ModelsIncorporacion";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { ModelIncorporacion } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
-import { TabListasComponent } from "./TabListas";
-import { validateFormExcept, validateForm } from "../../functions/validateFrom";
-import { setKilometrajeCalculado } from "../../helpers/utils";
+import { useParams, Link } from "react-router-dom";
+import Alert from "@material-ui/lab/Alert";
+import {
+  getDatosByFolio,
+  getCumplimientosByFolio,
+  getIncumplimientosByFolio,
+} from "../../helpers/DataGetters";
+import { useState } from "react";
+import { setFechaActual } from "../../helpers/utils";
 
-
-import { httpPostData } from "../../functions/httpRequest";
-import { CustomSwalSave, CustomSwalError} from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   conatiner: {
@@ -37,110 +37,66 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const FormDesincorporaciones = () => {
+export const CerrarFolioForm = () => {
+  const { idFolio } = useParams();
+  console.log("LA FECHA ",setFechaActual());
   const classes = useStyles();
+  const [cumplimientos] = useState(getCumplimientosByFolio(idFolio));
+  const [incumplimientos] = useState(getIncumplimientosByFolio(idFolio));
+  const [folio] = useState(getDatosByFolio(idFolio));
+  const { tipo } = folio;
 
   // Modelo y estructura de una Desincorporación
-  const [valuesDes, handleInputChangeDes, resetDes] = useForm(
-    ModelDesincorporacion
-  );
+  const [valuesDes, handleInputChangeDes, resetDes] = useForm(folio);
 
   // Modelo y estructura de una Incorporación
   const [valuesInco, handleInputChangeInc, resetInc] = useForm(
     ModelIncorporacion
   );
 
-  // Modelo y estructura de una Referencia para un Incumplimietno
-  const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(
-    ModelReferencias
-  );
+  // Modelo y estructura de una Referencia para un cumplimiento
+  const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(incumplimientos);
 
-  // Modelo y estructura de una Referencia para un Cumplimiento
+  // Modelo y estructura de una Referencia para un Incumplimiento
   const [valuesRef2, handleInputChangeRef2, resetRef2] = useForm(
-    ModelReferencias
+    cumplimientos
   );
 
-  const { tipo } = valuesDes;
-
-  const registraFolio = (e) => {
+  const registraIncorporacion = (e) => {
     e.preventDefault();
-    // Validamos el folio de la desincorporación
-    const isValidFolio = validateFormExcept(valuesDes, ["observaciones"]);
-    let isValidIncum,isValidApo = false;    
-    
-    // Realizamos el POST segun la peticion
-    switch (tipo) {
-      case "Incumplido":
-        isValidIncum = validateForm(valuesRef1);
-        if (isValidFolio && isValidIncum) {
-          const km = setKilometrajeCalculado(valuesRef1);
-          valuesRef1['kilometraje']=km;                 
-          console.log(valuesDes);
-          console.log(valuesRef1);
-          alert(`Kilometraje incumplido >: ${km}`);
-          //Realizar el POST
-        } else {
-          alert("Campos vacios");
-        }
-        break;
-      case "Apoyo":
-        isValidApo = validateForm(valuesRef2);
-        if (isValidFolio && isValidApo) {
-          const km = setKilometrajeCalculado(valuesRef2);
-          valuesRef2['kilometraje']=km;                 
-          console.log(valuesDes);
-          console.log(valuesRef2);
-          alert(`Kilometraje cumplido >: ${km}`);
-          //Realizar el POST
-        } else {
-          alert("Campos vacios");
-        }
-        break;
-      case "Afectación":
-        isValidIncum = validateForm(valuesRef1);
-        isValidApo = validateForm(valuesRef2);        
-          if((isValidFolio) && (!isValidApo && isValidIncum)){
-            const km = setKilometrajeCalculado(valuesRef1);
-            valuesRef1['kilometraje']=km;                         
-            console.log(valuesDes);
-            console.log(valuesRef1);
-            alert(`Kilometraje incumplido >: ${km}`);
-
-          }else if ((isValidFolio) && (isValidApo && isValidIncum)){
-            const km1 = setKilometrajeCalculado(valuesRef1);
-            const km2 = setKilometrajeCalculado(valuesRef2); 
-            valuesRef1['kilometraje']=km1                           
-            valuesRef2['kilometraje']=km2                
-            console.log(valuesDes);
-            console.log(valuesRef1);
-            console.log(valuesRef2);            
-            alert(`Kilometraje calculado >: Inc ${km1} cump ${km2}`);
-
-          }else{
-            alert("Campos vacios");
-          }
-          //Realizar el POST
-        break;
-      default:
-        break;
-    }
+    console.log(valuesDes);
+    console.log(valuesRef1);
+    console.log(valuesRef2);
   };
 
+  
   return (
     <Container maxWidth="lg" className={classes.conatiner}>
-      <Card className="animate__animated animate__fadeIn">
+      <Card>
         <Grid container spacing={3}>
           <Grid item lg={12}>
-            <Typography
-              variant="h6"
-              component="h4"
-              className={classes.headerText}
-            >
-              Incorporaciones y Desincorporaciones
-            </Typography>
+            <Alert severity="warning">
+              <Grid container spacing={2}>
+                <Grid item lg={6}>
+                  Usted está visualizando la infrormación del folio: {idFolio}
+                </Grid>
+                <Grid item lg={6}>
+                  <Typography
+                    variant="h6"
+                    component="h4"
+                    className={classes.headerText}
+                  >
+                    <Link className="" to={"/BitacordaDR"}>
+                      <ArrowBackIcon />
+                      cerrar folio sin guaradar
+                    </Link>
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Alert>
           </Grid>
           <Grid item lg={12}>
-            <form onSubmit={registraFolio}>
+            <form onSubmit={registraIncorporacion}>
               <CardContent>
                 <Grid container spacing={2}>
                   <Grid item lg={6}>
@@ -206,10 +162,6 @@ export const FormDesincorporaciones = () => {
                           resetInc={resetInc}
                         />
                       </Grid>
-                      {/* LISTA DE REGISTROS */}
-                      <Grid item lg={12}>
-                        <TabListasComponent />
-                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -221,7 +173,7 @@ export const FormDesincorporaciones = () => {
                   variant="contained"
                   color="primary"
                 >
-                  Guardar
+                  Guardar folio
                 </Button>
                 <Button size="small" variant="contained" color="primary">
                   Nuevo folio

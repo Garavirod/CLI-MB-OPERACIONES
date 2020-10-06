@@ -45,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
+  colorType:{
+    color:"#ffff"
+  }
 }));
 
 // Esta funcion crea los destinos (desde - hasta)
@@ -58,10 +61,11 @@ export default function Referencia(props) {
   const classes = useStyles();
 
   // desestructurando las propiedades del Hook
-  const { valuesRef, handleInputChangeRef } = props;
+  const { valuesRef, handleInputChangeRef, titulo, color } = props;
 
-  // Desestructurando el hook del modelo Referencia dadas las props del hook
-  /*const {
+  // Desestructurando el hook del modelo Desinc dadas las props del hook
+  const {
+    ruta_referencia,
     ref_ida,
     ref_vuelta,
     num_vuelta,
@@ -74,40 +78,29 @@ export default function Referencia(props) {
   // Variables del componente
   const [estacionesRuta, setEstacionesRuta] = useState([]); //Carga las rutas
   const [destinosRuta, setDestinosRuta] = useState([]); //Carga los destinos
-  const [referencia, setReferencia] = useState("");
 
   // Carga todas las referencias que el árbol desplegará
   const referencias = getReferencias();
 
   // La función verifica si se ha cambiado de ruta o referencia
   const handleChangeRuta = (ref) => {
-    setReferencia(ref);
-
-    /*------------------ no jala
-    props.handleRefValues(() => {
-      return ({
-        name:"referencia",
-        value: ref
-      });
-    });//setCumIncumValues
-    /------------------   */ 
+    // Se cambia la referencia en el modelo
+    const target = { name: "ruta_referencia", value: ref };
+    handleInputChangeRef({ target });
   };
-  
+
   // La función consigue todas las estaciones de una ruta en específico
-  const getDatosbyReferencia = (ref) =>{
+  const getDatosbyReferencia = (ref) => {
     const { estaciones, destinos } = getEstacionesByReferencia(ref);
     setEstacionesRuta(estaciones);
     setDestinosRuta(CreaDestinos(destinos));
-  }
+  };
 
   // El hook effect asegura qeu solo cuando se cambie la ruta, debe cargar
   // las estaciones de dicha ruta seleccionada
   useEffect(() => {
-    getDatosbyReferencia(referencia);
-  }, [referencia]);
-
-  
-
+    getDatosbyReferencia(ruta_referencia);
+  }, [ruta_referencia]);
 
   return (
     <Container className={classes.root}>
@@ -115,15 +108,18 @@ export default function Referencia(props) {
         <Grid item lg={12}>
           <Grid container spacing={3}>
             <Grid item lg={12} md={12} sm={12} xs={12}>
-              <Paper className={classes.paper} variant="outlined">
-                <Typography variant="h6" component="h4">
-                  Referencia
+              <Paper className={classes.paper} variant="outlined" style={{backgroundColor:color}}>
+                <Typography variant="h6" component="h4" className={classes.colorType}>
+                  {titulo}
                 </Typography>
               </Paper>
             </Grid>
             {/* ARBOL DE RUTAS */}
             <Grid item lg={12}>
               <div className={classes.divTree}>
+                <Typography variant="h6" component="h4" style={{ margin: 6 }}>
+                  Referencias
+                </Typography>
                 <TreeView
                   className={classes.viewRoot}
                   defaultCollapseIcon={<ExpandMoreIcon />}
@@ -149,9 +145,14 @@ export default function Referencia(props) {
                   ))}
                 </TreeView>
               </div>
-            </Grid>                     
+            </Grid>
+            <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Typography variant="h6" component="h4" style={{ margin: 5 }}>
+                Ruta de referencia sleccionada : {(ruta_referencia==="")?"Ninguna":ruta_referencia}
+              </Typography> 
+            </Grid>
             {/* IDA */}
-            <Grid item lg={6} md={12} sm={12} xs={12}>
+            <Grid item lg={6} md={12} sm={12} xs={12}>                        
               <FormControl className={classes.formControl}>
                 <InputLabel>Ida</InputLabel>
                 <Select
@@ -197,11 +198,9 @@ export default function Referencia(props) {
         <Grid item lg={12}>
           <Grid container spacing={3}>
             <Grid item lg={12} md={12} sm={12} xs={12}>
-              <Paper className={classes.paper} variant="outlined">
-                <Typography variant="h6" component="h4">
-                  Incumplido /Cubierto
-                </Typography>
-              </Paper>
+              <Typography variant="h6" component="h4" style={{ margin: 5 }}>
+                Vueltas, idas  y regresos
+              </Typography>
             </Grid>
             {/* VUELTAS */}
             <Grid item lg={4} md={4} sm={12} xs={12}>
@@ -282,6 +281,11 @@ export default function Referencia(props) {
               </FormControl>
             </Grid>
             {/* TRAMO DESDE */}
+            <Grid item lg={12} md={12} sm={12} xs={12}>
+              <Typography variant="h6" component="h4" style={{ margin: 5 }}>
+                Tramos
+              </Typography>
+            </Grid>
             <Grid item lg={6} md={12} sm={12} xs={12}>
               <FormControl className={classes.formControl}>
                 <InputLabel>Desde</InputLabel>

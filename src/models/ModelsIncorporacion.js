@@ -1,4 +1,6 @@
-export const ModelDesincorporacion = () =>{
+import { setFechaActual, setHoraActual } from "../helpers/utils";
+
+export const ModelDesincorporacion = () =>{    
     return {        
         linea: "",
         solicita: "",
@@ -10,12 +12,12 @@ export const ModelDesincorporacion = () =>{
         odometro: "",
         credencial: "",
         nombre: "",
-        fecha: "2017-05-24",
-        hora: "07:30",
+        fecha: setFechaActual(), // (yy/mm/dd)
+        hora: setHoraActual(),
         jornada: "",
         observaciones: "",
-        tipo: "",
-        edoFolio: "",        
+        tipo: "Incumplido",
+        edoFolio: "Abierto"      
     }
 };
 
@@ -28,8 +30,8 @@ export const ModelIncorporacion = () =>{
         odometro: "",
         credencial: "",
         nombre: "",
-        fecha: "2017-05-24",
-        hora: "07:30",                        
+        fecha: setFechaActual(),
+        hora: setHoraActual(),                        
         sentido: "",
         entrada: "",
         status: "",
@@ -41,15 +43,16 @@ export const ModelIncorporacion = () =>{
 };
 
 
-export const ModelReferencias = () =>{
+export const ModelReferencias = () =>{ //Praa cumplimientos e incumplimientos
     return {
-        referencia: "",
+        ruta_referencia: "",
         ref_ida: "",
         ref_vuelta :"",
-        num_vuelta: 0,
-        num_ida: 0,
-        num_regreso: 0,
+        num_vuelta: "0",
+        num_ida: "0",
+        num_regreso: "0",
         tramo_desde: "-",
         tramo_hasta:"-",
+        kilometraje:0,
     }
 }
