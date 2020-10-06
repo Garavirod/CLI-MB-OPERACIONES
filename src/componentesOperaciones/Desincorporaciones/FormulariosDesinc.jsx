@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -20,6 +20,10 @@ import {
 } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
 import { TabListasComponent } from "./TabListas";
+
+
+import { httpPostData } from "../../functions/httpRequest";
+import { CustomSwalSave, CustomSwalError} from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   conatiner: {
@@ -50,7 +54,53 @@ export const FormDesincorporaciones = () =>{
     ModelReferencias
   );
 
-  console.log(valuesRef);
+  
+  //----------cumplimientos_incumplimientos----------
+
+  const [cumIncum, setCumIncumValues] = useState({
+    referencia: 'referenciaPrueba', //how?
+    ida: '',
+    vuelta: '',
+    numVueltas: 0,
+    numIdas: 0,
+    numRegresos: 0,
+    tramoDesde: '',
+    tramoHasta: '',
+    kilometraje: 1.1, //how?
+    tipo: 'cumplimiento' //how?
+  });
+
+  function handleCumIncumChange(event){
+    const compName = event.target.name;
+    const compValue = event.target.value;
+
+    setCumIncumValues(prevValues => {
+      return ({
+        ...prevValues,
+        [compName]:compValue
+      });
+    });//setCumIncumValues
+    
+    console.log(cumIncum);
+
+  }//handleCumIncumChange
+
+
+  //Save Cumplimiento
+  function saveCumIncum(){
+    //where from??
+    const url = "/desincorporaciones/datos-cumplimiento/${idDesincorporacion:1}";    
+    const success = httpPostData(url, cumIncum);
+
+    if(success)
+      CustomSwalSave(); 
+    else
+      CustomSwalError();
+  }//saveCumIncum
+  //----------cumplimientos_incumplimientos----------
+
+
+  //console.log(valuesRef);
 
   return (
     <Container maxWidth="lg" className={classes.conatiner}>
@@ -88,9 +138,11 @@ export const FormDesincorporaciones = () =>{
                   <Grid item lg={6}>
                     {/* REFERENCIAS */}
                     <Referencia
-                      valuesRef={valuesRef}
-                      handleInputChangeRef={handleInputChangeRef}
-                      resetRef={resetRef}
+                      //valuesRef={valuesRef}
+                      //handleInputChangeRef={handleInputChangeRef}
+                      //resetRef={resetRef}
+                      refValues={cumIncum}
+                      handleRefValues={handleCumIncumChange}
                     />
                   </Grid>
                   {/* LISTA DE REGISTROS */}
@@ -100,7 +152,12 @@ export const FormDesincorporaciones = () =>{
                 </Grid>
               </CardContent>
               <CardActions>
-                <Button size="small" variant="contained" color="primary">
+                <Button 
+                  size="small"
+                  variant="contained"
+                  color="primary"
+                  onClick={saveCumIncum}
+                >
                   Guardar
                 </Button>
                 <Button size="small" variant="contained" color="primary">
