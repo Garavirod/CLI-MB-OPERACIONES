@@ -53,6 +53,7 @@ export const ModelReferencias = () =>{ //Praa cumplimientos e incumplimientos
         num_regreso: "0",
         tramo_desde: "-",
         tramo_hasta:"-",
+        tipo:"-",
         kilometraje:0,
     }
 }
