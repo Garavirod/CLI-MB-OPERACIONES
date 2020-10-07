@@ -45,14 +45,25 @@ export const ModelIncorporacion = () =>{
 
 export const ModelReferencias = () =>{ //Praa cumplimientos e incumplimientos
     return {
-        ruta_referencia: "",
-        ref_ida: "",
-        ref_vuelta :"",
-        num_vuelta: "0",
-        num_ida: "0",
-        num_regreso: "0",
-        tramo_desde: "-",
-        tramo_hasta:"-",
-        kilometraje:0,
+        referencia: '',
+        ida: '',
+        vuelta: '',
+        numVueltas: 0,
+        numIdas: 0,
+        numRegresos: 0,
+        tramoDesde: '',
+        tramoHasta: '',
+        kilometraje: 0,
+        tipo: ''
+        //así estaba--------
+        //ruta_referencia: "",
+        //ref_ida: "",
+        //ref_vuelta :"",
+        //num_vuelta: "0",
+        //num_ida: "0",
+        //num_regreso: "0",
+        //tramo_desde: "-",
+        //tramo_hasta:"-",
+        //kilometraje:0,
     }
 }

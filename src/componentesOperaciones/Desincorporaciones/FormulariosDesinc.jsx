@@ -50,10 +50,29 @@ export const FormDesincorporaciones = () => {
     ModelIncorporacion
   );
 
+  //----------cumplimientos_incumplimientos----------
   // Modelo y estructura de una Referencia para un Incumplimietno
   const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(
     ModelReferencias
   );
+
+  function handleInputChangeRef1(event){
+    console.log(event);
+    
+    const compName = event.target.name;
+    const compValue = event.target.value;
+
+    setCumIncumValues1(prevValues => {
+      return ({
+        ...prevValues,
+        [compName]:compValue
+      });
+    });//setCumIncumValues
+    
+    console.log(valuesRef1);
+
+  }//handleInputChangeRef1
+  //----------cumplimientos_incumplimientos----------
 
   // Modelo y estructura de una Referencia para un Cumplimiento
   const [valuesRef2, handleInputChangeRef2, resetRef2] = useForm(
