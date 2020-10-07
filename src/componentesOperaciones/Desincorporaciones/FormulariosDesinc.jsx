@@ -51,28 +51,14 @@ export const FormDesincorporaciones = () => {
   );
 
   //----------cumplimientos_incumplimientos----------
+  //where from??
+  const urlCum = "/desincorporaciones/datos-cumplimiento/${idDesincorporacion:1}";    
   // Modelo y estructura de una Referencia para un Incumplimietno
   const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(
     ModelReferencias
   );
-
-  function handleInputChangeRef1(event){
-    console.log(event);
-    
-    const compName = event.target.name;
-    const compValue = event.target.value;
-
-    setCumIncumValues1(prevValues => {
-      return ({
-        ...prevValues,
-        [compName]:compValue
-      });
-    });//setCumIncumValues
-    
-    console.log(valuesRef1);
-
-  }//handleInputChangeRef1
   //----------cumplimientos_incumplimientos----------
+
 
   // Modelo y estructura de una Referencia para un Cumplimiento
   const [valuesRef2, handleInputChangeRef2, resetRef2] = useForm(
@@ -82,6 +68,9 @@ export const FormDesincorporaciones = () => {
   const { tipo } = valuesDes;
 
   const registraFolio = (e) => {
+    //-----------------------------------borrar
+    console.log(valuesRef1);
+    //-----------------------------------borrar
     e.preventDefault();
     // Validamos el folio de la desincorporación
     const isValidFolio = validateFormExcept(valuesDes, ["observaciones"]);
@@ -99,6 +88,11 @@ export const FormDesincorporaciones = () => {
           console.log(valuesRef1);
           alert(`Kilometraje incumplido >: ${km}`);
           //Realizar el POST
+          const success = httpPostData(urlCum, valuesRef1);
+          if(success)
+            CustomSwalSave(); 
+          else
+            CustomSwalError();
         } else {
           alert("Campos vacios");
         }
@@ -113,6 +107,11 @@ export const FormDesincorporaciones = () => {
           console.log(valuesRef2);
           alert(`Kilometraje cumplido >: ${km}`);
           //Realizar el POST
+          const success = httpPostData(urlCum, valuesRef2);
+          if(success)
+            CustomSwalSave(); 
+          else
+            CustomSwalError();
         } else {
           alert("Campos vacios");
         }
@@ -144,6 +143,13 @@ export const FormDesincorporaciones = () => {
             alert("Campos vacios");
           }
           //Realizar el POST
+          /* SON LOS DOS???????? */
+          const success1 = httpPostData(urlCum, valuesRef1);
+          const success2 = httpPostData(urlCum, valuesRef2);
+          if(success1 && success2)
+            CustomSwalSave(); 
+          else
+            CustomSwalError();
         break;
       default:
         break;

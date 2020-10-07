@@ -62,21 +62,21 @@ export default function Referencia(props) {
   
   // desestructurando las propiedades del Hook
   //const { valuesRef, handleInputChangeRef, titulo, color } = props;
-  const { titulo, color } = props;
+  const { valuesRef, handleInputChangeRef, titulo, color } = props;
 
-  /* Desestructurando el hook del modelo Desinc dadas las props del hook
+  //Desestructurando el hook del modelo Desinc dadas las props del hook
   const {
-    referencia,
-    ida,
-    vuelta,
-    numVueltas,
-    numIdas,
-    numRegresos,
-    tramoDesde,
-    tramoHasta,
+    ruta_referencia,
+    ref_ida,
+    ref_vuelta,
+    num_vuelta,
+    num_ida,
+    num_regreso,
+    tramo_desde,
+    tramo_hasta,
+    tipo,
     kilometraje,
-    tipo
-  } = valuesRef;*/
+  } = valuesRef;
 
   // Variables del componente
   const [estacionesRuta, setEstacionesRuta] = useState([]); //Carga las rutas
@@ -87,13 +87,8 @@ export default function Referencia(props) {
 
   // La función verifica si se ha cambiado de ruta o referencia
   const handleChangeRuta = (ref) => {
-    // Se cambia la referencia en el modelo (cambié ruta_referencia)
-    const target = { name: "referencia", value: ref };
-    const event = {target};
-    //handleInputChangeRef({ target });
-    //-------------
-    props.handleInputChangeRef({event});
-    //-------------
+    const target = { name: "ruta_referencia", value: ref };
+    handleInputChangeRef({ target });
   };
 
   // La función consigue todas las estaciones de una ruta en específico
@@ -106,8 +101,8 @@ export default function Referencia(props) {
   // El hook effect asegura qeu solo cuando se cambie la ruta, debe cargar
   // las estaciones de dicha ruta seleccionada
   useEffect(() => {
-    getDatosbyReferencia(props.referencia);//ruta_referencia
-  }, [props.referencia]);
+    getDatosbyReferencia(ruta_referencia);//ruta_referencia
+  }, [ruta_referencia]);
 
   return (
     <Container className={classes.root}>
@@ -139,9 +134,7 @@ export default function Referencia(props) {
                           key={it.id}
                           nodeId={it.id}
                           label={it.name}
-                          name="referencia"
-                          //value={props.valuesRef.referencia}
-                          //onChange={handleCumIncumChange}
+                          name="ruta_referencia"
                           onLabelClick={() => {
                             //handleChangeRuta(it.id);
                             handleChangeRuta(it.name);
@@ -155,7 +148,7 @@ export default function Referencia(props) {
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12}>
             <Typography variant="h6" component="h4" style={{ margin: 5 }}>
-                Ruta de referencia sleccionada : {(props.valuesRef.referencia==="")?"Ninguna":props.valuesRef.referencia}
+                Ruta de referencia sleccionada : {(ruta_referencia==="")?"Ninguna":ruta_referencia}
               </Typography> 
             </Grid>
             {/* IDA */}
@@ -164,13 +157,10 @@ export default function Referencia(props) {
                 <InputLabel>Ida</InputLabel>
                 <Select
                   native
-                  //value={ref_ida}
-                  //onChange={handleInputChangeRef}
-                  value={props.valuesRef.ida}
-                  onChange={props.handleInputChangeRef}
+                  value={ref_ida}
+                  onChange={handleInputChangeRef}
                   inputProps={{
-                    //name: "ref_ida",
-                    name: "ida"
+                    name: "ref_ida",
                   }}
                 >
                   <option value={""}>...</option>
@@ -185,13 +175,10 @@ export default function Referencia(props) {
                 <InputLabel>Vuelta</InputLabel>
                 <Select
                   native
-                  //value={ref_vuelta}
-                  //onChange={handleInputChangeRef}
-                  value={props.valuesRef.vuelta}
-                  onChange={props.handleInputChangeRef}
+                  value={ref_vuelta}
+                  onChange={handleInputChangeRef}
                   inputProps={{
-                    //name: "ref_vuelta",
-                    name: "vuelta"
+                    name: "ref_vuelta",
                   }}
                 >
                   <option value={""}>...</option>
@@ -216,12 +203,9 @@ export default function Referencia(props) {
                   id="camporetrazo"
                   label="Vueltas"
                   type="number"
-                  //name="num_vuelta"
-                  //value={num_vuelta}
-                  //onChange={handleInputChangeRef}
-                  name= "numVueltas"
-                  value={props.valuesRef.numVueltas}
-                  onChange={props.handleInputChangeRef}
+                  name="num_vuelta"
+                  value={num_vuelta}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     step: 1,
                     min: 0,
@@ -242,12 +226,9 @@ export default function Referencia(props) {
                   id="camporetrazo"
                   label="Idas"
                   type="number"
-                  //name="num_ida"
-                  //value={num_ida}
-                  //onChange={handleInputChangeRef}
-                  name="numIdas"
-                  value={props.valuesRef.numIdas}
-                  onChange={props.handleInputChangeRef}
+                  name="num_ida"
+                  value={num_ida}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     step: 1,
                     min: 0,
@@ -268,12 +249,9 @@ export default function Referencia(props) {
                   id="camporetrazo"
                   label="Regresos"
                   type="number"
-                  //name="num_regreso"
-                  //value={num_regreso}
-                  //onChange={handleInputChangeRef}
-                  name="numRegresos"
-                  value={props.valuesRef.numRegresos}
-                  onChange={props.handleInputChangeRef}
+                  name="num_regreso"
+                  value={num_regreso}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     step: 1,
                     min: 0,
@@ -298,13 +276,10 @@ export default function Referencia(props) {
                 <InputLabel>Desde</InputLabel>
                 <Select
                   native
-                  //value={tramo_desde}
-                  //onChange={handleInputChangeRef}
-                  value={props.valuesRef.tramoDesde}
-                  onChange={props.handleInputChangeRef}
+                  value={tramo_desde}
+                  onChange={handleInputChangeRef}
                   inputProps={{
-                    //name: "tramo_desde",
-                    name: "tramoDesde",
+                    name: "tramo_desde",
                   }}
                 >
                   <option value={""}>...</option>
@@ -322,13 +297,10 @@ export default function Referencia(props) {
                 <InputLabel>Hasta</InputLabel>
                 <Select
                   native
-                  //value={tramo_hasta}
-                  //onChange={handleInputChangeRef}
-                  value={props.valuesRef.tramoHasta}
-                  onChange={props.handleInputChangeRef}
+                  value={tramo_hasta}
+                  onChange={handleInputChangeRef}
                   inputProps={{
-                    //name: "tramo_hasta",
-                    name: "tramoHasta",
+                    name: "tramo_hasta"
                   }}
                 >
                   <option value={""}>...</option>
