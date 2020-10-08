@@ -58,8 +58,8 @@ export const setKilometrajeCalculado = (referencia) =>{
     
     if(parseInt(num_vuelta)===0){
         // El incumplimiento o cumplimiento fue por tramos
-        let [_distE1] = distancias.filter(e=> e['Estacion'] === "Buenavista");
-        let [_distE2] = distancias.filter(e=> e['Estacion'] === "Durango");
+        let [_distE1] = distancias.filter(e=> e['Estacion'] === tramo_desde);
+        let [_distE2] = distancias.filter(e=> e['Estacion'] === tramo_hasta);
         console.log("OBJ E1",_distE1);
         console.log("OBJ E2",_distE2);       
         // Si la estacion es la ultima (penúltima array), se considera la distancia del retorno (última array)

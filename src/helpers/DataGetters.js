@@ -480,7 +480,7 @@ export const getDistanciasByRuta = (ruta) =>{
                         Estacion:'Buenavista',
                         Acumulado:7.04
                     },{
-                        Estacion:'El Chopo ',
+                        Estacion:'El Chopo',
                         Acumulado:7.41
                     },{
                         Estacion:'Revolución',
@@ -504,7 +504,7 @@ export const getDistanciasByRuta = (ruta) =>{
                         Estacion:'Álvaro Obregón',
                         Acumulado:10.56
                     },{
-                        Estacion:'Sonora ',
+                        Estacion:'Sonora',
                         Acumulado:10.91
                     },{
                         Estacion:'Campeche',
@@ -516,7 +516,7 @@ export const getDistanciasByRuta = (ruta) =>{
                         Estacion:'Nuevo León',
                         Acumulado:12.20
                     },{
-                        Estacion:'La Piedad ',
+                        Estacion:'La Piedad',
                         Acumulado:12.66
                     },{
                         Estacion:'Poliforum',
@@ -609,7 +609,7 @@ export const getDistanciasByRuta = (ruta) =>{
                         Estacion:'Poliforum',
                         Acumulado:5.93
                     },{
-                        Estacion:'La Piedad ',
+                        Estacion:'La Piedad',
                         Acumulado:6.43
                     },{
                         Estacion:'Nuevo León',
@@ -621,7 +621,7 @@ export const getDistanciasByRuta = (ruta) =>{
                         Estacion:'Campeche',
                         Acumulado:7.79
                     },{
-                        Estacion:'Sonora ',
+                        Estacion:'Sonora',
                         Acumulado:8.18
                     },{
                         Estacion:'Álvaro Obregón',
@@ -645,7 +645,7 @@ export const getDistanciasByRuta = (ruta) =>{
                         Estacion:'Revolución',
                         Acumulado:11.31
                     },{
-                        Estacion:'El Chopo ',
+                        Estacion:'El Chopo',
                         Acumulado:11.62
                     },{
                         Estacion:'Buenavista',
@@ -710,7 +710,7 @@ export const getDistanciasByRuta = (ruta) =>{
                         Estacion:'Nuevo León',
                         Acumulado:12.20
                     },{
-                        Estacion:'La Piedad ',
+                        Estacion:'La Piedad',
                         Acumulado:12.66
                     },{
                         Estacion:'Poliforum',
@@ -1114,25 +1114,144 @@ export const getEstacionesByReferencia = (ref) =>{
                     estaciones :[
                         {
                             idEstacion: "1",
-                            estacion :"Estacion 1"
+                            estacion :"I. Verdes"
                         },
                         {
                             idEstacion: "2",
-                            estacion :"Estacion 2"
+                            estacion :"Dptvo. 18 Mzo."
                         },
                         {
                             idEstacion: "3",
-                            estacion :"Estacion 3"
+                            estacion :"Euzkaro"
                         },
                         {
                             idEstacion: "4",
-                            estacion :"Estacion 4"
+                            estacion :"La Raza"
                         },
                         {
                             idEstacion: "5",
-                            estacion :"Estacion 5"
+                            estacion :"Circuito"
                         },
-        
+                        {
+                            idEstacion: "6",
+                            estacion :"San Simón"
+                        },
+                        {
+                            idEstacion: "7",
+                            estacion :"Manuel Glz."
+                        },
+                        {
+                            idEstacion: "8",
+                            estacion :"Buenavista"
+                        },
+                        {
+                            idEstacion: "9",
+                            estacion :"El Chopo"
+                        },
+                        {
+                            idEstacion: "10",
+                            estacion :"Revolución"
+                        },
+                        {
+                            idEstacion: "11",
+                            estacion :"Plaza de la República"
+                        },
+                        {
+                            idEstacion: "12",
+                            estacion :"Reforma"
+                        },
+                        {
+                            idEstacion: "13",
+                            estacion :"Hamburgo"
+                        },
+                        {
+                            idEstacion: "14",
+                            estacion :"Insurgentes"
+                        },
+                        {
+                            idEstacion: "15",
+                            estacion :"Durango"
+                        },
+                        {
+                            idEstacion: "16",
+                            estacion :"Álvaro Obregón"
+                        },
+                        {
+                            idEstacion: "17",
+                            estacion :"Sonora"
+                        },
+                        {
+                            idEstacion: "18",
+                            estacion :"Campeche"
+                        },
+                        {
+                            idEstacion: "19",
+                            estacion :"Chilpancingo"
+                        },
+                        {
+                            idEstacion: "20",
+                            estacion :"Nuevo León"
+                        },
+                        {
+                            idEstacion: "21",
+                            estacion :"La Piedad"
+                        },
+                        {
+                            idEstacion: "22",
+                            estacion :"Poliforum"
+                        },
+                        {
+                            idEstacion: "23",
+                            estacion :"Nápoles"
+                        },
+                        {
+                            idEstacion: "24",
+                            estacion :"Col. del Valle"
+                        },
+                        {
+                            idEstacion: "25",
+                            estacion :"Cd. de los Deportes"
+                        },
+                        {
+                            idEstacion: "26",
+                            estacion :"Parque Hundido"
+                        },
+                        {
+                            idEstacion: "27",
+                            estacion :"Félix Cuevas"
+                        },
+                        {
+                            idEstacion: "28",
+                            estacion :"Río Churubusco"
+                        },
+                        {
+                            idEstacion: "29",
+                            estacion :"Teatro Insurgentes"
+                        },
+                        {
+                            idEstacion: "30",
+                            estacion :"José María Velasco"
+                        },
+                        {
+                            idEstacion: "31",
+                            estacion :"Francia"
+                        },
+                        {
+                            idEstacion: "32",
+                            estacion :"Olivo"
+                        },
+                        {
+                            idEstacion: "33",
+                            estacion :"Altavista"
+                        },
+                        {
+                            idEstacion: "34",
+                            estacion :"La Bombilla"
+                        },
+                        {
+                            idEstacion: "35",
+                            estacion :"Dr. Gálvez"
+                        },        
                     ]
                 }
             break;           
@@ -1144,23 +1263,127 @@ export const getEstacionesByReferencia = (ref) =>{
                     estaciones :[
                         {
                             idEstacion: "1",
-                            estacion :"Estacion 1"
+                            estacion :"Insurgentes"
                         },
                         {
                             idEstacion: "2",
-                            estacion :"Estacion 2"
+                            estacion :"Durango"
                         },
                         {
                             idEstacion: "3",
-                            estacion :"Estacion 3"
+                            estacion :"Álvaro Obregón"
                         },
                         {
                             idEstacion: "4",
-                            estacion :"Estacion 4"
+                            estacion :"Sonora"
                         },
                         {
                             idEstacion: "5",
-                            estacion :"Estacion 5"
+                            estacion :"Campeche"
+                        },
+                        {
+                            idEstacion: "6",
+                            estacion :"Chilpancingo"
+                        },
+                        {
+                            idEstacion: "7",
+                            estacion :"Nuevo León"
+                        },
+                        {
+                            idEstacion: "8",
+                            estacion :"La Piedad"
+                        },
+                        {
+                            idEstacion: "9",
+                            estacion :"Poliforum"
+                        },
+                        {
+                            idEstacion: "10",
+                            estacion :"Nápoles"
+                        },
+                        {
+                            idEstacion: "11",
+                            estacion :"Col. del Valle"
+                        },
+                        {
+                            idEstacion: "12",
+                            estacion :"Cd. de los Deportes"
+                        },
+                        {
+                            idEstacion: "13",
+                            estacion :"Parque Hundido"
+                        },
+                        {
+                            idEstacion: "14",
+                            estacion :"Félix Cuevas"
+                        },
+                        {
+                            idEstacion: "15",
+                            estacion :"Río Churubusco"
+                        },
+                        {
+                            idEstacion: "16",
+                            estacion :"Teatro Insurgentes"
+                        },
+                        {
+                            idEstacion: "17",
+                            estacion :"José María Velasco"
+                        },
+                        {
+                            idEstacion: "18",
+                            estacion :"Francia"
+                        },
+                        {
+                            idEstacion: "19",
+                            estacion :"Olivo"
+                        },
+                        {
+                            idEstacion: "20",
+                            estacion :"Altavista"
+                        },
+                        {
+                            idEstacion: "21",
+                            estacion :"La Bombilla"
+                        },
+                        {
+                            idEstacion: "22",
+                            estacion :"Dr. Gálvez"
+                        },
+                        {
+                            idEstacion: "23",
+                            estacion :"Ciudad Universitaria"
+                        },
+                        {
+                            idEstacion: "24",
+                            estacion :"C. Cultura Universitario"
+                        },
+                        {
+                            idEstacion: "25",
+                            estacion :"Perisur"
+                        },
+                        {
+                            idEstacion: "26",
+                            estacion :"Villa Olimpica"
+                        },
+                        {
+                            idEstacion: "27",
+                            estacion :"Corregidora"
+                        },
+                        {
+                            idEstacion: "28",
+                            estacion :"Ayuntamiento"
+                        },
+                        {
+                            idEstacion: "29",
+                            estacion :"Fuentes Brotantes"
+                        },
+                        {
+                            idEstacion: "30",
+                            estacion :"Santa Úrsula"
+                        },
+                        {
+                            idEstacion: "31",
+                            estacion :"La Joya"
                         },
         
                     ]
@@ -1212,16 +1435,16 @@ export const getReferencias = () =>{
                     id: "A1",
                     name : "01-101 A1",                                      
                 }, 
-                {
-                    id: "A2",
-                    name : "01-102 A2",
+                // {
+                //     id: "A2",
+                //     name : "01-102 A2",
                     
-                }, 
-                {
-                    id: "A3",
-                    name : "01-103 A3",
+                // }, 
+                // {
+                //     id: "A3",
+                //     name : "01-103 A3",
                     
-                }, 
+                // }, 
                 {
                     id: "A20",
                     name : "01-120 A20",
