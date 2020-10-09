@@ -26,6 +26,7 @@ import { setKilometrajeCalculado } from "../../helpers/utils";
 
 import { httpPostData } from "../../functions/httpRequest";
 import { CustomSwalSave, CustomSwalError} from "../../functions/customSweetAlert";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   conatiner: {
@@ -51,12 +52,15 @@ export const FormDesincorporaciones = () => {
   );
 
   //----------cumplimientos_incumplimientos----------
-  //where from??
-  const urlCum = "/desincorporaciones/datos-cumplimiento/${idDesincorporacion:1}";    
   // Modelo y estructura de una Referencia para un Incumplimietno
   const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(
     ModelReferencias
   );
+  //get the idDesincorporacion for the Cumplimiento_Incumplimiento
+  //const { idFolio } = useParams();
+  const idFolio = 2;
+  const urlCum = "/desincorporaciones/datos-cumplimiento/${idDesincorporacion:"+idFolio+"}";
+  console.log("el folio "+idFolio);
   //----------cumplimientos_incumplimientos----------
 
 
@@ -68,9 +72,7 @@ export const FormDesincorporaciones = () => {
   const { tipo } = valuesDes;
 
   const registraFolio = (e) => {
-    //-----------------------------------borrar
-    console.log(valuesRef1);
-    //-----------------------------------borrar
+    
     e.preventDefault();
     // Validamos el folio de la desincorporación
     const isValidFolio = validateFormExcept(valuesDes, ["observaciones"]);
@@ -88,6 +90,7 @@ export const FormDesincorporaciones = () => {
           console.log(valuesRef1);
           alert(`Kilometraje incumplido >: ${km}`);
           //Realizar el POST
+          //cumplimientos_incumplimientos-----------
           const success = httpPostData(urlCum, valuesRef1);
           if(success)
             CustomSwalSave(); 
@@ -143,7 +146,7 @@ export const FormDesincorporaciones = () => {
             alert("Campos vacios");
           }
           //Realizar el POST
-          /* SON LOS DOS???????? */
+          /* BOTH???????? */
           const success1 = httpPostData(urlCum, valuesRef1);
           const success2 = httpPostData(urlCum, valuesRef2);
           if(success1 && success2)
