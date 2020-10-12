@@ -172,6 +172,7 @@ export const FormDesincorporaciones = () => {
                               valuesRef={valuesRef2}
                               handleInputChangeRef={handleInputChangeRef2}
                               resetRef={resetRef2}
+                              flag={true}
                             />
                           </div>
                         ) : tipo === "Incumplido" ? (

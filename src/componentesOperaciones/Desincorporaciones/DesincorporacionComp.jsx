@@ -19,7 +19,7 @@ import {
   getJornadas,
   getSolicitudes,
   getEstacionesByLinea,
-  getEconomicos,  
+  getEconomicos,
   getInfromantes,
   getMotivos,
   getEmpresaByEco,
@@ -47,8 +47,8 @@ export const DesincorporacionComp = (props) => {
   const classes = useStyles();
   const { valuesDes, handleInputChangeDes } = props;
   // Estaciones por linea
-  const [estacioneslinea,setEstacionLinea] = useState([]);
-  const [empresaeconomico,setEmpresaEco] = useState([]);
+  const [estacioneslinea, setEstacionLinea] = useState([]);
+  const [empresaeconomico, setEmpresaEco] = useState("");
 
   // desestructurando el values del hook
   const {
@@ -57,7 +57,6 @@ export const DesincorporacionComp = (props) => {
     informa,
     estacion,
     economico,
-    empresa,
     motivo,
     odometro,
     credencial,
@@ -71,14 +70,16 @@ export const DesincorporacionComp = (props) => {
   } = valuesDes;
 
   // Cada vez que cambie el estado de la linea, se tren todas las estaciones
-  useEffect(()=>{    
-    setEstacionLinea(getEstacionesByLinea(linea));    
-  },[linea]);
+  useEffect(() => {
+    setEstacionLinea(getEstacionesByLinea(linea));
+  }, [linea]);
 
   // Cada vez que el eco cambia de estado, busca la EO al que pertenece
-  useEffect(()=>{
-    setEmpresaEco(getEmpresaByEco(economico));
-  },[economico]);
+  useEffect(() => {
+    setEmpresaEco(getEmpresaByEco(economico)[0]);
+    const target = { name: "empresa", value: empresaeconomico };
+    handleInputChangeDes({ target });
+  }, [economico]);
 
   // Data inputs
   const lineas = getLineas();
@@ -101,11 +102,11 @@ export const DesincorporacionComp = (props) => {
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* LINEA */}
           <FormControl className={classes.formControl}>
-            <InputLabel>Linea</InputLabel>            
+            <InputLabel>Linea</InputLabel>
             <Select
               native
               value={linea}
-              onChange={handleInputChangeDes}                         
+              onChange={handleInputChangeDes}
               inputProps={{
                 name: "linea",
               }}
@@ -206,22 +207,15 @@ export const DesincorporacionComp = (props) => {
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* EMPRESA */}
           <FormControl className={classes.formControl}>
-            <InputLabel>Empresa</InputLabel>
-            <Select
-              native
-              value={empresa}
-              onChange={handleInputChangeDes}
-              inputProps={{
-                name: "empresa",
+            {/* <InputLabel>Empresa: {empresaeconomico}  </InputLabel>  */}
+            <TextField
+              id="standard-read-only-input"
+              label="Empresa"
+              value={empresaeconomico}
+              InputProps={{
+                readOnly: true,
               }}
-            >
-              <option value={""}>...</option>
-              {
-                empresaeconomico.map((it)=>(
-                  <option key={it} value={it}>{it}</option>            
-                ))
-              }
-            </Select>
+            />
           </FormControl>
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>

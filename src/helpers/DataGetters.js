@@ -1549,8 +1549,8 @@ export const getIncumplimientosByFolio = (folio) =>{
 export const getCumplimientosByFolio = (folio) =>{
     return{
             ruta_referencia: "A20",
-            ref_ida: "Insurgentes - La joya",
-            ref_vuelta :"La joya - Insurgentes",
+            ref_ida: "Insurgentes - La Joya",
+            ref_vuelta :"La Joya - Insurgentes",
             num_vuelta: 4,
             num_ida: 2,
             num_regreso: 2,

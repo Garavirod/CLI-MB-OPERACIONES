@@ -42,8 +42,9 @@ export const ModelIncorporacion = () =>{
     }
 };
 
+// Se toma para maracar losincumplimientos o apoyos
 
-export const ModelReferencias = () =>{ //Praa cumplimientos e incumplimientos
+export const ModelReferencias = () =>{
     return {
         ruta_referencia: "",
         ref_ida: "",
@@ -54,6 +55,6 @@ export const ModelReferencias = () =>{ //Praa cumplimientos e incumplimientos
         tramo_desde: "-",
         tramo_hasta:"-",
         tipo:"-",
-        kilometraje:0,
+        kilometraje:0,   
     }
 }
