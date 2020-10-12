@@ -76,9 +76,9 @@ export const DesincorporacionComp = (props) => {
 
   // Cada vez que el eco cambia de estado, busca la EO al que pertenece
   useEffect(() => {
-    setEmpresaEco(getEmpresaByEco(economico)[0]);
-    const target = { name: "empresa", value: empresaeconomico };
-    handleInputChangeDes({ target });
+    const empresa = getEmpresaByEco(economico)[0];
+    setEmpresaEco(empresa);
+    valuesDes["empresa"] = empresa;
   }, [economico]);
 
   // Data inputs
@@ -207,15 +207,10 @@ export const DesincorporacionComp = (props) => {
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* EMPRESA */}
           <FormControl className={classes.formControl}>
-            {/* <InputLabel>Empresa: {empresaeconomico}  </InputLabel>  */}
-            <TextField
-              id="standard-read-only-input"
-              label="Empresa"
-              value={empresaeconomico}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
+            <Typography variant="h6" component="h6">
+              Empresa
+            </Typography>
+            <InputLabel>{empresaeconomico}</InputLabel>
           </FormControl>
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>

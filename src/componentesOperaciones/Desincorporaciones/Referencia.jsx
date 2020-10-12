@@ -286,7 +286,7 @@ export default function Referencia(props) {
                     name: "tramo_desde",
                   }}
                 >
-                  <option value={""}>...</option>
+                  <option value={"-"}>...</option>
                   {estacionesRuta.map((it) => (
                     <option key={it.estacion} value={it.estacion}>
                       {it.estacion}
@@ -307,7 +307,7 @@ export default function Referencia(props) {
                     name: "tramo_hasta",
                   }}
                 >
-                  <option value={""}>...</option>
+                  <option value={"-"}>...</option>
                   {estacionesRuta.map((it) => (
                     <option key={it.estacion} value={it.estacion}>
                       {it.estacion}

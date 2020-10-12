@@ -32,6 +32,21 @@ export const setHoraActual = () =>{
 }
 
 
+const kilometrajeByTramos = (tramo1,tramo2, distancias) =>{
+    // El incumplimiento o cumplimiento fue por tramos
+    let [_distE1] = distancias.filter(e=> e['Estacion'] === tramo1);
+    let [_distE2] = distancias.filter(e=> e['Estacion'] === tramo2);
+    console.log("OBJ E1",_distE1);
+    console.log("OBJ E2",_distE2);       
+    // Si la estacion es la ultima (penúltima array), se considera la distancia del retorno (última array)
+    if (_distE2 === distancias[distancias.length - 2]){
+
+        _distE2 = distancias[distancias.length - 1] 
+    }
+
+    return Math.abs(_distE2['Acumulado'] - _distE1['Acumulado']);
+}
+
 export const setKilometrajeCalculado = (referencia) =>{    
     // Desestructuramos datos de la referecnia
     const {
@@ -57,21 +72,14 @@ export const setKilometrajeCalculado = (referencia) =>{
     const distancias = (ref_ida === tag_destino) ? distancias_ida : distancias_reg;
     
     if(parseInt(num_vuelta)===0){
-        // El incumplimiento o cumplimiento fue por tramos
-        let [_distE1] = distancias.filter(e=> e['Estacion'] === tramo_desde);
-        let [_distE2] = distancias.filter(e=> e['Estacion'] === tramo_hasta);
-        console.log("OBJ E1",_distE1);
-        console.log("OBJ E2",_distE2);       
-        // Si la estacion es la ultima (penúltima array), se considera la distancia del retorno (última array)
-        if (_distE2 === distancias[distancias.length - 2]){
-
-            _distE2 = distancias[distancias.length - 1] 
-        }
-        // Se calcula el kilometraje con la diferencia de los tramos
-        kilometraje = Math.abs(_distE2['Acumulado'] - _distE1['Acumulado']);
-    }else{
-        // Fue por vuleta completa
-
+        // El incumplimiento o cumplimiento fue por tramos        
+        kilometraje = kilometrajeByTramos(tramo_desde,tramo_hasta,distancias);
+    }else if(parseInt(num_vuelta)!==0 && tramo_desde !== "-" && tramo_hasta !== "-"){
+        // Kilometraje pir vueltas en circuito
+        kilometraje = num_vuelta * kilometrajeByTramos(tramo_desde,tramo_hasta,distancias)
+    }
+    else{
+        // Fue por vuleta completa en un aruta
         // Se calcula el kilometraje por numero de vuletas completas
         kilometraje = num_vuelta*vuelta_completa;
     }
