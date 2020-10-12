@@ -69,9 +69,12 @@ export const FormDesincorporaciones = () => {
       case "Incumplido":
         isValidIncum = validateForm(valuesRef1);
         if (isValidFolio && isValidIncum) {
-          valuesRef1['kilometraje']=setKilometrajeCalculado(valuesRef1);                 
+          const km = setKilometrajeCalculado(valuesRef1);
+          valuesRef1['kilometraje']=km;
+          valuesRef1['tipo'] = "Incumplido";                 
           console.log(valuesDes);
           console.log(valuesRef1);
+          alert(`Kilometraje incumplido >: ${km}`);
           //Realizar el POST
         } else {
           alert("Campos vacios");
@@ -80,9 +83,12 @@ export const FormDesincorporaciones = () => {
       case "Apoyo":
         isValidApo = validateForm(valuesRef2);
         if (isValidFolio && isValidApo) {
-          valuesRef2['kilometraje']=setKilometrajeCalculado(valuesRef2);                 
+          const km = setKilometrajeCalculado(valuesRef2);
+          valuesRef2['kilometraje']=km;
+          valuesRef2['tipo'] = "cumplido";                                          
           console.log(valuesDes);
           console.log(valuesRef2);
+          alert(`Kilometraje cumplido >: ${km}`);
           //Realizar el POST
         } else {
           alert("Campos vacios");
@@ -92,16 +98,25 @@ export const FormDesincorporaciones = () => {
         isValidIncum = validateForm(valuesRef1);
         isValidApo = validateForm(valuesRef2);        
           if((isValidFolio) && (!isValidApo && isValidIncum)){
-            valuesRef1['kilometraje']=setKilometrajeCalculado(valuesRef1);                           
+            const km = setKilometrajeCalculado(valuesRef1);
+            valuesRef1['kilometraje']=km;
+            valuesRef1['tipo'] = "Incumplido";                          
             console.log(valuesDes);
             console.log(valuesRef1);
+            alert(`Kilometraje incumplido >: ${km}`);
 
           }else if ((isValidFolio) && (isValidApo && isValidIncum)){
-            valuesRef1['kilometraje']=setKilometrajeCalculado(valuesRef1);                           
-            valuesRef2['kilometraje']=setKilometrajeCalculado(valuesRef2);                 
+            const km1 = setKilometrajeCalculado(valuesRef1);
+            const km2 = setKilometrajeCalculado(valuesRef2); 
+            valuesRef1['kilometraje']=km1                           
+            valuesRef2['kilometraje']=km2
+            valuesRef1['tipo'] = "Incumplido"; 
+            valuesRef2['tipo'] = "cumplido";                 
             console.log(valuesDes);
             console.log(valuesRef1);
-            console.log(valuesRef2);
+            console.log(valuesRef2);            
+            alert(`Kilometraje calculado >: Inc ${km1} cump ${km2}`);
+
           }else{
             alert("Campos vacios");
           }
