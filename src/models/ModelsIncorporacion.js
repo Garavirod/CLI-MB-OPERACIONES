@@ -47,8 +47,7 @@ export const ModelIncorporacion = () =>{
 export const ModelReferencias = () =>{
     return {
         ruta_referencia: "",
-        ref_ida: "",
-        ref_vuelta :"",
+        ref_ida: "",        
         num_vuelta: "0",
         num_ida: "0",
         num_regreso: "0",

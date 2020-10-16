@@ -41,11 +41,6 @@ export const FormDesincorporaciones = () => {
     ModelDesincorporacion
   );
 
-  // Modelo y estructura de una Incorporación
-  // const [valuesInco, handleInputChangeInc, resetInc] = useForm(
-  //   ModelIncorporacion
-  // );
-
   // Modelo y estructura de una Referencia para un Incumplimietno
   const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(
     ModelReferencias

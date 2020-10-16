@@ -73,7 +73,6 @@ export default function Referencia(props) {
   const {
     ruta_referencia,
     ref_ida,
-    ref_vuelta,
     num_vuelta,
     num_ida,
     num_regreso,
@@ -153,10 +152,10 @@ export default function Referencia(props) {
                 Ruta de referencia sleccionada : {(ruta_referencia==="")?"Ninguna":ruta_referencia}
               </Typography> 
             </Grid>
-            {/* IDA */}
-            <Grid item lg={6} md={12} sm={12} xs={12}>                        
+            {/* DIRECCIÓN DE IDA Y VUELTA */}
+            <Grid item lg={12} md={12} sm={12} xs={12}>                        
               <FormControl className={classes.formControl}>
-                <InputLabel>Ida</InputLabel>
+                <InputLabel>Dirección</InputLabel>
                 <Select
                   native
                   value={ref_ida}
@@ -170,25 +169,7 @@ export default function Referencia(props) {
                   <option value={destinosRuta[1]}>{destinosRuta[1]}</option>
                 </Select>
               </FormControl>
-            </Grid>
-            {/* REGRESO */}
-            <Grid item lg={6} md={12} sm={12} xs={12}>
-              <FormControl className={classes.formControl}>
-                <InputLabel>Vuelta</InputLabel>
-                <Select
-                  native
-                  value={ref_vuelta}
-                  onChange={handleInputChangeRef}
-                  inputProps={{
-                    name: "ref_vuelta",
-                  }}
-                >
-                  <option value={""}>...</option>
-                  <option value={destinosRuta[0]}>{destinosRuta[0]}</option>
-                  <option value={destinosRuta[1]}>{destinosRuta[1]}</option>
-                </Select>
-              </FormControl>
-            </Grid>
+            </Grid>            
           </Grid>
         </Grid>
         <Grid item lg={12}>
@@ -314,8 +295,7 @@ export default function Referencia(props) {
                     </option>
                   ))}
                 </Select>
-              </FormControl>
-              {/* CIRCUITOS */}
+              </FormControl>              
             </Grid>
           </Grid>
         </Grid>
