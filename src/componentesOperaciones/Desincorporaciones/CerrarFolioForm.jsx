@@ -38,8 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const CerrarFolioForm = () => {
-  const { idFolio } = useParams();
-  console.log("LA FECHA ",setFechaActual());
+  const { idFolio } = useParams();  
   const classes = useStyles();
   const [cumplimientos] = useState(getCumplimientosByFolio(idFolio));
   const [incumplimientos] = useState(getIncumplimientosByFolio(idFolio));

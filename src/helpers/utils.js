@@ -31,6 +31,26 @@ export const setHoraActual = () =>{
 
 }
 
+/**
+ * Retorna el kilometraje por trammos o circuitos
+ * @param {estación origen} tramo1 
+ * @param {estación destino} tramo2 
+ * @param {array de distancias segun la dirección} distancias 
+ */
+const kilometrajeByTramos = (tramo1,tramo2, distancias) =>{
+    // El incumplimiento o cumplimiento fue por tramos
+    let [_distE1] = distancias.filter(e=> e['Estacion'] === tramo1);
+    let [_distE2] = distancias.filter(e=> e['Estacion'] === tramo2);
+    console.log("OBJ E1",_distE1);
+    console.log("OBJ E2",_distE2);       
+    // Si la estacion es la ultima (penúltima array), se considera la distancia del retorno (última array)
+    if (_distE2 === distancias[distancias.length - 2]){
+
+        _distE2 = distancias[distancias.length - 1] 
+    }
+    // Retorna la direferecnia de los kilometrajes de la estacion origen y destino
+    return Math.abs(_distE2['Acumulado'] - _distE1['Acumulado']);
+}
 
 export const setKilometrajeCalculado = (referencia) =>{    
     // Desestructuramos datos de la referecnia
@@ -56,22 +76,16 @@ export const setKilometrajeCalculado = (referencia) =>{
     // Extramos las distancias de ida o vuelta según la referencia de ida
     const distancias = (ref_ida === tag_destino) ? distancias_ida : distancias_reg;
     
+    // si fue por vuelta complet no importan los tramos (sólo vaidamos num_vueltas)
     if(parseInt(num_vuelta)===0){
-        // El incumplimiento o cumplimiento fue por tramos
-        let [_distE1] = distancias.filter(e=> e['Estacion'] === "Buenavista");
-        let [_distE2] = distancias.filter(e=> e['Estacion'] === "Durango");
-        console.log("OBJ E1",_distE1);
-        console.log("OBJ E2",_distE2);       
-        // Si la estacion es la ultima (penúltima array), se considera la distancia del retorno (última array)
-        if (_distE2 === distancias[distancias.length - 2]){
-
-            _distE2 = distancias[distancias.length - 1] 
-        }
-        // Se calcula el kilometraje con la diferencia de los tramos
-        kilometraje = Math.abs(_distE2['Acumulado'] - _distE1['Acumulado']);
-    }else{
-        // Fue por vuleta completa
-
+        // El incumplimiento o cumplimiento fue por tramos        
+        kilometraje = kilometrajeByTramos(tramo_desde,tramo_hasta,distancias);
+    }else if(parseInt(num_vuelta)!==0 && tramo_desde !== "-" && tramo_hasta !== "-"){
+        // Kilometraje por vueltas en circuito ya que se marcarón vueltas y estacion de circuito
+        kilometraje = num_vuelta * kilometrajeByTramos(tramo_desde,tramo_hasta,distancias)
+    }
+    else{
+        // Fue por vuleta completa en un ruta
         // Se calcula el kilometraje por numero de vuletas completas
         kilometraje = num_vuelta*vuelta_completa;
     }
