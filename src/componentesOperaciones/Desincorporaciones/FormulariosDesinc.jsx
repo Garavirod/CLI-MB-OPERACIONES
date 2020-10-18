@@ -46,6 +46,7 @@ export const FormDesincorporaciones = () => {
     ModelDesincorporacion
   );
 
+  //----------cumplimientos_incumplimientos----------
   // Modelo y estructura de una Referencia para un Incumplimietno
   const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(
     ModelReferencias
@@ -53,8 +54,7 @@ export const FormDesincorporaciones = () => {
   //get the idDesincorporacion for the Cumplimiento_Incumplimiento
   //const { idFolio } = useParams();
   const idFolio = 2;
-  const urlCum = "/desincorporaciones/datos-cumplimiento/${idDesincorporacion:"+idFolio+"}";
-  console.log("el folio "+idFolio);
+  const urlCum = "/desincorporaciones/datos-cumplimiento/"+idFolio;
   //----------cumplimientos_incumplimientos----------
 
 
@@ -139,6 +139,13 @@ export const FormDesincorporaciones = () => {
           alert("Campos vacios");
         }
         //Realizar el POST
+          /* BOTH???????? */
+          const success1 = httpPostData(urlCum, valuesRef1);
+          const success2 = httpPostData(urlCum, valuesRef2);
+          if(success1 && success2)
+            CustomSwalSave(); 
+          else
+            CustomSwalError();
         break;
       default:
         break;
