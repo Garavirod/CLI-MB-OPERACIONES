@@ -24,7 +24,7 @@ import {
   getIncumplimientosByFolio,
 } from "../../helpers/DataGetters";
 import { useState } from "react";
-import { setFechaActual } from "../../helpers/utils";
+import { validateForm } from "../../functions/validateFrom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -63,9 +63,15 @@ export const CerrarFolioForm = () => {
 
   const registraIncorporacion = (e) => {
     e.preventDefault();
-    console.log(valuesDes);
-    console.log(valuesRef1);
-    console.log(valuesRef2);
+    if (validateForm(valuesInco)){
+      console.log(valuesDes);
+      console.log(valuesRef1);
+      console.log(valuesRef2);
+      console.log(valuesInco);
+    }else{
+      alert("¡CAMPOS VACIOS!");
+    }
+
   };
 
   
@@ -103,6 +109,7 @@ export const CerrarFolioForm = () => {
                     <Grid container spacing={2}>
                       <Grid item lg={12}>
                         <DesincorporacionComp
+                          active={true}
                           valuesDes={valuesDes}
                           handleInputChangeDes={handleInputChangeDes}
                           resetDes={resetDes}
@@ -118,6 +125,7 @@ export const CerrarFolioForm = () => {
                               valuesRef={valuesRef1}
                               handleInputChangeRef={handleInputChangeRef1}
                               resetRef={resetRef1}
+                              active={true}
                             />
 
                             <Referencia
@@ -126,6 +134,8 @@ export const CerrarFolioForm = () => {
                               valuesRef={valuesRef2}
                               handleInputChangeRef={handleInputChangeRef2}
                               resetRef={resetRef2}
+                              active={true}
+
                             />
                           </div>
                         ) : tipo === "Incumplido" ? (
@@ -135,6 +145,8 @@ export const CerrarFolioForm = () => {
                             valuesRef={valuesRef1}
                             handleInputChangeRef={handleInputChangeRef1}
                             resetRef={resetRef1}
+                            active={true}
+
                           />
                         ) : tipo === "Apoyo" ? (
                           <Referencia
@@ -143,6 +155,8 @@ export const CerrarFolioForm = () => {
                             valuesRef={valuesRef2}
                             handleInputChangeRef={handleInputChangeRef2}
                             resetRef={resetRef2}
+                            active={true}
+
                           />
                         ) : (
                           <></>

@@ -12,10 +12,8 @@ import {
 
 import { useForm } from "../../hooks/useForm";
 import { DesincorporacionComp } from "./DesincorporacionComp";
-import { IncorporacionComp } from "./IncorporacionComp";
 import {
   ModelDesincorporacion,
-  ModelIncorporacion,
   ModelReferencias,
 } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
@@ -140,7 +138,7 @@ export const FormDesincorporaciones = () => {
                 <Grid container spacing={2}>
                   {/* FORMULARIO DE DESINCORPORACIONES */}
                   <Grid item lg={6}>
-                    <DesincorporacionComp
+                    <DesincorporacionComp                      
                       valuesDes={valuesDes}
                       handleInputChangeDes={handleInputChangeDes}
                       resetDes={resetDes}

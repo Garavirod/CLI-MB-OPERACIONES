@@ -45,9 +45,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
-  colorType:{
-    color:"#ffff"
-  }
+  colorType: {
+    color: "#ffff",
+  },
 }));
 
 // Esta funcion crea los destinos (desde - hasta)
@@ -61,12 +61,13 @@ export default function Referencia(props) {
   const classes = useStyles();
 
   // desestructurando las propiedades del componente
-  const { 
+  const {
     valuesRef, //atributos del modelo referencia
     handleInputChangeRef, // fucion encargada de cambiar el edo del valuesRef
     titulo, // titulo a mostrar en el header
     color, //Color del header (cump - verder) (inc - rojo)
-    flag=false //Esta bandera indica indica si serán circuitos o tramos
+    flag = false, //Esta bandera indica indica si serán circuitos o tramos
+    active = false, //infromación de sólo lectura
   } = props;
 
   // Desestructurando el hook del modelo Desinc dadas las props del hook
@@ -113,8 +114,16 @@ export default function Referencia(props) {
         <Grid item lg={12}>
           <Grid container spacing={3}>
             <Grid item lg={12} md={12} sm={12} xs={12}>
-              <Paper className={classes.paper} variant="outlined" style={{backgroundColor:color}}>
-                <Typography variant="h6" component="h4" className={classes.colorType}>
+              <Paper
+                className={classes.paper}
+                variant="outlined"
+                style={{ backgroundColor: color }}
+              >
+                <Typography
+                  variant="h6"
+                  component="h4"
+                  className={classes.colorType}
+                >
                   {titulo}
                 </Typography>
               </Paper>
@@ -132,29 +141,47 @@ export default function Referencia(props) {
                 >
                   {referencias.map((ref) => (
                     <TreeItem key={ref.id} nodeId={ref.id} label={ref.name}>
-                      {ref.rutas.map((it) => (
-                        <TreeItem
-                          key={it.id}
-                          nodeId={it.id}
-                          label={it.name}
-                          onLabelClick={() => {
-                            handleChangeRuta(it.id);
-                          }}
-                        />
-                      ))}
+                      {
+                      (!active) ? (
+                        ref.rutas.map((it) => (
+                          <TreeItem
+                            key={it.id}
+                            nodeId={it.id}
+                            label={it.name}
+                            onLabelClick={() => {
+                              handleChangeRuta(it.id);
+                            }}
+                          />
+                        ))
+
+                      ):
+                      (
+                        [].map((it) => (
+                          <TreeItem
+                            key={it.id}
+                            nodeId={it.id}
+                            label={it.name}
+                            onLabelClick={() => {
+                              handleChangeRuta(it.id);
+                            }}
+                          />
+                        ))
+                      )
+                      }
                     </TreeItem>
                   ))}
                 </TreeView>
               </div>
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12}>
-            <Typography variant="h6" component="h4" style={{ margin: 5 }}>
-                Ruta de referencia sleccionada : {(ruta_referencia==="")?"Ninguna":ruta_referencia}
-              </Typography> 
+              <Typography variant="h6" component="h4" style={{ margin: 5 }}>
+                Ruta de referencia sleccionada :{" "}
+                {ruta_referencia === "" ? "Ninguna" : ruta_referencia}
+              </Typography>
             </Grid>
             {/* DIRECCIÓN DE IDA Y VUELTA */}
-            <Grid item lg={12} md={12} sm={12} xs={12}>                        
-              <FormControl className={classes.formControl}>
+            <Grid item lg={12} md={12} sm={12} xs={12}>
+              <FormControl className={classes.formControl} disabled={active}>
                 <InputLabel>Dirección</InputLabel>
                 <Select
                   native
@@ -169,20 +196,21 @@ export default function Referencia(props) {
                   <option value={destinosRuta[1]}>{destinosRuta[1]}</option>
                 </Select>
               </FormControl>
-            </Grid>            
+            </Grid>
           </Grid>
         </Grid>
         <Grid item lg={12}>
           <Grid container spacing={3}>
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <Typography variant="h6" component="h4" style={{ margin: 5 }}>
-                Vueltas, idas  y regresos
+                Vueltas, idas y regresos
               </Typography>
             </Grid>
             {/* VUELTAS */}
             <Grid item lg={4} md={4} sm={12} xs={12}>
               <FormControl className={classes.formControl}>
                 <TextField
+                  disabled={active}
                   id="camporetrazo"
                   label="Vueltas"
                   type="number"
@@ -206,6 +234,7 @@ export default function Referencia(props) {
             <Grid item lg={4} md={4} sm={12} xs={12}>
               <FormControl className={classes.formControl}>
                 <TextField
+                  disabled={active}
                   id="camporetrazo"
                   label="Idas"
                   type="number"
@@ -229,6 +258,7 @@ export default function Referencia(props) {
             <Grid item lg={4} md={4} sm={12} xs={12}>
               <FormControl className={classes.formControl}>
                 <TextField
+                  disabled={active}
                   id="camporetrazo"
                   label="Regresos"
                   type="number"
@@ -251,13 +281,11 @@ export default function Referencia(props) {
             {/* TRAMO O CIRCUITO DESDE */}
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <Typography variant="h6" component="h4" style={{ margin: 5 }}>
-                {
-                  (flag) ? "Circuitos" : "Tramos"
-                }                
+                {flag ? "Circuitos" : "Tramos"}
               </Typography>
             </Grid>
             <Grid item lg={6} md={12} sm={12} xs={12}>
-              <FormControl className={classes.formControl}>
+              <FormControl className={classes.formControl} disabled={active}>
                 <InputLabel>Desde</InputLabel>
                 <Select
                   native
@@ -278,7 +306,7 @@ export default function Referencia(props) {
             </Grid>
             {/* TRAMO O CIRCUITO HASTA */}
             <Grid item lg={6} md={12} sm={12} xs={12}>
-              <FormControl className={classes.formControl}>
+              <FormControl className={classes.formControl} disabled={active}>
                 <InputLabel>Hasta</InputLabel>
                 <Select
                   native
@@ -295,7 +323,7 @@ export default function Referencia(props) {
                     </option>
                   ))}
                 </Select>
-              </FormControl>              
+              </FormControl>
             </Grid>
           </Grid>
         </Grid>
