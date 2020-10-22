@@ -24,6 +24,7 @@ import { setKilometrajeCalculado } from "../../helpers/utils";
 
 import { httpPostData } from "../../functions/httpRequest";
 import { CustomSwalSave, CustomSwalError} from "../../functions/customSweetAlert";
+import swal from "sweetalert";
 
 const useStyles = makeStyles((theme) => ({
   conatiner: {
@@ -73,6 +74,7 @@ export const FormDesincorporaciones = () => {
           alert(`Kilometraje incumplido >: ${km}`);
           console.log(folio_with_ref);
           //Realizar el POST de Folio completo
+          httpPostData("/desincorporaciones/datos-desincorporacion", folio_with_ref);
         } else {
           alert("Campos vacios");
         }

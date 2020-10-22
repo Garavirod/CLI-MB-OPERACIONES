@@ -79,7 +79,7 @@ export default function Referencia(props) {
     num_regreso,
     tramo_desde,
     tramo_hasta,
-  } = valuesRef;*/
+  } = valuesRef;
 
   // Variables del componente
   const [estacionesRuta, setEstacionesRuta] = useState([]); //Carga las rutas
@@ -141,22 +141,6 @@ export default function Referencia(props) {
                 >
                   {referencias.map((ref) => (
                     <TreeItem key={ref.id} nodeId={ref.id} label={ref.name}>
-<<<<<<< HEAD
-                      {ref.rutas.map((it) => (
-                        <TreeItem
-                          key={it.id}
-                          nodeId={it.id}
-                          label={it.name}
-                          name="referencia"
-                          value={props.refValues.referencia}
-                          //onChange={handleCumIncumChange}
-                          onLabelClick={() => {
-                            //handleChangeRuta(it.id);
-                            handleChangeRuta(it.name);
-                          }}
-                        />
-                      ))}
-=======
                       {
                       (!active) ? (
                         ref.rutas.map((it) => (
@@ -184,7 +168,6 @@ export default function Referencia(props) {
                         ))
                       )
                       }
->>>>>>> b121ceb01e9ae272d144e40a2ff4bdd32c99638b
                     </TreeItem>
                   ))}
                 </TreeView>
@@ -202,13 +185,11 @@ export default function Referencia(props) {
                 <InputLabel>Dirección</InputLabel>
                 <Select
                   native
-                  //value={ref_ida}
-                  //onChange={handleInputChangeRef}
-                  value={props.refValues.ida}
-                  onChange={props.handleRefValues}
+                  value={ref_ida}
+                  onChange={handleInputChangeRef}
+                  
                   inputProps={{
-                    //name: "ref_ida",
-                    name: "ida"
+                    name: "ref_ida",
                   }}
                 >
                   <option value={""}>...</option>
@@ -234,12 +215,9 @@ export default function Referencia(props) {
                   id="camporetrazo"
                   label="Vueltas"
                   type="number"
-                  //name="num_vuelta"
-                  //value={num_vuelta}
-                  //onChange={handleInputChangeRef}
-                  name= "numVueltas"
-                  value={props.refValues.numVueltas}
-                  onChange={props.handleRefValues}
+                  name="num_vuelta"
+                  value={num_vuelta}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     step: 1,
                     min: 0,
@@ -261,12 +239,9 @@ export default function Referencia(props) {
                   id="camporetrazo"
                   label="Idas"
                   type="number"
-                  //name="num_ida"
-                  //value={num_ida}
-                  //onChange={handleInputChangeRef}
-                  name="numIdas"
-                  value={props.refValues.numIdas}
-                  onChange={props.handleRefValues}
+                  name="num_ida"
+                  value={num_ida}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     step: 1,
                     min: 0,
@@ -288,12 +263,9 @@ export default function Referencia(props) {
                   id="camporetrazo"
                   label="Regresos"
                   type="number"
-                  //name="num_regreso"
-                  //value={num_regreso}
-                  //onChange={handleInputChangeRef}
-                  name="numRegresos"
-                  value={props.refValues.numRegresos}
-                  onChange={props.handleRefValues}
+                  name="num_regreso"
+                  value={num_regreso}
+                  onChange={handleInputChangeRef}
                   inputProps={{
                     step: 1,
                     min: 0,
@@ -318,13 +290,10 @@ export default function Referencia(props) {
                 <InputLabel>Desde</InputLabel>
                 <Select
                   native
-                  //value={tramo_desde}
-                  //onChange={handleInputChangeRef}
-                  value={props.refValues.tramoDesde}
-                  onChange={props.handleRefValues}
+                  value={tramo_desde}
+                  onChange={handleInputChangeRef}
                   inputProps={{
-                    //name: "tramo_desde",
-                    name: "tramoDesde",
+                    name: "tramo_desde",
                   }}
                 >
                   <option value={"-"}>...</option>
@@ -342,13 +311,10 @@ export default function Referencia(props) {
                 <InputLabel>Hasta</InputLabel>
                 <Select
                   native
-                  //value={tramo_hasta}
-                  //onChange={handleInputChangeRef}
-                  value={props.refValues.tramoHasta}
-                  onChange={props.handleRefValues}
+                  value={tramo_hasta}
+                  onChange={handleInputChangeRef}
                   inputProps={{
-                    //name: "tramo_hasta",
-                    name: "tramoHasta",
+                    name: "tramo_hasta",
                   }}
                 >
                   <option value={"-"}>...</option>

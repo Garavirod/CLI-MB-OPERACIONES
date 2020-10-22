@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { CustomSwalSave, CustomSwalError} from "../functions/customSweetAlert";
 
 /**
  * En esye archivo se tienen todas las petciones http de axios
@@ -27,14 +28,16 @@ export const  httpGetData = async(endpoint) =>{
 export const httpPostData = async (endpoint, data) =>{
     const response = await axios.post(endpoint,data)
     .then(res=>{
-        console.log("Datos mandados", res);                        
-        return true;
+        console.log("Datos mandados", res); 
+        CustomSwalSave();                      
+        //return {success:true};
     })
     .catch(err=>{
+        CustomSwalError();  
         console.log("Hubo un error al guardar la infromacion en >: "+endpoint+" error "+err);
-        return false;
+        //return {success:false};
     });
-    return response;
+    //return response;
 };
 
 
