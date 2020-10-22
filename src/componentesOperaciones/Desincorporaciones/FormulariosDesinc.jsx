@@ -90,6 +90,7 @@ export const FormDesincorporaciones = () => {
           const folio_with_ref = {...valuesDes, ...valuesRef2};  
           console.log(folio_with_ref);
           //Realizar el POST de Folio completo
+          httpPostData("/desincorporaciones/datos-desincorporacion", folio_with_ref);
         } else {
           alert("Campos vacios");
         }
@@ -105,6 +106,7 @@ export const FormDesincorporaciones = () => {
           // Combinamos el folio con la referencia asociada
           const folio_with_ref = {...valuesDes, ...valuesRef1};          
           //Realizar el POST de Folio completo
+          httpPostData("/desincorporaciones/datos-afectacion", folio_with_ref);
           alert(`Kilometraje incumplido >: ${km}`);
           console.log(folio_with_ref);
 
@@ -120,7 +122,8 @@ export const FormDesincorporaciones = () => {
           valuesRef2["tipo"] = "cumplido";
           // Combinamos los folio con sus referencias asociadas
           const folio_with_refs = [valuesDes,valuesRef1,valuesRef2];                   
-          // Realizar POST de folio                  
+          // Realizar POST de folio
+          httpPostData("/desincorporaciones/datos-afectacion2", folio_with_refs);               
           alert(`Kilometraje calculado >: Incum ${km1} Cump ${km2}`);
           console.log(folio_with_refs);                    
         } else {
