@@ -57,7 +57,7 @@ export default function FormPropsTextFields() {
     if (validateForm(values)) {
       // Petición axios, manda la data ya vlidada al url definido
       const success = httpPostData(url,values);
-      if(success)
+      if(success===true)
         CustomSwalSave();
       else
         CustomSwalError();

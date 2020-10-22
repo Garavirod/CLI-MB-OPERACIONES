@@ -55,21 +55,20 @@ export const FormDesincorporaciones = () => {
     e.preventDefault();
     // Validamos el folio de la desincorporación
     const isValidFolio = validateFormExcept(valuesDes, ["observaciones"]);
-    let isValidIncum,
-      isValidApo = false;
-
-    // Realizamos el POST segun la peticion
+    let isValidIncum,isValidApo = false;
+    // validamos la referencia
     switch (tipo) {
       case "Incumplido":
         isValidIncum = validateForm(valuesRef1);
         if (isValidFolio && isValidIncum) {
           const km = setKilometrajeCalculado(valuesRef1);
           valuesRef1["kilometraje"] = km;
-          valuesRef1["tipo"] = "Incumplido";
-          console.log(valuesDes);
-          console.log(valuesRef1);
+          valuesRef1["tipo"] = "Incumplido";  
+          // Combinamos el folio con la referencia asociada
+          const folio_with_ref = {...valuesDes, ...valuesRef1};          
           alert(`Kilometraje incumplido >: ${km}`);
-          //Realizar el POST
+          console.log(folio_with_ref);
+          //Realizar el POST de Folio completo
         } else {
           alert("Campos vacios");
         }
@@ -80,10 +79,11 @@ export const FormDesincorporaciones = () => {
           const km = setKilometrajeCalculado(valuesRef2);
           valuesRef2["kilometraje"] = km;
           valuesRef2["tipo"] = "cumplido";
-          console.log(valuesDes);
-          console.log(valuesRef2);
           alert(`Kilometraje cumplido >: ${km}`);
-          //Realizar el POST
+          // combinamos el folio con la referencia asocaida
+          const folio_with_ref = {...valuesDes, ...valuesRef2};  
+          console.log(folio_with_ref);
+          //Realizar el POST de Folio completo
         } else {
           alert("Campos vacios");
         }
@@ -92,27 +92,34 @@ export const FormDesincorporaciones = () => {
         isValidIncum = validateForm(valuesRef1);
         isValidApo = validateForm(valuesRef2);
         if (isValidFolio && !isValidApo && isValidIncum) {
+          // cuando en una afectación sólo hay incumplimiento
           const km = setKilometrajeCalculado(valuesRef1);
           valuesRef1["kilometraje"] = km;
           valuesRef1["tipo"] = "Incumplido";
-          console.log(valuesDes);
-          console.log(valuesRef1);
+          // Combinamos el folio con la referencia asociada
+          const folio_with_ref = {...valuesDes, ...valuesRef1};          
+          //Realizar el POST de Folio completo
           alert(`Kilometraje incumplido >: ${km}`);
+          console.log(folio_with_ref);
+
         } else if (isValidFolio && isValidApo && isValidIncum) {
+          // cuando en una afectación hay incumplimiento y cumplimiento
           const km1 = setKilometrajeCalculado(valuesRef1);
           const km2 = setKilometrajeCalculado(valuesRef2);
+          // Asignación de kilometraje
           valuesRef1["kilometraje"] = km1;
           valuesRef2["kilometraje"] = km2;
+          // Tipo de folio
           valuesRef1["tipo"] = "Incumplido";
           valuesRef2["tipo"] = "cumplido";
-          console.log(valuesDes);
-          console.log(valuesRef1);
-          console.log(valuesRef2);
-          alert(`Kilometraje calculado >: Inc ${km1} cump ${km2}`);
+          // Combinamos los folio con sus referencias asociadas
+          const folio_with_refs = [valuesDes,valuesRef1,valuesRef2];                   
+          // Realizar POST de folio                  
+          alert(`Kilometraje calculado >: Incum ${km1} Cump ${km2}`);
+          console.log(folio_with_refs);                    
         } else {
           alert("Campos vacios");
-        }
-        //Realizar el POST
+        }        
         break;
       default:
         break;

@@ -15,7 +15,7 @@ export const  httpGetData = async(endpoint) =>{
         return {success:true, data: res.data.data};
     })
     .catch(err=>{
-        console.log("Eror al cargar los datos de >: "+endpoint+" error "+err);
+        console.log("Error al cargar los datos de >: "+endpoint+" error "+err);
         return {success:false};
     });
 
