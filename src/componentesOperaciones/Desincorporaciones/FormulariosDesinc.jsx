@@ -52,9 +52,7 @@ export const FormDesincorporaciones = () => {
     ModelReferencias
   );
   //get the idDesincorporacion for the Cumplimiento_Incumplimiento
-  //const { idFolio } = useParams();
-  const idFolio = 2;
-  const urlCum = "/desincorporaciones/datos-cumplimiento/"+idFolio;
+  const urlCum = "/desincorporaciones/datos-desincorporacion";
   //----------cumplimientos_incumplimientos----------
 
 
@@ -86,7 +84,7 @@ export const FormDesincorporaciones = () => {
           alert(`Kilometraje incumplido >: ${km}`);
           //Realizar el POST
           //cumplimientos_incumplimientos-----------
-          const success = httpPostData(urlCum, valuesRef1);
+          const success = httpPostData(urlCum, {valuesDes, valReferen:valuesRef1});
           if(success)
             CustomSwalSave(); 
           else
