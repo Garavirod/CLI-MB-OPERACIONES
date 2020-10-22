@@ -42,17 +42,18 @@ export const ModelIncorporacion = () =>{
     }
 };
 
+// Se toma para maracar losincumplimientos o apoyos
 
-export const ModelReferencias = () =>{ //Praa cumplimientos e incumplimientos
+export const ModelReferencias = () =>{
     return {
         ruta_referencia: "",
-        ref_ida: "",
-        ref_vuelta :"",
+        ref_ida: "",        
         num_vuelta: "0",
         num_ida: "0",
         num_regreso: "0",
         tramo_desde: "-",
         tramo_hasta:"-",
-        kilometraje:0,
+        tipo:"-",
+        kilometraje:0,   
     }
 }

@@ -12,10 +12,8 @@ import {
 
 import { useForm } from "../../hooks/useForm";
 import { DesincorporacionComp } from "./DesincorporacionComp";
-import { IncorporacionComp } from "./IncorporacionComp";
 import {
   ModelDesincorporacion,
-  ModelIncorporacion,
   ModelReferencias,
 } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
@@ -45,11 +43,6 @@ export const FormDesincorporaciones = () => {
     ModelDesincorporacion
   );
 
-  // Modelo y estructura de una Incorporación
-  const [valuesInco, handleInputChangeInc, resetInc] = useForm(
-    ModelIncorporacion
-  );
-
   // Modelo y estructura de una Referencia para un Incumplimietno
   const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(
     ModelReferencias
@@ -66,19 +59,20 @@ export const FormDesincorporaciones = () => {
     e.preventDefault();
     // Validamos el folio de la desincorporación
     const isValidFolio = validateFormExcept(valuesDes, ["observaciones"]);
-    let isValidIncum,isValidApo = false;    
-    
-    // Realizamos el POST segun la peticion
+    let isValidIncum,isValidApo = false;
+    // validamos la referencia
     switch (tipo) {
       case "Incumplido":
         isValidIncum = validateForm(valuesRef1);
         if (isValidFolio && isValidIncum) {
           const km = setKilometrajeCalculado(valuesRef1);
-          valuesRef1['kilometraje']=km;                 
-          console.log(valuesDes);
-          console.log(valuesRef1);
+          valuesRef1["kilometraje"] = km;
+          valuesRef1["tipo"] = "Incumplido";  
+          // Combinamos el folio con la referencia asociada
+          const folio_with_ref = {...valuesDes, ...valuesRef1};          
           alert(`Kilometraje incumplido >: ${km}`);
-          //Realizar el POST
+          console.log(folio_with_ref);
+          //Realizar el POST de Folio completo
         } else {
           alert("Campos vacios");
         }
@@ -87,39 +81,49 @@ export const FormDesincorporaciones = () => {
         isValidApo = validateForm(valuesRef2);
         if (isValidFolio && isValidApo) {
           const km = setKilometrajeCalculado(valuesRef2);
-          valuesRef2['kilometraje']=km;                 
-          console.log(valuesDes);
-          console.log(valuesRef2);
+          valuesRef2["kilometraje"] = km;
+          valuesRef2["tipo"] = "cumplido";
           alert(`Kilometraje cumplido >: ${km}`);
-          //Realizar el POST
+          // combinamos el folio con la referencia asocaida
+          const folio_with_ref = {...valuesDes, ...valuesRef2};  
+          console.log(folio_with_ref);
+          //Realizar el POST de Folio completo
         } else {
           alert("Campos vacios");
         }
         break;
       case "Afectación":
         isValidIncum = validateForm(valuesRef1);
-        isValidApo = validateForm(valuesRef2);        
-          if((isValidFolio) && (!isValidApo && isValidIncum)){
-            const km = setKilometrajeCalculado(valuesRef1);
-            valuesRef1['kilometraje']=km;                         
-            console.log(valuesDes);
-            console.log(valuesRef1);
-            alert(`Kilometraje incumplido >: ${km}`);
+        isValidApo = validateForm(valuesRef2);
+        if (isValidFolio && !isValidApo && isValidIncum) {
+          // cuando en una afectación sólo hay incumplimiento
+          const km = setKilometrajeCalculado(valuesRef1);
+          valuesRef1["kilometraje"] = km;
+          valuesRef1["tipo"] = "Incumplido";
+          // Combinamos el folio con la referencia asociada
+          const folio_with_ref = {...valuesDes, ...valuesRef1};          
+          //Realizar el POST de Folio completo
+          alert(`Kilometraje incumplido >: ${km}`);
+          console.log(folio_with_ref);
 
-          }else if ((isValidFolio) && (isValidApo && isValidIncum)){
-            const km1 = setKilometrajeCalculado(valuesRef1);
-            const km2 = setKilometrajeCalculado(valuesRef2); 
-            valuesRef1['kilometraje']=km1                           
-            valuesRef2['kilometraje']=km2                
-            console.log(valuesDes);
-            console.log(valuesRef1);
-            console.log(valuesRef2);            
-            alert(`Kilometraje calculado >: Inc ${km1} cump ${km2}`);
-
-          }else{
-            alert("Campos vacios");
-          }
-          //Realizar el POST
+        } else if (isValidFolio && isValidApo && isValidIncum) {
+          // cuando en una afectación hay incumplimiento y cumplimiento
+          const km1 = setKilometrajeCalculado(valuesRef1);
+          const km2 = setKilometrajeCalculado(valuesRef2);
+          // Asignación de kilometraje
+          valuesRef1["kilometraje"] = km1;
+          valuesRef2["kilometraje"] = km2;
+          // Tipo de folio
+          valuesRef1["tipo"] = "Incumplido";
+          valuesRef2["tipo"] = "cumplido";
+          // Combinamos los folio con sus referencias asociadas
+          const folio_with_refs = [valuesDes,valuesRef1,valuesRef2];                   
+          // Realizar POST de folio                  
+          alert(`Kilometraje calculado >: Incum ${km1} Cump ${km2}`);
+          console.log(folio_with_refs);                    
+        } else {
+          alert("Campos vacios");
+        }        
         break;
       default:
         break;
@@ -143,37 +147,23 @@ export const FormDesincorporaciones = () => {
             <form onSubmit={registraFolio}>
               <CardContent>
                 <Grid container spacing={2}>
+                  {/* FORMULARIO DE DESINCORPORACIONES */}
                   <Grid item lg={6}>
-                    {/* FORMULARIO DE DESINCORPORACIONES */}
-                    <Grid container spacing={2}>
-                      <Grid item lg={12}>
-                        <DesincorporacionComp
-                          valuesDes={valuesDes}
-                          handleInputChangeDes={handleInputChangeDes}
-                          resetDes={resetDes}
-                        />
-                      </Grid>
-                      <Grid item lg={12}>
-                        {/* FROMULARIO DE REFERENCIAS */}
-                        {tipo === "Afectación" ? (
-                          <div>
-                            <Referencia
-                              titulo={"Incumplimientos"}
-                              color={"#ef5350"}
-                              valuesRef={valuesRef1}
-                              handleInputChangeRef={handleInputChangeRef1}
-                              resetRef={resetRef1}
-                            />
-
-                            <Referencia
-                              titulo={"Cumplimientos"}
-                              color={"#4caf50"}
-                              valuesRef={valuesRef2}
-                              handleInputChangeRef={handleInputChangeRef2}
-                              resetRef={resetRef2}
-                            />
-                          </div>
-                        ) : tipo === "Incumplido" ? (
+                    <DesincorporacionComp                      
+                      valuesDes={valuesDes}
+                      handleInputChangeDes={handleInputChangeDes}
+                      resetDes={resetDes}
+                    />
+                  </Grid>
+                  {/* LISTA DE FOLIOS ABIERTOS/ INCUM / CUMP */}
+                  <Grid item lg={6}>
+                    <TabListasComponent />
+                  </Grid>
+                  {/* FROMULARIO DE REFERENCIAS (CUMPLIMIENTOS E INCUMPLIMIENTOS) */}
+                  <Grid item lg={12}>
+                    {tipo === "Afectación" ? (
+                      <Grid container spacing={3}>
+                        <Grid item lg={6}>
                           <Referencia
                             titulo={"Incumplimientos"}
                             color={"#ef5350"}
@@ -181,36 +171,41 @@ export const FormDesincorporaciones = () => {
                             handleInputChangeRef={handleInputChangeRef1}
                             resetRef={resetRef1}
                           />
-                        ) : tipo === "Apoyo" ? (
+                        </Grid>
+                        <Grid item lg={6}>
                           <Referencia
                             titulo={"Cumplimientos"}
                             color={"#4caf50"}
                             valuesRef={valuesRef2}
                             handleInputChangeRef={handleInputChangeRef2}
                             resetRef={resetRef2}
+                            flag={true}
                           />
-                        ) : (
-                          <></>
-                        )}
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid item lg={6}>
-                    <Grid container spacing={2}>
-                      {/* FORMULARIO DE INCORPORACIONES */}
-                      <Grid item lg={12}>
-                        <IncorporacionComp
-                          valuesInco={valuesInco}
-                          valuesDes={valuesDes}
-                          handleInputChangeInc={handleInputChangeInc}
-                          resetInc={resetInc}
+                    ) : tipo === "Incumplido" ? (
+                      <Grid item lg={6}>
+                        <Referencia
+                          titulo={"Incumplimientos"}
+                          color={"#ef5350"}
+                          valuesRef={valuesRef1}
+                          handleInputChangeRef={handleInputChangeRef1}
+                          resetRef={resetRef1}
                         />
                       </Grid>
-                      {/* LISTA DE REGISTROS */}
-                      <Grid item lg={12}>
-                        <TabListasComponent />
+                    ) : tipo === "Apoyo" ? (
+                      <Grid item lg={6}>
+                        <Referencia
+                          titulo={"Cumplimientos"}
+                          color={"#4caf50"}
+                          valuesRef={valuesRef2}
+                          handleInputChangeRef={handleInputChangeRef2}
+                          resetRef={resetRef2}
+                        />
                       </Grid>
-                    </Grid>
+                    ) : (
+                      <></>
+                    )}
                   </Grid>
                 </Grid>
               </CardContent>
