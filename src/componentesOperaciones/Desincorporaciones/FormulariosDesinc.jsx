@@ -23,9 +23,6 @@ import { setKilometrajeCalculado } from "../../helpers/utils";
 
 
 import { httpPostData } from "../../functions/httpRequest";
-import { CustomSwalSave, CustomSwalError} from "../../functions/customSweetAlert";
-import { useParams } from "react-router-dom";
-import swal from "sweetalert";
 
 const useStyles = makeStyles((theme) => ({
   conatiner: {

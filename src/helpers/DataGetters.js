@@ -1,6 +1,20 @@
-export const getFolios = () =>{
-    //Eco -ruta - tipo 
-    const folios = [
+import {httpGetData} from "../functions/httpRequest";
+
+export const getFolios = async () =>{
+    //abiertos
+    
+    const urlAbiertos = "/desincorporaciones/folios-abiertos";
+    const resp = await httpGetData(urlAbiertos);
+    if(resp.success)
+    {
+        const folios = [...resp.data];
+        console.log(folios);
+        return folios;
+    }
+    else
+        return [];
+
+    /*const folios = [
         {
             id: "1",
             fecha: "23-01-12",
@@ -66,8 +80,8 @@ export const getFolios = () =>{
         },
         
     ];
+    return folios;*/
 
-    return folios;
 }
 
 

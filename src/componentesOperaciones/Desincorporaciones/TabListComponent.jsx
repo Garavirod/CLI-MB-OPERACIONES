@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -10,11 +10,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import FolderIcon from "@material-ui/icons/Folder";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import {
-  getFolios,
-  getIncumplimientos,
-  getCumplimientos,
-} from "../../helpers/DataGetters";
+import {httpGetData} from "../../functions/httpRequest";
+import {CustomSwalError} from "../../functions/customSweetAlert";
+
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,34 +33,45 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// Carga los datos dependiendo la etiqueta (folios/incump/cumpl)
-const getDatabyLabel = (label) => {
-  let tag = null;
-  let data = null;
-  switch (label) {
-    case "Folios abiertos":
-      tag = "Folio";
-      data = getFolios();
-      break;
-    case "Incumplimeintos":
-      tag = "Incumplimiento";
-      data = getIncumplimientos();
-      break;
-    case "Cumplimientos":
-      tag = "Cumplimiento";
-      data = getCumplimientos();
-      break;
-    default:
-      break;
-  }
+const urlAbiertos = "/desincorporaciones/folios-abiertos";
 
-  return [tag, data];
-};
+export function TabListComponent(props){
 
-export const TabListComponent = (props) => {
+  const [data, setData] = useState([]);
+  const [tag, setTag] = useState("");
+
+  // Carga los datos dependiendo la etiqueta (folios/incump/cumpl)
+  const getDatabyLabel = async (label) => {
+    //let data = null;
+    switch (label) {
+      case "Folios abiertos":
+        setTag("Folio");
+        const resp = await httpGetData(urlAbiertos);
+        if(resp.success)
+        {
+          const folios = [...resp.data];
+          setData(folios);
+        }
+        else
+          CustomSwalError();
+        break;
+      case "Incumplimeintos":
+        setTag("Incumplimiento");
+        //data = getIncumplimientos();
+        break;
+      case "Cumplimientos":
+        setTag("Cumplimiento");
+        //data = getCumplimientos();
+        break;
+      default:
+        break;
+    }//switch
+  };//getDatabyLabel
+  
   const { typeList } = props;
-
-  const [tag, data] = getDatabyLabel(typeList);
+  useEffect(() => {
+    getDatabyLabel(typeList);
+  }, []);
 
   const classes = useStyles();
 
@@ -71,7 +80,7 @@ export const TabListComponent = (props) => {
       <div className={classes.demo}>
         <List dense={false}>
           {data.map((it) => (
-            <ListItem key={it.id}>
+            <ListItem key={it.idDesincorporacion}>
               <ListItemAvatar>
                 <Avatar>
                   <FolderIcon />
@@ -83,18 +92,18 @@ export const TabListComponent = (props) => {
               /> */}
               <ListItemText>
                 <p>
-                  <b>{`${tag} - ${it.id}`}</b>
+                  <b>{`${tag} - ${it.idDesincorporacion}`}</b>
                 </p>
                 <p>Detalles</p>
                 <ul>
-                  <li>{`Ruta : ${it.ruta}`}</li>
+                  <li>{`Linea : ${it.linea}`}</li>
                   <li>{`Fecha de creacion : ${it.fecha}`}</li>
-                  <li>{`Económico : ${it.eco}`}</li>
+                  <li>{`Económico : ${it.economico}`}</li>
                 </ul>
               </ListItemText>
               {(typeList === "Folios abiertos") ? (
                 <ListItemSecondaryAction>
-                  <Link className="" to={`/cerrar-folio/${it.id}`}>
+                  <Link className="" to={`/cerrar-folio/${it.idDesincorporacion}`}>
                     <IconButton edge="end" aria-label="delete">
                       <VisibilityIcon />
                     </IconButton>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -25,6 +25,8 @@ import {
 } from "../../helpers/DataGetters";
 import { useState } from "react";
 import { validateForm } from "../../functions/validateFrom";
+import {httpGetData} from "../../functions/httpRequest";
+import {CustomSwalError} from "../../functions/customSweetAlert";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,12 +40,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const CerrarFolioForm = () => {
+  
+  const getDesincorporacion = async (idDesinc) => {
+    const urlOneDesinc = `/desincorporaciones/one-desincorporacion/${idDesinc}`;
+    const resp = await httpGetData(urlOneDesinc);
+    if(resp.success)
+    {
+      const desinc = resp.data;
+      console.log(desinc);
+      setFolio(desinc);
+    }
+    else
+      CustomSwalError();
+  }//getDesincorporacion
+
   const { idFolio } = useParams();  
   const classes = useStyles();
   const [cumplimientos] = useState(getCumplimientosByFolio(idFolio));
   const [incumplimientos] = useState(getIncumplimientosByFolio(idFolio));
-  const [folio] = useState(getDatosByFolio(idFolio));
+  //const [folio] = useState(getDatosByFolio(idFolio));
+  const [folio, setFolio] = useState({});
   const { tipo } = folio;
+
+  useEffect(() => {
+    getDesincorporacion(idFolio);
+  }, []);
 
   // Modelo y estructura de una Desincorporación
   const [valuesDes, handleInputChangeDes, resetDes] = useForm(folio);

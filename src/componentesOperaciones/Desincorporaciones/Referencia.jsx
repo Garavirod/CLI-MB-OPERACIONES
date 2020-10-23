@@ -79,8 +79,6 @@ export default function Referencia(props) {
     num_regreso,
     tramo_desde,
     tramo_hasta,
-    tipo,
-    kilometraje,
   } = valuesRef;
 
   // Variables del componente
