@@ -12,10 +12,8 @@ import {
 
 import { useForm } from "../../hooks/useForm";
 import { DesincorporacionComp } from "./DesincorporacionComp";
-import { IncorporacionComp } from "./IncorporacionComp";
 import {
   ModelDesincorporacion,
-  ModelIncorporacion,
   ModelReferencias,
 } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
@@ -27,6 +25,7 @@ import { setKilometrajeCalculado } from "../../helpers/utils";
 import { httpPostData } from "../../functions/httpRequest";
 import { CustomSwalSave, CustomSwalError} from "../../functions/customSweetAlert";
 import { useParams } from "react-router-dom";
+import swal from "sweetalert";
 
 const useStyles = makeStyles((theme) => ({
   conatiner: {
@@ -68,27 +67,21 @@ export const FormDesincorporaciones = () => {
     e.preventDefault();
     // Validamos el folio de la desincorporación
     const isValidFolio = validateFormExcept(valuesDes, ["observaciones"]);
-    let isValidIncum,
-      isValidApo = false;
-
-    // Realizamos el POST segun la peticion
+    let isValidIncum,isValidApo = false;
+    // validamos la referencia
     switch (tipo) {
       case "Incumplido":
         isValidIncum = validateForm(valuesRef1);
         if (isValidFolio && isValidIncum) {
           const km = setKilometrajeCalculado(valuesRef1);
           valuesRef1["kilometraje"] = km;
-          valuesRef1["tipo"] = "Incumplido";
-          console.log(valuesDes);
-          console.log(valuesRef1);
+          valuesRef1["tipo"] = "Incumplido";  
+          // Combinamos el folio con la referencia asociada
+          const folio_with_ref = {...valuesDes, ...valuesRef1};          
           alert(`Kilometraje incumplido >: ${km}`);
-          //Realizar el POST
-          //cumplimientos_incumplimientos-----------
-          const success = httpPostData(urlCum, {valuesDes, valReferen:valuesRef1});
-          if(success)
-            CustomSwalSave(); 
-          else
-            CustomSwalError();
+          console.log(folio_with_ref);
+          //Realizar el POST de Folio completo
+          httpPostData("/desincorporaciones/datos-desincorporacion", folio_with_ref);
         } else {
           alert("Campos vacios");
         }
@@ -99,15 +92,12 @@ export const FormDesincorporaciones = () => {
           const km = setKilometrajeCalculado(valuesRef2);
           valuesRef2["kilometraje"] = km;
           valuesRef2["tipo"] = "cumplido";
-          console.log(valuesDes);
-          console.log(valuesRef2);
           alert(`Kilometraje cumplido >: ${km}`);
-          //Realizar el POST
-          const success = httpPostData(urlCum, valuesRef2);
-          if(success)
-            CustomSwalSave(); 
-          else
-            CustomSwalError();
+          // combinamos el folio con la referencia asocaida
+          const folio_with_ref = {...valuesDes, ...valuesRef2};  
+          console.log(folio_with_ref);
+          //Realizar el POST de Folio completo
+          httpPostData("/desincorporaciones/datos-desincorporacion", folio_with_ref);
         } else {
           alert("Campos vacios");
         }
@@ -116,34 +106,36 @@ export const FormDesincorporaciones = () => {
         isValidIncum = validateForm(valuesRef1);
         isValidApo = validateForm(valuesRef2);
         if (isValidFolio && !isValidApo && isValidIncum) {
+          // cuando en una afectación sólo hay incumplimiento
           const km = setKilometrajeCalculado(valuesRef1);
           valuesRef1["kilometraje"] = km;
           valuesRef1["tipo"] = "Incumplido";
-          console.log(valuesDes);
-          console.log(valuesRef1);
+          // Combinamos el folio con la referencia asociada
+          const folio_with_ref = {...valuesDes, ...valuesRef1};          
+          //Realizar el POST de Folio completo
+          httpPostData("/desincorporaciones/datos-afectacion", folio_with_ref);
           alert(`Kilometraje incumplido >: ${km}`);
+          console.log(folio_with_ref);
+
         } else if (isValidFolio && isValidApo && isValidIncum) {
+          // cuando en una afectación hay incumplimiento y cumplimiento
           const km1 = setKilometrajeCalculado(valuesRef1);
           const km2 = setKilometrajeCalculado(valuesRef2);
+          // Asignación de kilometraje
           valuesRef1["kilometraje"] = km1;
           valuesRef2["kilometraje"] = km2;
+          // Tipo de folio
           valuesRef1["tipo"] = "Incumplido";
           valuesRef2["tipo"] = "cumplido";
-          console.log(valuesDes);
-          console.log(valuesRef1);
-          console.log(valuesRef2);
-          alert(`Kilometraje calculado >: Inc ${km1} cump ${km2}`);
+          // Combinamos los folio con sus referencias asociadas
+          const folio_with_refs = [valuesDes,valuesRef1,valuesRef2];                   
+          // Realizar POST de folio
+          httpPostData("/desincorporaciones/datos-afectacion2", folio_with_refs);               
+          alert(`Kilometraje calculado >: Incum ${km1} Cump ${km2}`);
+          console.log(folio_with_refs);                    
         } else {
           alert("Campos vacios");
-        }
-        //Realizar el POST
-          /* BOTH???????? */
-          const success1 = httpPostData(urlCum, valuesRef1);
-          const success2 = httpPostData(urlCum, valuesRef2);
-          if(success1 && success2)
-            CustomSwalSave(); 
-          else
-            CustomSwalError();
+        }        
         break;
       default:
         break;
@@ -169,7 +161,7 @@ export const FormDesincorporaciones = () => {
                 <Grid container spacing={2}>
                   {/* FORMULARIO DE DESINCORPORACIONES */}
                   <Grid item lg={6}>
-                    <DesincorporacionComp
+                    <DesincorporacionComp                      
                       valuesDes={valuesDes}
                       handleInputChangeDes={handleInputChangeDes}
                       resetDes={resetDes}
