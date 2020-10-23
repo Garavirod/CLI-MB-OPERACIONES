@@ -82,7 +82,7 @@ export const EventosForm = () => {
     if (validateForm(values)) {
       // Petición axios genérica por url y data
       const success = httpPostData(url, values);
-      if(success)
+      if(success===true)
         CustomSwalSave(); 
       else
         CustomSwalError();          

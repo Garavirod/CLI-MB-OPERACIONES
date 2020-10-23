@@ -1553,7 +1553,7 @@ export const getDatosByFolio = (folio) =>{
             solicita: "Mantenimiento E.O",
             informa: "ébano 2",
             estacion: "Estacion 1 L1",
-            economico: "2323",
+            economico: "2343",
             empresa: "RTP",
             motivo: "Motivo 1",
             odometro: "1234.45",
@@ -1587,8 +1587,7 @@ export const getIncumplimientosByFolio = (folio) =>{
 export const getCumplimientosByFolio = (folio) =>{
     return{
             ruta_referencia: "A20",
-            ref_ida: "Insurgentes - La joya",
-            ref_vuelta :"La joya - Insurgentes",
+            ref_ida: "Insurgentes - La Joya",            
             num_vuelta: 4,
             num_ida: 2,
             num_regreso: 2,
