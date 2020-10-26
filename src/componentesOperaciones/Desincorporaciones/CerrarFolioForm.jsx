@@ -41,32 +41,37 @@ const useStyles = makeStyles((theme) => ({
 
 export const CerrarFolioForm = () => {
   
-  const getDesincorporacion = async (idDesinc) => {
-    const urlOneDesinc = `/desincorporaciones/one-desincorporacion/${idDesinc}`;
-    const resp = await httpGetData(urlOneDesinc);
-    if(resp.success)
-    {
-      const desinc = resp.data;
-      console.log(desinc);
-      setFolio(desinc);
-    }
-    else
-      CustomSwalError();
-  }//getDesincorporacion
+  //const { idFolio } = useParams();  
 
-  const { idFolio } = useParams();  
+  /*const getDesincorporacion = async () => {
+    //const urlOneDesinc = `/desincorporaciones/one-desincorporacion/${idFolio}`;
+    //const resp = await httpGetData(urlOneDesinc);
+    //if(resp.success)
+    //{
+      //const desinc = resp.data;
+      //console.log(desinc);
+      setFolio(desinc);
+      //setValues(desinc);
+    //}
+    //else
+      //CustomSwalError();
+  }//getDesincorporacion*/
+  const folioSt = JSON.parse(localStorage.getItem("folio"));
+  console.log(folioSt);
+  const {idDesincorporacion:idFolio}  = folioSt;
   const classes = useStyles();
   const [cumplimientos] = useState(getCumplimientosByFolio(idFolio));
   const [incumplimientos] = useState(getIncumplimientosByFolio(idFolio));
-  //const [folio] = useState(getDatosByFolio(idFolio));
-  const [folio, setFolio] = useState({});
+  const [folio] = useState(folioSt);
+  //const [folio, setFolio] = useState({});
   const { tipo } = folio;
 
-  useEffect(() => {
-    getDesincorporacion(idFolio);
-  }, []);
+  /*useEffect(() => {
+    getDesincorporacion();
+  }, []);*/
 
-  // Modelo y estructura de una Desincorporación
+
+  //Modelo y estructura de una Desincorporación
   const [valuesDes, handleInputChangeDes, resetDes] = useForm(folio);
 
   // Modelo y estructura de una Incorporación

@@ -50,6 +50,7 @@ export function TabListComponent(props){
         if(resp.success)
         {
           const folios = [...resp.data];
+          console.log(folios);
           setData(folios);
         }
         else
@@ -67,6 +68,12 @@ export function TabListComponent(props){
         break;
     }//switch
   };//getDatabyLabel
+
+  function sendCerrarFolio(folio){
+    console.log(folio);
+    localStorage.setItem("folio",JSON.stringify(folio));
+    window.location.replace("/cerrar-folio");
+  }//cerrarFOlio
   
   const { typeList } = props;
   useEffect(() => {
@@ -80,7 +87,7 @@ export function TabListComponent(props){
       <div className={classes.demo}>
         <List dense={false}>
           {data.map((it) => (
-            <ListItem key={it.idDesincorporacion}>
+            <ListItem key={it.id}>
               <ListItemAvatar>
                 <Avatar>
                   <FolderIcon />
@@ -92,7 +99,7 @@ export function TabListComponent(props){
               /> */}
               <ListItemText>
                 <p>
-                  <b>{`${tag} - ${it.idDesincorporacion}`}</b>
+                  <b>{`${tag} - ${it.id}`}</b>
                 </p>
                 <p>Detalles</p>
                 <ul>
@@ -103,7 +110,7 @@ export function TabListComponent(props){
               </ListItemText>
               {(typeList === "Folios abiertos") ? (
                 <ListItemSecondaryAction>
-                  <Link className="" to={`/cerrar-folio/${it.idDesincorporacion}`}>
+                  <Link className="" onClick={()=>{sendCerrarFolio(it)}}>
                     <IconButton edge="end" aria-label="delete">
                       <VisibilityIcon />
                     </IconButton>
