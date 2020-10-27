@@ -57,8 +57,8 @@ export const CerrarFolioForm = () => {
       //CustomSwalError();
   }//getDesincorporacion*/
   const folioSt = JSON.parse(localStorage.getItem("folio"));
-  console.log(folioSt);
-  const {idDesincorporacion:idFolio}  = folioSt;
+  //console.log(folioSt);
+  const {id:idFolio}  = folioSt;
   const classes = useStyles();
   const [cumplimientos] = useState(getCumplimientosByFolio(idFolio));
   const [incumplimientos] = useState(getIncumplimientosByFolio(idFolio));
@@ -89,7 +89,13 @@ export const CerrarFolioForm = () => {
 
   const registraIncorporacion = (e) => {
     e.preventDefault();
-    if (validateForm(valuesInco)){
+    console.log("values desinc");
+    console.log(valuesDes);
+    const {edoFolio} = valuesDes;
+    if(edoFolio === "Cerrado sin incorporar"){
+      //updateDesincorporacion
+    }
+    else if (edoFolio === "Cerrado" && validateForm(valuesInco)){
       console.log(valuesDes);
       console.log(valuesRef1);
       console.log(valuesRef2);
