@@ -25,7 +25,7 @@ import {
 } from "../../helpers/DataGetters";
 import { useState } from "react";
 import { validateForm } from "../../functions/validateFrom";
-import {httpGetData} from "../../functions/httpRequest";
+import {httpGetData, httpPostData} from "../../functions/httpRequest";
 import {CustomSwalError} from "../../functions/customSweetAlert";
 
 
@@ -88,18 +88,22 @@ export const CerrarFolioForm = () => {
   );
 
   const registraIncorporacion = (e) => {
+    const urlUpdate = "/desincorporaciones/update-desincorporacion";
+    const urlIncorpora = `/desincorporaciones/datos-incorporacion/${idFolio}`;
+
     e.preventDefault();
     console.log("values desinc");
     console.log(valuesDes);
     const {edoFolio} = valuesDes;
     if(edoFolio === "Cerrado sin incorporar"){
-      //updateDesincorporacion
+      httpPostData(urlUpdate, valuesDes);
     }
     else if (edoFolio === "Cerrado" && validateForm(valuesInco)){
       console.log(valuesDes);
       console.log(valuesRef1);
       console.log(valuesRef2);
       console.log(valuesInco);
+      httpPostData(urlIncorpora, valuesInco);
     }else{
       alert("¡CAMPOS VACIOS!");
     }
