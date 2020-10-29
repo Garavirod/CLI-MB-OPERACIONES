@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
 const urlAbiertos = "/desincorporaciones/folios-abiertos";
 
 export function TabListComponent(props){
-  console.log("value en tabList "+props.valueToRefr);
 
   const [data, setData] = useState([]);
   const [tag, setTag] = useState("");

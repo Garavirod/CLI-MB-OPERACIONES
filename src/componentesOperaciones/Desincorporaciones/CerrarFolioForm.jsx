@@ -25,8 +25,8 @@ import {
 } from "../../helpers/DataGetters";
 import { useState } from "react";
 import { validateForm } from "../../functions/validateFrom";
-import {httpGetData, httpPostData} from "../../functions/httpRequest";
-import {CustomSwalError} from "../../functions/customSweetAlert";
+import {httpPostData} from "../../functions/httpRequest";
+import swal from 'sweetalert';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -87,23 +87,41 @@ export const CerrarFolioForm = () => {
     cumplimientos
   );
 
-  const registraIncorporacion = (e) => {
+  const registraIncorporacion = async (e) => {
     const urlUpdate = "/desincorporaciones/update-desincorporacion";
     const urlIncorpora = `/desincorporaciones/datos-incorporacion/${idFolio}`;
+    const urlDesinc = "/BitacordaDR";
 
     e.preventDefault();
-    console.log("values desinc");
-    console.log(valuesDes);
+    //console.log("values desinc");
+    //console.log(valuesDes);
     const {edoFolio} = valuesDes;
     if(edoFolio === "Cerrado sin incorporar"){
-      httpPostData(urlUpdate, valuesDes);
+      await httpPostData(urlUpdate, valuesDes)
+        .then(resp =>{
+            if(resp.success){
+              swal("Información grabada", "Los cambios han sido grabados exitosamente", "success")
+              .then(()=>{
+                window.location.replace(urlDesinc);
+              });
+            }
+        });//then
     }
     else if (edoFolio === "Cerrado" && validateForm(valuesInco)){
       console.log(valuesDes);
       console.log(valuesRef1);
       console.log(valuesRef2);
       console.log(valuesInco);
-      httpPostData(urlIncorpora, valuesInco);
+      await httpPostData(urlIncorpora, valuesInco)
+      .then(resp =>{
+        if(resp.success){
+          swal("Información grabada", "Los cambios han sido grabados exitosamente", "success")
+          .then(()=>{
+            window.location.replace(urlDesinc);
+          });
+        }
+    });//then
+      
     }else{
       alert("¡CAMPOS VACIOS!");
     }
