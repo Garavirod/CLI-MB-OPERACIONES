@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 const urlAbiertos = "/desincorporaciones/folios-abiertos";
 
 export function TabListComponent(props){
+  console.log("value en tabList "+props.valueToRefr);
 
   const [data, setData] = useState([]);
   const [tag, setTag] = useState("");
@@ -75,10 +76,10 @@ export function TabListComponent(props){
     window.location.replace("/cerrar-folio");
   }//cerrarFOlio
   
-  const { typeList } = props;
+  const { typeList, valueToRefr } = props;
   useEffect(() => {
     getDatabyLabel(typeList);
-  }, []);
+  }, [valueToRefr]);
 
   const classes = useStyles();
 

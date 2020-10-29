@@ -57,6 +57,9 @@ export const FormDesincorporaciones = () => {
     ModelReferencias
   );
 
+  //refresh getting folios abiertos
+  const [valRefrFolios, setRefresh] = useState(0);
+
   const { tipo } = valuesDes;
 
   const registraFolio = (e) => {
@@ -137,6 +140,10 @@ export const FormDesincorporaciones = () => {
       default:
         break;
     }
+    setRefresh(prevValRefr => {
+      return prevValRefr + 1;
+    });
+    console.log(valRefrFolios);
   };
 
   return (
@@ -166,7 +173,9 @@ export const FormDesincorporaciones = () => {
                   </Grid>
                   {/* LISTA DE FOLIOS ABIERTOS/ INCUM / CUMP */}
                   <Grid item lg={6}>
-                    <TabListasComponent />
+                    <TabListasComponent 
+                      refreshFolios={valRefrFolios}
+                    />
                   </Grid>
                   {/* FROMULARIO DE REFERENCIAS (CUMPLIMIENTOS E INCUMPLIMIENTOS) */}
                   <Grid item lg={12}>
