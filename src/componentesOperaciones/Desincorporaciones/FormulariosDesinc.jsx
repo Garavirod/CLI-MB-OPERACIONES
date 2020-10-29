@@ -88,7 +88,7 @@ export const FormDesincorporaciones = () => {
         if (isValidFolio && isValidApo) {
           const km = setKilometrajeCalculado(valuesRef2);
           valuesRef2["kilometraje"] = km;
-          valuesRef2["tipo"] = "cumplido";
+          valuesRef2["tipo"] = "Apoyo";
           alert(`Kilometraje cumplido >: ${km}`);
           // combinamos el folio con la referencia asocaida
           const folio_with_ref = {...valuesDes, ...valuesRef2};  
@@ -123,7 +123,7 @@ export const FormDesincorporaciones = () => {
           valuesRef2["kilometraje"] = km2;
           // Tipo de folio
           valuesRef1["tipo"] = "Incumplido";
-          valuesRef2["tipo"] = "cumplido";
+          valuesRef2["tipo"] = "Apoyo";
           // Combinamos los folio con sus referencias asociadas
           const folio_with_refs = [valuesDes,valuesRef1,valuesRef2];                   
           // Realizar POST de folio
