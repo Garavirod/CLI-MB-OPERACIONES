@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -16,10 +16,9 @@ import { IncorporacionComp } from "./IncorporacionComp";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { ModelIncorporacion } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
 import {
-  getDatosByFolio,
   getCumplimientosByFolio,
   getIncumplimientosByFolio,
 } from "../../helpers/DataGetters";
@@ -41,21 +40,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const CerrarFolioForm = () => {
   
-  //const { idFolio } = useParams();  
-
-  /*const getDesincorporacion = async () => {
-    //const urlOneDesinc = `/desincorporaciones/one-desincorporacion/${idFolio}`;
-    //const resp = await httpGetData(urlOneDesinc);
-    //if(resp.success)
-    //{
-      //const desinc = resp.data;
-      //console.log(desinc);
-      setFolio(desinc);
-      //setValues(desinc);
-    //}
-    //else
-      //CustomSwalError();
-  }//getDesincorporacion*/
   const folioSt = JSON.parse(localStorage.getItem("folio"));
   //console.log(folioSt);
   const {id:idFolio}  = folioSt;
@@ -63,12 +47,7 @@ export const CerrarFolioForm = () => {
   const [cumplimientos] = useState(getCumplimientosByFolio(idFolio));
   const [incumplimientos] = useState(getIncumplimientosByFolio(idFolio));
   const [folio] = useState(folioSt);
-  //const [folio, setFolio] = useState({});
   const { tipo } = folio;
-
-  /*useEffect(() => {
-    getDesincorporacion();
-  }, []);*/
 
 
   //Modelo y estructura de una Desincorporación

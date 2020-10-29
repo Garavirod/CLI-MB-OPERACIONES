@@ -29,6 +29,7 @@ import ListaDatosSeguroColisiones from "./componentesOperaciones/Colisiones/List
 import {EventosFormColisiones} from "./componentesOperaciones/Colisiones/EventosFormColisiones";
 import { FormDesincorporaciones } from './componentesOperaciones/Desincorporaciones/FormulariosDesinc';
 import { CerrarFolioForm } from './componentesOperaciones/Desincorporaciones/CerrarFolioForm';
+import { ReportJustSemana } from './componentesOperaciones/Reportes/ReportJustSemana';
 const Routes = () => {
     return ( 
         <Router>
@@ -38,7 +39,6 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" path="/JustificacionSemana" component={Levantamiento} exact/>
                 <PrivateRoute role="Operaciones" path="/BitacordaDR" component={FormDesincorporaciones} exact/>
                 <PrivateRoute role="Operaciones" path="/ControlDeServicios" component={Control} exact/>
-                <PrivateRoute role="Operaciones" path='/reportes/' component={MainReportes}/>
                 <PrivateRoute role="Operaciones" path='/pruebas' component={Pruebas}exact/> 
                 <PrivateRoute role="Operaciones" path='/eventos/' component={EventosScreen}exact/>                              
                 <PrivateRoute role="Operaciones" path='/MenuAccidentes/' component={MenuAccidentesScreen}exact/>
@@ -58,6 +58,9 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" exact path="/colisiones-form" component={EventosFormColisiones}/>
                 {/* DESINCORPORACIONES */}
                 <PrivateRoute role="Operaciones" exact path="/cerrar-folio" component={CerrarFolioForm}/>
+                {/* JUST SEMANA*/}
+                <PrivateRoute role="Operaciones" path='/reportes' component={ReportJustSemana}/>
+               
 
                 {/* LOGIN */}
                 <Route path="/denied" component={Denied} exact/>
