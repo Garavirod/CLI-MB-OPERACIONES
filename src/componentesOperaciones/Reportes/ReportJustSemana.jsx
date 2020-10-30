@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { httpGetData } from "../../functions/httpRequest";
 import TableDataRegistros from "../Reportes/TableComponent";
+import { Container, Grid } from "@material-ui/core";
 
 export const ReportJustSemana = () => {
   const [data, setData] = useState([]);
@@ -13,12 +14,10 @@ export const ReportJustSemana = () => {
     const url = "/desincorporaciones/incumplimientos-list/inc";
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
-    if (_data.success) {
+    if (_data.success) {      
       setData(_data.data);
     }
-  };
-
-  console.log(data);
+  };  
   {/*
     <div>
       {data.map((incp) => (
@@ -28,6 +27,12 @@ export const ReportJustSemana = () => {
 */}   
 
   return (
-    <TableDataRegistros/> 
+    <Container component="main">
+      <Grid container spacing={2}>
+        <Grid item lg={12}>
+          <TableDataRegistros dataRegistros={data}/> 
+        </Grid>
+      </Grid>
+    </Container>
   )
 };

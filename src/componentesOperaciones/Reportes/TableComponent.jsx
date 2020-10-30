@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
@@ -14,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { useState, useEffect } from 'react';
 
 const useRowStyles = makeStyles({
   root: {
@@ -23,24 +23,18 @@ const useRowStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein, price) {
+function createData(data) {
+  const {id, fecha,hora, jornada, estacion, linea, motivo, observaciones} = data;
+  const {Cumplimiento_Incumplimientos} = data;
   return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      { date: '2020-01-05', customerId: '11091700', amount: 3 },
-      { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
-    ],
+    id, fecha,hora, jornada, estacion, linea, motivo, observaciones,
+    history: [Cumplimiento_Incumplimientos[0]]
   };
 }
 
 function Row(props) {
   const { row } = props;
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
   return (
@@ -52,40 +46,49 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.name}
+          {row.id}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+        <TableCell>{row.fecha}</TableCell>
+        <TableCell>{row.hora}</TableCell>
+        <TableCell>{row.jornada}</TableCell>
+        <TableCell>{row.motivo}</TableCell>
+        <TableCell>{row.linea}</TableCell>        
+        <TableCell>{row.estacion}</TableCell>        
+        <TableCell>{row.observaciones}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
-                History
+                Incumplimiento
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
+                    <TableCell>Ruta referencia</TableCell>
+                    <TableCell>Tramo desde</TableCell>
+                    <TableCell>Tramo hasta</TableCell>
+                    <TableCell>Dirección</TableCell>
+                    <TableCell>Número de vuletas</TableCell>
+                    <TableCell>Número de idas</TableCell>
+                    <TableCell>Número de regresos</TableCell>
+                    <TableCell>Kilometraje (Km)</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
+                    <TableRow key={historyRow.id}>
                       <TableCell component="th" scope="row">
-                        {historyRow.date}
+                        {historyRow.ruta_referencia}
                       </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
+                      <TableCell>{historyRow.tramo_desde}</TableCell>
+                      <TableCell>{historyRow.tramo_hasta}</TableCell>
+                      <TableCell>{historyRow.ref_ida}</TableCell>
+                      <TableCell>{historyRow.num_vuelta}</TableCell>
+                      <TableCell>{historyRow.num_ida}</TableCell>
+                      <TableCell>{historyRow.num_regreso}</TableCell>
+                      <TableCell>{historyRow.kilometraje}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -98,49 +101,41 @@ function Row(props) {
   );
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
-};
+export default function TableDataRegistros(props) {  
+  const {dataRegistros} = props;
+  const [rows,setRows] = useState([]);
+  useEffect(()=>{
+    FillRows();
+  },[dataRegistros])
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-  createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
-];
+  const FillRows = () => {
+    let r = [];
+    dataRegistros.forEach(element => {            
+      r.push(createData(element));
+    });
+    setRows(r);
+  };
+  console.log(dataRegistros);
 
-export default function TableDataRegistros() {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
             <TableCell />
+            <TableCell>Folio</TableCell>
             <TableCell>Fecha</TableCell>
-            <TableCell align="right">Hora</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>Hora</TableCell>
+            <TableCell>Jornada</TableCell>
+            <TableCell>Motivo</TableCell>
+            <TableCell>Linea</TableCell>
+            <TableCell>Estación</TableCell>
+            <TableCell>Observación</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.name} row={row} />
+            <Row key={row.id} row={row} />
           ))}
         </TableBody>
       </Table>
