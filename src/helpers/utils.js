@@ -1,4 +1,5 @@
 import {getDistanciasByRuta} from './DataGetters';
+import { date } from 'yup';
 
 export const setFechaActual = () =>{
     const f = new Date();
@@ -92,3 +93,37 @@ export const setKilometrajeCalculado = (referencia) =>{
 
     return parseFloat(kilometraje.toFixed(3));
 }
+
+
+/* 
+    Esta funcion recibe un conjunto de registros entre
+    cumplientos, incmplimientos y afectciones.
+
+    Retorna los registros agrupados por fechas y 
+    kilometraje total acumulado en esa fecha.
+*/
+
+
+export const GruopedDataByDate = (data) =>{
+    let values = [];
+    let dateRef = data[0].fecha;
+    let collections = [];
+    let km = 0;
+    for (let idx = 0; idx < data.length; idx++) {
+        if(data[idx].fecha !== dateRef || idx === (data.length-1)){
+            const obj = {
+                date: dateRef,
+                collection : collections,
+                kmtotal: parseFloat(km.toFixed(3))
+            }
+            values.push(obj);
+            dateRef = data[idx].fecha;
+            collections = [];
+            km = 0;            
+        }      
+        collections.push(data[idx]);
+        km += data[idx].Cumplimiento_Incumplimientos[0].kilometraje;
+    }    
+    return values
+
+};
