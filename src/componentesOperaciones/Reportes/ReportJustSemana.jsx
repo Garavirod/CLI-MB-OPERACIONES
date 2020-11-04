@@ -98,7 +98,7 @@ export const ReportJustSemana = () => {
 
   // Afectaciones
   const getDataApoyoInucump = async (tipo) => {
-    const url = `/desincorporaciones/registros-list/${tipo}`;
+    const url = `/desincorporaciones/registros-desinc-list/${tipo}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
     if (_data.success) {
