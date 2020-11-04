@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -10,11 +10,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import FolderIcon from "@material-ui/icons/Folder";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import {
-  getFolios,
-  getIncumplimientos,
-  getCumplimientos,
-} from "../../helpers/DataGetters";
+import {httpGetData} from "../../functions/httpRequest";
+import {CustomSwalError} from "../../functions/customSweetAlert";
+
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,34 +33,52 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// Carga los datos dependiendo la etiqueta (folios/incump/cumpl)
-const getDatabyLabel = (label) => {
-  let tag = null;
-  let data = null;
-  switch (label) {
-    case "Folios abiertos":
-      tag = "Folio";
-      data = getFolios();
-      break;
-    case "Incumplimeintos":
-      tag = "Incumplimiento";
-      data = getIncumplimientos();
-      break;
-    case "Cumplimientos":
-      tag = "Cumplimiento";
-      data = getCumplimientos();
-      break;
-    default:
-      break;
-  }
+const urlAbiertos = "/desincorporaciones/folios-abiertos";
 
-  return [tag, data];
-};
+export function TabListComponent(props){
 
-export const TabListComponent = (props) => {
-  const { typeList } = props;
+  const [data, setData] = useState([]);
+  const [tag, setTag] = useState("");
 
-  const [tag, data] = getDatabyLabel(typeList);
+  // Carga los datos dependiendo la etiqueta (folios/incump/cumpl)
+  const getDatabyLabel = async (label) => {
+    //let data = null;
+    switch (label) {
+      case "Folios abiertos":
+        setTag("Folio");
+        const resp = await httpGetData(urlAbiertos);
+        if(resp.success)
+        {
+          const folios = [...resp.data];
+          console.log(folios);
+          setData(folios);
+        }
+        else
+          CustomSwalError();
+        break;
+      case "Incumplimeintos":
+        setTag("Incumplimiento");
+        //data = getIncumplimientos();
+        break;
+      case "Cumplimientos":
+        setTag("Cumplimiento");
+        //data = getCumplimientos();
+        break;
+      default:
+        break;
+    }//switch
+  };//getDatabyLabel
+
+  function sendCerrarFolio(folio){
+    console.log(folio);
+    localStorage.setItem("folio",JSON.stringify(folio));
+    window.location.replace("/cerrar-folio");
+  }//cerrarFOlio
+  
+  const { typeList, valueToRefr } = props;
+  useEffect(() => {
+    getDatabyLabel(typeList);
+  }, [valueToRefr]);
 
   const classes = useStyles();
 
@@ -87,14 +103,14 @@ export const TabListComponent = (props) => {
                 </p>
                 <p>Detalles</p>
                 <ul>
-                  <li>{`Ruta : ${it.ruta}`}</li>
+                  <li>{`Linea : ${it.linea}`}</li>
                   <li>{`Fecha de creacion : ${it.fecha}`}</li>
-                  <li>{`Económico : ${it.eco}`}</li>
+                  <li>{`Económico : ${it.economico}`}</li>
                 </ul>
               </ListItemText>
               {(typeList === "Folios abiertos") ? (
                 <ListItemSecondaryAction>
-                  <Link className="" to={`/cerrar-folio/${it.id}`}>
+                  <Link className="" onClick={()=>{sendCerrarFolio(it)}}>
                     <IconButton edge="end" aria-label="delete">
                       <VisibilityIcon />
                     </IconButton>

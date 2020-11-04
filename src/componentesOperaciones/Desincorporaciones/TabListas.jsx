@@ -67,7 +67,7 @@ function TabPanel(props) {
   );
 }
 
-export const TabListasComponent = () => {
+export const TabListasComponent = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -115,7 +115,9 @@ export const TabListasComponent = () => {
                 onChangeIndex={handleChangeIndex}
               >
                 <TabPanel value={value} index={0} dir={theme.direction}>
-                  <TabListComponent typeList={"Folios abiertos"} />
+                  <TabListComponent typeList={"Folios abiertos"} 
+                    valueToRefr = {props.refreshFolios}
+                  />
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
                 <TabListComponent typeList={"Incumplimeintos"} />                  

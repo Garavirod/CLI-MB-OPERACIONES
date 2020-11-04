@@ -70,7 +70,7 @@ export default function Referencia(props) {
     active = false, //infromación de sólo lectura
   } = props;
 
-  // Desestructurando el hook del modelo Desinc dadas las props del hook
+  //Desestructurando el hook del modelo Desinc dadas las props del hook
   const {
     ruta_referencia,
     ref_ida,
@@ -90,7 +90,6 @@ export default function Referencia(props) {
 
   // La función verifica si se ha cambiado de ruta o referencia
   const handleChangeRuta = (ref) => {
-    // Se cambia la referencia en el modelo
     const target = { name: "ruta_referencia", value: ref };
     handleInputChangeRef({ target });
   };
@@ -105,7 +104,7 @@ export default function Referencia(props) {
   // El hook effect asegura qeu solo cuando se cambie la ruta, debe cargar
   // las estaciones de dicha ruta seleccionada
   useEffect(() => {
-    getDatosbyReferencia(ruta_referencia);
+    getDatosbyReferencia(ruta_referencia);//ruta_referencia
   }, [ruta_referencia]);
 
   return (

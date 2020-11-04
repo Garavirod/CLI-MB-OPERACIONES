@@ -30,14 +30,14 @@ export const httpPostData = async (endpoint, data) =>{
     .then(res=>{
         console.log("Datos mandados", res); 
         CustomSwalSave();                      
-        //return {success:true};
+        return res.data;
     })
     .catch(err=>{
         CustomSwalError();  
         console.log("Hubo un error al guardar la infromacion en >: "+endpoint+" error "+err);
-        //return {success:false};
+        return err.data;
     });
-    //return response;
+    return response;
 };
 
 
