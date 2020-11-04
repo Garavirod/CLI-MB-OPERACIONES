@@ -86,7 +86,8 @@ export const ReportJustSemana = () => {
         getDataApoyoInucump('inc');        
         break;
       case CUMPLI:        
-        getDataApoyoInucump('apo');        
+        getDataApoyoInucump('apo');
+        break;        
       default:
         break;
     }
@@ -141,25 +142,27 @@ export const ReportJustSemana = () => {
                 <Tab label="Item Seven" {...a11yProps(6)} />
               </Tabs>
             </AppBar>
+            {/* INCUMPLIMIENTOS */}
             <TabPanel value={tab} index={INCUMP}>
               {incumplimientos.map((f) => (
                 <Paper key={f.date} className={classes.paper}>
                   <Typography variant="h5" gutterBottom>
                     {f.date}
                   </Typography>
-                  <TableDataRegistros dataRegistros={f.collection} />
-                  <Alert severity="info">KM Total : {f.kmtotal}</Alert>
+                  <TableDataRegistros dataRegistros={f.collection} tipoRegistro={"Incumplimiento"} />
+                  <Alert severity="info"><b>KM Total : {f.kmtotal} KM</b></Alert>
                 </Paper>
               ))}
             </TabPanel>
+            {/* APOYOS */}
             <TabPanel value={tab} index={CUMPLI}>
             {cumplimientos.map((f) => (
                 <Paper key={f.date} className={classes.paper}>
                   <Typography variant="h5" gutterBottom>
                     {f.date}
                   </Typography>
-                  <TableDataRegistros dataRegistros={f.collection} />
-                  <Alert severity="info">KM Total : {f.kmtotal}</Alert>
+                  <TableDataRegistros dataRegistros={f.collection} tipoRegistro={"Apoyo"} />
+                  <Alert severity="info"><b>KM Total : {f.kmtotal} KM</b></Alert>
                 </Paper>
               ))}
             </TabPanel>

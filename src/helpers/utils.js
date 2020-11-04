@@ -97,7 +97,7 @@ export const setKilometrajeCalculado = (referencia) =>{
 
 /* 
     Esta funcion recibe un conjunto de registros entre
-    cumplientos, incmplimientos y afectciones.
+    cumplientos e incmplimientos.
 
     Retorna los registros agrupados por fechas y 
     kilometraje total acumulado en esa fecha.
@@ -112,24 +112,30 @@ export const GruopedDataByDate = (data) =>{
       
 
     for (let idx = 1; idx < data.length; idx++) {
-        if(data[idx].fecha !== dateRef){            
+        if(data[idx].fecha === dateRef){      
+            collections.push(data[idx]);
+            km += data[idx].Cumplimiento_Incumplimientos[0].kilometraje;      
+            if(idx===data.length-1){
+                const obj = {
+                    date: dateRef,
+                    collection : collections,
+                    kmtotal: parseFloat(km.toFixed(3))
+                }
+                values.push(obj);
+            }       
+        }else{
             const obj = {
                 date: dateRef,
                 collection : collections,
                 kmtotal: parseFloat(km.toFixed(3))
             }
             values.push(obj);
-
             dateRef = data[idx].fecha;
             collections = [data[idx]];
-            km = data[idx].Cumplimiento_Incumplimientos[0].kilometraje;;            
+            km = data[idx].Cumplimiento_Incumplimientos[0].kilometraje;  
         }      
-        collections.push(data[idx]);
-        km += data[idx].Cumplimiento_Incumplimientos[0].kilometraje;
+        
     }    
-    // 26
-    // 27
-    // 28
     return values
 
 };

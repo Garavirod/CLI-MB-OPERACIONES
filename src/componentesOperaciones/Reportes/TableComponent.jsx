@@ -33,7 +33,7 @@ function createData(data) {
 }
 
 function Row(props) {
-  const { row } = props;
+  const { row, tipoRegistro } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
@@ -60,7 +60,7 @@ function Row(props) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
-                Incumplimiento
+                {tipoRegistro}
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
@@ -101,7 +101,7 @@ function Row(props) {
 }
 
 export default function TableDataRegistros(props) {  
-  const {dataRegistros} = props;
+  const {dataRegistros, tipoRegistro="registro"} = props;
   const [rows,setRows] = useState([]);
   useEffect(()=>{
     FillRows();
@@ -133,7 +133,7 @@ export default function TableDataRegistros(props) {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.id} row={row} />
+            <Row key={row.id} row={row} tipoRegistro={tipoRegistro} />
           ))}
         </TableBody>
       </Table>
