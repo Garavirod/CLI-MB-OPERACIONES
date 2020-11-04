@@ -29,6 +29,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+// Constantes para cada elemento del tabpanel
+
+const INCUMP = 0;
+const CUMPLI = 1;
+const AFECTA = 2;
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -65,30 +72,41 @@ function a11yProps(index) {
 export const ReportJustSemana = () => {
   const classes = useStyles();
   const [incumplimientos, setIncumplimientos] = useState([]);
-  // const [cumplimientos, setCumplimientos] = useState([]);
-  const [tab, setTab] = React.useState(0);
+  const [cumplimientos, setCumplimientos] = useState([]);
+  const [tab, setTab] = React.useState(INCUMP); //Estado inicial para incumplimientos 
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (event,newValue) => {
     setTab(newValue);
   };
 
   // Incumplimientos
   useEffect(() => {
-    getDataIncumplimientos();
-  }, []);
+    switch (tab) {
+      case INCUMP:
+        getDataApoyoInucump('inc');        
+        break;
+      case CUMPLI:        
+        getDataApoyoInucump('apo');        
+      default:
+        break;
+    }
+  }, [tab]);
 
   // Cumplimientos
 
 
   // Afectaciones
-
-  
-  const getDataIncumplimientos = async () => {
-    const url = "/desincorporaciones/registros-list/inc";
+  const getDataApoyoInucump = async (tipo) => {
+    const url = `/desincorporaciones/registros-list/${tipo}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
     if (_data.success) {
-      setIncumplimientos(GruopedDataByDate(_data.data));
+      if (tab===INCUMP){
+        setIncumplimientos(GruopedDataByDate(_data.data));
+      }else{
+        console.log(_data.data);
+        setCumplimientos(GruopedDataByDate(_data.data));
+      }
     }
   };
 
@@ -114,16 +132,16 @@ export const ReportJustSemana = () => {
                 scrollButtons="auto"
                 aria-label="scrollable auto tabs example"
               >
-                <Tab label="Incumplimientos" {...a11yProps(0)} />
-                <Tab label="Cumpplimientos" {...a11yProps(1)} />
-                <Tab label="Afectaciones" {...a11yProps(2)} />
+                <Tab label="Incumplimientos" {...a11yProps(INCUMP)} />
+                <Tab label="Cumpplimientos" {...a11yProps(CUMPLI)} />
+                <Tab label="Afectaciones" {...a11yProps(AFECTA)} />
                 <Tab label="Deducción operadores" {...a11yProps(3)} />
                 <Tab label="Item Five" {...a11yProps(4)} />
                 <Tab label="Item Six" {...a11yProps(5)} />
                 <Tab label="Item Seven" {...a11yProps(6)} />
               </Tabs>
             </AppBar>
-            <TabPanel value={tab} index={0}>
+            <TabPanel value={tab} index={INCUMP}>
               {incumplimientos.map((f) => (
                 <Paper key={f.date} className={classes.paper}>
                   <Typography variant="h5" gutterBottom>
@@ -134,10 +152,18 @@ export const ReportJustSemana = () => {
                 </Paper>
               ))}
             </TabPanel>
-            <TabPanel value={tab} index={1}>
-              Item Two
+            <TabPanel value={tab} index={CUMPLI}>
+            {cumplimientos.map((f) => (
+                <Paper key={f.date} className={classes.paper}>
+                  <Typography variant="h5" gutterBottom>
+                    {f.date}
+                  </Typography>
+                  <TableDataRegistros dataRegistros={f.collection} />
+                  <Alert severity="info">KM Total : {f.kmtotal}</Alert>
+                </Paper>
+              ))}
             </TabPanel>
-            <TabPanel value={tab} index={2}>
+            <TabPanel value={tab} index={AFECTA}>
               Item Three
             </TabPanel>
             <TabPanel value={tab} index={3}>

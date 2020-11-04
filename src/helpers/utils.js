@@ -107,23 +107,29 @@ export const setKilometrajeCalculado = (referencia) =>{
 export const GruopedDataByDate = (data) =>{
     let values = [];
     let dateRef = data[0].fecha;
-    let collections = [];
-    let km = 0;
-    for (let idx = 0; idx < data.length; idx++) {
-        if(data[idx].fecha !== dateRef || idx === (data.length-1)){
+    let collections = [data[0]];
+    let km = data[0].Cumplimiento_Incumplimientos[0].kilometraje;
+      
+
+    for (let idx = 1; idx < data.length; idx++) {
+        if(data[idx].fecha !== dateRef){            
             const obj = {
                 date: dateRef,
                 collection : collections,
                 kmtotal: parseFloat(km.toFixed(3))
             }
             values.push(obj);
+
             dateRef = data[idx].fecha;
-            collections = [];
-            km = 0;            
+            collections = [data[idx]];
+            km = data[idx].Cumplimiento_Incumplimientos[0].kilometraje;;            
         }      
         collections.push(data[idx]);
         km += data[idx].Cumplimiento_Incumplimientos[0].kilometraje;
     }    
+    // 26
+    // 27
+    // 28
     return values
 
 };
