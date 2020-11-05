@@ -77,9 +77,9 @@ function Row(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map(history=>(
-                    <React.Fragment key={history.id}>
-                      {history.map((hs) => (
+                  {row.history.map(historyDate=>(
+                    <React.Fragment key={row.history.indexOf(historyDate)}>
+                      {historyDate.map((hs) => (
                         <TableRow key={hs.id}>                      
                           <TableCell component="th" scope="row">
                             {hs.ruta_referencia}

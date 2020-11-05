@@ -65,6 +65,8 @@ export const IncorporacionComp = (props) => {
     seg_retrazo,
   } = valuesInco;
 
+  const {empresa:empresaDesInc} = valuesDes;
+
   // Las estaciones se basan en la linea seleccionada en la desincorporación
   const {linea} =  valuesDes;  
     // Cada vez que cambie el estado de la linea, se tren todas las estaciones
@@ -271,24 +273,12 @@ export const IncorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* EMPRESA */}
-          <FormControl className={classes.formControl}>
-            <InputLabel>Empresa</InputLabel>
-            <Select
-              native
-              value={empresa}
-              onChange={handleInputChangeInc}
-              inputProps={{
-                name: "empresa",
-              }}
-            >
-              <option value={""}>...</option>
-              {empresas.map((it) => (
-                <option key={it} value={it}>
-                  {it}
-                </option>
-              ))}
-            </Select>
-          </FormControl>
+          <FormControl className={classes.formControl} disabled={false}>
+            <Typography variant="h6" component="h6">
+              Empresa
+            </Typography>
+            <InputLabel>{empresaDesInc}</InputLabel>
+          </FormControl>          
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* ECONÓMICO */}
