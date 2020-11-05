@@ -104,35 +104,71 @@ export const setKilometrajeCalculado = (referencia) =>{
 */
 
 
-export const GruopedDataByDate = (data) =>{
+export const GruopedDataByDate = (data, afectacion=false) =>{
     let values = [];
     let dateRef = data[0].fecha;
     let collections = [data[0]];
     let km = data[0].Cumplimiento_Incumplimientos[0].kilometraje;
-      
-
+    
+    /* 
+        20
+        20
+        20    
+        28
+        28
+        28
+    */
+    console.log(data);
     for (let idx = 1; idx < data.length; idx++) {
         if(data[idx].fecha === dateRef){      
-            collections.push(data[idx]);
-            km += data[idx].Cumplimiento_Incumplimientos[0].kilometraje;      
+            collections.push(data[idx]);                 
+            if(afectacion && data[idx].Cumplimiento_Incumplimientos.length>1){
+                let km1 = data[idx].Cumplimiento_Incumplimientos[0].kilometraje; 
+                let km2 = data[idx].Cumplimiento_Incumplimientos[1].kilometraje; 
+                km =  Math.abs(km2-km1);                
+
+            }else{
+                km += data[idx].Cumplimiento_Incumplimientos[0].kilometraje;      
+
+            }
             if(idx===data.length-1){
                 const obj = {
                     date: dateRef,
                     collection : collections,
-                    kmtotal: parseFloat(km.toFixed(3))
+                    kmtotal: parseFloat((Math.abs(km)).toFixed(3))
                 }
                 values.push(obj);
-            }       
-        }else{
+            }               
+        }
+        // else if(idx===data.length-1){
+        //     dateRef = data[idx].fecha;
+        //     collections = [data[idx]];
+        //     km = data[idx].Cumplimiento_Incumplimientos[0].kilometraje;
+        //     const obj = {
+        //         date: dateRef,
+        //         collection : collections,
+        //         kmtotal: parseFloat((Math.abs(km)).toFixed(3))
+        //     }
+        //     values.push(obj);
+        // }   
+        else{
             const obj = {
                 date: dateRef,
                 collection : collections,
-                kmtotal: parseFloat(km.toFixed(3))
+                kmtotal: parseFloat((Math.abs(km)).toFixed(3))
             }
             values.push(obj);
             dateRef = data[idx].fecha;
             collections = [data[idx]];
             km = data[idx].Cumplimiento_Incumplimientos[0].kilometraje;  
+            if(idx===data.length-1){
+                const obj = {
+                    date: dateRef,
+                    collection : collections,
+                    kmtotal: parseFloat((Math.abs(km)).toFixed(3))
+                }
+                values.push(obj);
+            }
         }      
         
     }    

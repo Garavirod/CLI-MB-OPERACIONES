@@ -11,6 +11,7 @@ import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import { GruopedDataByDate } from "../../helpers/utils";
 import Alert from "@material-ui/lab/Alert";
+import { PreloadData } from "../ui/PreloadData";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,9 +74,12 @@ export const ReportJustSemana = () => {
   const classes = useStyles();
   const [incumplimientos, setIncumplimientos] = useState([]);
   const [cumplimientos, setCumplimientos] = useState([]);
+  const [afectaciones, setAfectaciones] = useState([]);
+  const [preload, setPreload] = useState(true);
   const [tab, setTab] = React.useState(INCUMP); //Estado inicial para incumplimientos 
 
   const handleChange = (event,newValue) => {
+    setPreload(true);
     setTab(newValue);
   };
 
@@ -87,7 +91,10 @@ export const ReportJustSemana = () => {
         break;
       case CUMPLI:        
         getDataApoyoInucump('apo');
-        break;        
+        break;
+      case AFECTA:
+        getDataApoyoInucump('afe');
+        break;
       default:
         break;
     }
@@ -104,10 +111,12 @@ export const ReportJustSemana = () => {
     if (_data.success) {
       if (tab===INCUMP){
         setIncumplimientos(GruopedDataByDate(_data.data));
-      }else{
-        console.log(_data.data);
+      }else if (tab===CUMPLI){        
         setCumplimientos(GruopedDataByDate(_data.data));
+      }else{
+        setAfectaciones(GruopedDataByDate(_data.data,true));
       }
+      setPreload(false);
     }
   };
 
@@ -120,6 +129,9 @@ export const ReportJustSemana = () => {
               Reportes y registros
             </Typography>
           </Paper>
+        </Grid>
+        <Grid item lg={12}>
+          <PreloadData isVisible={preload} />
         </Grid>
         <Grid item lg={12}>
           <div className={classes.rootTab}>
@@ -166,8 +178,17 @@ export const ReportJustSemana = () => {
                 </Paper>
               ))}
             </TabPanel>
+            {/* AFECTACIONES */}
             <TabPanel value={tab} index={AFECTA}>
-              Item Three
+            {afectaciones.map((f) => (
+                <Paper key={f.date} className={classes.paper}>
+                  <Typography variant="h5" gutterBottom>
+                    {f.date}
+                  </Typography>
+                  <TableDataRegistros dataRegistros={f.collection} tipoRegistro={"Afectación"} />
+                  <Alert severity="info"><b>KM Total : {f.kmtotal} KM</b></Alert>
+                </Paper>
+              ))}
             </TabPanel>
             <TabPanel value={tab} index={3}>
               Item Four
