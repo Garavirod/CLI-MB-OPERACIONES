@@ -104,7 +104,7 @@ export const setKilometrajeCalculado = (referencia) =>{
 */
 
 
-export const GruopedDataByDate = (data, afectacion=false) =>{
+export const GruopedDataByDate = (data, afectacion) =>{
     let values = [];
     let dateRef = data[0].fecha;
     let collections = [data[0]];

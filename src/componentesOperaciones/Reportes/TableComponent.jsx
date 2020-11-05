@@ -24,10 +24,10 @@ const useRowStyles = makeStyles({
 });
 
 function createData(data) {
-  const {id,hora, jornada, estacion, linea, motivo, observaciones} = data;
+  const {id,empresa,hora, jornada, estacion, linea, motivo, observaciones} = data;
   const {Cumplimiento_Incumplimientos} = data;
   return {
-    id,hora, jornada, estacion, linea, motivo, observaciones,
+    id,empresa,hora, jornada, estacion, linea, motivo, observaciones,
     history: [Cumplimiento_Incumplimientos]
   };
 }
@@ -48,6 +48,7 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.id}
         </TableCell>
+        <TableCell>{row.empresa}</TableCell>
         <TableCell>{row.hora}</TableCell>
         <TableCell>{row.jornada}</TableCell>
         <TableCell>{row.motivo}</TableCell>
@@ -129,6 +130,7 @@ export default function TableDataRegistros(props) {
           <TableRow>
             <TableCell />
             <TableCell>Folio</TableCell>            
+            <TableCell>Empresa</TableCell>            
             <TableCell>Hora</TableCell>
             <TableCell>Jornada</TableCell>
             <TableCell>Motivo</TableCell>
