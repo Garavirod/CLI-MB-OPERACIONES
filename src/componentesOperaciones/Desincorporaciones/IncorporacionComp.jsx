@@ -50,8 +50,7 @@ export const IncorporacionComp = (props) => {
   const {
     informa,
     estacion,
-    economico,
-    empresa,
+    economico,    
     odometro,
     credencial,
     nombre,
@@ -74,13 +73,17 @@ export const IncorporacionComp = (props) => {
       setEstacionLinea(getEstacionesByLinea(linea));    
     },[linea]);
 
+      // Asigana la empresa que previamente se regitro en la desincorporación
+    useEffect(()=>{
+      valuesInco["empresa"] = empresaDesInc;
+    },[]);
+
   // Datos de los inputs
   const sentidos = getSentido();
   const entradas = ["En tiempo", "Retrazo"];
   const statusset = ["Incorporacion", "Reincorporación", "Remplazo"];
   const informantes = getInfromantes();
-  const economicos = getEconomicos();
-  const empresas = getEmpresas();
+  const economicos = getEconomicos();  
 
   return (
     <Container className={classes.root}>

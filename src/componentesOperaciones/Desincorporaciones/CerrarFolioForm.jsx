@@ -18,10 +18,6 @@ import { ModelIncorporacion } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
 import { Link } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
-import {
-  getCumplimientosByFolio,
-  getIncumplimientosByFolio,
-} from "../../helpers/DataGetters";
 import { useState } from "react";
 import { validateForm } from "../../functions/validateFrom";
 import {httpPostData} from "../../functions/httpRequest";
@@ -91,6 +87,7 @@ export const CerrarFolioForm = () => {
             }
         });//then
     }
+    
     else if (edoFolio === "Cerrado" && validateForm(valuesInco)){
       console.log(valuesDes);
       console.log(valuesRef1);
