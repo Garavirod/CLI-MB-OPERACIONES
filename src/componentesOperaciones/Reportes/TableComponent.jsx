@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, hslToRgb } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
@@ -24,11 +24,11 @@ const useRowStyles = makeStyles({
 });
 
 function createData(data) {
-  const {id,hora, jornada, estacion, linea, motivo, observaciones} = data;
+  const {id,empresa,hora, jornada, estacion, linea, motivo, observaciones} = data;
   const {Cumplimiento_Incumplimientos} = data;
   return {
-    id,hora, jornada, estacion, linea, motivo, observaciones,
-    history: [Cumplimiento_Incumplimientos[0]]
+    id,empresa,hora, jornada, estacion, linea, motivo, observaciones,
+    history: [Cumplimiento_Incumplimientos]
   };
 }
 
@@ -48,6 +48,7 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.id}
         </TableCell>
+        <TableCell>{row.empresa}</TableCell>
         <TableCell>{row.hora}</TableCell>
         <TableCell>{row.jornada}</TableCell>
         <TableCell>{row.motivo}</TableCell>
@@ -66,6 +67,7 @@ function Row(props) {
                 <TableHead>
                   <TableRow>
                     <TableCell>Ruta referencia</TableCell>
+                    <TableCell>Tipo</TableCell>
                     <TableCell>Tramo desde</TableCell>
                     <TableCell>Tramo hasta</TableCell>
                     <TableCell>Dirección</TableCell>
@@ -76,20 +78,26 @@ function Row(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.id}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.ruta_referencia}
-                      </TableCell>
-                      <TableCell>{historyRow.tramo_desde}</TableCell>
-                      <TableCell>{historyRow.tramo_hasta}</TableCell>
-                      <TableCell>{historyRow.ref_ida}</TableCell>
-                      <TableCell>{historyRow.num_vuelta}</TableCell>
-                      <TableCell>{historyRow.num_ida}</TableCell>
-                      <TableCell>{historyRow.num_regreso}</TableCell>
-                      <TableCell>{historyRow.kilometraje}</TableCell>
-                    </TableRow>
-                  ))}
+                  {row.history.map(historyDate=>(
+                    <React.Fragment key={row.history.indexOf(historyDate)}>
+                      {historyDate.map((hs) => (
+                        <TableRow key={hs.id}>                      
+                          <TableCell component="th" scope="row">
+                            {hs.ruta_referencia}
+                          </TableCell>
+                          <TableCell>{hs.tipo}</TableCell>
+                          <TableCell>{hs.tramo_desde}</TableCell>
+                          <TableCell>{hs.tramo_hasta}</TableCell>
+                          <TableCell>{hs.ref_ida}</TableCell>
+                          <TableCell>{hs.num_vuelta}</TableCell>
+                          <TableCell>{hs.num_ida}</TableCell>
+                          <TableCell>{hs.num_regreso}</TableCell>
+                          <TableCell>{hs.kilometraje}</TableCell>
+                        </TableRow>
+                      ))}
+                    </React.Fragment>
+                  ))
+                  }
                 </TableBody>
               </Table>
             </Box>
@@ -113,8 +121,7 @@ export default function TableDataRegistros(props) {
       r.push(createData(element));
     });
     setRows(r);
-  };
-  console.log(dataRegistros);
+  };  
 
   return (
     <TableContainer component={Paper}>
@@ -123,6 +130,7 @@ export default function TableDataRegistros(props) {
           <TableRow>
             <TableCell />
             <TableCell>Folio</TableCell>            
+            <TableCell>Empresa</TableCell>            
             <TableCell>Hora</TableCell>
             <TableCell>Jornada</TableCell>
             <TableCell>Motivo</TableCell>

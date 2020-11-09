@@ -18,10 +18,6 @@ import { ModelIncorporacion } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
 import { Link } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
-import {
-  getCumplimientosByFolio,
-  getIncumplimientosByFolio,
-} from "../../helpers/DataGetters";
 import { useState } from "react";
 import { validateForm } from "../../functions/validateFrom";
 import {httpPostData} from "../../functions/httpRequest";
@@ -41,11 +37,15 @@ const useStyles = makeStyles((theme) => ({
 export const CerrarFolioForm = () => {
   
   const folioSt = JSON.parse(localStorage.getItem("folio"));
-  //console.log(folioSt);
+  const apoyo = JSON.parse(localStorage.getItem("apoyo"));
+  const incumplimiento = JSON.parse(localStorage.getItem("incumplido"));
+  localStorage.removeItem("apoyo");
+  localStorage.removeItem("incumplido");
+
   const {id:idFolio}  = folioSt;
   const classes = useStyles();
-  const [cumplimientos] = useState(getCumplimientosByFolio(idFolio));
-  const [incumplimientos] = useState(getIncumplimientosByFolio(idFolio));
+  const [cumplimientos] = useState(apoyo);
+  const [incumplimientos] = useState(incumplimiento);
   const [folio] = useState(folioSt);
   const { tipo } = folio;
 
@@ -74,6 +74,7 @@ export const CerrarFolioForm = () => {
     e.preventDefault();
     //console.log("values desinc");
     //console.log(valuesDes);
+    console.log(valuesInco);
     const {edoFolio} = valuesDes;
     if(edoFolio === "Cerrado sin incorporar"){
       await httpPostData(urlUpdate, valuesDes)
@@ -86,6 +87,7 @@ export const CerrarFolioForm = () => {
             }
         });//then
     }
+    
     else if (edoFolio === "Cerrado" && validateForm(valuesInco)){
       console.log(valuesDes);
       console.log(valuesRef1);

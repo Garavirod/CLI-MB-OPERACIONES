@@ -11,6 +11,7 @@ import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import { GruopedDataByDate } from "../../helpers/utils";
 import Alert from "@material-ui/lab/Alert";
+import { PreloadData } from "../ui/PreloadData";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
 }));
-
 
 // Constantes para cada elemento del tabpanel
 
@@ -56,6 +56,35 @@ function TabPanel(props) {
   );
 }
 
+// Componente para la lstar el pago a las empresas
+function ListCompanyKM(props) {
+  const { collections } = props;
+  let companiesKM = {};
+
+  collections.forEach((element) => {
+    if (companiesKM[element.empresa]) {
+      companiesKM[element.empresa] +=
+        element.Cumplimiento_Incumplimientos[0].kilometraje;
+      companiesKM[element.empresa] = parseFloat(
+        companiesKM[element.empresa].toFixed(3)
+      );
+    } else {
+      companiesKM[element.empresa] =
+        element.Cumplimiento_Incumplimientos[0].kilometraje;
+    }
+  });
+
+  return (
+    <div>
+      <Alert variant="outlined" severity="success">      
+          {Object.entries(companiesKM).map(([key, value]) => (
+            <p key={key}>{key} - {value} KM</p>
+          ))}
+      </Alert>
+    </div>
+  );
+}
+
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
@@ -73,41 +102,43 @@ export const ReportJustSemana = () => {
   const classes = useStyles();
   const [incumplimientos, setIncumplimientos] = useState([]);
   const [cumplimientos, setCumplimientos] = useState([]);
-  const [tab, setTab] = React.useState(INCUMP); //Estado inicial para incumplimientos 
+  const [afectaciones, setAfectaciones] = useState([]);
+  const [preload, setPreload] = useState(true);
+  const [tab, setTab] = React.useState(INCUMP); //Estado inicial para incumplimientos
 
-  const handleChange = (event,newValue) => {
+  const handleChange = (event, newValue) => {
+    setPreload(true);
     setTab(newValue);
   };
 
-  // Incumplimientos
   useEffect(() => {
     switch (tab) {
       case INCUMP:
-        getDataApoyoInucump('inc');        
+        getDataApoyoInucump("inc");
         break;
-      case CUMPLI:        
-        getDataApoyoInucump('apo');
-        break;        
+      case CUMPLI:
+        getDataApoyoInucump("apo");
+        break;
+      case AFECTA:
+        getDataApoyoInucump("afe");
+        break;
       default:
         break;
     }
   }, [tab]);
-
-  // Cumplimientos
-
-
-  // Afectaciones
   const getDataApoyoInucump = async (tipo) => {
-    const url = `/desincorporaciones/registros-list/${tipo}`;
+    const url = `/desincorporaciones/registros-desinc-list/${tipo}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
     if (_data.success) {
-      if (tab===INCUMP){
+      if (tab === INCUMP) {
         setIncumplimientos(GruopedDataByDate(_data.data));
-      }else{
-        console.log(_data.data);
+      } else if (tab === CUMPLI) {
         setCumplimientos(GruopedDataByDate(_data.data));
+      } else {
+        setAfectaciones(GruopedDataByDate(_data.data, true));
       }
+      setPreload(false);
     }
   };
 
@@ -120,6 +151,9 @@ export const ReportJustSemana = () => {
               Reportes y registros
             </Typography>
           </Paper>
+        </Grid>
+        <Grid item lg={12}>
+          <PreloadData isVisible={preload} />
         </Grid>
         <Grid item lg={12}>
           <div className={classes.rootTab}>
@@ -149,25 +183,51 @@ export const ReportJustSemana = () => {
                   <Typography variant="h5" gutterBottom>
                     {f.date}
                   </Typography>
-                  <TableDataRegistros dataRegistros={f.collection} tipoRegistro={"Incumplimiento"} />
-                  <Alert severity="info"><b>KM Total : {f.kmtotal} KM</b></Alert>
+                  <TableDataRegistros
+                    dataRegistros={f.collection}
+                    tipoRegistro={"Incumplimiento"}
+                  />
+                  <Alert severity="info">
+                    <b>KM Total : {f.kmtotal} KM</b>
+                  </Alert>
+                  <ListCompanyKM collections={f.collection} />
                 </Paper>
               ))}
             </TabPanel>
             {/* APOYOS */}
             <TabPanel value={tab} index={CUMPLI}>
-            {cumplimientos.map((f) => (
+              {cumplimientos.map((f) => (
                 <Paper key={f.date} className={classes.paper}>
                   <Typography variant="h5" gutterBottom>
                     {f.date}
                   </Typography>
-                  <TableDataRegistros dataRegistros={f.collection} tipoRegistro={"Apoyo"} />
-                  <Alert severity="info"><b>KM Total : {f.kmtotal} KM</b></Alert>
+                  <TableDataRegistros
+                    dataRegistros={f.collection}
+                    tipoRegistro={"Apoyo"}
+                  />
+                  <Alert severity="info">
+                    <b>KM Total : {f.kmtotal} KM</b>
+                  </Alert>
+                  <ListCompanyKM collections={f.collection} />
                 </Paper>
               ))}
             </TabPanel>
+            {/* AFECTACIONES */}
             <TabPanel value={tab} index={AFECTA}>
-              Item Three
+              {afectaciones.map((f) => (
+                <Paper key={f.date} className={classes.paper}>
+                  <Typography variant="h5" gutterBottom>
+                    {f.date}
+                  </Typography>
+                  <TableDataRegistros
+                    dataRegistros={f.collection}
+                    tipoRegistro={"Afectación"}
+                  />
+                  <Alert severity="info">
+                    <b>KM Total : {f.kmtotal} KM</b>
+                  </Alert>
+                </Paper>
+              ))}
             </TabPanel>
             <TabPanel value={tab} index={3}>
               Item Four

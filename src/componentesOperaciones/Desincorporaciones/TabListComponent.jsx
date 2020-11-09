@@ -11,7 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import FolderIcon from "@material-ui/icons/Folder";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import {httpGetData} from "../../functions/httpRequest";
-import {CustomSwalError} from "../../functions/customSweetAlert";
+import {swal} from "sweetalert";
 
 import { Link } from "react-router-dom";
 
@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const urlAbiertos = "/desincorporaciones/folios-abiertos";
+const urlCumIncum = "/desincorporaciones/cumplimiento-incumplimiento-folio/";
 
 export function TabListComponent(props){
 
@@ -54,7 +55,7 @@ export function TabListComponent(props){
           setData(folios);
         }
         else
-          CustomSwalError();
+          swal("Error", "Error al obtener Folios", "error");
         break;
       case "Incumplimeintos":
         setTag("Incumplimiento");
@@ -69,9 +70,36 @@ export function TabListComponent(props){
     }//switch
   };//getDatabyLabel
 
-  function sendCerrarFolio(folio){
+  const getCumpIncum = async (idFolio) =>{
+    const urlConFolio = urlCumIncum + idFolio;
+    const resp = await httpGetData(urlConFolio);
+    if(resp.success)
+    {
+      //es un array con su cumplimiento o incumpmimiento (ambos si fue una afectación)
+      return resp.data;
+    }
+    else
+      swal("Error", "Error al obtener Cumplimientos o Incumplimientos", "error");
+    
+  }//getCumplimiento
+
+  async function sendCerrarFolio(folio){
     console.log(folio);
     localStorage.setItem("folio",JSON.stringify(folio));
+    await getCumpIncum(folio.id)
+    .then((cumpIncums)=>{
+      /*sólo deben haber máximo 2 por Folio;
+      cuando fue afectación y hubo cumpl e incum*/
+      cumpIncums.map(oneCumIncum =>{
+        const {tipo} = oneCumIncum;
+        if (tipo === "Incumplido")
+          localStorage.setItem("incumplido",JSON.stringify(oneCumIncum));
+        else
+          localStorage.setItem("apoyo",JSON.stringify(oneCumIncum));
+      });//map
+    });//then
+    //console.log(localStorage.getItem("incumplido"));
+    //console.log(localStorage.getItem("apoyo"));
     window.location.replace("/cerrar-folio");
   }//cerrarFOlio
   
