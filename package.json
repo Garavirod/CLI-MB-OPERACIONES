@@ -12,7 +12,7 @@
     "@testing-library/user-event": "^7.2.1",
     "animate.css": "^4.1.1",
     "axios": "^0.20.0",
-    "formik": "^2.2.0",
+    "formik": "^2.2.3",
     "jwt-decode": "^2.2.0",
     "material-ui-popup-state": "^1.7.0",
     "prop-types": "latest",
@@ -23,7 +23,7 @@
     "react-swipeable-views": "latest",
     "react-window": "latest",
     "sweetalert": "^2.1.2",
-    "typescript": "^4.0.3",
+    "typescript": "^4.0.5",
     "yup": "^0.29.3"
   },
   "scripts": {
