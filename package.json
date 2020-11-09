@@ -14,6 +14,7 @@
     "axios": "^0.20.0",
     "formik": "^2.2.3",
     "jwt-decode": "^2.2.0",
+    "kill-port": "^1.6.1",
     "material-ui-popup-state": "^1.7.0",
     "prop-types": "latest",
     "react": "^16.14.0",
