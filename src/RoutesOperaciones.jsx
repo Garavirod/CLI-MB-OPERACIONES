@@ -30,6 +30,7 @@ import {EventosFormColisiones} from "./componentesOperaciones/Colisiones/Eventos
 import { FormDesincorporaciones } from './componentesOperaciones/Desincorporaciones/FormulariosDesinc';
 import { CerrarFolioForm } from './componentesOperaciones/Desincorporaciones/CerrarFolioForm';
 import { ReportJustSemana } from './componentesOperaciones/Reportes/ReportJustSemana';
+import { EditarFolio } from './componentesOperaciones/Desincorporaciones/EditaFolio';
 const Routes = () => {
     return ( 
         <Router>
@@ -60,6 +61,7 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" exact path="/cerrar-folio" component={CerrarFolioForm}/>
                 {/* JUST SEMANA*/}
                 <PrivateRoute role="Operaciones" path='/reportes' component={ReportJustSemana}/>
+                <PrivateRoute role="Operaciones" path='/editar-folio/:idFolio' component={EditarFolio}/>
                
 
                 {/* LOGIN */}

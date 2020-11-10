@@ -79,7 +79,7 @@ function Row(props) {
         <TableCell>{row.estacion}</TableCell>
         <TableCell>{row.observaciones}</TableCell>
         <TableCell align="center">
-          <Link className="" to={`/add-registerColisiones/${row.id}`}>
+          <Link className="" to={`/editar-folio/${row.id}`}>
             <IconButton aria-label="add">
               <EditIcon />
             </IconButton>
