@@ -56,15 +56,18 @@ function TabPanel(props) {
   );
 }
 
-// Componente para la lstar el pago a las empresas
-function ListCompanyKM(props) {
-  const { collections } = props;
+/*
+ Componente para listar cuánto KM de  km realizado 
+ le corresponde a cada empresa por apoyos e incumplimentos
+*/
+function ListCompanyKMCumpIncup(props) {
+  const { collections} = props;
   let companiesKM = {};
+  let km=0;
 
   collections.forEach((element) => {
-    if (companiesKM[element.empresa]) {
-      companiesKM[element.empresa] +=
-        element.Cumplimiento_Incumplimientos[0].kilometraje;
+    if (companiesKM[element.empresa]) {      
+      companiesKM[element.empresa] += element.Cumplimiento_Incumplimientos[0].kilometraje;
       companiesKM[element.empresa] = parseFloat(
         companiesKM[element.empresa].toFixed(3)
       );
@@ -74,8 +77,83 @@ function ListCompanyKM(props) {
     }
   });
 
+  Object.values(companiesKM).forEach(e=>{
+    km +=e;
+  });
+
+  km = parseFloat(km.toFixed(3));
+  
+
   return (
     <div>
+      <Alert severity="info">
+        <b>KM Total : {km} KM</b>
+      </Alert>
+      <Alert variant="outlined" severity="success">      
+          {Object.entries(companiesKM).map(([key, value]) => (
+            <p key={key}>{key} - {value} KM</p>
+          ))}
+      </Alert>
+    </div>
+  );
+}
+
+ /*
+ Componente para listar cuánto KM de km realizado 
+ le corresponde a cada empresa por afectaciones
+*/
+
+
+function ListCompanyKMAfectaciones(props) {
+  const { collections} = props;
+  let companiesKM = {};
+  let km=0;
+
+  collections.forEach((element) => {
+    // Validamos si la empresa existe en el diccionario
+    if (companiesKM[element.empresa]) {
+      // Verificamos si hay mas de un registro de km
+      if(element.Cumplimiento_Incumplimientos.length>1){
+        let km1 = element.Cumplimiento_Incumplimientos[0].kilometraje;
+        let km2 = element.Cumplimiento_Incumplimientos[1].kilometraje;
+        companiesKM[element.empresa] += Math.abs(km1-km2);
+        companiesKM[element.empresa] = parseFloat(
+          companiesKM[element.empresa].toFixed(3)
+        );
+
+      }else{
+        companiesKM[element.empresa] += element.Cumplimiento_Incumplimientos[0].kilometraje;
+        companiesKM[element.empresa] = parseFloat(
+          companiesKM[element.empresa].toFixed(3)
+        );
+      }      
+    } else { //Si la empresa no existe, la agregamos al diccionario
+      if(element.Cumplimiento_Incumplimientos.length>1){
+        let km1 = element.Cumplimiento_Incumplimientos[0].kilometraje;
+        let km2 = element.Cumplimiento_Incumplimientos[1].kilometraje;
+        companiesKM[element.empresa] = Math.abs(km1-km2);
+        companiesKM[element.empresa] = parseFloat(
+          companiesKM[element.empresa].toFixed(3)
+        );
+
+      }else{
+        companiesKM[element.empresa] =
+          element.Cumplimiento_Incumplimientos[0].kilometraje;
+      }
+    }
+  });
+
+  Object.values(companiesKM).forEach(e=>{
+    km +=e;
+  });
+
+  km = parseFloat(km.toFixed(3));
+
+  return (
+    <div>
+      <Alert severity="info">
+        <b>KM Total : {km} KM</b>
+      </Alert>
       <Alert variant="outlined" severity="success">      
           {Object.entries(companiesKM).map(([key, value]) => (
             <p key={key}>{key} - {value} KM</p>
@@ -148,7 +226,7 @@ export const ReportJustSemana = () => {
         <Grid item lg={12}>
           <Paper className={classes.paper}>
             <Typography variant="h5" gutterBottom>
-              Reportes y registros
+              Kilometraje realizado
             </Typography>
           </Paper>
         </Grid>
@@ -186,11 +264,8 @@ export const ReportJustSemana = () => {
                   <TableDataRegistros
                     dataRegistros={f.collection}
                     tipoRegistro={"Incumplimiento"}
-                  />
-                  <Alert severity="info">
-                    <b>KM Total : {f.kmtotal} KM</b>
-                  </Alert>
-                  <ListCompanyKM collections={f.collection} />
+                  />                  
+                  <ListCompanyKMCumpIncup collections={f.collection} />
                 </Paper>
               ))}
             </TabPanel>
@@ -205,10 +280,7 @@ export const ReportJustSemana = () => {
                     dataRegistros={f.collection}
                     tipoRegistro={"Apoyo"}
                   />
-                  <Alert severity="info">
-                    <b>KM Total : {f.kmtotal} KM</b>
-                  </Alert>
-                  <ListCompanyKM collections={f.collection} />
+                  <ListCompanyKMCumpIncup collections={f.collection} />
                 </Paper>
               ))}
             </TabPanel>
@@ -222,10 +294,8 @@ export const ReportJustSemana = () => {
                   <TableDataRegistros
                     dataRegistros={f.collection}
                     tipoRegistro={"Afectación"}
-                  />
-                  <Alert severity="info">
-                    <b>KM Total : {f.kmtotal} KM</b>
-                  </Alert>
+                  />                  
+                  <ListCompanyKMAfectaciones collections={f.collection}/>
                 </Paper>
               ))}
             </TabPanel>

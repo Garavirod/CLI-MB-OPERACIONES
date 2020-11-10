@@ -23,6 +23,7 @@ import { setKilometrajeCalculado } from "../../helpers/utils";
 
 
 import { httpPostData } from "../../functions/httpRequest";
+import { CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   conatiner: {
@@ -88,7 +89,8 @@ export const FormDesincorporaciones = () => {
             });
           });
         } else {
-          alert("Campos vacios");
+          CustomSwalEmptyFrom();
+          // alert("Campos vacios");
         }
         break;
       case "Apoyo":
@@ -109,7 +111,8 @@ export const FormDesincorporaciones = () => {
             });
           });
         } else {
-          alert("Campos vacios");
+          CustomSwalEmptyFrom();
+          // alert("Campos vacios");
         }
         break;
       case "Afectación":
@@ -154,7 +157,8 @@ export const FormDesincorporaciones = () => {
           alert(`Kilometraje calculado >: Incum ${km1} Cump ${km2}`);
           console.log(folio_with_refs);                    
         } else {
-          alert("Campos vacios");
+          CustomSwalEmptyFrom();
+          // alert("Campos vacios");
         }        
         break;
       default:

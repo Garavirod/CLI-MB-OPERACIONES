@@ -22,6 +22,7 @@ import { useState } from "react";
 import { validateForm } from "../../functions/validateFrom";
 import {httpPostData} from "../../functions/httpRequest";
 import swal from 'sweetalert';
+import { CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -104,7 +105,8 @@ export const CerrarFolioForm = () => {
     });//then
       
     }else{
-      alert("¡CAMPOS VACIOS!");
+      CustomSwalEmptyFrom();
+      // alert("¡CAMPOS VACIOS!");
     }
 
   };
@@ -128,7 +130,7 @@ export const CerrarFolioForm = () => {
                   >
                     <Link className="" to={"/BitacordaDR"}>
                       <ArrowBackIcon />
-                      cerrar folio sin guaradar
+                      cerrar folio sin guardar
                     </Link>
                   </Typography>
                 </Grid>
