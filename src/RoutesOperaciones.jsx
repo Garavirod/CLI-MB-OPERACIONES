@@ -61,7 +61,7 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" exact path="/cerrar-folio" component={CerrarFolioForm}/>
                 {/* JUST SEMANA*/}
                 <PrivateRoute role="Operaciones" path='/reportes' component={ReportJustSemana}/>
-                <PrivateRoute role="Operaciones" path='/editar-folio/:idFolio' component={EditarFolio}/>
+                <PrivateRoute role="Operaciones" path='/editar-folio' component={EditarFolio}/>
                
 
                 {/* LOGIN */}

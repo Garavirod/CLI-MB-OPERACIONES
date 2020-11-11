@@ -45,10 +45,11 @@ const useStyles = makeStyles((theme) => ({
 
 export const DesincorporacionComp = (props) => {
   const classes = useStyles();
-  const { valuesDes, handleInputChangeDes, active=false } = props;
+  const { valuesDes, handleInputChangeDes, active=false, active2=false } = props;
   // Estaciones por linea
   const [estacioneslinea, setEstacionLinea] = useState([]);
   const [empresaeconomico, setEmpresaEco] = useState("");
+  const [editableInput,setEditableInput] = useState(false);
 
   // desestructurando el values del hook
   const {
@@ -80,6 +81,14 @@ export const DesincorporacionComp = (props) => {
     setEmpresaEco(empresa);
     valuesDes["empresa"] = empresa;
   }, [economico]);
+
+  useEffect(()=>{
+    editable();
+  },[]);
+  const editable = ()=>{
+    if(active===true || active2===true)
+      setEditableInput(true);      
+  }
 
   // Data inputs
   const lineas = getLineas();
@@ -356,7 +365,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} xs={6}>
           {/* TIPO DESINCO*/}
-          <FormControl className={classes.formControl} disabled={active}>
+          <FormControl className={classes.formControl} disabled={editableInput}>
             <FormLabel>Tipo</FormLabel>
             <RadioGroup
               aria-label="gender"
@@ -384,7 +393,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} xs={6}>
           {/* ESTADO FOLIO */}
-          <FormControl className={classes.formControl}>
+          <FormControl className={classes.formControl} disabled={editableInput}>
             <FormLabel>Estado de foilo</FormLabel>
             <RadioGroup
               aria-label="gender"

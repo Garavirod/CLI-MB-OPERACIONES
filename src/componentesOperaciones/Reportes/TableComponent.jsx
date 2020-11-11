@@ -13,10 +13,22 @@ import Paper from "@material-ui/core/Paper";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { useState, useEffect } from "react";
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Link } from "react-router-dom";
+import { httpGetData } from "../../functions/httpRequest";
+import { CustomSwalErrorOnLoad } from "../../functions/customSweetAlert";
+
+const prepareEditFolio = async (idfolio) => {
+  const _data = await httpGetData(`/desincorporaciones/getfolio/${idfolio}`);
+  if (_data.success) {    
+    localStorage.setItem("folioDesincData", JSON.stringify(_data.data));    
+    window.location.replace("/editar-folio");
+  } else {
+    CustomSwalErrorOnLoad();
+  }
+};
 
 const useRowStyles = makeStyles({
   root: {
@@ -79,17 +91,12 @@ function Row(props) {
         <TableCell>{row.estacion}</TableCell>
         <TableCell>{row.observaciones}</TableCell>
         <TableCell align="center">
-          <Link className="" to={`/editar-folio/${row.id}`}>
-            <IconButton aria-label="add">
-              <EditIcon />
-            </IconButton>
-          </Link>
-
-          <Link className="" to={`/add-registerColisiones/${row.id}`}>
-            <IconButton aria-label="add">
-              <DeleteIcon />
-            </IconButton>
-          </Link>
+          <IconButton aria-label="add" color="primary" onClick={()=>prepareEditFolio(row.id)}>
+            <EditIcon />
+          </IconButton>
+          <IconButton aria-label="add" color="secondary">
+            <DeleteIcon />
+          </IconButton>
         </TableCell>
       </TableRow>
       <TableRow>

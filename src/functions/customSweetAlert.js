@@ -46,6 +46,16 @@ export const CustomSwalError = () =>{
 }
 
 
+export const CustomSwalErrorOnLoad = () =>{    
+  swal({
+      title: "Error al cargar los datos",
+      text: "Intente nuevamente",
+      icon: "error",
+      buttons: true,
+      dangerMode: true,
+    });      
+}
+
 export const CustomSwalEmptyFrom = () =>{    
     swal({
         title: "Aún hay campos vacios",
