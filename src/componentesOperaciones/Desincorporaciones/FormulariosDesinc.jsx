@@ -255,10 +255,7 @@ export const FormDesincorporaciones = () => {
                   color="primary"
                 >
                   Guardar
-                </Button>
-                <Button size="small" variant="contained" color="primary">
-                  Nuevo folio
-                </Button>
+                </Button>                
               </CardActions>
             </form>
           </Grid>

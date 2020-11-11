@@ -248,7 +248,7 @@ export const ReportJustSemana = () => {
                 <Tab label="Incumplimientos" {...a11yProps(INCUMP)} />
                 <Tab label="Cumpplimientos" {...a11yProps(CUMPLI)} />
                 <Tab label="Afectaciones" {...a11yProps(AFECTA)} />
-                <Tab label="Deducción operadores" {...a11yProps(3)} />
+                <Tab label="Item Four" {...a11yProps(3)} />
                 <Tab label="Item Five" {...a11yProps(4)} />
                 <Tab label="Item Six" {...a11yProps(5)} />
                 <Tab label="Item Seven" {...a11yProps(6)} />
@@ -262,7 +262,7 @@ export const ReportJustSemana = () => {
                     {f.date}
                   </Typography>
                   <TableDataRegistros
-                    dataRegistros={f.collection}
+                    dataRegistros={f.collection}                    
                     tipoRegistro={"Incumplimiento"}
                   />                  
                   <ListCompanyKMCumpIncup collections={f.collection} />
@@ -277,7 +277,7 @@ export const ReportJustSemana = () => {
                     {f.date}
                   </Typography>
                   <TableDataRegistros
-                    dataRegistros={f.collection}
+                    dataRegistros={f.collection}                    
                     tipoRegistro={"Apoyo"}
                   />
                   <ListCompanyKMCumpIncup collections={f.collection} />

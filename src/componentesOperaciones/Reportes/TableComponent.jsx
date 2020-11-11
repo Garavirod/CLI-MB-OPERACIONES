@@ -16,19 +16,44 @@ import { useState, useEffect } from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { Link } from "react-router-dom";
-import { httpGetData } from "../../functions/httpRequest";
-import { CustomSwalErrorOnLoad } from "../../functions/customSweetAlert";
+import { httpGetData, httpDeleteData } from "../../functions/httpRequest";
+import swal from 'sweetalert';
+import { CustomSwalErrorOnLoad, CustomSwalError } from "../../functions/customSweetAlert";
 
-const prepareEditFolio = async (idfolio) => {
+
+const prepareEditFolio = async (idfolio) => {  
   const _data = await httpGetData(`/desincorporaciones/getfolio/${idfolio}`);
   if (_data.success) {    
     localStorage.setItem("folioDesincData", JSON.stringify(_data.data));    
     window.location.replace("/editar-folio");
-  } else {
+  } else {    
     CustomSwalErrorOnLoad();
   }
 };
+
+
+const DeleteFolio = async (idfolio) =>{
+  await swal({
+    title: "¿Seguro que deseas borrar la información?",
+    text: "Una vez eliminada no se podrá recuperar",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+        const r = httpDeleteData(`desincorporaciones/delete-folio/${idfolio}`);
+        if(r){
+          swal("Información eliminada", {icon: "success"});          
+          window.location.assign("/reportes");           
+        }else{              
+          CustomSwalError();
+        }                                     
+    } else {
+      swal("Información salvada");          
+    }
+  });      
+}
 
 const useRowStyles = makeStyles({
   root: {
@@ -64,7 +89,7 @@ function createData(data) {
 }
 
 function Row(props) {
-  const { row, tipoRegistro } = props;
+  const { row, tipoRegistro} = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
@@ -94,7 +119,7 @@ function Row(props) {
           <IconButton aria-label="add" color="primary" onClick={()=>prepareEditFolio(row.id)}>
             <EditIcon />
           </IconButton>
-          <IconButton aria-label="add" color="secondary">
+          <IconButton aria-label="add" color="primary" onClick={()=>DeleteFolio(row.id)}>
             <DeleteIcon />
           </IconButton>
         </TableCell>
@@ -164,7 +189,6 @@ export default function TableDataRegistros(props) {
     });
     setRows(r);
   };
-
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">

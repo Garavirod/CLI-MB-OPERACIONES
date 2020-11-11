@@ -22,7 +22,10 @@ import { useState } from "react";
 import { validateForm } from "../../functions/validateFrom";
 import { httpPostData } from "../../functions/httpRequest";
 import swal from "sweetalert";
-import { CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
+import {
+  CustomSwalEmptyFrom,
+  CustomSwalError,
+} from "../../functions/customSweetAlert";
 import { Ref } from "yup";
 import { validateFormExcept } from "../../functions/validateFrom";
 import { setKilometrajeCalculado } from "../../helpers/utils";
@@ -45,7 +48,7 @@ export const EditarFolio = () => {
   // localStorage.removeItem("folioDesinc");
   console.log(folioDesinc);
   const {
-    id,
+    id: idFoliotoUpdate,
     credencial,
     economico,
     edoFolio,
@@ -86,7 +89,6 @@ export const EditarFolio = () => {
   };
 
   const getReferecncias = (idx) => {
-    
     const {
       kilometraje,
       num_ida,
@@ -120,14 +122,13 @@ export const EditarFolio = () => {
     case "Apoyo":
       Ref2 = getReferecncias(0);
     default:
-        if (Cumplimiento_Incumplimientos.length > 1) {
-            Ref1 = getReferecncias(0);
-            Ref2 = getReferecncias(1);
-
-        }else{
-            Ref1 = getReferecncias(0);
-        }
-    break;
+      if (Cumplimiento_Incumplimientos.length > 1) {
+        Ref1 = getReferecncias(0);
+        Ref2 = getReferecncias(1);
+      } else {
+        Ref1 = getReferecncias(0);
+      }
+      break;
   }
 
   //   Modelo y estructura de una Desincorporación
@@ -139,12 +140,15 @@ export const EditarFolio = () => {
   // // Modelo y estructura de una Referencia para un Incumplimiento
   let [valuesRef2, handleInputChangeRef2, resetRef2] = useForm(Ref2);
 
-
-  const SendDataEdited = (e) => {    
+  const SendDataEdited = async (e) => {
     e.preventDefault();
+    console.log(valuesDes);
+    console.log(valuesRef1);
+    console.log(valuesRef2);
     // Validamos el folio de la desincorporación
     const isValidFolio = validateFormExcept(valuesDes, ["observaciones"]);
-    let isValidIncum,isValidApo = false;
+    let isValidIncum,
+      isValidApo = false;
     // validamos la referencia
     switch (tipo) {
       case "Incumplido":
@@ -152,18 +156,33 @@ export const EditarFolio = () => {
         if (isValidFolio && isValidIncum) {
           const km = setKilometrajeCalculado(valuesRef1);
           valuesRef1["kilometraje"] = km;
-          valuesRef1["tipo"] = "Incumplido";  
+          valuesRef1["tipo"] = "Incumplido";
           // Combinamos el folio con la referencia asociada
-          const folio_with_ref = {...valuesDes, ...valuesRef1};          
+          const folio_with_ref = { ...valuesDes, ...valuesRef1 };
           alert(`Kilometraje incumplido >: ${km}`);
           console.log(folio_with_ref);
           //Realizar el POST de Folio completo
-          httpPostData("/desincorporaciones/datos-desincorporacion", folio_with_ref)
-          localStorage.removeItem("folioDesincData");
-
+          await httpPostData(
+            `/desincorporaciones/update-folio-cumpinc/${idFoliotoUpdate}`,
+            folio_with_ref
+          ).then((resp) => {
+            if (resp.success) {
+              swal(
+                "Información grabada",
+                "Los cambios han sido actaulizados exitosamente",
+                "success"
+              ).then(() => {
+                localStorage.removeItem("folioDesincData");
+                window.location.assign("/reportes");
+              });
+            }
+          })
+          .catch(()=>{
+            CustomSwalError();
+          });
+          
         } else {
           CustomSwalEmptyFrom();
-          // alert("Campos vacios");
         }
         break;
       case "Apoyo":
@@ -174,15 +193,29 @@ export const EditarFolio = () => {
           valuesRef2["tipo"] = "Apoyo";
           alert(`Kilometraje cumplido >: ${km}`);
           // combinamos el folio con la referencia asocaida
-          const folio_with_ref = {...valuesDes, ...valuesRef2};  
+          const folio_with_ref = { ...valuesDes, ...valuesRef2 };
           console.log(folio_with_ref);
           //Realizar el POST de Folio completo
-          httpPostData("/desincorporaciones/datos-desincorporacion", folio_with_ref)
-          localStorage.removeItem("folioDesincData");
-
+          await httpPostData(
+            `/desincorporaciones/update-folio-cumpinc/${idFoliotoUpdate}`,
+            folio_with_ref
+          ).then((resp) => {
+            if (resp.success) {
+              swal(
+                "Información grabada",
+                "Los cambios han sido actaulizados exitosamente",
+                "success"
+              ).then(() => {
+                localStorage.removeItem("folioDesincData");
+                window.location.assign("/reportes");
+              });
+            }
+          })
+          .catch(()=>{
+            CustomSwalError();
+          });
         } else {
           CustomSwalEmptyFrom();
-          // alert("Campos vacios");
         }
         break;
       case "Afectación":
@@ -194,14 +227,12 @@ export const EditarFolio = () => {
           valuesRef1["kilometraje"] = km;
           valuesRef1["tipo"] = "Incumplido";
           // Combinamos el folio con la referencia asociada
-          const folio_with_ref = {...valuesDes, ...valuesRef1};          
+          const folio_with_ref = { ...valuesDes, ...valuesRef1 };
           //Realizar el POST de Folio completo
-          httpPostData("/desincorporaciones/datos-afectacion", folio_with_ref)
+          httpPostData("/desincorporaciones/datos-afectacion", folio_with_ref);
           alert(`Kilometraje incumplido >: ${km}`);
           console.log(folio_with_ref);
           localStorage.removeItem("folioDesincData");
-
-
         } else if (isValidFolio && isValidApo && isValidIncum) {
           // cuando en una afectación hay incumplimiento y cumplimiento
           const km1 = setKilometrajeCalculado(valuesRef1);
@@ -213,22 +244,23 @@ export const EditarFolio = () => {
           valuesRef1["tipo"] = "Incumplido";
           valuesRef2["tipo"] = "Apoyo";
           // Combinamos los folio con sus referencias asociadas
-          const folio_with_refs = [valuesDes,valuesRef1,valuesRef2];                   
+          const folio_with_refs = [valuesDes, valuesRef1, valuesRef2];
           // Realizar POST de folio
-          httpPostData("/desincorporaciones/datos-afectacion2", folio_with_refs)               
+          httpPostData(
+            "/desincorporaciones/datos-afectacion2",
+            folio_with_refs
+          );
           alert(`Kilometraje calculado >: Incum ${km1} Cump ${km2}`);
           console.log(folio_with_refs);
           localStorage.removeItem("folioDesincData");
-
         } else {
-          CustomSwalEmptyFrom();          
-        }        
+          CustomSwalEmptyFrom();
+        }
         break;
       default:
         break;
     }
   };
-
 
   return (
     <Container maxWidth="lg" className={classes.conatiner}>
@@ -238,7 +270,8 @@ export const EditarFolio = () => {
             <Alert severity="warning">
               <Grid container spacing={2}>
                 <Grid item lg={6}>
-                  Usted está visualizando la infrormación del folio: {id}
+                  Usted está visualizando la infrormación del folio:{" "}
+                  {idFoliotoUpdate}
                 </Grid>
                 <Grid item lg={6}>
                   <Typography
@@ -256,32 +289,53 @@ export const EditarFolio = () => {
             </Alert>
           </Grid>
           <Grid container spacing={3}>
-          <Grid item lg={12}>
-            <Typography
-              variant="h6"
-              component="h4"
-              className={classes.headerText}
-            >
-              Incorporaciones y Desincorporaciones
-            </Typography>
-          </Grid>
-          <Grid item lg={12}>
-            <form onSubmit={SendDataEdited}>
-              <CardContent>
-                <Grid container spacing={2}>
-                  {/* FORMULARIO DE DESINCORPORACIONES */}
-                  <Grid item lg={6}>
-                    <DesincorporacionComp                      
-                      valuesDes={valuesDes}
-                      handleInputChangeDes={handleInputChangeDes}
-                      resetDes={resetDes}
-                      active2={true}
-                    />
-                  </Grid>                 
-                  {/* FROMULARIO DE REFERENCIAS (CUMPLIMIENTOS E INCUMPLIMIENTOS) */}
-                  <Grid item lg={12}>
-                    {tipo === "Afectación" ? (
-                      <Grid container spacing={3}>
+            <Grid item lg={12}>
+              <Typography
+                variant="h6"
+                component="h4"
+                className={classes.headerText}
+              >
+                Incorporaciones y Desincorporaciones
+              </Typography>
+            </Grid>
+            <Grid item lg={12}>
+              <form onSubmit={SendDataEdited}>
+                <CardContent>
+                  <Grid container spacing={2}>
+                    {/* FORMULARIO DE DESINCORPORACIONES */}
+                    <Grid item lg={6}>
+                      <DesincorporacionComp
+                        valuesDes={valuesDes}
+                        handleInputChangeDes={handleInputChangeDes}
+                        resetDes={resetDes}
+                        active2={true}
+                      />
+                    </Grid>
+                    {/* FROMULARIO DE REFERENCIAS (CUMPLIMIENTOS E INCUMPLIMIENTOS) */}
+                    <Grid item lg={12}>
+                      {tipo === "Afectación" ? (
+                        <Grid container spacing={3}>
+                          <Grid item lg={6}>
+                            <Referencia
+                              titulo={"Incumplimientos"}
+                              color={"#ef5350"}
+                              valuesRef={valuesRef1}
+                              handleInputChangeRef={handleInputChangeRef1}
+                              resetRef={resetRef1}
+                            />
+                          </Grid>
+                          <Grid item lg={6}>
+                            <Referencia
+                              titulo={"Cumplimientos"}
+                              color={"#4caf50"}
+                              valuesRef={valuesRef2}
+                              handleInputChangeRef={handleInputChangeRef2}
+                              resetRef={resetRef2}
+                              flag={true}
+                            />
+                          </Grid>
+                        </Grid>
+                      ) : tipo === "Incumplido" ? (
                         <Grid item lg={6}>
                           <Referencia
                             titulo={"Incumplimientos"}
@@ -291,6 +345,7 @@ export const EditarFolio = () => {
                             resetRef={resetRef1}
                           />
                         </Grid>
+                      ) : tipo === "Apoyo" ? (
                         <Grid item lg={6}>
                           <Referencia
                             titulo={"Cumplimientos"}
@@ -298,52 +353,27 @@ export const EditarFolio = () => {
                             valuesRef={valuesRef2}
                             handleInputChangeRef={handleInputChangeRef2}
                             resetRef={resetRef2}
-                            flag={true}
                           />
                         </Grid>
-                      </Grid>
-                    ) : tipo === "Incumplido" ? (
-                      <Grid item lg={6}>
-                        <Referencia
-                          titulo={"Incumplimientos"}
-                          color={"#ef5350"}
-                          valuesRef={valuesRef1}
-                          handleInputChangeRef={handleInputChangeRef1}
-                          resetRef={resetRef1}
-                        />
-                      </Grid>
-                    ) : tipo === "Apoyo" ? (
-                      <Grid item lg={6}>
-                        <Referencia
-                          titulo={"Cumplimientos"}
-                          color={"#4caf50"}
-                          valuesRef={valuesRef2}
-                          handleInputChangeRef={handleInputChangeRef2}
-                          resetRef={resetRef2}
-                        />
-                      </Grid>
-                    ) : (
-                      <></>
-                    )}
+                      ) : (
+                        <></>
+                      )}
+                    </Grid>
                   </Grid>
-                </Grid>
-              </CardContent>
-              <CardActions>
-                <Button
-                  type="submit"
-                  size="small"
-                  variant="contained"
-                  color="primary"
-                >
-                  Guardar
-                </Button>
-                <Button size="small" variant="contained" color="primary">
-                  Nuevo folio
-                </Button>
-              </CardActions>
-            </form>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    type="submit"
+                    size="small"
+                    variant="contained"
+                    color="primary"
+                  >
+                    Guardar
+                  </Button>                  
+                </CardActions>
+              </form>
+            </Grid>
           </Grid>
-        </Grid>
         </Grid>
       </Card>
     </Container>
