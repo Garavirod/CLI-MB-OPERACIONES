@@ -21,11 +21,11 @@ import {
   getEstacionesByLinea,
   getEconomicos,
   getInfromantes,
-  getMotivos,
   getEmpresaByEco,
 } from "../../helpers/DataGetters";
 import { useState } from "react";
 import { useEffect } from "react";
+import { httpGetData } from "../../functions/httpRequest";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,8 +53,8 @@ export const DesincorporacionComp = (props) => {
   const { valuesDes, handleInputChangeDes, active1=false, active2=false, active3=false } = props;
   // Estaciones por linea
   const [estacioneslinea, setEstacionLinea] = useState([]);
-  const [empresaeconomico, setEmpresaEco] = useState("");
-  const [editableInput,setEditableInput] = useState(false);
+  const [empresaeconomico, setEmpresaEco] = useState("");  
+  const [motivos, setMotivos] = useState([]);
 
   // desestructurando el values del hook
   const {
@@ -87,12 +87,25 @@ export const DesincorporacionComp = (props) => {
     valuesDes["empresa"] = empresa;
   }, [economico]);
 
+  useEffect(()=>{
+    getMotivosList();
+  },[]);
+
+
+  const getMotivosList =  async () =>{
+    //folios-abiertos
+    const url = '/desincorporaciones/motivos-list';
+    const _data = await httpGetData(url);
+    if (_data.success) {
+      setMotivos(_data.data);    
+    }
+  } 
+
   // Data inputs
   const lineas = getLineas();
   const jornadas = getJornadas();
   const solicitudes = getSolicitudes();
-  const infromantes = getInfromantes();
-  const motivos = getMotivos();
+  const infromantes = getInfromantes();  
   const economicos = getEconomicos();
 
   return (
@@ -233,8 +246,8 @@ export const DesincorporacionComp = (props) => {
             >
               <option value={""}>...</option>
               {motivos.map((it) => (
-                <option key={it} value={it}>
-                  {it}
+                <option key={it.id} value={it.motivo}>
+                  {it.motivo}
                 </option>
               ))}
             </Select>

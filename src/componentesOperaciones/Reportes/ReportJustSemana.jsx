@@ -246,7 +246,7 @@ export const ReportJustSemana = () => {
                 aria-label="scrollable auto tabs example"
               >
                 <Tab label="Incumplimientos" {...a11yProps(INCUMP)} />
-                <Tab label="Cumpplimientos" {...a11yProps(CUMPLI)} />
+                <Tab label="Cumplimientos" {...a11yProps(CUMPLI)} />
                 <Tab label="Afectaciones" {...a11yProps(AFECTA)} />
                 <Tab label="Item Four" {...a11yProps(3)} />
                 <Tab label="Item Five" {...a11yProps(4)} />

@@ -97,26 +97,6 @@ export function TabListComponent(props) {
 
   
   const DeleteFolio = async (idfolio) =>{
-    // await swal({
-    //   title: "¿Seguro que deseas borrar la información?",
-    //   text: "Una vez eliminada no se podrá recuperar",
-    //   icon: "warning",
-    //   buttons: true,
-    //   dangerMode: true,
-    // })
-    // .then((willDelete) => {
-    //   if (willDelete) {
-    //       const r = httpDeleteData();
-    //       if(r){
-    //         swal("Información eliminada", {icon: "success"});          
-            
-    //       }else{                          
-    //         CustomSwalError();
-    //       }                                     
-    //   } else {
-    //     swal("Información salvada");          
-    //   }
-    // });
     CustomSwalDelete(`desincorporaciones/delete-folio/${idfolio}`);        
   }
 
