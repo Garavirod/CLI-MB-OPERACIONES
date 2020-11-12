@@ -45,7 +45,12 @@ const useStyles = makeStyles((theme) => ({
 
 export const DesincorporacionComp = (props) => {
   const classes = useStyles();
-  const { valuesDes, handleInputChangeDes, active=false, active2=false } = props;
+  /* 
+    active1 : Dehabilita los campos de una desincorporación
+    active2: Deshabilita los campos 'Tipo desincoporación'
+    active3: Deshabilita los campos 'Edo folio'
+  */
+  const { valuesDes, handleInputChangeDes, active1=false, active2=false, active3=false } = props;
   // Estaciones por linea
   const [estacioneslinea, setEstacionLinea] = useState([]);
   const [empresaeconomico, setEmpresaEco] = useState("");
@@ -82,14 +87,6 @@ export const DesincorporacionComp = (props) => {
     valuesDes["empresa"] = empresa;
   }, [economico]);
 
-  useEffect(()=>{
-    editable();
-  },[]);
-  const editable = ()=>{
-    if(active===true || active2===true)
-      setEditableInput(true);      
-  }
-
   // Data inputs
   const lineas = getLineas();
   const jornadas = getJornadas();
@@ -110,7 +107,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* LINEA */}
-          <FormControl className={classes.formControl} disabled={active}>
+          <FormControl className={classes.formControl} disabled={active1}>
             <InputLabel>Linea</InputLabel>
             <Select                            
               native
@@ -131,7 +128,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* SOLIICITA */}
-          <FormControl className={classes.formControl} disabled={active}>
+          <FormControl className={classes.formControl} disabled={active1}>
             <InputLabel>Solicita</InputLabel>
             <Select
               native
@@ -152,7 +149,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* INFROMA */}
-          <FormControl className={classes.formControl} disabled={active}>
+          <FormControl className={classes.formControl} disabled={active1}>
             <InputLabel>Informa</InputLabel>
             <Select
               native
@@ -173,7 +170,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* ESTACIÓN */}
-          <FormControl className={classes.formControl} disabled={active}>
+          <FormControl className={classes.formControl} disabled={active1}>
             <InputLabel>Estación</InputLabel>
             <Select
               native
@@ -194,7 +191,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* ECONÓMICO */}
-          <FormControl className={classes.formControl} disabled={active}>
+          <FormControl className={classes.formControl} disabled={active1}>
             <InputLabel>Económico</InputLabel>
             <Select
               native
@@ -215,7 +212,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* EMPRESA */}
-          <FormControl className={classes.formControl} disabled={active}>
+          <FormControl className={classes.formControl} disabled={active1}>
             <Typography variant="h6" component="h6">
               Empresa
             </Typography>
@@ -224,7 +221,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* MOTIVO */}
-          <FormControl className={classes.formControl} disabled={active}>
+          <FormControl className={classes.formControl} disabled={active1}>
             <InputLabel>Motivo</InputLabel>
             <Select
               native
@@ -247,7 +244,7 @@ export const DesincorporacionComp = (props) => {
           {/* ODÓMETRO */}
           <FormControl className={classes.formControl}>
             <TextField
-              disabled={active}
+              disabled={active1}
               id="standard-required"
               label="Odómetro"
               name="odometro"
@@ -260,7 +257,7 @@ export const DesincorporacionComp = (props) => {
           {/* CREDENCIAL */}
           <FormControl className={classes.formControl}>
             <TextField
-              disabled={active}
+              disabled={active1}
               id="standard-required"
               label="Credencial"
               name="credencial"
@@ -273,7 +270,7 @@ export const DesincorporacionComp = (props) => {
           {/* NOMBRE */}
           <FormControl className={classes.formControl}>
             <TextField
-              disabled={active}
+              disabled={active1}
               id="standard-required"
               label="Nombre"
               name="nombre"
@@ -286,7 +283,7 @@ export const DesincorporacionComp = (props) => {
           {/* FECHA */}
           <FormControl className={classes.formControl}>
             <TextField
-              disabled={active}
+              disabled={active1}
               id="date"
               name="fecha"
               label="Fecha"
@@ -304,7 +301,7 @@ export const DesincorporacionComp = (props) => {
           {/* HORA */}
           <FormControl className={classes.formControl}>
             <TextField
-              disabled={active}
+              disabled={active1}
               id="time"
               name="hora"
               label="Hora"
@@ -323,7 +320,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={4}>
           {/* JORNADA */}
-          <FormControl className={classes.formControl} disabled={active}>
+          <FormControl className={classes.formControl} disabled={active1}>
             <InputLabel>Jornada</InputLabel>
             <Select
               native
@@ -346,7 +343,7 @@ export const DesincorporacionComp = (props) => {
           {/* OBSERVACIONES */}
           <FormControl fullWidth>
             <TextField  
-              disabled={active}            
+              disabled={active1}            
               id="outlined-multiline-static"
               onChange={handleInputChangeDes}
               label="Observaciones"
@@ -365,7 +362,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} xs={6}>
           {/* TIPO DESINCO*/}
-          <FormControl className={classes.formControl} disabled={editableInput}>
+          <FormControl className={classes.formControl} disabled={active2}>
             <FormLabel>Tipo</FormLabel>
             <RadioGroup
               aria-label="gender"
@@ -393,7 +390,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} xs={6}>
           {/* ESTADO FOLIO */}
-          <FormControl className={classes.formControl} disabled={editableInput}>
+          <FormControl className={classes.formControl} disabled={active3}>
             <FormLabel>Estado de foilo</FormLabel>
             <RadioGroup
               aria-label="gender"

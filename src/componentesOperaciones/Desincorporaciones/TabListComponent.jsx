@@ -10,10 +10,10 @@ import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import FolderIcon from "@material-ui/icons/Folder";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import {httpGetData} from "../../functions/httpRequest";
-import {swal} from "sweetalert";
-
-import { Link } from "react-router-dom";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { httpGetData, httpDeleteData } from "../../functions/httpRequest";
+import { swal } from "sweetalert";
+import { CustomSwalError, CustomSwalDelete } from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 const urlAbiertos = "/desincorporaciones/folios-abiertos";
 const urlCumIncum = "/desincorporaciones/cumplimiento-incumplimiento-folio/";
 
-export function TabListComponent(props){
+export function TabListComponent(props) {
 
   const [data, setData] = useState([]);
   const [tag, setTag] = useState("");
@@ -48,61 +48,78 @@ export function TabListComponent(props){
       case "Folios abiertos":
         setTag("Folio");
         const resp = await httpGetData(urlAbiertos);
-        if(resp.success)
-        {
+        if (resp.success) {
           const folios = [...resp.data];
           console.log(folios);
           setData(folios);
-        }
-        else
-          swal("Error", "Error al obtener Folios", "error");
+        } else swal("Error", "Error al obtener Folios", "error");
         break;
       case "Incumplimeintos":
         setTag("Incumplimiento");
-        //data = getIncumplimientos();
         break;
       case "Cumplimientos":
         setTag("Cumplimiento");
-        //data = getCumplimientos();
         break;
       default:
         break;
-    }//switch
-  };//getDatabyLabel
+    } //switch
+  }; //getDatabyLabel
 
-  const getCumpIncum = async (idFolio) =>{
+  const getCumpIncum = async (idFolio) => {
     const urlConFolio = urlCumIncum + idFolio;
     const resp = await httpGetData(urlConFolio);
-    if(resp.success)
-    {
+    if (resp.success) {
       //es un array con su cumplimiento o incumpmimiento (ambos si fue una afectación)
       return resp.data;
-    }
-    else
-      swal("Error", "Error al obtener Cumplimientos o Incumplimientos", "error");
-    
-  }//getCumplimiento
+    } else
+      swal(
+        "Error",
+        "Error al obtener Cumplimientos o Incumplimientos",
+        "error"
+      );
+  }; //getCumplimiento
 
-  async function sendCerrarFolio(folio){
+  async function sendCerrarFolio(folio) {
     console.log(folio);
-    localStorage.setItem("folio",JSON.stringify(folio));
-    await getCumpIncum(folio.id)
-    .then((cumpIncums)=>{
+    localStorage.setItem("folio", JSON.stringify(folio));
+    await getCumpIncum(folio.id).then((cumpIncums) => {
       /*sólo deben haber máximo 2 por Folio;
       cuando fue afectación y hubo cumpl e incum*/
-      cumpIncums.map(oneCumIncum =>{
-        const {tipo} = oneCumIncum;
+      cumpIncums.map((oneCumIncum) => {
+        const { tipo } = oneCumIncum;
         if (tipo === "Incumplido")
-          localStorage.setItem("incumplido",JSON.stringify(oneCumIncum));
-        else
-          localStorage.setItem("apoyo",JSON.stringify(oneCumIncum));
-      });//map
-    });//then
-    //console.log(localStorage.getItem("incumplido"));
-    //console.log(localStorage.getItem("apoyo"));
+          localStorage.setItem("incumplido", JSON.stringify(oneCumIncum));
+        else localStorage.setItem("apoyo", JSON.stringify(oneCumIncum));
+      }); //map
+    }); //then
     window.location.replace("/cerrar-folio");
-  }//cerrarFOlio
+  } //cerrarFOlio
+
   
+  const DeleteFolio = async (idfolio) =>{
+    // await swal({
+    //   title: "¿Seguro que deseas borrar la información?",
+    //   text: "Una vez eliminada no se podrá recuperar",
+    //   icon: "warning",
+    //   buttons: true,
+    //   dangerMode: true,
+    // })
+    // .then((willDelete) => {
+    //   if (willDelete) {
+    //       const r = httpDeleteData();
+    //       if(r){
+    //         swal("Información eliminada", {icon: "success"});          
+            
+    //       }else{                          
+    //         CustomSwalError();
+    //       }                                     
+    //   } else {
+    //     swal("Información salvada");          
+    //   }
+    // });
+    CustomSwalDelete(`desincorporaciones/delete-folio/${idfolio}`);        
+  }
+
   const { typeList, valueToRefr } = props;
   useEffect(() => {
     getDatabyLabel(typeList);
@@ -121,10 +138,6 @@ export function TabListComponent(props){
                   <FolderIcon />
                 </Avatar>
               </ListItemAvatar>
-              {/* <ListItemText
-                primary={`${tag} - ${it.id}`}
-                secondary={`Fecha de registro: ${it.fecha} Ruta: ${it.ruta}`}                
-              /> */}
               <ListItemText>
                 <p>
                   <b>{`${tag} - ${it.id}`}</b>
@@ -136,13 +149,23 @@ export function TabListComponent(props){
                   <li>{`Económico : ${it.economico}`}</li>
                 </ul>
               </ListItemText>
-              {(typeList === "Folios abiertos") ? (
+              {typeList === "Folios abiertos" ? (
                 <ListItemSecondaryAction>
-                  <Link className="" onClick={()=>{sendCerrarFolio(it)}}>
-                    <IconButton edge="end" aria-label="delete">
-                      <VisibilityIcon />
-                    </IconButton>
-                  </Link>
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => {
+                      sendCerrarFolio(it);
+                    }}
+                  >
+                    <VisibilityIcon />
+                  </IconButton>
+                  {/* <IconButton
+                    aria-label="add"                   
+                    onClick={() => DeleteFolio(it.id)}
+                  >
+                    <DeleteIcon/>
+                  </IconButton> */}
                 </ListItemSecondaryAction>
               ) : null}
             </ListItem>
@@ -151,4 +174,4 @@ export function TabListComponent(props){
       </div>
     </Grid>
   );
-};
+}

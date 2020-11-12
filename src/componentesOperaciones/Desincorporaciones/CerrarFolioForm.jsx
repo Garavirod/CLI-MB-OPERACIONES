@@ -40,8 +40,7 @@ export const CerrarFolioForm = () => {
   const folioSt = JSON.parse(localStorage.getItem("folio"));
   const apoyo = JSON.parse(localStorage.getItem("apoyo"));
   const incumplimiento = JSON.parse(localStorage.getItem("incumplido"));
-  localStorage.removeItem("apoyo");
-  localStorage.removeItem("incumplido");
+
 
   const {id:idFolio}  = folioSt;
   const classes = useStyles();
@@ -83,6 +82,8 @@ export const CerrarFolioForm = () => {
             if(resp.success){
               swal("Información grabada", "Los cambios han sido grabados exitosamente", "success")
               .then(()=>{
+                localStorage.removeItem("apoyo");
+                localStorage.removeItem("incumplido");
                 window.location.replace(urlDesinc);
               });
             }
@@ -99,14 +100,15 @@ export const CerrarFolioForm = () => {
         if(resp.success){
           swal("Información grabada", "Los cambios han sido grabados exitosamente", "success")
           .then(()=>{
+            localStorage.removeItem("apoyo");
+            localStorage.removeItem("incumplido");
             window.location.replace(urlDesinc);
           });
-        }
+        }        
     });//then
       
     }else{
       CustomSwalEmptyFrom();
-      // alert("¡CAMPOS VACIOS!");
     }
 
   };
@@ -146,7 +148,8 @@ export const CerrarFolioForm = () => {
                     <Grid container spacing={2}>
                       <Grid item lg={12}>
                         <DesincorporacionComp
-                          active={true}
+                          active1={true} //Deshabilitamos todos los campos 'Desincoporacion'
+                          active2={true} //Deshabilita el campo 'Tipo'
                           valuesDes={valuesDes}
                           handleInputChangeDes={handleInputChangeDes}
                           resetDes={resetDes}

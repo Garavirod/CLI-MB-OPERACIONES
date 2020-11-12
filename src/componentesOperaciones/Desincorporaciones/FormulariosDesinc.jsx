@@ -89,8 +89,7 @@ export const FormDesincorporaciones = () => {
             });
           });
         } else {
-          CustomSwalEmptyFrom();
-          // alert("Campos vacios");
+          CustomSwalEmptyFrom();        
         }
         break;
       case "Apoyo":

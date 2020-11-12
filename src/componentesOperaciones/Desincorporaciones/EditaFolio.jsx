@@ -307,8 +307,9 @@ export const EditarFolio = () => {
                       <DesincorporacionComp
                         valuesDes={valuesDes}
                         handleInputChangeDes={handleInputChangeDes}
-                        resetDes={resetDes}
-                        active2={true}
+                        resetDes={resetDes}                        
+                        active2={true} //Deshabilitamos 'Tipo'
+                        active3={true} //Deshabilitamos 'EdoFolio'
                       />
                     </Grid>
                     {/* FROMULARIO DE REFERENCIAS (CUMPLIMIENTOS E INCUMPLIMIENTOS) */}
