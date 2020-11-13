@@ -13,12 +13,13 @@ import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../func
 import { useHookForm } from "../../hooks/hookFrom";
 import { validateForm } from "../../functions/validateFrom";
 import { httpPostData } from "../../functions/httpRequest";
+import { Card, CardContent, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "20ch",
+      width: "15ch",
     },
   },
 
@@ -73,7 +74,10 @@ export default function FormPropsTextFields() {
 
   return (
     <Container component="main">
-      <form
+      <Card>
+        <CardContent>
+        <Typography>Agregar afectados</Typography>  
+        <form
         className={classes.root}
         noValidate
         autoComplete="off"
@@ -137,6 +141,7 @@ export default function FormPropsTextFields() {
                 variant="contained"                
                 className={classes.bgPDF}
                 startIcon={<AddIcon />}
+                size="small"
               >
                 Agregar Afectado
               </Button>
@@ -151,6 +156,8 @@ export default function FormPropsTextFields() {
           </Grid>
         </div>
       </form>
+        </CardContent>
+      </Card>      
     </Container>
   );
 }

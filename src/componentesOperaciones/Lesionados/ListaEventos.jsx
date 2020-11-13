@@ -17,6 +17,7 @@ import { PreloadData } from "../ui/PreloadData";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { AccordionComponent } from "./AccordionComponent";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -127,6 +128,9 @@ export default function ListaEventos() {
               </TableBody>
             </Table>
           </TableContainer>
+        </Grid>
+        <Grid item lg={12}>
+          <AccordionComponent/>
         </Grid>
       </Grid>
     </div>

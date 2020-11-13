@@ -10,17 +10,18 @@ import Grid from "@material-ui/core/Grid";
 import { useHookForm } from "../../hooks/hookFrom";
 import { validateForm } from "../../functions/validateFrom";
 import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
+import { Card, CardContent, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "25ch",
+      width: "15ch",
     },
   },
 }));
 
-export default function FormPropsTextFields() {
+export const FormDatosSeguro = () =>{
   const classes = useStyles();
   // Parámetros por url
   const { idEvento } = useParams();
@@ -71,8 +72,11 @@ export default function FormPropsTextFields() {
   };
 
   return (
-    <Container component="main">      
-      <form
+    <Container component="main">    
+      <Card>
+        <CardContent>
+        <Typography>Agregar datos de seguro vehicular</Typography>            
+        <form
         className={classes.root}
         noValidate
         autoComplete="off"
@@ -149,6 +153,7 @@ export default function FormPropsTextFields() {
                 color="red"
                 className={classes.bgPDF}
                 startIcon={<AddIcon />}
+                size="small"
               >
                 Agregar Seguro
               </Button>
@@ -159,6 +164,8 @@ export default function FormPropsTextFields() {
           </Grid>
         </div>
       </form>
+        </CardContent>
+      </Card>       
     </Container>
   );
 }

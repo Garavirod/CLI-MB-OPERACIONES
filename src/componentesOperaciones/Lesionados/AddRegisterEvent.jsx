@@ -9,7 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 // Components
 import Afectado from "./Afectado";
-import DatosSeguro from "./DatosSeguro";
+import { FormDatosSeguro } from "./DatosSeguro";
+// import DatosSeguro from "./DatosSeguro";
 
 // Styles
 
@@ -59,7 +60,7 @@ export const AddRegisterEvent = () => {
             <Typography className={classes.heading}>Datos de seguro</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <DatosSeguro />
+            <FormDatosSeguro/>
           </AccordionDetails>
         </Accordion>        
         {/* DESABLE */}
