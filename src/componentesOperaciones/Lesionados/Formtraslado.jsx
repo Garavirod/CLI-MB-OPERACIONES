@@ -3,8 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 // Components
-import Ambulancia from "./Ambulancia";
+// import Ambulancia from "./Ambulancia";
 import Traslado from "./TrasladoHospital";
+import { FormDatosAmbulancia } from "./Ambulancia";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +36,8 @@ export const FormTraslado = () => {
           <Link to={`/afectados/${idEvento}`}>Lista de afectados</Link>
         </Grid>
         <Grid item lg={12}>
-          <Ambulancia />
+          {/* <Ambulancia /> */}
+          <FormDatosAmbulancia/>
         </Grid>
         <Grid item lg={12}>
           <Traslado />

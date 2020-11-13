@@ -10,6 +10,7 @@ import { useHookForm } from "../../hooks/hookFrom";
 import { validateForm } from "../../functions/validateFrom";
 import { httpPostData } from "../../functions/httpRequest";
 import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
+import { Card, CardContent, Container, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,12 +28,12 @@ const useStyles = makeStyles((theme) => ({
   form: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "25ch",
+      width: "15ch",
     },
   },
 }));
 
-export default function FormPropsTextFields() {
+export const FormDatosAmbulancia = () =>{
   const classes = useStyles();
   const { idAfectado, idEvento } = useParams();
   // Objeto a mapear
@@ -81,9 +82,11 @@ export default function FormPropsTextFields() {
 
   return (
     <div className={classes.root}>
-        <Paper className={classes.paper}>
-          <h6>Registrar ambulancia</h6>
-          <form
+        <Container component="main">
+          <Card>
+            <CardContent>
+              <Typography>Agregar ambulancia</Typography>
+            <form
             className={classes.form}
             noValidate
             autoComplete="off"
@@ -158,6 +161,7 @@ export default function FormPropsTextFields() {
                 variant="contained"                
                 className={classes.bgPDF}
                 startIcon={<AddIcon />}
+                size="small"
               >
                 Agregar Ambulancia
               </Button>
@@ -167,7 +171,13 @@ export default function FormPropsTextFields() {
             </Grid>
             </Grid>
           </form>
-        </Paper>
+            </CardContent>
+          </Card>
+        </Container>
+        {/* <Paper className={classes.paper}>
+          <h6>Registrar ambulancia</h6>
+          
+        </Paper> */}
       </div>
 
   );

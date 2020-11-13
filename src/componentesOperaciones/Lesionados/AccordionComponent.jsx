@@ -13,6 +13,7 @@ import Divider from '@material-ui/core/Divider';
 import { Grid } from '@material-ui/core';
 import FormPropsTextFields from './Afectado';
 import { FormDatosSeguro } from './DatosSeguro';
+import { FormDatosAmbulancia } from './Ambulancia';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,25 +77,30 @@ export const  AccordionComponent =() =>{
         <AccordionDetails className={classes.details}>
           <Grid container spacing={3}>           
             {/* Formularios */}
-            <Grid item lg={9}>
+            <Grid item lg={8}>
                 <Grid container spacing={2}>                
                     <Grid item lg={12}>
                         <FormPropsTextFields/>
                     </Grid>
-                </Grid>
-                <Grid container spacing={2}>                
                     <Grid item lg={12}>
                         <FormDatosSeguro/>
                     </Grid>
-                </Grid>
+                    <Grid item lg={12}>
+                        <FormDatosAmbulancia/>
+                    </Grid>
+                </Grid>                
             </Grid>
             {/* Detalles del evento */}
-            <Grid item lg={3}>
-                <Typography>Tipo de Incidente: </Typography>
-                <Typography>Tramo: </Typography>
-                <Typography>Operador: </Typography>
-                <Typography>Bitácora: </Typography>
-                <Typography>Descripción: </Typography>
+            <Grid item lg={4}>
+                <Grid container spacing={2}>
+                    <Grid item lg={12}>
+                        <Typography>Tipo de Incidente: </Typography>
+                        <Typography>Tramo: </Typography>
+                        <Typography>Operador: </Typography>
+                        <Typography>Bitácora: </Typography>
+                        <Typography>Descripción: </Typography>
+                    </Grid>
+                </Grid>                
             </Grid>           
         </Grid>          
         </AccordionDetails>

@@ -10,10 +10,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import FolderIcon from "@material-ui/icons/Folder";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { httpGetData, httpDeleteData } from "../../functions/httpRequest";
+import { httpGetData } from "../../functions/httpRequest";
 import { swal } from "sweetalert";
-import { CustomSwalError, CustomSwalDelete } from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -95,10 +93,6 @@ export function TabListComponent(props) {
     window.location.replace("/cerrar-folio");
   } //cerrarFOlio
 
-  
-  const DeleteFolio = async (idfolio) =>{
-    CustomSwalDelete(`desincorporaciones/delete-folio/${idfolio}`);        
-  }
 
   const { typeList, valueToRefr } = props;
   useEffect(() => {
@@ -140,12 +134,6 @@ export function TabListComponent(props) {
                   >
                     <VisibilityIcon />
                   </IconButton>
-                  {/* <IconButton
-                    aria-label="add"                   
-                    onClick={() => DeleteFolio(it.id)}
-                  >
-                    <DeleteIcon/>
-                  </IconButton> */}
                 </ListItemSecondaryAction>
               ) : null}
             </ListItem>
