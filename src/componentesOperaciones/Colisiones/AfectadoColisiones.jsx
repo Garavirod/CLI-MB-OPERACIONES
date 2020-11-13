@@ -26,10 +26,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function FormPropsTextFields() {
+export default function FormPropsTextFields(props) {
   const classes = useStyles();
   // Parámetros del url
-  const { idEvento } = useParams();
+  //const { idEvento } = useParams();
+  const {idEvento} = props;
+  console.log("el id evento ", idEvento);
 
   // Objeto a mapear
   const initial_afectado = {
