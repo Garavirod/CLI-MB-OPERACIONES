@@ -1,5 +1,4 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
 // Accordion
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
@@ -28,54 +27,36 @@ export const AddRegisterEvent = () => {
   // Using styles
   const classes = useStyles();
 
-  // URL Param
-  const { idEvento } = useParams();
+
 
   return (
-    <div>
-      <h4>Agregar registros al evento {idEvento}</h4>
-      <Link to={"/eventos"}>Lista de eventos</Link>
-      <hr />
-      <div className={classes.root}>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            {/* AfFECTADOS */}
-            <Typography className={classes.heading}>Afectados</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Afectado />
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-              {/* SEGURO */}
-            <Typography className={classes.heading}>Datos de seguro</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <FormDatosSeguro/>
-          </AccordionDetails>
-        </Accordion>        
-        {/* DESABLE */}
-        {/* <Accordion disabled>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel3a-content"
-            id="panel3a-header"
-          >
-            <Typography className={classes.heading}>
-              Disabled Accordion
-            </Typography>
-          </AccordionSummary>
-        </Accordion> */}
-      </div>
+    <div className={classes.root}>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          {/* AfFECTADOS */}
+          <Typography className={classes.heading}>Lista de afectados</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Afectado />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          {/* TRASLADOS */}
+          <Typography className={classes.heading}>Lista de traslados</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <FormDatosSeguro />
+        </AccordionDetails>
+      </Accordion>
     </div>
   );
 };

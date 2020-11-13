@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 export default function FormPropsTextFields(props) {
   const classes = useStyles();
   // Parámetros del url
-  const { idEvento=2 } = props;
+  const { idEvento = 2 } = props;
 
   // Objeto a mapear
   const initial_afectado = {
@@ -167,34 +167,38 @@ export default function FormPropsTextFields(props) {
           {/* ACCORDION */}
           <Grid container spacing={2}>
             <Grid item lg={12}>
-            <div className={classes.root}>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          {/* AfFECTADOS */}
-          <Typography className={classes.heading}>Lista de afectados</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ListaAfectados idEvento={2} />
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          {/* TRASLADOS */}
-          <Typography className={classes.heading}>Lista de traslados</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ListaTraslado idEvento={2}/>
-        </AccordionDetails>
-      </Accordion>
-    </div>
+              <div className={classes.root}>
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    {/* AfFECTADOS */}
+                    <Typography className={classes.heading}>
+                      Lista de afectados
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <ListaAfectados idEvento={2} />
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel2a-content"
+                    id="panel2a-header"
+                  >
+                    {/* TRASLADOS */}
+                    <Typography className={classes.heading}>
+                      Lista de traslados
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <ListaTraslado idEvento={2} />
+                  </AccordionDetails>
+                </Accordion>
+              </div>
             </Grid>
           </Grid>
         </CardContent>

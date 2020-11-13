@@ -12,10 +12,6 @@ import { Grid, Card, CardContent } from "@material-ui/core";
 import FormPropsTextFields from "./Afectado";
 import { FormDatosSeguro } from "./DatosSeguro";
 import { FormDatosAmbulancia } from "./Ambulancia";
-import ListaAfectados from "./ListaAfectados";
-import ListaAmbulancia from "./ListaAmbulancia";
-import ListadatosSeguros from "./ListaDatosSeguro";
-import ListaTraslado from "./ListaTrasladoHospital";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const AccordionComponent = () => {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <Accordion>
@@ -92,46 +87,28 @@ export const AccordionComponent = () => {
           </div>
         </AccordionSummary>
         <AccordionDetails className={classes.details}>
+            {/* Detalles */}
           <Grid container spacing={3}>
+            <Grid item lg={12}>
+              <Typography>Tipo de Incidente: </Typography>
+              <Typography>Tramo: </Typography>
+              <Typography>Operador: </Typography>
+              <Typography>Bitácora: </Typography>
+              <Typography>Descripción: </Typography>
+            </Grid>
             {/* Formularios */}
-            <Grid item lg={8}>
-              <Grid container spacing={2}>
-                <Grid item lg={12}>
-                  <FormPropsTextFields idEvento={2}/>
-                </Grid>
-                <Grid item lg={12}>
-                  <FormDatosSeguro />
-                </Grid>
-                <Grid item lg={12}>
-                  <FormDatosAmbulancia />
-                </Grid>
-              </Grid>
+            <Grid item lg={12}>
+              <FormPropsTextFields idEvento={2} />
+            </Grid>
+            <Grid item lg={12}>
+              <FormDatosSeguro idEvento={2} />
+            </Grid>
+            <Grid item lg={12}>
+              <FormDatosAmbulancia idEvento={2} />
             </Grid>
             {/* Detalles del evento */}
-            <Grid item lg={4}>
-              <Grid container spacing={2}>
-                {/* Detalles del evento */}
-                <Grid item lg={12}>
-                  <Typography>Tipo de Incidente: </Typography>
-                  <Typography>Tramo: </Typography>
-                  <Typography>Operador: </Typography>
-                  <Typography>Bitácora: </Typography>
-                  <Typography>Descripción: </Typography>
-                </Grid>               
-
-                {/* Lista de seguros vehiculares */}
-                <Grid item lg={12}>
-                  <Card>
-                    <CardContent>
-                      <Typography>Lista de seguros</Typography>
-                      <div className={classes.ScrollList}>
-                        <ListadatosSeguros idEvento={2} />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Grid>
-
-                {/* Lista de ambulancias */}
+            {/* <Grid item lg={4}>
+              <Grid container spacing={2}>                             
                 <Grid item lg={12}>
                   <Card>
                     <CardContent>
@@ -143,7 +120,7 @@ export const AccordionComponent = () => {
                   </Card>
                 </Grid>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Grid>
         </AccordionDetails>
         <Divider />

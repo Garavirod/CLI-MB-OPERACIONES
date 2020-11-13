@@ -15,12 +15,10 @@ import Grid from "@material-ui/core/Grid";
 import { PreloadData } from "../ui/PreloadData";
 
 export default function ListaAmbulancia(props) {
-  
+  const { idEvento = 44 } = props;
 
-  const { idEvento=44 } = props;
-
-    // Preload
-    const [preload, setPreload] = useState(true);
+  // Preload
+  const [preload, setPreload] = useState(true);
 
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -31,10 +29,10 @@ export default function ListaAmbulancia(props) {
     const url = `/lesionados/datosambulancias/${idEvento}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
-    if (_data.success){
+    if (_data.success) {
       setData(_data.data);
       setPreload(false);
-    } 
+    }
   };
 
   const deleteAmbulanica = async (evento) => {
@@ -43,60 +41,58 @@ export default function ListaAmbulancia(props) {
   };
 
   return (
-    <div>
-      <Grid container spacing={3}>        
-        <PreloadData isVisible={preload} />        
-        <Grid item lg={12}>
-          <TableContainer
-            component={Paper}
-            className="animate__animated animate__fadeIn"
-          >
-            <Table aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell align="center">Tiempo Llegada</TableCell>
-                  <TableCell align="center">Tiempo Respuesta</TableCell>
-                  <TableCell align="center">Ambulancia</TableCell>
-                  <TableCell align="center">Economico Ambulancia</TableCell>
-                  <TableCell align="center">Paramedico</TableCell>
-                  <TableCell align="center">Diagnóstico</TableCell>
-                  <TableCell align="center">Borrar</TableCell>
+    <Grid container spacing={3}>
+      <PreloadData isVisible={preload} />
+      <Grid item lg={12}>
+        <TableContainer
+          component={Paper}
+          className="animate__animated animate__fadeIn"
+        >
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell align="center">Tiempo Llegada</TableCell>
+                <TableCell align="center">Tiempo Respuesta</TableCell>
+                <TableCell align="center">Ambulancia</TableCell>
+                <TableCell align="center">Economico Ambulancia</TableCell>
+                <TableCell align="center">Paramedico</TableCell>
+                <TableCell align="center">Diagnóstico</TableCell>
+                <TableCell align="center">Borrar</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">
+                    {row.id}
+                  </TableCell>
+                  <TableCell align="center">
+                    {row.tiempoLLegada.substr(0, 5)}
+                  </TableCell>
+                  <TableCell align="center">
+                    {row.tiempoRespuesta.substr(0, 5)}
+                  </TableCell>
+                  <TableCell align="center">{row.ambulancia}</TableCell>
+                  <TableCell align="center">{row.ecoPlaca}</TableCell>
+                  <TableCell align="center">{row.paramedico}</TableCell>
+                  <TableCell align="center">{row.diagnostico}</TableCell>
+                  <TableCell align="center">
+                    {
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => deleteAmbulanica(row.id)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    }
+                  </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {data.map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell component="th" scope="row">
-                      {row.id}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row.tiempoLLegada.substr(0, 5)}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row.tiempoRespuesta.substr(0, 5)}
-                    </TableCell>
-                    <TableCell align="center">{row.ambulancia}</TableCell>
-                    <TableCell align="center">{row.ecoPlaca}</TableCell>
-                    <TableCell align="center">{row.paramedico}</TableCell>
-                    <TableCell align="center">{row.diagnostico}</TableCell>
-                    <TableCell align="center">
-                      {
-                        <IconButton
-                          aria-label="delete"
-                          onClick={() => deleteAmbulanica(row.id)}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      }
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Grid>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Grid>
-    </div>
+    </Grid>
   );
 }

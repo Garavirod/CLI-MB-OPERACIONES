@@ -50,8 +50,7 @@ export default function ListadatosSeguros(props) {
   };
 
   return (
-    <div>
-      <Grid container spacing={2}>       
+    <Grid container spacing={2}>       
         <PreloadData isVisible={preload} />
         <Grid item lg={12}>
           <TableContainer
@@ -100,6 +99,5 @@ export default function ListadatosSeguros(props) {
           </TableContainer>
         </Grid>
       </Grid>
-    </div>
   );
 }
