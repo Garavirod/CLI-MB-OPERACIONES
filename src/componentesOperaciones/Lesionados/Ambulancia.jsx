@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import { useParams, Link } from "react-router-dom";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { useHookForm } from "../../hooks/hookFrom";
 import { validateForm } from "../../functions/validateFrom";
@@ -165,19 +164,12 @@ export const FormDatosAmbulancia = () =>{
               >
                 Agregar Ambulancia
               </Button>
-            </Grid>
-            <Grid item lg={12}>
-              <Link to={`/ambulancias/${idEvento}`}> ver registros</Link>
-            </Grid>
+            </Grid>          
             </Grid>
           </form>
             </CardContent>
           </Card>
-        </Container>
-        {/* <Paper className={classes.paper}>
-          <h6>Registrar ambulancia</h6>
-          
-        </Paper> */}
+        </Container>      
       </div>
 
   );

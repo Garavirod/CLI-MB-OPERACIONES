@@ -66,13 +66,13 @@ export default function ListaAfectados(props) {
 
   return (
     <Grid container spacing={2}>               
-        <Grid item lg={12}>
+        {/* <Grid item lg={12}>
         <Typography component="div" variant="h4">
           <Box textAlign="center" m={1}>
-            <PreloadData isVisible={preload} />
           </Box>
         </Typography>
-        </Grid>
+        </Grid> */}
+        <PreloadData isVisible={preload} />
         <Grid item lg={12}>
           <TableContainer
             component={Paper}

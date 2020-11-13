@@ -57,13 +57,7 @@ export default function ListaEventos() {
   return (
     <div>
       <Grid container spacing={3}>
-        <Grid item lg={12}>
-        <Typography component="div" variant="h4">
-          <Box textAlign="center" m={1}>
-            <PreloadData isVisible={preload} />
-          </Box>
-        </Typography>
-        </Grid>
+        <PreloadData isVisible={preload} />        
         <Grid item lg={12}>
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
