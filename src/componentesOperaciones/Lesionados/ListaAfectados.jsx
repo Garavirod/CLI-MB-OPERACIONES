@@ -25,14 +25,13 @@ const useStyles = makeStyles({
 });
 
 export default function ListaAfectados(props) {
-
   const classes = useStyles();
   // Parametros por url
-  const { idEvento=44 } = props;
+  const { idEvento } = props;
 
   // Preload
   const [preload, setPreload] = useState(true);
-  
+
   const [data, setData] = useState([]);
   useEffect(() => {
     getAfectados();
@@ -42,10 +41,10 @@ export default function ListaAfectados(props) {
     const url = `/lesionados/afectados/${idEvento}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
-    if (_data.success){
+    if (_data.success) {
       setData(_data.data);
       setPreload(false);
-    } 
+    }
   };
 
   const deleteEvento = async (afectado) => {
@@ -65,60 +64,54 @@ export default function ListaAfectados(props) {
   };
 
   return (
-    <Grid container spacing={2}>               
-        {/* <Grid item lg={12}>
-        <Typography component="div" variant="h4">
-          <Box textAlign="center" m={1}>
-          </Box>
-        </Typography>
-        </Grid> */}
-        <PreloadData isVisible={preload} />
-        <Grid item lg={12}>
-          <TableContainer
-            component={Paper}
-            className="animate__animated animate__fadeIn"
-          >
-            <Table aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell align="center">Nombre</TableCell>
-                  <TableCell align="center">Edad</TableCell>
-                  <TableCell align="center">Género</TableCell>
-                  <TableCell align="center">Estado</TableCell>
-                  <TableCell align="center">Evento</TableCell>                  
-                  <TableCell align="center">Borrar</TableCell>
+    <Grid container spacing={2}>
+      <PreloadData isVisible={preload} />
+      <Grid item lg={12}>
+        <TableContainer
+          component={Paper}
+          className="animate__animated animate__fadeIn"
+        >
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell align="center">Nombre</TableCell>
+                <TableCell align="center">Edad</TableCell>
+                <TableCell align="center">Género</TableCell>
+                <TableCell align="center">Estado</TableCell>
+                <TableCell align="center">Evento</TableCell>
+                <TableCell align="center">Borrar</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">
+                    {row.id}
+                  </TableCell>
+                  <TableCell align="center">{row.nombre}</TableCell>
+                  <TableCell align="center">{row.edad}</TableCell>
+                  <TableCell align="center">{validaSexo(row.sexo)}</TableCell>
+                  <TableCell align="center">
+                    {validaEstado(row.status)}
+                  </TableCell>
+                  <TableCell align="center">{row.fk_evento}</TableCell>
+                  <TableCell align="center">
+                    {
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => deleteEvento(row.id)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    }
+                  </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {data.map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell component="th" scope="row">
-                      {row.id}
-                    </TableCell>
-                    <TableCell align="center">{row.nombre}</TableCell>
-                    <TableCell align="center">{row.edad}</TableCell>
-                    <TableCell align="center">{validaSexo(row.sexo)}</TableCell>
-                    <TableCell align="center">
-                      {validaEstado(row.status)}
-                    </TableCell>
-                    <TableCell align="center">{row.fk_evento}</TableCell>                    
-                    <TableCell align="center">
-                      {
-                        <IconButton
-                          aria-label="delete"
-                          onClick={() => deleteEvento(row.id)}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      }
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Grid>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Grid>
+    </Grid>
   );
 }

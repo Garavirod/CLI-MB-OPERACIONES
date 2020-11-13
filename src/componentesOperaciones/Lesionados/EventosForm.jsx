@@ -98,11 +98,7 @@ export const EventosForm = () => {
         <Grid item lg={12}>
             <h5>Lesionados y atropellados</h5>
             <h6>Crear evento nuevo</h6>          
-        </Grid>
-        <Grid item lg={12}>
-          <Link to={"/eventos"}>Lista de eventos</Link>
-        </Grid>
-
+        </Grid>      
         <Grid item lg={12}>
           <Paper className={classes.paper}>
             <form

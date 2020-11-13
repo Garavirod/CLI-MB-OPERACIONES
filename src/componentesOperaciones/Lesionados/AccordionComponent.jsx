@@ -12,6 +12,10 @@ import { Grid, Card, CardContent } from "@material-ui/core";
 import FormPropsTextFields from "./Afectado";
 import { FormDatosSeguro } from "./DatosSeguro";
 import { FormDatosAmbulancia } from "./Ambulancia";
+import { useEffect } from "react";
+import { httpGetData } from "../../functions/httpRequest";
+import { PreloadData } from "../ui/PreloadData";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,78 +62,108 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const AccordionComponent = () => {
+  const [data, setData] = useState([]);
+  const [preload, setPreload] = useState(true);
+  useEffect(() => {
+    getEventos();
+  }, []);
+
+  const getEventos = async () => {
+    const url = "/lesionados/eventos";
+    //peticion de axios genérica por url
+    const _data = await httpGetData(url);
+    if (_data.success) {
+      setData(_data.data);
+      setPreload(false);
+    }
+  };
+
+  const tipoIncident = (incident) => {
+    return incident === true ? "Autobús" : "Estación";
+  };
+
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1c-content"
-          id="panel1c-header"
-        >
-          <div className={classes.column}>
-            <Typography className={classes.heading}>Id: 12</Typography>
-          </div>
-          <div className={classes.column}>
-            <Typography className={classes.secondaryHeading}>
-              Fecha: 12-12-2022
-            </Typography>
-          </div>
-          <div className={classes.column}>
-            <Typography className={classes.secondaryHeading}>
-              Hora: 12:00
-            </Typography>
-          </div>
-          <div className={classes.column}>
-            <Typography className={classes.secondaryHeading}>
-              Incidente : Contusión
-            </Typography>
-          </div>
-        </AccordionSummary>
-        <AccordionDetails className={classes.details}>
+      <PreloadData isVisible={preload} />
+      {data.map((eve) => (
+        <Accordion key={eve.id}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1c-content"
+            id="panel1c-header"
+          >
+            <div className={classes.column}>
+              <Typography className={classes.heading}>Id: {eve.id}</Typography>
+            </div>
+            <div className={classes.column}>
+              <Typography className={classes.secondaryHeading}>
+                Fecha:{" "}
+                {eve.fecha.substr(8, 2) +
+                  "-" +
+                  eve.fecha.substr(5, 2) +
+                  "-" +
+                  eve.fecha.substr(0, 4)}
+              </Typography>
+            </div>
+            <div className={classes.column}>
+              <Typography className={classes.secondaryHeading}>
+                Hora: {eve.hora.substr(0, 5)}
+              </Typography>
+            </div>
+            <div className={classes.column}>
+              <Typography className={classes.secondaryHeading}>
+                Incidente : {eve.incidente}
+              </Typography>
+            </div>
+          </AccordionSummary>
+          <AccordionDetails className={classes.details}>
             {/* Detalles */}
-          <Grid container spacing={3}>
-            <Grid item lg={12}>
-              <Typography>Tipo de Incidente: </Typography>
-              <Typography>Tramo: </Typography>
-              <Typography>Operador: </Typography>
-              <Typography>Bitácora: </Typography>
-              <Typography>Descripción: </Typography>
-            </Grid>
-            {/* Formularios */}
-            <Grid item lg={12}>
-              <FormPropsTextFields idEvento={2} />
-            </Grid>
-            <Grid item lg={12}>
-              <FormDatosSeguro idEvento={2} />
-            </Grid>
-            <Grid item lg={12}>
-              <FormDatosAmbulancia idEvento={2} />
-            </Grid>
-            {/* Detalles del evento */}
-            {/* <Grid item lg={4}>
-              <Grid container spacing={2}>                             
-                <Grid item lg={12}>
-                  <Card>
-                    <CardContent>
-                      <Typography>Lista de ambulancias</Typography>
-                      <div className={classes.ScrollList}>
-                        <ListaAmbulancia idEvento={2} />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Grid>
+            <Grid container spacing={3}>
+              <Grid item lg={12}>
+                <Typography>
+                  Tipo de Incidente: {tipoIncident(eve.tipo_incidente)}
+                </Typography>
+                <Typography>Tramo: {eve.tramo}</Typography>
+                <Typography>Operador: {eve.operador}</Typography>
+                <Typography>Bitácora: {eve.bitacora}</Typography>
+                <Typography>Descripción: {eve.descripcion}</Typography>
               </Grid>
-            </Grid> */}
-          </Grid>
-        </AccordionDetails>
-        <Divider />
-        <AccordionActions>
-          <Button size="small" color="primary">
-            Eliminar
-          </Button>
-        </AccordionActions>
-      </Accordion>
+              {/* Formularios */}
+              <Grid item lg={12}>
+                <FormPropsTextFields idEvento={eve.id} />
+              </Grid>
+              <Grid item lg={12}>
+                <FormDatosSeguro idEvento={eve.id} />
+              </Grid>
+              <Grid item lg={12}>
+                <FormDatosAmbulancia idEvento={eve.id} />
+              </Grid>
+              {/* Detalles del evento */}
+              {/* <Grid item lg={4}>
+                      <Grid container spacing={2}>                             
+                        <Grid item lg={12}>
+                          <Card>
+                            <CardContent>
+                              <Typography>Lista de ambulancias</Typography>
+                              <div className={classes.ScrollList}>
+                                <ListaAmbulancia idEvento={2} />
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </Grid>
+                      </Grid>
+                    </Grid> */}
+            </Grid>
+          </AccordionDetails>
+          <Divider />
+          <AccordionActions>
+            <Button size="small" color="primary">
+              Eliminar
+            </Button>
+          </AccordionActions>
+        </Accordion>
+      ))}
     </div>
   );
 };

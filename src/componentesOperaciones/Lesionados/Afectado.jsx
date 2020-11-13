@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 export default function FormPropsTextFields(props) {
   const classes = useStyles();
   // Parámetros del url
-  const { idEvento = 2 } = props;
+  const { idEvento } = props;
 
   // Objeto a mapear
   const initial_afectado = {
@@ -180,7 +180,7 @@ export default function FormPropsTextFields(props) {
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <ListaAfectados idEvento={2} />
+                    <ListaAfectados idEvento={idEvento} />
                   </AccordionDetails>
                 </Accordion>
                 <Accordion>
@@ -195,7 +195,7 @@ export default function FormPropsTextFields(props) {
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <ListaTraslado idEvento={2} />
+                    <ListaTraslado idEvento={idEvento} />
                   </AccordionDetails>
                 </Accordion>
               </div>

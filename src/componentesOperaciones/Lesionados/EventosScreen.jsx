@@ -36,18 +36,7 @@ export const EventosScreen = () => {
               <Box textAlign="center" m={1}>
                 Lista de eventos
               </Box>
-            </Typography>
-            <Typography component="div">
-
-              <Box textAlign="left" m={1}>
-                <Link to="/lesiones-form">
-                  <span className={classes.icon}>
-                      <CreateIcon/>
-                  </span>
-                    Agregar evento nuevo
-                </Link>
-              </Box>
-            </Typography>
+            </Typography>           
           </Paper>
         </Grid>
         <Grid item lg={12} className="animate__animated animate__fadeIn">
