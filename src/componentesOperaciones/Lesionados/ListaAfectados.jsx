@@ -10,8 +10,6 @@ import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
-import { useParams, Link } from "react-router-dom";
-import AirportShuttleIcon from "@material-ui/icons/AirportShuttle";
 import { CustomSwalDelete } from "../../functions/customSweetAlert";
 import { httpGetData } from "../../functions/httpRequest";
 import Typography from "@material-ui/core/Typography";
@@ -26,10 +24,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ListaAfectados() {
+export default function ListaAfectados(props) {
+
   const classes = useStyles();
   // Parametros por url
-  const { idEvento } = useParams();
+  const { idEvento=44 } = props;
 
   // Preload
   const [preload, setPreload] = useState(true);
@@ -66,17 +65,7 @@ export default function ListaAfectados() {
   };
 
   return (
-    <div className={classes.gridRoot}>
-      <Grid container spacing={2}>
-        <Grid item lg={12}>
-          <h4>Lista de afectados registrados en el evento {idEvento}</h4>
-        </Grid>
-        <Grid item lg={6}>
-          <Link to={`/add-register/${idEvento}`}>Registrar afectado o seguro</Link>
-        </Grid>
-        <Grid item lg={6}>
-          <Link to={"/eventos"}>Lista de eventos</Link>
-        </Grid>
+    <Grid container spacing={2}>               
         <Grid item lg={12}>
         <Typography component="div" variant="h4">
           <Box textAlign="center" m={1}>
@@ -97,8 +86,7 @@ export default function ListaAfectados() {
                   <TableCell align="center">Edad</TableCell>
                   <TableCell align="center">Género</TableCell>
                   <TableCell align="center">Estado</TableCell>
-                  <TableCell align="center">Evento</TableCell>
-                  <TableCell align="center">Agregar traslado</TableCell>
+                  <TableCell align="center">Evento</TableCell>                  
                   <TableCell align="center">Borrar</TableCell>
                 </TableRow>
               </TableHead>
@@ -114,17 +102,7 @@ export default function ListaAfectados() {
                     <TableCell align="center">
                       {validaEstado(row.status)}
                     </TableCell>
-                    <TableCell align="center">{row.fk_evento}</TableCell>
-                    <TableCell align="center">
-                      <Link
-                        className=""
-                        to={`/add-register-traslado/${row.id}/${idEvento}`}
-                      >
-                        <IconButton aria-label="add">
-                          <AirportShuttleIcon />
-                        </IconButton>
-                      </Link>
-                    </TableCell>
+                    <TableCell align="center">{row.fk_evento}</TableCell>                    
                     <TableCell align="center">
                       {
                         <IconButton
@@ -142,6 +120,5 @@ export default function ListaAfectados() {
           </TableContainer>
         </Grid>
       </Grid>
-    </div>
   );
 }

@@ -1,19 +1,18 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionActions from '@material-ui/core/AccordionActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Chip from '@material-ui/core/Chip';
+import { makeStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import { Grid } from '@material-ui/core';
 import FormPropsTextFields from './Afectado';
 import { FormDatosSeguro } from './DatosSeguro';
 import { FormDatosAmbulancia } from './Ambulancia';
+import ListaAfectados from './ListaAfectados';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +46,15 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       textDecoration: 'underline',
     },
+  },
+  ScrollList:{
+    backgroundColor: theme.palette.background.paper,
+    overflowY: "scroll",
+    overflowX: "hidden", 
+    maxHeight: 300,
+    maxWidth: "100%",
+    padding: 0,
+    margin: 0,
   },
 }));
 
@@ -93,12 +101,19 @@ export const  AccordionComponent =() =>{
             {/* Detalles del evento */}
             <Grid item lg={4}>
                 <Grid container spacing={2}>
+                    {/* Detalles del evento */}
                     <Grid item lg={12}>
                         <Typography>Tipo de Incidente: </Typography>
                         <Typography>Tramo: </Typography>
                         <Typography>Operador: </Typography>
                         <Typography>Bitácora: </Typography>
                         <Typography>Descripción: </Typography>
+                    </Grid>
+                    {/* Lista de afectados */}
+                    <Grid item lg={12}>
+                        <div className={classes.ScrollList}>
+                            <ListaAfectados idEvento={2}/>
+                        </div>
                     </Grid>
                 </Grid>                
             </Grid>           
