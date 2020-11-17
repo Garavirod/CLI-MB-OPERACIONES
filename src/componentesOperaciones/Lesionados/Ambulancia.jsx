@@ -75,7 +75,7 @@ export const FormDatosAmbulancia = (props) => {
     diagnostico,
   } = values;
 
-  console.log(values);
+  
 
   // Valida el fromulario y de no haber campos vacios manda la infromacion al servidor
   const sendData = (e) => {

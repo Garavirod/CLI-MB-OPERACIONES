@@ -12,7 +12,6 @@ import ListaAmbulancia from "./componentesOperaciones/Lesionados/ListaAmbulancia
 import ListaTraslado from "./componentesOperaciones/Lesionados/ListaTrasladoHospital";
 import { FormTraslado } from './componentesOperaciones/Lesionados/Formtraslado';
 import Bienvenida from './componentesOperaciones/Main/Principal';
-import { EventosScreen } from './componentesOperaciones/Lesionados/EventosScreen';
 import { EventosForm } from './componentesOperaciones/Lesionados/EventosForm';
 import Login from './componentesOperaciones/Login/Login'
 import Registro from './componentesOperaciones/Login/Registro'
@@ -31,6 +30,7 @@ import { FormDesincorporaciones } from './componentesOperaciones/Desincorporacio
 import { CerrarFolioForm } from './componentesOperaciones/Desincorporaciones/CerrarFolioForm';
 import { ReportJustSemana } from './componentesOperaciones/Reportes/ReportJustSemana';
 import { EditarFolio } from './componentesOperaciones/Desincorporaciones/EditaFolio';
+import { AccordionComponent } from './componentesOperaciones/Lesionados/AccordionComponent';
 const Routes = () => {
     return ( 
         <Router>
@@ -41,7 +41,7 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" path="/BitacordaDR" component={FormDesincorporaciones} exact/>
                 <PrivateRoute role="Operaciones" path="/ControlDeServicios" component={Control} exact/>
                 <PrivateRoute role="Operaciones" path='/pruebas' component={Pruebas}exact/> 
-                <PrivateRoute role="Operaciones" path='/eventos/' component={EventosScreen}exact/>                              
+                <PrivateRoute role="Operaciones" path='/eventos/' component={AccordionComponent}exact/>                              
                 <PrivateRoute role="Operaciones" path='/MenuAccidentes/' component={MenuAccidentesScreen}exact/>
                 <PrivateRoute role="Operaciones" exact path="/add-register/:idEvento" component={AddRegisterEvent} />                                               
                 <PrivateRoute role="Operaciones" exact path="/afectados/:idEvento" component={ListaAfectados} />                                               

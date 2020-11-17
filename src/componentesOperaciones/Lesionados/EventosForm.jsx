@@ -36,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const EventosForm = () => {
+export const EventosForm = (props) => {
+  const {setRealoadEventos} = props;
   const classes = useStyles();
 
   // Objeto a mapear
@@ -72,7 +73,7 @@ export const EventosForm = () => {
     economico,
   } = values;
 
-  console.log(values);
+  // console.log(values);
   // Valida el fromulario y de no haber campos vacios manda la infromacion al servidor
   const sendData = (e) => {
     //Evita que la petición sea mandada por defecto en GET
@@ -81,11 +82,8 @@ export const EventosForm = () => {
     const url = "/lesionados/registro-evento";    
     if (validateForm(values)) {
       // Petición axios genérica por url y data
-      const success = httpPostData(url, values);
-      if(success===true)
-        CustomSwalSave(); 
-      else
-        CustomSwalError();          
+      httpPostData(url, values);
+      setRealoadEventos(callback=>!callback);                
     } else {
       CustomSwalEmptyFrom();
     }

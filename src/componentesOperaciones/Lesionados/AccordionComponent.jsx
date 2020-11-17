@@ -8,14 +8,17 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-import { Grid, Card, CardContent } from "@material-ui/core";
+import { Grid} from "@material-ui/core";
 import FormPropsTextFields from "./Afectado";
 import { FormDatosSeguro } from "./DatosSeguro";
 import { FormDatosAmbulancia } from "./Ambulancia";
 import { useEffect } from "react";
-import { httpGetData } from "../../functions/httpRequest";
+import { httpGetData, httpDeleteData } from "../../functions/httpRequest";
 import { PreloadData } from "../ui/PreloadData";
 import { useState } from "react";
+import { EventosForm } from "./EventosForm";
+import swal from 'sweetalert';
+import { CustomSwalError } from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,11 +65,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const AccordionComponent = () => {
+ 
   const [data, setData] = useState([]);
   const [preload, setPreload] = useState(true);
+  const [realodEventos,setRealoadEventos] = useState(false);
   useEffect(() => {
     getEventos();
-  }, []);
+  }, [realodEventos]);
 
   const getEventos = async () => {
     const url = "/lesionados/eventos";
@@ -78,6 +83,32 @@ export const AccordionComponent = () => {
     }
   };
 
+  const DeleteEvento = async (idEvento) =>{
+    const url = `/lesionados/borra-evento/${idEvento}`;
+    await swal({
+      title: "¿Seguro que deseas borrar la información?",
+      text: "Una vez eliminada no se podrá recuperar",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {        
+          const r = httpDeleteData(url);
+          if(r){
+            swal("Información eliminada", {icon: "success"});
+            setRealoadEventos(callback=>!callback);  
+          }else{                          
+            CustomSwalError();
+          }                                     
+      } else {
+        swal("Información salvada");          
+      }
+    });   
+    setRealoadEventos(callback=>!callback);                
+  };
+  
+  console.log(realodEventos);
   const tipoIncident = (incident) => {
     return incident === true ? "Autobús" : "Estación";
   };
@@ -85,6 +116,7 @@ export const AccordionComponent = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
+      <EventosForm setRealoadEventos={setRealoadEventos}/>
       <PreloadData isVisible={preload} />
       {data.map((eve) => (
         <Accordion key={eve.id}>
@@ -158,7 +190,7 @@ export const AccordionComponent = () => {
           </AccordionDetails>
           <Divider />
           <AccordionActions>
-            <Button size="small" color="primary">
+            <Button size="small" color="primary" onClick={()=>DeleteEvento(eve.id)}>
               Eliminar
             </Button>
           </AccordionActions>

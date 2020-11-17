@@ -65,7 +65,7 @@ export default function FormPropsTextFields(props) {
   // Desestructurando el Hook response
   const { sexo, edad, nombre, status } = values;
 
-  console.log(values);
+  
 
   // Valida el fromulario y de no haber campos vacios manda la infromacion al servidor
   const sendData = (e) => {
