@@ -58,11 +58,20 @@ export default function FormPropsTextFields(props) {
     const url = `/colisiones/datos-lesionado/${idEvento}`;
     if (validateForm(values)) {
       // Petición axios, manda la data ya vlidada al url definido
+      httpPostData(url, values)
+        .then(resp =>{
+            if(resp && resp.success)
+              CustomSwalSave();
+            else
+              CustomSwalError();
+        });//then
+      /*
       const success = httpPostData(url,values);
       if(success===true)
         CustomSwalSave();
       else
         CustomSwalError();
+        */
     } else {
       CustomSwalEmptyFrom();
     }

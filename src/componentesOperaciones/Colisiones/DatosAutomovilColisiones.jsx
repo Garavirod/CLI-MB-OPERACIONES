@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
-import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { useHookForm } from "../../hooks/hookFrom";
@@ -13,6 +12,7 @@ import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../func
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
+import { httpPostData } from "../../functions/httpRequest";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,10 +23,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function DatosAutomovilColisiones() {
+export default function DatosAutomovilColisiones(props) {
   const classes = useStyles();
   // Parámetros por url
-  const { idEvento } = useParams();
+  //const { idEvento } = useParams();
+  const {idEvento} = props;
   // Objeto a mapear
   const initial_datosAutomovilData= {
     sexo: "",
@@ -56,6 +57,14 @@ export default function DatosAutomovilColisiones() {
     const url = `/colisiones/datos-automovil/${idEvento}`;
     if (validateForm(values)) {
       // Petición axios, manda la data ya vlidada al url definido
+      httpPostData(url, values)
+        .then(resp =>{
+            if(resp && resp.success)
+              CustomSwalSave();
+            else
+              CustomSwalError();
+        });//then
+      /*
       axios
         .post(url, values)
         .then((res) => {
@@ -66,6 +75,7 @@ export default function DatosAutomovilColisiones() {
           CustomSwalError();
           console.log("Hubo un error al guardar el datos Automovil", err);
         });
+        */
     } else {
       CustomSwalEmptyFrom();
     }
