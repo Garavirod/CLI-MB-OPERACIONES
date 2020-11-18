@@ -19,6 +19,7 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ListaAmbulancia from "./ListaAmbulancia";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,8 +50,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const FormDatosAmbulancia = (props) => {
+  const [reloadAmbulancia, setReloadAmbulancia] = useState(false);
   const classes = useStyles();
-  const { idAfectado, idEvento = 2 } = props;
+  const { idAfectado, idEvento} = props;
   // Objeto a mapear
   const initial_ambulancia = {
     tiempoLLegada: "12:00", // hora
@@ -85,9 +87,8 @@ export const FormDatosAmbulancia = (props) => {
     const url = `/lesionados/registro-datosAmbulancia/${idEvento}`;
     if (validateForm(values)) {
       // Petición axios genérica por url y data
-      const success = httpPostData(url, values);
-      if (success === true) CustomSwalSave();
-      else CustomSwalError();
+      httpPostData(url, values);
+      setReloadAmbulancia(callback=>!callback);
     } else {
       CustomSwalEmptyFrom();
     }
@@ -197,7 +198,11 @@ export const FormDatosAmbulancia = (props) => {
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <ListaAmbulancia idEvento={2} />
+                    <ListaAmbulancia 
+                      idEvento={idEvento} 
+                      setReloadAmbulancia={setReloadAmbulancia}
+                      reloadAmbulancia={reloadAmbulancia}
+                    />
                   </AccordionDetails>
                 </Accordion>               
               </div>

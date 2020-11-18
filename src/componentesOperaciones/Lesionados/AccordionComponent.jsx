@@ -2,7 +2,6 @@ import React from "react";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionActions from "@material-ui/core/AccordionActions";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,8 +16,11 @@ import { httpGetData, httpDeleteData } from "../../functions/httpRequest";
 import { PreloadData } from "../ui/PreloadData";
 import { useState } from "react";
 import { EventosForm } from "./EventosForm";
+import DeleteIcon from "@material-ui/icons/Delete";
 import swal from 'sweetalert';
 import { CustomSwalError } from "../../functions/customSweetAlert";
+import ListaAfectados from "./ListaAfectados";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -148,6 +150,15 @@ export const AccordionComponent = () => {
                 Incidente : {eve.incidente}
               </Typography>
             </div>
+            <div className={classes.column}>
+            <Button 
+              size="small" 
+              color="primary" 
+              startIcon={<DeleteIcon />}
+              onClick={()=>DeleteEvento(eve.id)}>
+              Eliminar
+            </Button>  
+            </div>
           </AccordionSummary>
           <AccordionDetails className={classes.details}>
             {/* Detalles */}
@@ -162,10 +173,10 @@ export const AccordionComponent = () => {
                 <Typography>Descripción: {eve.descripcion}</Typography>
               </Grid>
               {/* Formularios */}
-              <Grid item lg={12}>
-                <FormPropsTextFields idEvento={eve.id} />
+              <Grid item lg={6}>
+                <FormPropsTextFields idEvento={eve.id} />                                
               </Grid>
-              <Grid item lg={12}>
+              <Grid item lg={6}>
                 <FormDatosSeguro idEvento={eve.id} />
               </Grid>
               <Grid item lg={12}>
@@ -188,14 +199,9 @@ export const AccordionComponent = () => {
                     </Grid> */}
             </Grid>
           </AccordionDetails>
-          <Divider />
-          <AccordionActions>
-            <Button size="small" color="primary" onClick={()=>DeleteEvento(eve.id)}>
-              Eliminar
-            </Button>
-          </AccordionActions>
+          <Divider />         
         </Accordion>
-      ))}
+      ))}   
     </div>
   );
 };

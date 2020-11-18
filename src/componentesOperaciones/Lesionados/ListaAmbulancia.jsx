@@ -15,7 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import { PreloadData } from "../ui/PreloadData";
 
 export default function ListaAmbulancia(props) {
-  const { idEvento = 44 } = props;
+  const { idEvento, setReloadAmbulancia, reloadAmbulancia } = props;
 
   // Preload
   const [preload, setPreload] = useState(true);
@@ -23,7 +23,7 @@ export default function ListaAmbulancia(props) {
   const [data, setData] = useState([]);
   useEffect(() => {
     getAmbulancias();
-  }, []);
+  }, [reloadAmbulancia]);
 
   const getAmbulancias = async () => {
     const url = `/lesionados/datosambulancias/${idEvento}`;
@@ -35,9 +35,11 @@ export default function ListaAmbulancia(props) {
     }
   };
 
-  const deleteAmbulanica = async (evento) => {
-    const url = `/lesionados/borra-datos-ambulancia/${evento}`;
-    CustomSwalDelete(url).then(() => getAmbulancias());
+  const deleteAmbulanica = async (idAmbulancia) => {
+    const url = `/lesionados/borra-datos-ambulancia/${idAmbulancia}`;    
+    CustomSwalDelete(url).then(
+      () => setReloadAmbulancia(callback=>!callback)
+    );
   };
 
   return (

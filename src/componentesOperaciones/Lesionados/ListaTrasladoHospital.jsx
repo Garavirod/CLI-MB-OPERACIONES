@@ -14,7 +14,7 @@ import Grid from "@material-ui/core/Grid";
 import { PreloadData } from "../ui/PreloadData";
 
 export default function ListaTraslado(props) {
-  const { idEvento=44 } = props;
+  const { idEvento, reloadAfectado } = props;
   const [data, setData] = useState([]);
 
   // Preload
@@ -22,7 +22,7 @@ export default function ListaTraslado(props) {
 
   useEffect(() => {
     getTraslados();
-  }, []);
+  }, [reloadAfectado]);
 
   const getTraslados = async () => {
     const url = `/lesionados/traslados/${idEvento}`;

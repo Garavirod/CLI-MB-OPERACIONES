@@ -25,21 +25,19 @@ const useStyles = makeStyles({
 });
 
 export default function ListaAfectados(props) {
-  const classes = useStyles();
-  // Parametros por url
-  const { idEvento } = props;
-
-  // Preload
+  const { idEvento, reloadAfectado, setReloadAfectado } = props;
   const [preload, setPreload] = useState(true);
-
   const [data, setData] = useState([]);
-  useEffect(() => {
-    getAfectados();
-  }, []);
 
-  const getAfectados = async () => {
+  useEffect(() => {
+    console.log("Cambio el afectado en la lista", reloadAfectado);
+    getAfectados();
+  }, [reloadAfectado]);
+
+  const getAfectados = async () => {    
     const url = `/lesionados/afectados/${idEvento}`;
     //peticion de axios genérica por url
+    setPreload(true);
     const _data = await httpGetData(url);
     if (_data.success) {
       setData(_data.data);
@@ -50,7 +48,7 @@ export default function ListaAfectados(props) {
   const deleteEvento = async (afectado) => {
     const url = `/lesionados/borra-afectado/${afectado}`;
     CustomSwalDelete(url).then(() => {
-      getAfectados();
+      setReloadAfectado(callback=>!callback);
     });
   };
 

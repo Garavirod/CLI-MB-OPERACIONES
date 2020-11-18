@@ -5,7 +5,6 @@ import Control from './componentesOperaciones/Bitacoras/Control';
 import MainReportes from './componentesOperaciones/JustSemana/MainReportes';
 import Pruebas from './componentesOperaciones/Lesionados/Pruebas';
 import { MenuAccidentesScreen } from './componentesOperaciones/Lesionados/MenuAccidentesScreen';
-import { AddRegisterEvent } from './componentesOperaciones/Lesionados/AddRegisterEvent';
 import ListaAfectados from './componentesOperaciones/Lesionados/ListaAfectados';
 import ListaDatosSeguro from "./componentesOperaciones/Lesionados/ListaDatosSeguro";
 import ListaAmbulancia from "./componentesOperaciones/Lesionados/ListaAmbulancia";
@@ -42,8 +41,7 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" path="/ControlDeServicios" component={Control} exact/>
                 <PrivateRoute role="Operaciones" path='/pruebas' component={Pruebas}exact/> 
                 <PrivateRoute role="Operaciones" path='/eventos/' component={AccordionComponent}exact/>                              
-                <PrivateRoute role="Operaciones" path='/MenuAccidentes/' component={MenuAccidentesScreen}exact/>
-                <PrivateRoute role="Operaciones" exact path="/add-register/:idEvento" component={AddRegisterEvent} />                                               
+                <PrivateRoute role="Operaciones" path='/MenuAccidentes/' component={MenuAccidentesScreen}exact/>                                              
                 <PrivateRoute role="Operaciones" exact path="/afectados/:idEvento" component={ListaAfectados} />                                               
                 <PrivateRoute role="Operaciones" exact path="/ambulancias/:idEvento" component={ListaAmbulancia} />                                               
                 <PrivateRoute role="Operaciones" exact path="/traslados/:idEvento" component={ListaTraslado} />                                                                                                            

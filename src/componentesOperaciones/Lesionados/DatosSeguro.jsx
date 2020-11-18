@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "15ch",
+      width: "10ch",
     },
   },
   rootAcc: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 export const FormDatosSeguro = (props) => {
   const classes = useStyles();
   // Parámetros por url
-  const { idEvento=2 } = props;
+  const { idEvento} = props;
   // Objeto a mapear
   const initial_datosSeguroData = {
     horaArribo: "12:00",
@@ -194,7 +194,7 @@ export const FormDatosSeguro = (props) => {
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <ListadatosSeguros idEvento={2} />
+                    <ListadatosSeguros idEvento={idEvento} />
                   </AccordionDetails>
                 </Accordion>               
               </div>

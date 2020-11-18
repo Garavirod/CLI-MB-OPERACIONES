@@ -24,12 +24,13 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ListaAfectados from "./ListaAfectados";
 import ListaTraslado from "./ListaTrasladoHospital";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "13ch",
+      width: "10ch",
     },
   },
 
@@ -47,9 +48,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FormPropsTextFields(props) {
+  const {idEvento} = props;
+  const [reloadAfectado, setReloadAfectado] = useState(false);
   const classes = useStyles();
-  // Parámetros del url
-  const { idEvento } = props;
 
   // Objeto a mapear
   const initial_afectado = {
@@ -75,9 +76,8 @@ export default function FormPropsTextFields(props) {
     const url = `/lesionados/registro-afectado/${idEvento}`;
     if (validateForm(values)) {
       // Petición axios, manda la data ya vlidada al url definido
-      const success = httpPostData(url, values);
-      if (success === true) CustomSwalSave();
-      else CustomSwalError();
+      httpPostData(url, values);
+      setReloadAfectado(callback=>!callback);
     } else {
       CustomSwalEmptyFrom();
     }
@@ -180,7 +180,11 @@ export default function FormPropsTextFields(props) {
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <ListaAfectados idEvento={idEvento} />
+                    <ListaAfectados 
+                      idEvento={idEvento} 
+                      reloadAfectado={reloadAfectado}
+                      setReloadAfectado={setReloadAfectado}
+                    />
                   </AccordionDetails>
                 </Accordion>
                 <Accordion>
@@ -195,7 +199,10 @@ export default function FormPropsTextFields(props) {
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <ListaTraslado idEvento={idEvento} />
+                    <ListaTraslado 
+                      idEvento={idEvento} 
+                      reloadAfectado={reloadAfectado}
+                    />
                   </AccordionDetails>
                 </Accordion>
               </div>
