@@ -48,8 +48,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FormPropsTextFields(props) {
-  const {idEvento} = props;
-  const [reloadAfectado, setReloadAfectado] = useState(false);
+  const {idEvento,setReloadAfectado } = props;
+  // const [reloadAfectado, setReloadAfectado] = useState(false);
   const classes = useStyles();
 
   // Objeto a mapear
@@ -164,50 +164,7 @@ export default function FormPropsTextFields(props) {
               </Grid>
             </div>
           </form>
-          {/* ACCORDION */}
-          <Grid container spacing={2}>
-            <Grid item lg={12}>
-              <div className={classes.root}>
-                <Accordion>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    {/* AfFECTADOS */}
-                    <Typography className={classes.heading}>
-                      Lista de afectados
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <ListaAfectados 
-                      idEvento={idEvento} 
-                      reloadAfectado={reloadAfectado}
-                      setReloadAfectado={setReloadAfectado}
-                    />
-                  </AccordionDetails>
-                </Accordion>
-                <Accordion>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel2a-content"
-                    id="panel2a-header"
-                  >
-                    {/* TRASLADOS */}
-                    <Typography className={classes.heading}>
-                      Lista de traslados
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <ListaTraslado 
-                      idEvento={idEvento} 
-                      reloadAfectado={reloadAfectado}
-                    />
-                  </AccordionDetails>
-                </Accordion>
-              </div>
-            </Grid>
-          </Grid>
+          {/* ACCORDION */}          
         </CardContent>
       </Card>
     </Container>

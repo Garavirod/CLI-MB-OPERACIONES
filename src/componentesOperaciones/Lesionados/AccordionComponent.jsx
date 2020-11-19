@@ -22,6 +22,7 @@ import { CustomSwalError } from "../../functions/customSweetAlert";
 import ListaAfectados from "./ListaAfectados";
 
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -71,6 +72,8 @@ export const AccordionComponent = () => {
   const [data, setData] = useState([]);
   const [preload, setPreload] = useState(true);
   const [realodEventos,setRealoadEventos] = useState(false);
+  const [reloadAfectado, setReloadAfectado] = useState(false);
+
   useEffect(() => {
     getEventos();
   }, [realodEventos]);
@@ -78,6 +81,7 @@ export const AccordionComponent = () => {
   const getEventos = async () => {
     const url = "/lesionados/eventos";
     //peticion de axios genérica por url
+    setPreload(true);
     const _data = await httpGetData(url);
     if (_data.success) {
       setData(_data.data);
@@ -174,13 +178,16 @@ export const AccordionComponent = () => {
               </Grid>
               {/* Formularios */}
               <Grid item lg={6}>
-                <FormPropsTextFields idEvento={eve.id} />                                
+                <FormPropsTextFields idEvento={eve.id} setReloadAfectado={setReloadAfectado}/>
               </Grid>
               <Grid item lg={6}>
                 <FormDatosSeguro idEvento={eve.id} />
               </Grid>
               <Grid item lg={12}>
                 <FormDatosAmbulancia idEvento={eve.id} />
+              </Grid>
+              <Grid item lg={12}>
+                <ListaAfectados idEvento={eve.id} reloadAfectado={reloadAfectado} setReloadAfectado={setReloadAfectado}/>                                
               </Grid>
               {/* Detalles del evento */}
               {/* <Grid item lg={4}>
