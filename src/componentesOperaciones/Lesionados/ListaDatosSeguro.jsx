@@ -22,20 +22,21 @@ const useStyles = makeStyles({
 
 export default function ListadatosSeguros(props) {
   const classes = useStyles();
-  const { idEvento=44 } = props;
-
-    // Preload
-    const [preload, setPreload] = useState(true);
+  const { idEvento,setReloadSeguro,reloadSeguro } = props;
+  // Preload
+  const [preload, setPreload] = useState(true);
 
   const [data, setData] = useState([]);
   useEffect(() => {
+    console.log("Cambio el seguro en la lista", reloadSeguro);
     getdatosSeguros();
-  }, []);
+  }, [reloadSeguro]);
 
   const getdatosSeguros = async () => {
     const url = `/lesionados/datoseguros/${idEvento}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
+    setPreload(true);
     if (_data.success){
       setData(_data.data);
       setPreload(false);
@@ -45,7 +46,7 @@ export default function ListadatosSeguros(props) {
   const deleteEvento = async (idSeguro) => {
     const url = `/lesionados/borra-datos-seguro/${idSeguro}`;
     CustomSwalDelete(url).then(() => {
-      getdatosSeguros();
+      setReloadSeguro(callback=>!callback);
     });
   };
 

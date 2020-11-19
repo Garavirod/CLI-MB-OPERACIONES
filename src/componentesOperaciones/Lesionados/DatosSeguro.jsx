@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "10ch",
+      width: "13ch",
     },
   },
   rootAcc: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 export const FormDatosSeguro = (props) => {
   const classes = useStyles();
   // Parámetros por url
-  const { idEvento} = props;
+  const { idEvento, setReloadSeguro } = props;
   // Objeto a mapear
   const initial_datosSeguroData = {
     horaArribo: "12:00",
@@ -77,6 +77,7 @@ export const FormDatosSeguro = (props) => {
         .post(url, values)
         .then((res) => {
           console.log("DatosSeguro mandados", res);
+          setReloadSeguro(callback => !callback);
           CustomSwalSave();
         })
         .catch((err) => {
@@ -177,29 +178,7 @@ export const FormDatosSeguro = (props) => {
                 </Grid>
               </Grid>
             </div>
-          </form>
-           {/* ACCORDION */}
-           <Grid container spacing={2}>
-            <Grid item lg={12}>
-              <div className={classes.root}>
-                <Accordion>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    {/* DATOS SEGURO */}
-                    <Typography className={classes.heading}>
-                      Lista de seguros vehiculares
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <ListadatosSeguros idEvento={idEvento} />
-                  </AccordionDetails>
-                </Accordion>               
-              </div>
-            </Grid>
-          </Grid>
+          </form>          
         </CardContent>
       </Card>
     </Container>

@@ -20,6 +20,12 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import swal from 'sweetalert';
 import { CustomSwalError } from "../../functions/customSweetAlert";
 import ListaAfectados from "./ListaAfectados";
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Box from '@material-ui/core/Box';
+import PropTypes from 'prop-types';
+import ListadatosSeguros from "./ListaDatosSeguro";
 
 
 
@@ -65,14 +71,63 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     margin: 0,
   },
+
+  rootTab: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+  },
 }));
 
+// Tabs elements
+
+function TabPanel(props) {
+  const classes = useStyles();
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <div className={classes.ScrollList}>{children}</div>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+// Main component
+
 export const AccordionComponent = () => {
- 
+  // styles
+  const classes = useStyles();
+
   const [data, setData] = useState([]);
   const [preload, setPreload] = useState(true);
   const [realodEventos,setRealoadEventos] = useState(false);
   const [reloadAfectado, setReloadAfectado] = useState(false);
+  const [reloadSeguro, setReloadSeguro] = useState(false);
+  const [reloadTraslado, setReloadTraslado] = useState(false);
+  const [reloadAmbulancia, setReloadAmbulancia] = useState(false);
+  // Tab States
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   useEffect(() => {
     getEventos();
@@ -119,7 +174,6 @@ export const AccordionComponent = () => {
     return incident === true ? "Autobús" : "Estación";
   };
 
-  const classes = useStyles();
   return (
     <div className={classes.root}>
       <EventosForm setRealoadEventos={setRealoadEventos}/>
@@ -177,21 +231,35 @@ export const AccordionComponent = () => {
                 <Typography>Descripción: {eve.descripcion}</Typography>
               </Grid>
               {/* Formularios */}
-              <Grid item lg={6}>
+              <Grid item lg={12}>
                 <FormPropsTextFields idEvento={eve.id} setReloadAfectado={setReloadAfectado}/>
               </Grid>
               <Grid item lg={6}>
-                <FormDatosSeguro idEvento={eve.id} />
-              </Grid>
-              <Grid item lg={12}>
                 <FormDatosAmbulancia idEvento={eve.id} />
+              </Grid>
+              <Grid item lg={6}>
+                <FormDatosSeguro idEvento={eve.id} setReloadSeguro={setReloadSeguro} />
               </Grid>
               {/* Tabs  section*/}
               <Grid item lg={12}>
-              {/* <div className={classes.ScrollList}>
-                                <ListaAmbulancia idEvento={2} />
-                              </div> */}
-                <ListaAfectados idEvento={eve.id} reloadAfectado={reloadAfectado} setReloadAfectado={setReloadAfectado}/>                                
+              <div className={classes.rootTab}>
+                <AppBar position="static">
+                  <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+                    <Tab label="Lista afectados" {...a11yProps(0)} />
+                    <Tab label="Lista seguros" {...a11yProps(1)} />
+                    <Tab label="Lista traslados" {...a11yProps(2)} />
+                  </Tabs>
+                </AppBar>
+                <TabPanel value={value} index={0}>
+                    <ListaAfectados idEvento={eve.id} reloadAfectado={reloadAfectado} setReloadAfectado={setReloadAfectado}/>                                  
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    <ListadatosSeguros idEvento={eve.id} reloadSeguro={reloadSeguro} setReloadSeguro={setReloadSeguro}/>
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                  Item Three
+                </TabPanel>
+              </div>            
               </Grid>             
             </Grid>
           </AccordionDetails>

@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   form: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "15ch",
+      width: "12ch",
     },
   },
   rootAcc: {
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 export const FormDatosAmbulancia = (props) => {
   const [reloadAmbulancia, setReloadAmbulancia] = useState(false);
   const classes = useStyles();
-  const { idAfectado, idEvento} = props;
+  const { idAfectado, idEvento } = props;
   // Objeto a mapear
   const initial_ambulancia = {
     tiempoLLegada: "12:00", // hora
@@ -77,8 +77,6 @@ export const FormDatosAmbulancia = (props) => {
     diagnostico,
   } = values;
 
-  
-
   // Valida el fromulario y de no haber campos vacios manda la infromacion al servidor
   const sendData = (e) => {
     //Evita que la petición sea mandada por defecto en GET
@@ -88,7 +86,7 @@ export const FormDatosAmbulancia = (props) => {
     if (validateForm(values)) {
       // Petición axios genérica por url y data
       httpPostData(url, values);
-      setReloadAmbulancia(callback=>!callback);
+      setReloadAmbulancia((callback) => !callback);
     } else {
       CustomSwalEmptyFrom();
     }
@@ -181,33 +179,7 @@ export const FormDatosAmbulancia = (props) => {
                   </Button>
                 </Grid>
               </Grid>
-            </form>
-            {/* ACCORDION */}
-           <Grid container spacing={2}>
-            <Grid item lg={12}>
-              <div className={classes.root}>
-                <Accordion>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    {/* DATOS SEGURO */}
-                    <Typography className={classes.heading}>
-                      Lista de ambulancias
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <ListaAmbulancia 
-                      idEvento={idEvento} 
-                      setReloadAmbulancia={setReloadAmbulancia}
-                      reloadAmbulancia={reloadAmbulancia}
-                    />
-                  </AccordionDetails>
-                </Accordion>               
-              </div>
-            </Grid>
-          </Grid>
+            </form>           
           </CardContent>
         </Card>
       </Container>
