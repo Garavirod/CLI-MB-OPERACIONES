@@ -163,8 +163,7 @@ export default function FormPropsTextFields(props) {
                 </Grid>
               </Grid>
             </div>
-          </form>
-          {/* ACCORDION */}          
+          </form>          
         </CardContent>
       </Card>
     </Container>
