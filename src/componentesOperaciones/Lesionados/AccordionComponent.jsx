@@ -186,24 +186,13 @@ export const AccordionComponent = () => {
               <Grid item lg={12}>
                 <FormDatosAmbulancia idEvento={eve.id} />
               </Grid>
+              {/* Tabs  section*/}
               <Grid item lg={12}>
-                <ListaAfectados idEvento={eve.id} reloadAfectado={reloadAfectado} setReloadAfectado={setReloadAfectado}/>                                
-              </Grid>
-              {/* Detalles del evento */}
-              {/* <Grid item lg={4}>
-                      <Grid container spacing={2}>                             
-                        <Grid item lg={12}>
-                          <Card>
-                            <CardContent>
-                              <Typography>Lista de ambulancias</Typography>
-                              <div className={classes.ScrollList}>
+              {/* <div className={classes.ScrollList}>
                                 <ListaAmbulancia idEvento={2} />
-                              </div>
-                            </CardContent>
-                          </Card>
-                        </Grid>
-                      </Grid>
-                    </Grid> */}
+                              </div> */}
+                <ListaAfectados idEvento={eve.id} reloadAfectado={reloadAfectado} setReloadAfectado={setReloadAfectado}/>                                
+              </Grid>             
             </Grid>
           </AccordionDetails>
           <Divider />         
