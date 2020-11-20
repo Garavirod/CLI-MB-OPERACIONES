@@ -14,19 +14,21 @@ import Grid from "@material-ui/core/Grid";
 import { PreloadData } from "../ui/PreloadData";
 
 export default function ListaTraslado(props) {
-  const { idEvento, reloadAfectado } = props;
+  const { idEvento, reloadAfectado, reloadTraslado, setReloadTraslado } = props;
   const [data, setData] = useState([]);
 
   // Preload
   const [preload, setPreload] = useState(true);
 
   useEffect(() => {
+    console.log("Cambio el traslado en la lista", reloadAfectado);
     getTraslados();
-  }, [reloadAfectado]);
+  }, [reloadAfectado,reloadTraslado]);
 
   const getTraslados = async () => {
     const url = `/lesionados/traslados/${idEvento}`;
     //peticion de axios genérica por url
+    setPreload(true);
     const _data = await httpGetData(url);
     if (_data.success){
       setData(_data.data);
@@ -35,8 +37,11 @@ export default function ListaTraslado(props) {
   };
 
   const deleteTraslado = async (traslado) => {
-    const url = `/lesionados/borra-traslado-hospital/${traslado}`;
-    CustomSwalDelete(url).then(() => getTraslados());
+    const url = `/lesionados/borra-traslado-hospital/${traslado}`;      
+    CustomSwalDelete(url).then(() => 
+      setReloadTraslado(callback=>!callback)
+    );
+    
   };
 
   return (

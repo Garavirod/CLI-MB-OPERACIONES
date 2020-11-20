@@ -186,3 +186,4 @@ export const FormDatosAmbulancia = (props) => {
     </div>
   );
 };
+// http://localhost:5000/lesionados/registro-afectado-traslado/60

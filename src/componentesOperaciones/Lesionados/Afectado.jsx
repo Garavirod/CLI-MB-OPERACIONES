@@ -16,14 +16,8 @@ import {
 import { useHookForm } from "../../hooks/hookFrom";
 import { validateForm } from "../../functions/validateFrom";
 import { httpPostData } from "../../functions/httpRequest";
-import { Card, CardContent, Typography } from "@material-ui/core";
-// Accordion
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ListaAfectados from "./ListaAfectados";
-import ListaTraslado from "./ListaTrasladoHospital";
+import { Card, CardContent, Typography, Switch } from "@material-ui/core";
+
 import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
@@ -48,8 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FormPropsTextFields(props) {
-  const {idEvento,setReloadAfectado } = props;
-  // const [reloadAfectado, setReloadAfectado] = useState(false);
+  const {idEvento,setReloadAfectado } = props;  
   const classes = useStyles();
 
   // Objeto a mapear
@@ -60,24 +53,47 @@ export default function FormPropsTextFields(props) {
     status: "",
   };
 
+  const initial_traslado = {
+    nombreHospital:"",
+    paseMedico:""
+  }
+
   // Utilizando el hook personalizado
   const [values, handleInputChange] = useHookForm(initial_afectado);
-
+  const [valuesTras, handleInputChangeTras] = useHookForm(initial_traslado);
+  const [traslado, setTraslado] = useState(false);
   // Desestructurando el Hook response
   const { sexo, edad, nombre, status } = values;
+  const { paseMedico, nombreHospital } = valuesTras;
 
   
+  const handleChangeTraslado = ()=>{
+    setTraslado(callback=>!callback);
+  };
 
   // Valida el fromulario y de no haber campos vacios manda la infromacion al servidor
   const sendData = (e) => {
     //Evita que la petición sea mandada por defecto en GET
     e.preventDefault();
     // Url de la API
-    const url = `/lesionados/registro-afectado/${idEvento}`;
-    if (validateForm(values)) {
-      // Petición axios, manda la data ya vlidada al url definido
-      httpPostData(url, values);
-      setReloadAfectado(callback=>!callback);
+    let url="";
+    let flagForms=false;
+    let dataform = {};
+    if(!traslado){
+      url = `/lesionados/registro-afectado/${idEvento}`;
+      dataform = values;
+      flagForms = validateForm(dataform);
+    }else{      
+      dataform = {...values, ...valuesTras};
+      url = `/lesionados/registro-afectado-traslado/${idEvento}`;
+      flagForms = validateForm(dataform);
+    }
+    
+    if (flagForms) {
+      // Petición axios, manda la data ya vlidada al url definido}
+      console.log(dataform);
+      httpPostData(url, dataform);
+      setReloadAfectado(callback=>!callback);      
     } else {
       CustomSwalEmptyFrom();
     }
@@ -149,6 +165,36 @@ export default function FormPropsTextFields(props) {
                       <option value={0}>Muerto</option>
                     </Select>
                   </FormControl>
+                </Grid>
+                <Grid item lg={12}>
+                  <Typography>¿Agregar traslado?</Typography>
+                  <Switch
+                    checked={traslado}
+                    onChange={handleChangeTraslado}
+                    color="primary"
+                    name="checkedB"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                  />
+                </Grid>
+                <Grid item lg={12}>
+                <Grid item lg={12}>
+                  <TextField
+                    id="standard"
+                    label="Nombre Hospital"
+                    value={nombreHospital}
+                    name="nombreHospital"
+                    onChange={handleInputChangeTras}
+                    disabled={!traslado}
+                  />
+                  <TextField
+                    id="standard"
+                    label="Pase médico"
+                    value={paseMedico}
+                    name="paseMedico"
+                    onChange={handleInputChangeTras}
+                    disabled={!traslado}
+                  />
+                </Grid>
                 </Grid>
                 <Grid item lg={12}>
                   <Button

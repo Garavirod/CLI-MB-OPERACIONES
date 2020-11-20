@@ -26,6 +26,7 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import ListadatosSeguros from "./ListaDatosSeguro";
+import ListaTraslado from "./ListaTrasladoHospital";
 
 
 
@@ -248,16 +249,30 @@ export const AccordionComponent = () => {
                     <Tab label="Lista afectados" {...a11yProps(0)} />
                     <Tab label="Lista seguros" {...a11yProps(1)} />
                     <Tab label="Lista traslados" {...a11yProps(2)} />
+                    <Tab label="Lista ambulancias" {...a11yProps(3)} />
                   </Tabs>
                 </AppBar>
                 <TabPanel value={value} index={0}>
-                    <ListaAfectados idEvento={eve.id} reloadAfectado={reloadAfectado} setReloadAfectado={setReloadAfectado}/>                                  
+                    <ListaAfectados 
+                      idEvento={eve.id} 
+                      reloadAfectado={reloadAfectado} 
+                      setReloadAfectado={setReloadAfectado}                      
+                    />                                  
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <ListadatosSeguros idEvento={eve.id} reloadSeguro={reloadSeguro} setReloadSeguro={setReloadSeguro}/>
+                    <ListadatosSeguros 
+                      idEvento={eve.id} 
+                      reloadSeguro={reloadSeguro} 
+                      setReloadSeguro={setReloadSeguro}
+                    />
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                  Item Three
+                  <ListaTraslado 
+                    idEvento={eve.id}    
+                    reloadAfectado={reloadAfectado}
+                    reloadTraslado={reloadTraslado}                                                       
+                    setReloadTraslado={setReloadTraslado}                    
+                  />
                 </TabPanel>
               </div>            
               </Grid>             
