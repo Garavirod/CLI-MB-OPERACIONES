@@ -28,6 +28,7 @@ export default function ListaAmbulancia(props) {
   const getAmbulancias = async () => {
     const url = `/lesionados/datosambulancias/${idEvento}`;
     //peticion de axios genérica por url
+    setPreload(true);
     const _data = await httpGetData(url);
     if (_data.success) {
       setData(_data.data);

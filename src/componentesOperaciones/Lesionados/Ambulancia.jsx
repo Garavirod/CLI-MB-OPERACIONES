@@ -8,17 +8,9 @@ import { useHookForm } from "../../hooks/hookFrom";
 import { validateForm } from "../../functions/validateFrom";
 import { httpPostData } from "../../functions/httpRequest";
 import {
-  CustomSwalSave,
-  CustomSwalError,
   CustomSwalEmptyFrom,
 } from "../../functions/customSweetAlert";
 import { Card, CardContent, Container, Typography } from "@material-ui/core";
-// Accordion
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ListaAmbulancia from "./ListaAmbulancia";
 import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,9 +42,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const FormDatosAmbulancia = (props) => {
-  const [reloadAmbulancia, setReloadAmbulancia] = useState(false);
+  const {idEvento,setReloadAmbulancia} = useState(false);
   const classes = useStyles();
-  const { idAfectado, idEvento } = props;
   // Objeto a mapear
   const initial_ambulancia = {
     tiempoLLegada: "12:00", // hora
@@ -60,8 +51,7 @@ export const FormDatosAmbulancia = (props) => {
     ambulancia: "",
     ecoPlaca: "",
     paramedico: "",
-    diagnostico: "",
-    idAfectado: idAfectado, //Quitar en bdd
+    diagnostico: "",    
   };
 
   // Hook personalizado
@@ -86,7 +76,7 @@ export const FormDatosAmbulancia = (props) => {
     if (validateForm(values)) {
       // Petición axios genérica por url y data
       httpPostData(url, values);
-      setReloadAmbulancia((callback) => !callback);
+      setReloadAmbulancia(callback=>!callback);
     } else {
       CustomSwalEmptyFrom();
     }
@@ -186,4 +176,3 @@ export const FormDatosAmbulancia = (props) => {
     </div>
   );
 };
-// http://localhost:5000/lesionados/registro-afectado-traslado/60

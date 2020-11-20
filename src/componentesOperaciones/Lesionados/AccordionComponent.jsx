@@ -27,6 +27,7 @@ import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import ListadatosSeguros from "./ListaDatosSeguro";
 import ListaTraslado from "./ListaTrasladoHospital";
+import ListaAmbulancia from "./ListaAmbulancia";
 
 
 
@@ -272,6 +273,13 @@ export const AccordionComponent = () => {
                     reloadAfectado={reloadAfectado}
                     reloadTraslado={reloadTraslado}                                                       
                     setReloadTraslado={setReloadTraslado}                    
+                  />
+                </TabPanel>
+                <TabPanel value={value} index={3}>
+                  <ListaAmbulancia 
+                    idEvento={eve.id}    
+                    setReloadAmbulancia={setReloadAmbulancia}
+                    reloadAmbulancia={reloadAmbulancia}                                                                                              
                   />
                 </TabPanel>
               </div>            
