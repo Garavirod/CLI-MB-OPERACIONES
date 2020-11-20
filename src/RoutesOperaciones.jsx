@@ -22,7 +22,6 @@ import PrivateRoute from './PrivateRoute'
 import RootRoute from './RootRoute'
 import Denied from './componentesOperaciones/Login/Denied';
 import ListaEventosColisiones from "./componentesOperaciones/Colisiones/ListaEventosColisiones";
-import {AddRegisterEventColisiones} from "./componentesOperaciones/Colisiones/AddRegisterEventColisiones";
 import ListaAfectadosColisiones from './componentesOperaciones/Colisiones/ListaAfectadosColisiones';
 import ListaAutomovilColisiones from "./componentesOperaciones/Colisiones/ListaAutomovilColisiones";
 import ListaDatosSeguroColisiones from "./componentesOperaciones/Colisiones/ListaDatosSeguroColisiones";
@@ -52,7 +51,9 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" exact path="/add-register-traslado/:idAfectado/:idEvento" component={FormTraslado} />
                 {/* COLISIONES */}
                 <PrivateRoute role="Operaciones" path='/eventosColisiones/' component={ListaEventosColisiones}exact />
-                <PrivateRoute role="Operaciones" exact path="/add-registerColisiones/:idEvento" component={AddRegisterEventColisiones}/>
+                
+                {/*<PrivateRoute role="Operaciones" exact path="/add-registerColisiones/:idEvento" component={AddRegisterEventColisiones}/>*/}
+                
                 <PrivateRoute role="Operaciones" exact path="/afectadosColisiones/:idEvento" component={ListaAfectadosColisiones}/>
                 <PrivateRoute role="Operaciones" exact path="/automovilColisiones/:idEvento" component={ListaAutomovilColisiones}/>
                 <PrivateRoute role="Operaciones" exact path="/segurosColisiones/:idEvento" component={ListaDatosSeguroColisiones}/>
