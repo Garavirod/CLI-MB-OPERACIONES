@@ -13,14 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import { CustomSwalDelete } from "../../functions/customSweetAlert";
 import { httpGetData } from "../../functions/httpRequest";
 import { PreloadData } from "../ui/PreloadData";
-const useStyles = makeStyles({
-  gridRoot: {
-    flexGrow: 1,
-  },
-  table: {
-    minWidth: 650,
-  },
-});
+
 
 export default function ListaAfectados(props) {
   const { idEvento, reloadAfectado, setReloadAfectado } = props;

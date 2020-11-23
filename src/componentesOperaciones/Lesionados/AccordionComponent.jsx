@@ -7,7 +7,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-import { Grid} from "@material-ui/core";
+import { Grid, Card, CardContent } from "@material-ui/core";
 import FormPropsTextFields from "./Afectado";
 import { FormDatosSeguro } from "./DatosSeguro";
 import { FormDatosAmbulancia } from "./Ambulancia";
@@ -17,19 +17,16 @@ import { PreloadData } from "../ui/PreloadData";
 import { useState } from "react";
 import { EventosForm } from "./EventosForm";
 import DeleteIcon from "@material-ui/icons/Delete";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 import { CustomSwalError } from "../../functions/customSweetAlert";
 import ListaAfectados from "./ListaAfectados";
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
-import PropTypes from 'prop-types';
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Box from "@material-ui/core/Box";
 import ListadatosSeguros from "./ListaDatosSeguro";
 import ListaTraslado from "./ListaTrasladoHospital";
 import ListaAmbulancia from "./ListaAmbulancia";
-
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -103,11 +100,10 @@ function TabPanel(props) {
   );
 }
 
-
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -119,7 +115,7 @@ export const AccordionComponent = () => {
 
   const [data, setData] = useState([]);
   const [preload, setPreload] = useState(true);
-  const [realodEventos,setRealoadEventos] = useState(false);
+  const [realodEventos, setRealoadEventos] = useState(false);
   const [reloadAfectado, setReloadAfectado] = useState(false);
   const [reloadSeguro, setReloadSeguro] = useState(false);
   const [reloadTraslado, setReloadTraslado] = useState(false);
@@ -146,7 +142,7 @@ export const AccordionComponent = () => {
     }
   };
 
-  const DeleteEvento = async (idEvento) =>{
+  const DeleteEvento = async (idEvento) => {
     const url = `/lesionados/borra-evento/${idEvento}`;
     await swal({
       title: "¿Seguro que deseas borrar la información?",
@@ -154,23 +150,22 @@ export const AccordionComponent = () => {
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    })
-    .then((willDelete) => {
-      if (willDelete) {        
-          const r = httpDeleteData(url);
-          if(r){
-            swal("Información eliminada", {icon: "success"});
-            setRealoadEventos(callback=>!callback);  
-          }else{                          
-            CustomSwalError();
-          }                                     
+    }).then((willDelete) => {
+      if (willDelete) {
+        const r = httpDeleteData(url);
+        if (r) {
+          swal("Información eliminada", { icon: "success" });
+          setRealoadEventos((callback) => !callback);
+        } else {
+          CustomSwalError();
+        }
       } else {
-        swal("Información salvada");          
+        swal("Información salvada");
       }
-    });   
-    setRealoadEventos(callback=>!callback);                
+    });
+    setRealoadEventos((callback) => !callback);
   };
-  
+
   console.log(realodEventos);
   const tipoIncident = (incident) => {
     return incident === true ? "Autobús" : "Estación";
@@ -178,7 +173,7 @@ export const AccordionComponent = () => {
 
   return (
     <div className={classes.root}>
-      <EventosForm setRealoadEventos={setRealoadEventos}/>
+      <EventosForm setRealoadEventos={setRealoadEventos} />
       <PreloadData isVisible={preload} />
       {data.map((eve) => (
         <Accordion key={eve.id}>
@@ -211,13 +206,14 @@ export const AccordionComponent = () => {
               </Typography>
             </div>
             <div className={classes.column}>
-            <Button 
-              size="small" 
-              color="primary" 
-              startIcon={<DeleteIcon />}
-              onClick={()=>DeleteEvento(eve.id)}>
-              Eliminar
-            </Button>  
+              <Button
+                size="small"
+                color="primary"
+                startIcon={<DeleteIcon />}
+                onClick={() => DeleteEvento(eve.id)}
+              >
+                Eliminar
+              </Button>
             </div>
           </AccordionSummary>
           <AccordionDetails className={classes.details}>
@@ -234,61 +230,78 @@ export const AccordionComponent = () => {
               </Grid>
               {/* Formularios */}
               <Grid item lg={12}>
-                <FormPropsTextFields idEvento={eve.id} setReloadAfectado={setReloadAfectado}/>
+                <FormPropsTextFields
+                  idEvento={eve.id}
+                  setReloadAfectado={setReloadAfectado}                  
+                />
               </Grid>
               <Grid item lg={6}>
-                <FormDatosAmbulancia idEvento={eve.id} />
+                <FormDatosAmbulancia
+                  idEvento={eve.id}
+                  setReloadAmbulancia={setReloadAmbulancia}
+                />
               </Grid>
               <Grid item lg={6}>
-                <FormDatosSeguro idEvento={eve.id} setReloadSeguro={setReloadSeguro} />
+                <FormDatosSeguro
+                  idEvento={eve.id}
+                  setReloadSeguro={setReloadSeguro}
+                />
               </Grid>
               {/* Tabs  section*/}
               <Grid item lg={12}>
-              <div className={classes.rootTab}>
-                <AppBar position="static">
-                  <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                    <Tab label="Lista afectados" {...a11yProps(0)} />
-                    <Tab label="Lista seguros" {...a11yProps(1)} />
-                    <Tab label="Lista traslados" {...a11yProps(2)} />
-                    <Tab label="Lista ambulancias" {...a11yProps(3)} />
-                  </Tabs>
-                </AppBar>
-                <TabPanel value={value} index={0}>
-                    <ListaAfectados 
-                      idEvento={eve.id} 
-                      reloadAfectado={reloadAfectado} 
-                      setReloadAfectado={setReloadAfectado}                      
-                    />                                  
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <ListadatosSeguros 
-                      idEvento={eve.id} 
-                      reloadSeguro={reloadSeguro} 
-                      setReloadSeguro={setReloadSeguro}
-                    />
-                </TabPanel>
-                <TabPanel value={value} index={2}>
-                  <ListaTraslado 
-                    idEvento={eve.id}    
-                    reloadAfectado={reloadAfectado}
-                    reloadTraslado={reloadTraslado}                                                       
-                    setReloadTraslado={setReloadTraslado}                    
-                  />
-                </TabPanel>
-                <TabPanel value={value} index={3}>
-                  <ListaAmbulancia 
-                    idEvento={eve.id}    
-                    setReloadAmbulancia={setReloadAmbulancia}
-                    reloadAmbulancia={reloadAmbulancia}                                                                                              
-                  />
-                </TabPanel>
-              </div>            
-              </Grid>             
+                <Card>
+                  <CardContent>
+                    <div className={classes.rootTab}>
+                      <AppBar position="static">
+                        <Tabs
+                          value={value}
+                          onChange={handleChange}
+                          aria-label="simple tabs example"
+                        >
+                          <Tab label="Lista afectados" {...a11yProps(0)} />
+                          <Tab label="Lista seguros" {...a11yProps(1)} />
+                          <Tab label="Lista traslados" {...a11yProps(2)} />
+                          <Tab label="Lista ambulancias" {...a11yProps(3)} />
+                        </Tabs>
+                      </AppBar>
+                      <TabPanel value={value} index={0}>
+                        <ListaAfectados
+                          idEvento={eve.id}
+                          reloadAfectado={reloadAfectado}
+                          setReloadAfectado={setReloadAfectado}
+                        />
+                      </TabPanel>
+                      <TabPanel value={value} index={1}>
+                        <ListadatosSeguros
+                          idEvento={eve.id}
+                          reloadSeguro={reloadSeguro}
+                          setReloadSeguro={setReloadSeguro}
+                        />
+                      </TabPanel>
+                      <TabPanel value={value} index={2}>
+                        <ListaTraslado
+                          idEvento={eve.id}
+                          reloadAfectado={reloadAfectado}
+                          reloadTraslado={reloadTraslado}
+                          setReloadTraslado={setReloadTraslado}
+                        />
+                      </TabPanel>
+                      <TabPanel value={value} index={3}>
+                        <ListaAmbulancia
+                          idEvento={eve.id}
+                          setReloadAmbulancia={setReloadAmbulancia}
+                          reloadAmbulancia={reloadAmbulancia}
+                        />
+                      </TabPanel>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Grid>
             </Grid>
           </AccordionDetails>
-          <Divider />         
+          <Divider />
         </Accordion>
-      ))}   
+      ))}
     </div>
   );
 };

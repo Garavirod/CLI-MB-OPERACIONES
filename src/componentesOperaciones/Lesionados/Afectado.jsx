@@ -93,7 +93,7 @@ export default function FormPropsTextFields(props) {
       // Petición axios, manda la data ya vlidada al url definido}
       console.log(dataform);
       httpPostData(url, dataform);
-      setReloadAfectado(callback=>!callback);      
+      setReloadAfectado(callback=>!callback);            
     } else {
       CustomSwalEmptyFrom();
     }

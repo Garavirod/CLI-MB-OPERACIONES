@@ -11,7 +11,6 @@ import {
   CustomSwalEmptyFrom,
 } from "../../functions/customSweetAlert";
 import { Card, CardContent, Container, Typography } from "@material-ui/core";
-import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const FormDatosAmbulancia = (props) => {
-  const {idEvento,setReloadAmbulancia} = useState(false);
+  const {idEvento,setReloadAmbulancia} = props;
   const classes = useStyles();
   // Objeto a mapear
   const initial_ambulancia = {
@@ -83,7 +82,7 @@ export const FormDatosAmbulancia = (props) => {
   };
 
   return (
-    <div className={classes.root}>
+    
       <Container component="main">
         <Card>
           <CardContent>
@@ -173,6 +172,6 @@ export const FormDatosAmbulancia = (props) => {
           </CardContent>
         </Card>
       </Container>
-    </div>
+  
   );
 };

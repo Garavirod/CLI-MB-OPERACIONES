@@ -15,13 +15,14 @@ import Grid from "@material-ui/core/Grid";
 import { PreloadData } from "../ui/PreloadData";
 
 export default function ListaAmbulancia(props) {
-  const { idEvento, setReloadAmbulancia, reloadAmbulancia } = props;
+  const { idEvento,reloadAmbulancia, setReloadAmbulancia } = props;
 
   // Preload
   const [preload, setPreload] = useState(true);
 
   const [data, setData] = useState([]);
   useEffect(() => {
+    console.log("Cambio ambulacia en la lista", reloadAmbulancia);
     getAmbulancias();
   }, [reloadAmbulancia]);
 
@@ -39,7 +40,7 @@ export default function ListaAmbulancia(props) {
   const deleteAmbulanica = async (idAmbulancia) => {
     const url = `/lesionados/borra-datos-ambulancia/${idAmbulancia}`;    
     CustomSwalDelete(url).then(
-      () => setReloadAmbulancia(callback=>!callback)
+      () => {setReloadAmbulancia(callback=>!callback)}
     );
   };
 
