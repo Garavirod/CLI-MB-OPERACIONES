@@ -72,11 +72,18 @@ export const EventosFormColisiones = () => {
     const url = "/colisiones/datos-colision";    
     if (validateForm(values)) {
       // Petición axios genérica por url y data
-      const success = httpPostData(url, values);
+      httpPostData(url, values)
+        .then(resp =>{
+            if(resp && resp.success)
+              CustomSwalSave();
+            else
+              CustomSwalError();
+        });//then
+      /*const success = httpPostData(url, values);
       if(success===true)
         CustomSwalSave(); 
       else
-        CustomSwalError();          
+        CustomSwalError();*/         
     } else {
       CustomSwalEmptyFrom();
     }

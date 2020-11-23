@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
-import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { useHookForm } from "../../hooks/hookFrom";
@@ -13,6 +12,7 @@ import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../func
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
+import { httpPostData } from "../../functions/httpRequest";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,10 +23,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FormPropsTextFields() {
+export default function FormPropsTextFields(props) {
   const classes = useStyles();
   // Parámetros por url
-  const { idEvento } = useParams();
+  //const { idEvento } = useParams();
+  const {idEvento} = props;
   // Objeto a mapear
   const initial_datosSeguroData = {
     nombre_seguro: "",
@@ -54,7 +55,14 @@ export default function FormPropsTextFields() {
     const url = `/colisiones/datos-seguro/${idEvento}`;
     if (validateForm(values)) {
       // Petición axios, manda la data ya vlidada al url definido
-      axios
+      httpPostData(url, values)
+        .then(resp =>{
+            if(resp && resp.success)
+              CustomSwalSave();
+            else
+              CustomSwalError();
+        });//then
+      /*axios
         .post(url, values)
         .then((res) => {
           console.log("DatosSeguro mandados", res);
@@ -63,7 +71,7 @@ export default function FormPropsTextFields() {
         .catch((err) => {
           CustomSwalError();
           console.log("Hubo un error al guardar el datosSeguro", err);
-        });
+        });*/
     } else {
       CustomSwalEmptyFrom();
     }

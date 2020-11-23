@@ -65,11 +65,11 @@ export default function ListaAfectadosColisiones() {
     <div className={classes.gridRoot}>
       <Grid container spacing={2}>
         <Grid item lg={12}>
-          <h4>Lista de afectados registrados en el evento colisiones {idEvento}</h4>
+          <h4>Lista de afectados registrados del evento colisiones {idEvento}</h4>
         </Grid>
-        <Grid item lg={6}>
+        {/*<Grid item lg={6}>
           <Link to={`/add-registerColisiones/${idEvento}`}>Registrar afectado o seguro colisiones</Link>
-        </Grid>
+        </Grid>*/}
         <Grid item lg={6}>
           <Link to={"/eventosColisiones"}>Lista de eventos Colisiones</Link>
         </Grid>

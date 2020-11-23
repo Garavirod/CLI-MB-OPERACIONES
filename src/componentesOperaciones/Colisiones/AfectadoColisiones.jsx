@@ -26,10 +26,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function FormPropsTextFields() {
+export default function FormPropsTextFields(props) {
   const classes = useStyles();
   // Parámetros del url
-  const { idEvento } = useParams();
+  //const { idEvento } = useParams();
+  const {idEvento} = props;
+  console.log("el id evento ", idEvento);
 
   // Objeto a mapear
   const initial_afectado = {
@@ -56,11 +58,20 @@ export default function FormPropsTextFields() {
     const url = `/colisiones/datos-lesionado/${idEvento}`;
     if (validateForm(values)) {
       // Petición axios, manda la data ya vlidada al url definido
+      httpPostData(url, values)
+        .then(resp =>{
+            if(resp && resp.success)
+              CustomSwalSave();
+            else
+              CustomSwalError();
+        });//then
+      /*
       const success = httpPostData(url,values);
       if(success===true)
         CustomSwalSave();
       else
         CustomSwalError();
+        */
     } else {
       CustomSwalEmptyFrom();
     }

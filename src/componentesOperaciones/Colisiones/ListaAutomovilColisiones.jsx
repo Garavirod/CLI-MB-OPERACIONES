@@ -52,9 +52,9 @@ export default function ListaDatosAutomovil() {
         <Grid item lg={12}>
           <h4>Lista de seguros registrados en el evento de colisión No. {idEvento}</h4>
         </Grid>
-        <Grid item lg={6}>
+        {/*<Grid item lg={6}>
           <Link to={`/add-registerColisiones/${idEvento}`}>Registar seguro o afectado de colisiones</Link>
-        </Grid>
+        </Grid>*/}
         <Grid item lg={6}>
           <Link to={"/eventosColisiones"}>Lista de eventos colisiones</Link>
         </Grid>

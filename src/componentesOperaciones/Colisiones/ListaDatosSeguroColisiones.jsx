@@ -58,9 +58,9 @@ export default function ListadatosSeguros() {
         <Grid item lg={12}>
           <h4>Lista de seguros registrados en el evento colisiones {idEvento}</h4>
         </Grid>
-        <Grid item lg={6}>
+        {/*<Grid item lg={6}>
           <Link to={`/add-registerColisiones/${idEvento}`}>Registar seguro, afectado o Automóvil colisiones</Link>
-        </Grid>
+        </Grid>*/}
         <Grid item lg={6}>
           <Link to={"/eventosColisiones"}>Lista de eventos Colisiones</Link>
         </Grid>
@@ -80,10 +80,10 @@ export default function ListadatosSeguros() {
               <TableHead>
                 <TableRow>
                   <TableCell>ID</TableCell>                  
-                  <TableCell align="center">Marca</TableCell>
-                  <TableCell align="center">Submarca</TableCell>
-                  <TableCell align="center">Color</TableCell>
-                  <TableCell align="center">Placa</TableCell>
+                  <TableCell align="center">Seguro</TableCell>
+                  <TableCell align="center">Tipo seguro</TableCell>
+                  <TableCell align="center">Paga</TableCell>
+                  <TableCell align="center">Comentarios</TableCell>
                   <TableCell align="center">Borrar</TableCell>
                 </TableRow>
               </TableHead>

@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+//import { useParams, Link } from "react-router-dom";
 // Accordion
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
@@ -24,18 +24,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const AddRegisterEventColisiones = () => {
+export const AddRegisterEventColisiones = (props) => {
+
+  const {idColision} = props;
   // Using styles
   const classes = useStyles();
 
   // URL Param
-  const { idEvento } = useParams();
+  //const { idEvento } = useParams();
 
   return (
     <div>
-      <h4>Agregar registros al evento colisiones {idEvento}</h4>
+      {/*<h4>Agregar registros al evento colisiones {idEvento}</h4>
       <Link to={"/eventosColisiones"}>Lista de eventos colisiones</Link>
-      <hr />
+      <hr />*/}
       <div className={classes.root}>
         <Accordion>
           <AccordionSummary
@@ -47,7 +49,7 @@ export const AddRegisterEventColisiones = () => {
             <Typography className={classes.heading}>Afectado colisiones</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <AfectadoColisiones/>
+            <AfectadoColisiones idEvento={idColision}/>
           </AccordionDetails>
         </Accordion>
       
@@ -61,7 +63,7 @@ export const AddRegisterEventColisiones = () => {
             <Typography className={classes.heading}>Automovil colisiones</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <DatosAutomovilColisiones/>
+            <DatosAutomovilColisiones idEvento={idColision}/>
           </AccordionDetails>
         </Accordion>
 
@@ -75,7 +77,7 @@ export const AddRegisterEventColisiones = () => {
             <Typography className={classes.heading}>Datos de seguro colisiones</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <DatosSeguroColisiones />
+            <DatosSeguroColisiones idEvento={idColision}/>
           </AccordionDetails>
         </Accordion> 
         {/* DESABLE */}
