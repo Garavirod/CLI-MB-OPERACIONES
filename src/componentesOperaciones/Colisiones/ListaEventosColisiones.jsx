@@ -15,6 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import RowColision from "./RowColision";
+import { CustomSwalError } from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles({
   table: {
@@ -36,9 +37,12 @@ export default function ListaEventos() {
     const url = "/colisiones/colisiones-list";
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
-    if (_data.success) {
+    if (_data && _data.success) {
       setData(_data.data);
       setPreload(false);
+    }
+    else if(!_data){
+      CustomSwalError();
     }
   };
 

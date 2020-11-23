@@ -25,6 +25,7 @@ import ListaEventosColisiones from "./componentesOperaciones/Colisiones/ListaEve
 import ListaAfectadosColisiones from './componentesOperaciones/Colisiones/ListaAfectadosColisiones';
 import ListaAutomovilColisiones from "./componentesOperaciones/Colisiones/ListaAutomovilColisiones";
 import ListaDatosSeguroColisiones from "./componentesOperaciones/Colisiones/ListaDatosSeguroColisiones";
+import ListaEconomicoColisiones from "./componentesOperaciones/Colisiones/ListaEconomicoColisiones";
 import {EventosFormColisiones} from "./componentesOperaciones/Colisiones/EventosFormColisiones";
 import { FormDesincorporaciones } from './componentesOperaciones/Desincorporaciones/FormulariosDesinc';
 import { CerrarFolioForm } from './componentesOperaciones/Desincorporaciones/CerrarFolioForm';
@@ -58,6 +59,8 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" exact path="/automovilColisiones/:idEvento" component={ListaAutomovilColisiones}/>
                 <PrivateRoute role="Operaciones" exact path="/segurosColisiones/:idEvento" component={ListaDatosSeguroColisiones}/>
                 <PrivateRoute role="Operaciones" exact path="/colisiones-form" component={EventosFormColisiones}/>
+                <PrivateRoute role="Operaciones" exact path="/economicoColisiones/:idEvento" component={ListaEconomicoColisiones}/>
+                
                 {/* DESINCORPORACIONES */}
                 <PrivateRoute role="Operaciones" exact path="/cerrar-folio" component={CerrarFolioForm}/>
                 {/* JUST SEMANA*/}

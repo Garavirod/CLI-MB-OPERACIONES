@@ -11,6 +11,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AfectadoColisiones from "./AfectadoColisiones";
 import DatosSeguroColisiones from "./DatosSeguroColisiones";
 import DatosAutomovilColisiones from "./DatosAutomovilColisiones";
+import DatosEconomicoColision from "./DatosEconomicoColision";
 
 // Styles
 
@@ -64,6 +65,21 @@ export const AddRegisterEventColisiones = (props) => {
           </AccordionSummary>
           <AccordionDetails>
             <DatosAutomovilColisiones idEvento={idColision}/>
+          </AccordionDetails>
+        </Accordion>
+
+        <Accordion>
+          {/*/datos-economico/:idColision */}
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            {/* Económico */}
+            <Typography className={classes.heading}>Económico colisiones</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <DatosEconomicoColision idEvento={idColision} />
           </AccordionDetails>
         </Accordion>
 
