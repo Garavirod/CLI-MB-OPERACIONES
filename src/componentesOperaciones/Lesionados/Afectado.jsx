@@ -9,8 +9,6 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import Grid from "@material-ui/core/Grid";
 import {
-  CustomSwalSave,
-  CustomSwalError,
   CustomSwalEmptyFrom,
 } from "../../functions/customSweetAlert";
 import { useHookForm } from "../../hooks/hookFrom";
