@@ -31,6 +31,8 @@ import { FormDesincorporaciones } from './componentesOperaciones/Desincorporacio
 import { CerrarFolioForm } from './componentesOperaciones/Desincorporaciones/CerrarFolioForm';
 import { ReportJustSemana } from './componentesOperaciones/Reportes/ReportJustSemana';
 import { EditarFolio } from './componentesOperaciones/Desincorporaciones/EditaFolio';
+import ColisionEmpresa from './componentesOperaciones/Colisiones/Charts/ColisionEmpresa';
+
 const Routes = () => {
     return ( 
         <Router>
@@ -61,6 +63,9 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" exact path="/colisiones-form" component={EventosFormColisiones}/>
                 <PrivateRoute role="Operaciones" exact path="/economicoColisiones/:idEvento" component={ListaEconomicoColisiones}/>
                 
+                {/*charts */}
+                <PrivateRoute role="Operaciones" exact path="/test-chart" component={ColisionEmpresa}/>
+
                 {/* DESINCORPORACIONES */}
                 <PrivateRoute role="Operaciones" exact path="/cerrar-folio" component={CerrarFolioForm}/>
                 {/* JUST SEMANA*/}
