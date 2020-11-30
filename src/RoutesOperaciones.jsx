@@ -30,6 +30,9 @@ import { CerrarFolioForm } from './componentesOperaciones/Desincorporaciones/Cer
 import { ReportJustSemana } from './componentesOperaciones/Reportes/ReportJustSemana';
 import { EditarFolio } from './componentesOperaciones/Desincorporaciones/EditaFolio';
 import { AccordionComponent } from './componentesOperaciones/Lesionados/AccordionComponent';
+import { EstadisticasPage } from './componentesOperaciones/Estadisicas/EstadisticasPage';
+import { LesionAtropPieChart } from './componentesOperaciones/Estadisicas/LesionAtropelladoPieChart';
+import { ColisionesByYearChart } from './componentesOperaciones/Estadisicas/ColisionesByYearBarChart';
 const Routes = () => {
     return ( 
         <Router>
@@ -60,8 +63,10 @@ const Routes = () => {
                 {/* JUST SEMANA*/}
                 <PrivateRoute role="Operaciones" path='/reportes' component={ReportJustSemana}/>
                 <PrivateRoute role="Operaciones" path='/editar-folio' component={EditarFolio}/>
-               
-
+                {/* ESTADÍSTICAS */}
+                <PrivateRoute role="Operaciones" path="/estadisticas" component={EstadisticasPage}/>
+                <PrivateRoute role="Operaciones" path="/lesionados-atropellados-chart" component={LesionAtropPieChart}/>                
+                <PrivateRoute role="Operaciones" path="/colisiones-by-year" component={ColisionesByYearChart}/>                                
                 {/* LOGIN */}
                 <Route path="/denied" component={Denied} exact/>
                 <Route path="/RecuperarC" component={RecuperarC} exact/>
