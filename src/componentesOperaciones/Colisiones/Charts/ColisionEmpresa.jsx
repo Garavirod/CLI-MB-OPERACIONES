@@ -65,10 +65,10 @@ export default function ColisionEmpresa(){
         labels: usedMNames,
         datasets: [
           {
-            label: 'Colisiones',
-            backgroundColor: 'rgba(75,192,192,1)',
-            borderColor: 'rgba(0,0,0,1)',
-            borderWidth: 2,
+            label: '# Colisiones',
+            backgroundColor: 'rgba(255, 48, 26, 0.92)',
+            borderColor: 'rgba(1, 0, 0, 0.72)',
+            borderWidth: 1,
             data: countByMonth
           }
         ]
@@ -83,7 +83,7 @@ export default function ColisionEmpresa(){
                 options={{
                     title:{
                         display:true,
-                        text:'Colisiones por mes',
+                        text:"Colisiones de "+empresa+" por mes",
                         fontSize:20
                     },
                     legend:{

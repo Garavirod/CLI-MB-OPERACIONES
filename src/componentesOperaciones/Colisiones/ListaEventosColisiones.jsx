@@ -57,15 +57,18 @@ export default function ListaEventos() {
   return (
     <div>
       <Grid container spacing={3}>
-      <Grid item lg={6}>
+        <Grid item lg={6}>
           <Link to={`/colisiones-form`}>Nuevo evento de colisión</Link>
         </Grid>
+        <Grid item lg={6}>
+          <Link to={`/selec-grafica-colisiones`}>Gráficas Colisiones</Link>
+        </Grid>
         <Grid item lg={12}>
-        <Typography component="div" variant="h4">
-          <Box textAlign="center" m={1}>
-            <PreloadData isVisible={preload} />
-          </Box>
-        </Typography>
+          <Typography component="div" variant="h4">
+            <Box textAlign="center" m={1}>
+              <PreloadData isVisible={preload} />
+            </Box>
+          </Typography>
         </Grid>
         <Grid item lg={12}>
           <TableContainer component={Paper}>
