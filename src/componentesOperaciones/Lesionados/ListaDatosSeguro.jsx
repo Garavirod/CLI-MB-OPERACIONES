@@ -9,12 +9,9 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
-import { useParams, Link } from "react-router-dom";
 import { CustomSwalDelete } from "../../functions/customSweetAlert";
 import { httpGetData } from "../../functions/httpRequest";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import { PreloadData } from "../ui/PreloadData";
 
 const useStyles = makeStyles({
@@ -23,54 +20,39 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ListadatosSeguros() {
+export default function ListadatosSeguros(props) {
   const classes = useStyles();
-  const { idEvento } = useParams();
-
-    // Preload
-    const [preload, setPreload] = useState(true);
+  const { idEvento,setReloadSeguro,reloadSeguro } = props;
+  // Preload
+  const [preload, setPreload] = useState(true);
 
   const [data, setData] = useState([]);
   useEffect(() => {
+    console.log("Cambio el seguro en la lista", reloadSeguro);
     getdatosSeguros();
-  }, []);
+  }, [reloadSeguro]);
 
   const getdatosSeguros = async () => {
     const url = `/lesionados/datoseguros/${idEvento}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
+    setPreload(true);
     if (_data.success){
       setData(_data.data);
       setPreload(false);
     }
   };
 
-  const deleteEvento = async (datosSeguro) => {
-    const url = `/lesionados/borra-datos-seguro/${datosSeguro}`;
+  const deleteEvento = async (idSeguro) => {
+    const url = `/lesionados/borra-datos-seguro/${idSeguro}`;
     CustomSwalDelete(url).then(() => {
-      getdatosSeguros();
+      setReloadSeguro(callback=>!callback);
     });
   };
 
   return (
-    <div>
-      <Grid container spacing={2}>
-        <Grid item lg={12}>
-          <h4>Lista de seguros registardos en el evento {idEvento}</h4>
-        </Grid>
-        <Grid item lg={6}>
-          <Link to={`/add-register/${idEvento}`}>Registar seguro u afectado</Link>
-        </Grid>
-        <Grid item lg={6}>
-          <Link to={"/eventos"}>Lista de eventos</Link>
-        </Grid>
-        <Grid item lg={12}>
-        <Typography component="div" variant="h4">
-          <Box textAlign="center" m={1}>
-            <PreloadData isVisible={preload} />
-          </Box>
-        </Typography>
-        </Grid>
+    <Grid container spacing={2}>       
+        <PreloadData isVisible={preload} />
         <Grid item lg={12}>
           <TableContainer
             component={Paper}
@@ -118,6 +100,5 @@ export default function ListadatosSeguros() {
           </TableContainer>
         </Grid>
       </Grid>
-    </div>
   );
 }

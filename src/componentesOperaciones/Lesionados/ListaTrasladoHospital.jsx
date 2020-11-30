@@ -8,28 +8,27 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
-import { useParams, Link } from "react-router-dom";
 import { httpGetData } from "../../functions/httpRequest";
 import { CustomSwalDelete } from "../../functions/customSweetAlert";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import { PreloadData } from "../ui/PreloadData";
 
-export default function ListaTraslado() {
-  const { idEvento } = useParams();
+export default function ListaTraslado(props) {
+  const { idEvento, reloadAfectado, reloadTraslado, setReloadTraslado } = props;
   const [data, setData] = useState([]);
 
   // Preload
   const [preload, setPreload] = useState(true);
 
   useEffect(() => {
+    console.log("Cambio el traslado en la lista", reloadAfectado);
     getTraslados();
-  }, []);
+  }, [reloadAfectado,reloadTraslado]);
 
   const getTraslados = async () => {
     const url = `/lesionados/traslados/${idEvento}`;
     //peticion de axios genérica por url
+    setPreload(true);
     const _data = await httpGetData(url);
     if (_data.success){
       setData(_data.data);
@@ -38,31 +37,17 @@ export default function ListaTraslado() {
   };
 
   const deleteTraslado = async (traslado) => {
-    const url = `/lesionados/borra-traslado-hospital/${traslado}`;
-    CustomSwalDelete(url).then(() => getTraslados());
+    const url = `/lesionados/borra-traslado-hospital/${traslado}`;      
+    CustomSwalDelete(url).then(() => 
+      setReloadTraslado(callback=>!callback)
+    );
+    
   };
 
   return (
     <div>
-      <Grid container spacing={3}>
-        <Grid item lg={12}>
-          <h4>Lista de ambulancias registradas en el evento {idEvento}</h4>
-        </Grid>
-        <Grid item lg={6}>
-          <Link to={`/afectados/${idEvento}`}>
-            Registar ambulancia u traslado
-          </Link>
-        </Grid>
-        <Grid item lg={6}>
-          <Link to={"/eventos"}>Lista de eventos</Link>
-        </Grid>
-        <Grid item lg={12}>
-        <Typography component="div" variant="h4">
-          <Box textAlign="center" m={1}>
-            <PreloadData isVisible={preload} />
-          </Box>
-        </Typography>
-        </Grid>
+      <Grid container spacing={3}>        
+        <PreloadData isVisible={preload} />
         <Grid item lg={12}>
           <TableContainer
             component={Paper}

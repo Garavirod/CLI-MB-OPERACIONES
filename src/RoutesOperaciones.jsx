@@ -5,14 +5,12 @@ import Control from './componentesOperaciones/Bitacoras/Control';
 import MainReportes from './componentesOperaciones/JustSemana/MainReportes';
 import Pruebas from './componentesOperaciones/Lesionados/Pruebas';
 import { MenuAccidentesScreen } from './componentesOperaciones/Lesionados/MenuAccidentesScreen';
-import { AddRegisterEvent } from './componentesOperaciones/Lesionados/AddRegisterEvent';
 import ListaAfectados from './componentesOperaciones/Lesionados/ListaAfectados';
 import ListaDatosSeguro from "./componentesOperaciones/Lesionados/ListaDatosSeguro";
 import ListaAmbulancia from "./componentesOperaciones/Lesionados/ListaAmbulancia";
 import ListaTraslado from "./componentesOperaciones/Lesionados/ListaTrasladoHospital";
 import { FormTraslado } from './componentesOperaciones/Lesionados/Formtraslado';
 import Bienvenida from './componentesOperaciones/Main/Principal';
-import { EventosScreen } from './componentesOperaciones/Lesionados/EventosScreen';
 import { EventosForm } from './componentesOperaciones/Lesionados/EventosForm';
 import Login from './componentesOperaciones/Login/Login'
 import Registro from './componentesOperaciones/Login/Registro'
@@ -34,6 +32,10 @@ import { EditarFolio } from './componentesOperaciones/Desincorporaciones/EditaFo
 import ColisionEmpresa from './componentesOperaciones/Colisiones/Charts/ColisionEmpresa';
 import SelectChart from './componentesOperaciones/Colisiones/Charts/SelectChart'
 
+import { AccordionComponent } from './componentesOperaciones/Lesionados/AccordionComponent';
+import { EstadisticasPage } from './componentesOperaciones/Estadisicas/EstadisticasPage';
+import { LesionAtropPieChart } from './componentesOperaciones/Estadisicas/LesionAtropelladoPieChart';
+import { ColisionesByYearChart } from './componentesOperaciones/Estadisicas/ColisionesByYearBarChart';
 const Routes = () => {
     return ( 
         <Router>
@@ -44,9 +46,8 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" path="/BitacordaDR" component={FormDesincorporaciones} exact/>
                 <PrivateRoute role="Operaciones" path="/ControlDeServicios" component={Control} exact/>
                 <PrivateRoute role="Operaciones" path='/pruebas' component={Pruebas}exact/> 
-                <PrivateRoute role="Operaciones" path='/eventos/' component={EventosScreen}exact/>                              
-                <PrivateRoute role="Operaciones" path='/MenuAccidentes/' component={MenuAccidentesScreen}exact/>
-                <PrivateRoute role="Operaciones" exact path="/add-register/:idEvento" component={AddRegisterEvent} />                                               
+                <PrivateRoute role="Operaciones" path='/eventos/' component={AccordionComponent}exact/>                              
+                <PrivateRoute role="Operaciones" path='/MenuAccidentes/' component={MenuAccidentesScreen}exact/>                                              
                 <PrivateRoute role="Operaciones" exact path="/afectados/:idEvento" component={ListaAfectados} />                                               
                 <PrivateRoute role="Operaciones" exact path="/ambulancias/:idEvento" component={ListaAmbulancia} />                                               
                 <PrivateRoute role="Operaciones" exact path="/traslados/:idEvento" component={ListaTraslado} />                                                                                                            
@@ -73,8 +74,10 @@ const Routes = () => {
                 {/* JUST SEMANA*/}
                 <PrivateRoute role="Operaciones" path='/reportes' component={ReportJustSemana}/>
                 <PrivateRoute role="Operaciones" path='/editar-folio' component={EditarFolio}/>
-               
-
+                {/* ESTADÍSTICAS */}
+                <PrivateRoute role="Operaciones" path="/estadisticas" component={EstadisticasPage}/>
+                <PrivateRoute role="Operaciones" path="/lesionados-atropellados-chart" component={LesionAtropPieChart}/>                
+                <PrivateRoute role="Operaciones" path="/colisiones-by-year" component={ColisionesByYearChart}/>                                
                 {/* LOGIN */}
                 <Route path="/denied" component={Denied} exact/>
                 <Route path="/RecuperarC" component={RecuperarC} exact/>
