@@ -29,13 +29,12 @@ import { FormDesincorporaciones } from './componentesOperaciones/Desincorporacio
 import { CerrarFolioForm } from './componentesOperaciones/Desincorporaciones/CerrarFolioForm';
 import { ReportJustSemana } from './componentesOperaciones/Reportes/ReportJustSemana';
 import { EditarFolio } from './componentesOperaciones/Desincorporaciones/EditaFolio';
-import ColisionEmpresa from './componentesOperaciones/Colisiones/Charts/ColisionEmpresa';
-import SelectChart from './componentesOperaciones/Colisiones/Charts/SelectChart'
+import ColisionEmpresa from './componentesOperaciones/Estadisticas/ColisionEmpresa';
 
 import { AccordionComponent } from './componentesOperaciones/Lesionados/AccordionComponent';
-import { EstadisticasPage } from './componentesOperaciones/Estadisicas/EstadisticasPage';
-import { LesionAtropPieChart } from './componentesOperaciones/Estadisicas/LesionAtropelladoPieChart';
-import { ColisionesByYearChart } from './componentesOperaciones/Estadisicas/ColisionesByYearBarChart';
+import { EstadisticasPage } from './componentesOperaciones/Estadisticas/EstadisticasPage';
+import { LesionAtropPieChart } from './componentesOperaciones/Estadisticas/LesionAtropelladoPieChart';
+import { ColisionesByYearChart } from './componentesOperaciones/Estadisticas/ColisionesByYearBarChart';
 const Routes = () => {
     return ( 
         <Router>
@@ -66,8 +65,7 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" exact path="/economicoColisiones/:idEvento" component={ListaEconomicoColisiones}/>
                 
                 {/*charts */}
-                <PrivateRoute role="Operaciones" exact path="/test-chart/:empresa" component={ColisionEmpresa}/>
-                <PrivateRoute role="Operaciones" exact path="/selec-grafica-colisiones" component={SelectChart}/>
+                <PrivateRoute role="Operaciones" exact path="/colision-empresa-chart" component={ColisionEmpresa}/>
                 
                 {/* DESINCORPORACIONES */}
                 <PrivateRoute role="Operaciones" exact path="/cerrar-folio" component={CerrarFolioForm}/>

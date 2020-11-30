@@ -108,6 +108,24 @@ export const EstadisticasPage = () => {
           </Typography>
         </AccordionDetails>
       </Accordion>
+
+      <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel5bh-content"
+          id="panel5bh-header"
+        >
+          <Typography className={classes.heading}>Colisiones por empresa al mes</Typography>
+          <Link to={'/colision-empresa-chart'}>Ver estadísticas</Link>
+
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
+            vitae egestas augue. Duis vel est augue.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
         </Grid>
       </Grid>
     </Container>
