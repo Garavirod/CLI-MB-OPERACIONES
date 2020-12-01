@@ -98,7 +98,7 @@ export const EstadisticasPage = () => {
           id="panel4bh-header"
         >
           <Typography className={classes.heading}>Responsable de colisiones</Typography>
-          <Link to={'/lesionados-atropellados-chart'}>Ver estadísticas</Link>
+          <Link to={'/responsables-chart'}>Ver estadísticas</Link>
 
         </AccordionSummary>
         <AccordionDetails>

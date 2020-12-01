@@ -35,6 +35,8 @@ import { AccordionComponent } from './componentesOperaciones/Lesionados/Accordio
 import { EstadisticasPage } from './componentesOperaciones/Estadisticas/EstadisticasPage';
 import { LesionAtropPieChart } from './componentesOperaciones/Estadisticas/LesionAtropelladoPieChart';
 import { ColisionesByYearChart } from './componentesOperaciones/Estadisticas/ColisionesByYearBarChart';
+import { Responsables } from './componentesOperaciones/Estadisticas/Responsables';
+
 const Routes = () => {
     return ( 
         <Router>
@@ -66,6 +68,7 @@ const Routes = () => {
                 
                 {/*charts */}
                 <PrivateRoute role="Operaciones" exact path="/colision-empresa-chart" component={ColisionEmpresa}/>
+                <PrivateRoute role="Operaciones" exact path="/responsables-chart" component={Responsables}/>
                 
                 {/* DESINCORPORACIONES */}
                 <PrivateRoute role="Operaciones" exact path="/cerrar-folio" component={CerrarFolioForm}/>
