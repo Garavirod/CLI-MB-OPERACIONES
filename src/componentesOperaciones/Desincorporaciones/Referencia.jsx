@@ -281,7 +281,7 @@ export default function Referencia(props) {
             {/* TRAMO O CIRCUITO DESDE */}
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <Typography variant="h6" component="h4" style={{ margin: 5 }}>
-                {flag ? "Circuitos" : "Tramos"}
+                {!flag ? "Circuitos" : "Tramos"}
               </Typography>
             </Grid>
             <Grid item lg={6} md={12} sm={12} xs={12}>

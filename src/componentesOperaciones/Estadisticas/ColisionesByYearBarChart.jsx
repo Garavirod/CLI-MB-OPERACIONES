@@ -2,22 +2,56 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 import { Container, Grid, Typography, Card, CardContent } from "@material-ui/core";
 import { Link } from "react-router-dom";
-const state = {
-  labels: ["2017", "2018", "2019", "2020"],
-  datasets: [
-    {
-      label: "Colisiones",
-      backgroundColor: "rgba(75,192,192,1)",
-      borderColor: "rgba(0,0,0,1)",
-      borderWidth: 2,
-      data: [651, 591, 801, 810],
-    },
-  ],
-};
-
+import { useEffect } from "react";
+import { httpGetData } from "../../functions/httpRequest";
+import { useState } from "react";
 
 
 export const ColisionesByYearChart = () => {
+
+  const [state, setState] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: "Colisiones",
+        backgroundColor: "rgba(75,192,192,1)",
+        borderColor: "rgba(0,0,0,1)",
+        borderWidth: 2,
+        data: [],
+      },
+    ],
+  }); ;
+
+  useEffect(()=>{
+    getData()
+  },[]);
+
+
+  const getData = async () => {
+    const data = await httpGetData('/colisiones/colisiones-by-year');
+    if(data.success){
+      let labelYear = [];
+      let colisions = [];
+      data.data.forEach(obj => {
+        labelYear.push(obj.fecha.slice(0,-20));        
+        colisions.push(obj.no_colisions);                
+      });
+      setState({
+        ...state,
+        ['labels'] : labelYear,
+        ['datasets']: 
+          [{
+            label: "Colisiones",
+            backgroundColor: "rgba(75,192,192,1)",
+            borderColor: "rgba(0,0,0,1)",
+            borderWidth: 2,
+            data: colisions,
+          }]        
+      });
+      console.log(state);
+    }
+  }
+
   return (
     <Container component="main">
       <h1>Estadísticas</h1>
