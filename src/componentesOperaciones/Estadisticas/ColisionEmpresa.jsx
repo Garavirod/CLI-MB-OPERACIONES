@@ -38,9 +38,14 @@ export default function ColisionEmpresa(){
         let filtered = [];
         for(let i=0; i <= currentM; i++){
             const forMonthi = arr.filter(oneCol =>{
-                const colsDate = new Date(oneCol.fecha);
+                //console.log("onecol ", oneCol);
+                //sin el replace nos regresa un día antes al dado
+                const colsDate = new Date(oneCol.fecha.replace(/-/g, '\/').replace(/T.+/, ''));
+                //console.log("colsDate", colsDate);
                 const oneColMonth = colsDate.getMonth();
-                return oneColMonth === i
+                //console.log("es i ",i);
+                //console.log("es mes",oneColMonth);
+                return oneColMonth === i;
             });
             filtered.push(forMonthi);
         }//for
@@ -53,7 +58,7 @@ export default function ColisionEmpresa(){
         const data = await httpGetData(url);
         if (data && data.success) {
             const arrCols = data.data;
-            console.log(arrCols);
+            console.log("arr cols",arrCols);
             const colsByMonth = filterByMonth(arrCols);
             console.log("filtered by Month", colsByMonth);
             const countColsByMonth = colsByMonth.map(ofOneMonth => {
