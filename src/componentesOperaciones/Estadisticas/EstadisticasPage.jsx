@@ -74,7 +74,7 @@ export const EstadisticasPage = () => {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+      {/*<Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3bh-content"
@@ -90,7 +90,7 @@ export const EstadisticasPage = () => {
             vitae egestas augue. Duis vel est augue.
           </Typography>
         </AccordionDetails>
-      </Accordion>
+      </Accordion>*/}
       <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
