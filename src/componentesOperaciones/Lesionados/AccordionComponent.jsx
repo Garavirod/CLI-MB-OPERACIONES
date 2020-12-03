@@ -168,7 +168,7 @@ export const AccordionComponent = () => {
 
   console.log(realodEventos);
   const tipoIncident = (incident) => {
-    return incident === true ? "Autobús" : "Estación";
+    return incident === true ? "Lesión de autobús" : "Atropellamiento";
   };
 
   return (
