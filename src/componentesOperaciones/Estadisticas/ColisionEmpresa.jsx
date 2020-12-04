@@ -35,7 +35,12 @@ export default function ColisionEmpresa(){
             hasta el mes presente (currentM)
     */
     function filterByMonth(arr){
-        let filtered = [];
+        let filtered = [currentM + 1];
+        arr.map(oneCol => {
+            const colsDate = new Date(oneCol.fecha);
+            const oneColMonth = colsDate.getMonth();
+            filtered[oneColMonth] = 
+        });
         for(let i=0; i <= currentM; i++){
             const forMonthi = arr.filter(oneCol =>{
                 const colsDate = new Date(oneCol.fecha);
@@ -53,7 +58,7 @@ export default function ColisionEmpresa(){
         const data = await httpGetData(url);
         if (data && data.success) {
             const arrCols = data.data;
-            console.log(arrCols);
+            console.log("arr",arrCols);
             const colsByMonth = filterByMonth(arrCols);
             console.log("filtered by Month", colsByMonth);
             const countColsByMonth = colsByMonth.map(ofOneMonth => {
