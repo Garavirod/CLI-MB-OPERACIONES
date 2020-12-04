@@ -60,9 +60,6 @@ export default function ListaEventos() {
         <Grid item lg={6}>
           <Link to={`/colisiones-form`}>Nuevo evento de colisión</Link>
         </Grid>
-        <Grid item lg={6}>
-          <Link to={`/selec-grafica-colisiones`}>Gráficas Colisiones</Link>
-        </Grid>
         <Grid item lg={12}>
           <Typography component="div" variant="h4">
             <Box textAlign="center" m={1}>
