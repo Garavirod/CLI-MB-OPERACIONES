@@ -30,3 +30,23 @@ export const validateFormExcept = (obj, arr) =>{
     }
     return isValid;
 }
+
+/* 
+    Vaida si una desincorporación es por tamos o vueltas
+*/
+
+export const validateIncumByTramos = (obj) =>{
+    if(
+        (obj['tramo_desde']!=="-" && obj['tramo_hasta']!=="-")
+        &&
+        (
+            obj['num_vuelta']!=="" && 
+            obj['num_ida'] !== "" && 
+            obj['num_regreso'] !== ""
+        )
+    ){
+        return false;
+    }
+    return true;
+
+}

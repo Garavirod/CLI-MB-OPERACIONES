@@ -430,8 +430,10 @@ export const getEmpresaByEco = (eco) =>{
             return ["RTP BI"]
         case "2353":
             return ["CE4-17M BI"]
-        default:
+        case "":
             return []
+        default:
+            return ['CISA']
     }
 }
 
