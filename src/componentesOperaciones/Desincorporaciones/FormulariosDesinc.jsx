@@ -105,6 +105,10 @@ export const FormDesincorporaciones = () => {
               setRefresh(prevValRefr => {
                 return prevValRefr + 1;
               });
+              // Reseteamos modelos
+              resetDes(ModelDesincorporacion);
+              resetRef1(ModelReferencias);
+              resetRef2(ModelReferencias);
             });
           }
 
@@ -142,6 +146,10 @@ export const FormDesincorporaciones = () => {
               setRefresh(prevValRefr => {
                 return prevValRefr + 1;
               });
+              // Reseteamos modelos
+              resetDes(ModelDesincorporacion);
+              resetRef1(ModelReferencias);
+              resetRef2(ModelReferencias);              
             });
           }         
         } else {
@@ -180,6 +188,10 @@ export const FormDesincorporaciones = () => {
               setRefresh(prevValRefr => {
                 return prevValRefr + 1;
               });
+              // Reseteamos modelos
+              valuesDes = ModelDesincorporacion;
+              valuesRef1 = ModelReferencias;   
+              valuesRef2 = ModelReferencias;   
             });
             alert(`KILOMETRAJE INCUMPLIDO >: ${km}`);
             console.log(folio_with_ref);
@@ -201,13 +213,7 @@ export const FormDesincorporaciones = () => {
               valuesRef1['num_vuelta'] = '0';
               valuesRef1['num_ida'] = '0';
               valuesRef1['num_regreso'] = '0';
-            }
-             // Si los tramos estan llenos entonces las vueltas van en ceros
-             if(valuesRef2['tramo_desde']!=="-" && valuesRef2['tramo_hasta']!=="-"){
-              valuesRef2['num_vuelta'] = '0';
-              valuesRef2['num_ida'] = '0';
-              valuesRef2['num_regreso'] = '0';
-            }
+            }            
             // Se calccula el KM
             const km1 = setKilometrajeCalculado(valuesRef1);
             const km2 = setKilometrajeCalculado(valuesRef2);
@@ -225,6 +231,10 @@ export const FormDesincorporaciones = () => {
               setRefresh(prevValRefr => {
                 return prevValRefr + 1;
               });
+              // Reseteamos modelos
+              resetDes(ModelDesincorporacion);
+              resetRef1(ModelReferencias);
+              resetRef2(ModelReferencias);   
             });               
             alert(`KILOMETRAJE INCUMPLIDO >: ${km1} \n KILOMETRAJE CUMPLIDO >: ${km2}`);
             console.log(folio_with_refs);                    

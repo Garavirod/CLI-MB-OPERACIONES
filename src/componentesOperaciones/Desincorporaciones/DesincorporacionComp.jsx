@@ -91,15 +91,6 @@ export const DesincorporacionComp = (props) => {
     getMotivosList();
   },[]);
 
-  /* Verifica si los datos introducidos son numeros */
-    const isNumber = (name) =>{
-      if(isNaN(valuesDes[name])){
-        valuesDes["odometro"] = "";
-        console.log("not is number");
-      }
-    }
-
-
   const getMotivosList =  async () =>{
     //folios-abiertos
     const url = '/desincorporaciones/motivos-list';
@@ -271,8 +262,14 @@ export const DesincorporacionComp = (props) => {
               label="Odómetro"
               name="odometro"
               value={odometro}
-              onBlur={()=>isNumber("odometro")}
               onChange={handleInputChangeDes}
+              inputProps={{
+                step: 0.001,
+                min: 0,
+                max:90000000,                
+                type: "number",
+                "aria-labelledby": "input-slider",
+              }}
             />
           </FormControl>
         </Grid>
