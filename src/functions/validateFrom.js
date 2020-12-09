@@ -82,6 +82,20 @@ export const validateRefApoInc = (obj) =>{
                     obj['num_regreso'] === ""
                 )
             )
+
+            ||
+
+            (
+                (obj['tramo_desde']!=="-" && obj['tramo_hasta']!=="-")
+                &&
+                (
+                    obj['num_vuelta']!=="" &&
+                    obj['num_ida'] !== "" &&
+                    obj['num_regreso'] !== ""
+                )
+            )
+
+             
         )
         
     ){
