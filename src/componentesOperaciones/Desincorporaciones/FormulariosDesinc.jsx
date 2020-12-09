@@ -18,7 +18,7 @@ import {
 } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
 import { TabListasComponent } from "./TabListas";
-import { validateFormExcept, validateForm, validateIncumByTramos } from "../../functions/validateFrom";
+import { validateFormExcept, validateForm, validateIncumByTramos, validateRefApoInc } from "../../functions/validateFrom";
 import { setKilometrajeCalculado } from "../../helpers/utils";
 
 
@@ -73,19 +73,24 @@ export const FormDesincorporaciones = () => {
     // validamos la referencia
     switch (tipo) {
       case "Incumplido":
-        isValidIncum = validateForm(valuesRef1);
+        isValidIncum = validateRefApoInc(valuesRef1);
         /*
           Validamos si se ha lledo todo el formulario 
         */                
         if (isValidFolio && isValidIncum) {
-          const isvalidTramos = validateIncumByTramos(valuesRef1);
+          const bothFilled = validateIncumByTramos(valuesRef1);
           /* 
             Validamos que el usuario solo haya llenado los tramos
             o las vueltas, pero no ambas.
           */
-          if(isvalidTramos){
+          if(bothFilled){
             swal("¿Tramos o vueltas?", "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas");
           }else{
+            if(valuesRef1['tramo_desde']!=="-" && valuesRef1['tramo_hasta']!=="-"){
+              valuesRef1['num_vuelta'] = '0';
+              valuesRef1['num_ida'] = '0';
+              valuesRef1['num_regreso'] = '0';
+            }
             const km = setKilometrajeCalculado(valuesRef1);
             valuesRef1["kilometraje"] = km;
             valuesRef1["tipo"] = "Incumplido";  
@@ -132,13 +137,14 @@ export const FormDesincorporaciones = () => {
         isValidIncum = validateForm(valuesRef1);
         isValidApo = validateForm(valuesRef2);
         if (isValidFolio && !isValidApo && isValidIncum) {
-          const isvalidTramos = validateIncumByTramos(valuesRef1);
+          const bothFilled = validateIncumByTramos(valuesRef1);
           /* 
             Validamos que el usuario solo haya llenado los tramos
             o las vueltas, pero no ambas.
           */
-          if(isvalidTramos){
+          if(bothFilled){
             swal("¿Tramos o vueltas?", "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas");
+            console.log(valuesRef1);
           }else{
             // cuando en una afectación sólo hay incumplimiento
             const km = setKilometrajeCalculado(valuesRef1);

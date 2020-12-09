@@ -78,10 +78,10 @@ export const setKilometrajeCalculado = (referencia) =>{
     const distancias = (ref_ida === tag_destino) ? distancias_ida : distancias_reg;
     
     // si fue por vuelta complet no importan los tramos (sólo vaidamos num_vueltas)
-    if(parseInt(num_vuelta)===0){
+    if(parseInt(num_vuelta)===0 || num_vuelta === ""){
         // El incumplimiento o cumplimiento fue por tramos        
         kilometraje = kilometrajeByTramos(tramo_desde,tramo_hasta,distancias);
-    }else if(parseInt(num_vuelta)!==0 && tramo_desde !== "-" && tramo_hasta !== "-"){
+    }else if((parseInt(num_vuelta)!==0 || num_vuelta !== "")&& tramo_desde !== "-" && tramo_hasta !== "-"){
         // Kilometraje por vueltas en circuito ya que se marcarón vueltas y estacion de circuito
         kilometraje = num_vuelta * kilometrajeByTramos(tramo_desde,tramo_hasta,distancias)
     }

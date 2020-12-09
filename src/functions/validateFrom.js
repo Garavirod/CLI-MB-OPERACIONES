@@ -36,17 +36,57 @@ export const validateFormExcept = (obj, arr) =>{
 */
 
 export const validateIncumByTramos = (obj) =>{
+    /* Si ambos están llenos */
     if(
-        (obj['tramo_desde']!=="-" && obj['tramo_hasta']!=="-")
+        (obj['tramo_desde']!=="-" || obj['tramo_hasta']!=="-")
         &&
         (
-            obj['num_vuelta']!=="" && 
-            obj['num_ida'] !== "" && 
+            obj['num_vuelta']!=="" ||
+            obj['num_ida'] !== "" || 
             obj['num_regreso'] !== ""
         )
     ){
-        return false;
+        return true;
     }
-    return true;
+    return false;
+
+}
+
+
+export const validateRefApoInc = (obj) =>{
+    if(
+        (
+            (obj['ruta_referencia']!=="") &&
+            (obj['ref_ida']!=="") &&
+            (obj['tipo']!=="")
+        )
+        &&
+        (
+            (
+
+                (obj['tramo_desde']==="-" || obj['tramo_hasta']==="-") &&
+                (
+                    obj['num_vuelta']!=="" &&
+                    obj['num_ida'] !== "" &&
+                    obj['num_regreso'] !== ""
+                )
+            )
+            ||
+         
+            (
+                (obj['tramo_desde']!=="-" && obj['tramo_hasta']!=="-")
+                &&
+                (
+                    obj['num_vuelta']==="" ||
+                    obj['num_ida'] === "" || 
+                    obj['num_regreso'] === ""
+                )
+            )
+        )
+        
+    ){
+        return true;
+    }
+    return false;
 
 }

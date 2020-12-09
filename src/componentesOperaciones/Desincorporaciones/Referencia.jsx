@@ -16,7 +16,8 @@ import {
   FormControl,
   InputLabel,
   Select,
-  TextField,  
+  TextField,
+  Switch,  
 } from "@material-ui/core";
 import { useEffect } from "react";
 
@@ -200,7 +201,7 @@ export default function Referencia(props) {
           </Grid>
         </Grid>        
         <Grid item lg={12}>
-          <Grid container spacing={3}>            
+          <Grid container spacing={3}>                 
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <Typography variant="h6" component="h4" style={{ margin: 5 }}>
                 Vueltas, idas y regresos
