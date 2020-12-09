@@ -28,10 +28,12 @@ export default function ListaEventos() {
 
   const [data, setData] = useState([]);
   const [preload, setPreload] = useState(true);
+  //state para que useEffect se lance cada que haya un delete
+  const [valueToRefresh, setValToRef] = useState(true);
 
   useEffect(() => {
     getEventos();
-  }, []);
+  }, [valueToRefresh]);
 
   const getEventos = async () => {
     const url = "/colisiones/colisiones-list";
@@ -49,7 +51,7 @@ export default function ListaEventos() {
   const deleteEvento = async (idevento) => {
     const url = `/colisiones/delete-colision/${idevento}`;
     CustomSwalDelete(url).then(() => {
-      getEventos();
+      setValToRef(prevVal => !prevVal);
     });
   };
 
