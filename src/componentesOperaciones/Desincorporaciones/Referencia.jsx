@@ -17,6 +17,7 @@ import {
   InputLabel,
   Select,
   TextField,
+  Switch,  
 } from "@material-ui/core";
 import { useEffect } from "react";
 
@@ -93,6 +94,13 @@ export default function Referencia(props) {
     const target = { name: "ruta_referencia", value: ref };
     handleInputChangeRef({ target });
   };
+
+  /* Verifica si los datos introducidos son numeros */
+  const isNumber = (name) =>{
+    if(Number.isInteger(valuesRef[name])){
+      valuesRef[name] = "";
+    }
+  }
 
   // La función consigue todas las estaciones de una ruta en específico
   const getDatosbyReferencia = (ref) => {
@@ -198,9 +206,9 @@ export default function Referencia(props) {
               </FormControl>
             </Grid>
           </Grid>
-        </Grid>
+        </Grid>        
         <Grid item lg={12}>
-          <Grid container spacing={3}>
+          <Grid container spacing={3}>                 
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <Typography variant="h6" component="h4" style={{ margin: 5 }}>
                 Vueltas, idas y regresos
@@ -217,6 +225,7 @@ export default function Referencia(props) {
                   name="num_vuelta"
                   value={num_vuelta}
                   onChange={handleInputChangeRef}
+                  onBlur={()=>isNumber("num_vuelta")}
                   inputProps={{
                     step: 1,
                     min: 0,
@@ -240,7 +249,9 @@ export default function Referencia(props) {
                   type="number"
                   name="num_ida"
                   value={num_ida}
+                  onBlur={()=>isNumber("num_ida")}
                   onChange={handleInputChangeRef}
+                  // onBlur={isNumber}
                   inputProps={{
                     step: 1,
                     min: 0,
@@ -264,7 +275,9 @@ export default function Referencia(props) {
                   type="number"
                   name="num_regreso"
                   value={num_regreso}
+                  onBlur={()=>isNumber("num_regreso")}
                   onChange={handleInputChangeRef}
+                  // onBlur={isNumber}
                   inputProps={{
                     step: 1,
                     min: 0,

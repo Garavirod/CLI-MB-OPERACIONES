@@ -48,9 +48,9 @@ export const ModelReferencias = () =>{
     return {
         ruta_referencia: "",
         ref_ida: "",        
-        num_vuelta: "0",
-        num_ida: "0",
-        num_regreso: "0",
+        num_vuelta: "",
+        num_ida: "",
+        num_regreso: "",
         tramo_desde: "-",
         tramo_hasta:"-",
         tipo:"-",
