@@ -72,7 +72,7 @@ export const FormDesincorporaciones = () => {
     let isValidIncum,isValidApo = false;
     // validamos la referencia
     switch (tipo) {
-      case "Incumplido":
+      case "Incumplido":        
         isValidIncum = validateRefApoInc(valuesRef1);
         /*
           Validamos si se ha lledo todo el formulario 

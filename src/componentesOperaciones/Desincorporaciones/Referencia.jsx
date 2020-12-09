@@ -95,6 +95,13 @@ export default function Referencia(props) {
     handleInputChangeRef({ target });
   };
 
+  /* Verifica si los datos introducidos son numeros */
+  const isNumber = (name) =>{
+    if(Number.isInteger(valuesRef[name])){
+      valuesRef[name] = "";
+    }
+  }
+
   // La función consigue todas las estaciones de una ruta en específico
   const getDatosbyReferencia = (ref) => {
     const { estaciones, destinos } = getEstacionesByReferencia(ref);
@@ -218,6 +225,7 @@ export default function Referencia(props) {
                   name="num_vuelta"
                   value={num_vuelta}
                   onChange={handleInputChangeRef}
+                  onBlur={()=>isNumber("num_vuelta")}
                   inputProps={{
                     step: 1,
                     min: 0,
@@ -241,7 +249,9 @@ export default function Referencia(props) {
                   type="number"
                   name="num_ida"
                   value={num_ida}
+                  onBlur={()=>isNumber("num_ida")}
                   onChange={handleInputChangeRef}
+                  // onBlur={isNumber}
                   inputProps={{
                     step: 1,
                     min: 0,
@@ -265,7 +275,9 @@ export default function Referencia(props) {
                   type="number"
                   name="num_regreso"
                   value={num_regreso}
+                  onBlur={()=>isNumber("num_regreso")}
                   onChange={handleInputChangeRef}
+                  // onBlur={isNumber}
                   inputProps={{
                     step: 1,
                     min: 0,
