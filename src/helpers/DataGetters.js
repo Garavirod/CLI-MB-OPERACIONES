@@ -14,79 +14,11 @@ export const getFolios = async () =>{
     else
         return [];
 
-    /*const folios = [
-        {
-            id: "1",
-            fecha: "23-01-12",
-            ruta: "A1",
-            eco: "2345",
-            edo:true, //Edo del folio
-        },
-        {
-            id: "2",
-            fecha: "23-01-12",
-            ruta: "A1",
-            eco: "2345",
-            edo:true, //Edo del folio
-        },
-        {
-            id: "3",
-            fecha: "23-01-12",
-            ruta: "A1",
-            eco: "2345",
-            edo:true, //Edo del folio
-        },
-        {
-            id: "4",
-            fecha: "23-01-12",
-            ruta: "A1",
-            eco: "2345",
-            edo:true, //Edo del folio
-        },
-        {
-            id: "5",
-            fecha: "23-01-12",
-            ruta: "A1",
-            eco: "2345",
-            edo:true, //Edo del folio
-        },
-        {
-            id: "6",
-            fecha: "23-01-12",
-            ruta: "A1",
-            eco: "2345",
-            edo:true, //Edo del folio
-        },
-        {
-            id: "7",
-            fecha: "23-01-12",
-            ruta: "A1",
-            eco: "2345",
-            edo:true, //Edo del folio
-        },
-        {
-            id: "8",
-            fecha: "23-01-12",
-            ruta: "A1",
-            eco: "2345",
-            edo:true, //Edo del folio
-        },
-        {
-            id: "9",
-            fecha: "23-01-12",
-            ruta: "A1",
-            eco: "2345",
-            edo:true, //Edo del folio
-        },
-        
-    ];
-    return folios;*/
-
 }
 
 
 /**
- * INCUMPLIMENTOS REALIZADOs
+ * INCUMPLIMENTOS REALIZADOS
  */
 
 export const getIncumplimientos = () =>{
@@ -268,26 +200,6 @@ export const getSolicitudes = () =>{
     return solicitudes;
 }
 
-
-export const getMotivos = () =>{
-    const motivos = [
-        "Motivo 1",
-        "Motivo 2",
-        "Motivo 3",
-        "Motivo 4",
-        "Motivo 5",
-        "Motivo 6",
-        "Motivo 7",
-        "Motivo 8",
-        "Motivo 9",
-        "Motivo 10",
-        "Motivo 11",
-        "Motivo 12",
-        "Motivo 13",
-    ]
-
-    return motivos;
-}
 
 export const getLineas = () =>{
 

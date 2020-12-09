@@ -30,7 +30,7 @@ export const ModelIncorporacion = () =>{
         odometro: "",
         credencial: "",
         nombre: "",
-        fecha: setFechaActual(),
+        fecha: setFechaActual(), // (yy/mm/dd)
         hora: setHoraActual(),                        
         sentido: "",
         entrada: "",

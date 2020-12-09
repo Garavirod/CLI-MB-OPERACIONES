@@ -1,5 +1,4 @@
 import {getDistanciasByRuta} from './DataGetters';
-import { date } from 'yup';
 
 export const setFechaActual = () =>{
     const f = new Date();

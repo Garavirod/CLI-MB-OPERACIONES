@@ -14,7 +14,6 @@ import {
   getSentido,
   getInfromantes,
   getEconomicos,
-  getEmpresas,
   getEstacionesByLinea,
 } from "../../helpers/DataGetters";
 import { useState } from "react";

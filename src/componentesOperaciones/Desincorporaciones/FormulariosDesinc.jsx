@@ -49,10 +49,6 @@ export const FormDesincorporaciones = () => {
   const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(
     ModelReferencias
   );
-  //get the idDesincorporacion for the Cumplimiento_Incumplimiento
-  const urlCum = "/desincorporaciones/datos-desincorporacion";
-  //----------cumplimientos_incumplimientos----------
-
 
   // Modelo y estructura de una Referencia para un Cumplimiento
   const [valuesRef2, handleInputChangeRef2, resetRef2] = useForm(
