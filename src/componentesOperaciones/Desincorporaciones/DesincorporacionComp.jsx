@@ -91,6 +91,14 @@ export const DesincorporacionComp = (props) => {
     getMotivosList();
   },[]);
 
+  /* Verifica si los datos introducidos son numeros */
+    const isNumber = (name) =>{
+      if(isNaN(valuesDes[name])){
+        valuesDes["odometro"] = "";
+        console.log("not is number");
+      }
+    }
+
 
   const getMotivosList =  async () =>{
     //folios-abiertos
@@ -258,10 +266,12 @@ export const DesincorporacionComp = (props) => {
           <FormControl className={classes.formControl}>
             <TextField
               disabled={active1}
+              type="number"
               id="standard-required"
               label="Odómetro"
               name="odometro"
               value={odometro}
+              onBlur={()=>isNumber("odometro")}
               onChange={handleInputChangeDes}
             />
           </FormControl>
