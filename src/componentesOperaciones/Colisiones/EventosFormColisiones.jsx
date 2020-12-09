@@ -51,7 +51,7 @@ export const EventosFormColisiones = () => {
   };
 
   // Hook personalizado con el evento inicial
-  const [values, handleInputChange] = useHookForm(initial_evento);
+  const [values, handleInputChange, reset] = useHookForm(initial_evento);
 
   // desestructuando el values del hook
   const {
@@ -75,7 +75,10 @@ export const EventosFormColisiones = () => {
       httpPostData(url, values)
         .then(resp =>{
             if(resp && resp.success)
+            {
               CustomSwalSave();
+              reset();
+            }
             else
               CustomSwalError();
         });//then
