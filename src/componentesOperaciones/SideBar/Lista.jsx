@@ -48,7 +48,7 @@ const Lista = () => {
                 <ListItem button>
                     <ListItemIcon>
                     <ListAltIcon className={classes.icon}/>
-                        <a href="/BitacordaDR">
+                        <a href="/BitacoraDR">
                         <ListItemText
                                     disableTypography
                                     primary={<Typography variant="h5" style={{ color: '#FFFFFF' }}>Desincorporaciones</Typography>}

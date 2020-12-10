@@ -44,7 +44,7 @@ const Routes = () => {
                 <RootRoute path="/"  exact/>
                 <PrivateRoute role="Operaciones" path="/Bienvenida" component={Bienvenida} exact/>
                 <PrivateRoute role="Operaciones" path="/JustificacionSemana" component={Levantamiento} exact/>
-                <PrivateRoute role="Operaciones" path="/BitacordaDR" component={FormDesincorporaciones} exact/>
+                <PrivateRoute role="Operaciones" path="/BitacoraDR" component={FormDesincorporaciones} exact/>
                 <PrivateRoute role="Operaciones" path="/ControlDeServicios" component={Control} exact/>
                 <PrivateRoute role="Operaciones" path='/pruebas' component={Pruebas}exact/> 
                 <PrivateRoute role="Operaciones" path='/eventos/' component={AccordionComponent}exact/>                              

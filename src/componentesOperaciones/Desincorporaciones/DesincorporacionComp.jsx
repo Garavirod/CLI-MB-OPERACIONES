@@ -121,7 +121,7 @@ export const DesincorporacionComp = (props) => {
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <Paper className={classes.paper} variant="outlined">
             <Typography variant="h6" component="h4">
-              Desincorporacion / Entrada
+              Desincorporación / Entrada
             </Typography>
           </Paper>
         </Grid>

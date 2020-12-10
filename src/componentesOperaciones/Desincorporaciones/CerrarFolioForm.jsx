@@ -69,7 +69,7 @@ export const CerrarFolioForm = () => {
   const registraIncorporacion = async (e) => {
     const urlUpdate = "/desincorporaciones/update-desincorporacion";
     const urlIncorpora = `/desincorporaciones/datos-incorporacion/${idFolio}`;
-    const urlDesinc = "/BitacordaDR";
+    const urlDesinc = "/BitacoraDR";
 
     e.preventDefault();
     //console.log("values desinc");
@@ -132,7 +132,7 @@ export const CerrarFolioForm = () => {
                     component="h4"
                     className={classes.headerText}
                   >
-                    <Link className="" to={"/BitacordaDR"}>
+                    <Link className="" to={"/BitacoraDR"}>
                       <ArrowBackIcon />
                       cerrar folio sin guardar
                     </Link>
