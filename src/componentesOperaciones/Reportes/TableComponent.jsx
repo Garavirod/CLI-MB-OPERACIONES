@@ -192,7 +192,7 @@ export default function TableDataRegistros(props) {
     setRows(r);
   };
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className="animate__animated animate__fadeInUp">
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>

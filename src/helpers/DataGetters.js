@@ -1385,26 +1385,26 @@ export const getReferencias = () =>{
             id: "L2",
             name : "L02 - Linea 2 - Eje 4 sur (34)",
             rutas :[
-                {
-                    id: "C1",
-                    name : "02-201 C1",
+                // {
+                //     id: "C1",
+                //     name : "02-201 C1",
                     
-                }, 
-                {
-                    id: "C2",
-                    name : "02-202 C2",
+                // }, 
+                // {
+                //     id: "C2",
+                //     name : "02-202 C2",
                     
-                }, 
-                {
-                    id: "C3",
-                    name : "02-203 C3",
+                // }, 
+                // {
+                //     id: "C3",
+                //     name : "02-203 C3",
                     
-                }, 
-                {
-                    id: "C4",
-                    name : "02-204 C4",
+                // }, 
+                // {
+                //     id: "C4",
+                //     name : "02-204 C4",
                     
-                },                            
+                // },                            
             ]
 
         },
@@ -1412,21 +1412,21 @@ export const getReferencias = () =>{
             id: "L4",
             name : "L04 - Linea 4 - Buenavista San Lazaro Aeropuerto",
             rutas :[
-                {
-                    id: "L41",
-                    name : "04-401 E1 Norte",
+                // {
+                //     id: "L41",
+                //     name : "04-401 E1 Norte",
                     
-                }, 
-                {
-                    id: "L42",
-                    name : "04-402 E2 Sur",
+                // }, 
+                // {
+                //     id: "L42",
+                //     name : "04-402 E2 Sur",
                     
-                }, 
-                {                        
-                    id: "L43",
-                    name : "04-403 E3 Norte",
+                // }, 
+                // {                        
+                //     id: "L43",
+                //     name : "04-403 E3 Norte",
                     
-                },                                    
+                // },                                    
             ]
 
         },

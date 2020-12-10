@@ -148,7 +148,7 @@ export const CerrarFolioForm = () => {
                   <Grid item lg={6}>
                     {/* FORMULARIO DE DESINCORPORACIONES */}
                     <Grid container spacing={2}>
-                      <Grid item lg={12}>
+                      <Grid item lg={12} className="animate__animated animate__fadeInLeft">
                         <DesincorporacionComp
                           active1={true} //Deshabilitamos todos los campos 'Desincoporacion'
                           active2={true} //Deshabilita el campo 'Tipo'
@@ -158,7 +158,7 @@ export const CerrarFolioForm = () => {
                           resetDes={resetDes}
                         />
                       </Grid>
-                      <Grid item lg={12}>
+                      <Grid item lg={12} className="animate__animated animate__fadeInUp">
                         {/* FROMULARIO DE REFERENCIAS */}
                         {tipo === "Afectación" ? (
                           <div>
@@ -210,7 +210,7 @@ export const CerrarFolioForm = () => {
                   <Grid item lg={6}>
                     <Grid container spacing={2}>
                       {/* FORMULARIO DE INCORPORACIONES */}
-                      <Grid item lg={12}>
+                      <Grid item lg={12} className="animate__animated animate__fadeInRight">
                         <IncorporacionComp
                           valuesInco={valuesInco}
                           valuesDes={valuesDes}
