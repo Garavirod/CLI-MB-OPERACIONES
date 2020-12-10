@@ -119,7 +119,7 @@ export function TabListComponent(props) {
                 <p>Detalles</p>
                 <ul>
                   <li>{`Linea : ${it.linea}`}</li>
-                  <li>{`Fecha de creacion : ${it.fecha}`}</li>
+                  <li>{`Fecha : ${it.fecha.slice(0,10)}`}</li>
                   <li>{`Económico : ${it.economico}`}</li>
                 </ul>
               </ListItemText>

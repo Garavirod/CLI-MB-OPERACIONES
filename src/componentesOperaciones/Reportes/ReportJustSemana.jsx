@@ -259,7 +259,7 @@ export const ReportJustSemana = () => {
               {incumplimientos.map((f) => (
                 <Paper key={f.date} className={classes.paper}>
                   <Typography variant="h5" gutterBottom>
-                    {f.date}
+                    {f.date.slice(0,10)}
                   </Typography>
                   <TableDataRegistros
                     dataRegistros={f.collection}                    
@@ -274,7 +274,7 @@ export const ReportJustSemana = () => {
               {cumplimientos.map((f) => (
                 <Paper key={f.date} className={classes.paper}>
                   <Typography variant="h5" gutterBottom>
-                    {f.date}
+                    {f.date.slice(0,10)}
                   </Typography>
                   <TableDataRegistros
                     dataRegistros={f.collection}                    
@@ -289,7 +289,7 @@ export const ReportJustSemana = () => {
               {afectaciones.map((f) => (
                 <Paper key={f.date} className={classes.paper}>
                   <Typography variant="h5" gutterBottom>
-                    {f.date}
+                    {f.date.slice(0,10)}
                   </Typography>
                   <TableDataRegistros
                     dataRegistros={f.collection}

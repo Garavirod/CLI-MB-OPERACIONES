@@ -49,10 +49,6 @@ export const FormDesincorporaciones = () => {
   const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(
     ModelReferencias
   );
-  //get the idDesincorporacion for the Cumplimiento_Incumplimiento
-  const urlCum = "/desincorporaciones/datos-desincorporacion";
-  //----------cumplimientos_incumplimientos----------
-
 
   // Modelo y estructura de una Referencia para un Cumplimiento
   const [valuesRef2, handleInputChangeRef2, resetRef2] = useForm(
@@ -72,7 +68,8 @@ export const FormDesincorporaciones = () => {
     let isValidIncum,isValidApo = false;
     // validamos la referencia
     switch (tipo) {
-      case "Incumplido":        
+      case "Incumplido":
+        valuesDes['edoFolio'] = "Abierto";        
         isValidIncum = validateRefApoInc(valuesRef1);
         /*
           Validamos si se ha lledo todo el formulario 
@@ -84,7 +81,10 @@ export const FormDesincorporaciones = () => {
             o las vueltas, pero no ambas.
           */
           if(bothFilled){
-            swal("¿Tramos o vueltas?", "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas");
+            swal(
+              "¿Tramos o vueltas?", 
+              "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas",
+              "warning");
           }else{
             // Si los tramos estan llenos entonces las vueltas van en ceros
             if(valuesRef1['tramo_desde']!=="-" && valuesRef1['tramo_hasta']!=="-"){
@@ -97,7 +97,7 @@ export const FormDesincorporaciones = () => {
             valuesRef1["tipo"] = "Incumplido";  
             // Combinamos el folio con la referencia asociada
             const folio_with_ref = {...valuesDes, ...valuesRef1};          
-            alert(`Kilometraje incumplido >: ${km}`);
+            alert(`KILOMETRAJE INCUMPLIDO >: ${km}`);
             console.log(folio_with_ref);
             //Realizar el POST de Folio completo
             httpPostData("/desincorporaciones/datos-desincorporacion", folio_with_ref)
@@ -105,6 +105,10 @@ export const FormDesincorporaciones = () => {
               setRefresh(prevValRefr => {
                 return prevValRefr + 1;
               });
+              // Reseteamos modelos
+              resetDes(ModelDesincorporacion);
+              resetRef1(ModelReferencias);
+              resetRef2(ModelReferencias);
             });
           }
 
@@ -113,6 +117,7 @@ export const FormDesincorporaciones = () => {
         }              
         break;
       case "Apoyo":
+        valuesDes['edoFolio'] = "Cerrado";        
         isValidApo = validateRefApoInc(valuesRef2);
         if (isValidFolio && isValidApo) {
           const bothFilled = validateIncumByTramos(valuesRef2);
@@ -121,7 +126,10 @@ export const FormDesincorporaciones = () => {
             o las vueltas, pero no ambas.
           */
           if(bothFilled){
-            swal("¿Tramos o vueltas?", "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas");
+            swal(
+              "¿Tramos o vueltas?", 
+              "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas",
+              "warning");
           }else{
             // Si los tramos estan llenos entonces las vueltas van en ceros
             if(valuesRef2['tramo_desde']!=="-" && valuesRef2['tramo_hasta']!=="-"){
@@ -132,7 +140,7 @@ export const FormDesincorporaciones = () => {
             const km = setKilometrajeCalculado(valuesRef2);
             valuesRef2["kilometraje"] = km;
             valuesRef2["tipo"] = "Apoyo";
-            alert(`Kilometraje cumplido >: ${km}`);
+            alert(`KILOMETRAJE CUMPLIDO >: ${km}`);
             // combinamos el folio con la referencia asocaida
             const folio_with_ref = {...valuesDes, ...valuesRef2};  
             console.log(folio_with_ref);
@@ -142,6 +150,10 @@ export const FormDesincorporaciones = () => {
               setRefresh(prevValRefr => {
                 return prevValRefr + 1;
               });
+              // Reseteamos modelos
+              resetDes(ModelDesincorporacion);
+              resetRef1(ModelReferencias);
+              resetRef2(ModelReferencias);              
             });
           }         
         } else {
@@ -150,7 +162,8 @@ export const FormDesincorporaciones = () => {
         }
         break;
       case "Afectación":
-        isValidIncum = validateForm(valuesRef1);
+        valuesDes['edoFolio'] = "Cerrado";        
+        isValidIncum = validateRefApoInc(valuesRef1);
         isValidApo = validateForm(valuesRef2);
         if (isValidFolio && !isValidApo && isValidIncum) {
           const bothFilled = validateIncumByTramos(valuesRef1);
@@ -159,9 +172,18 @@ export const FormDesincorporaciones = () => {
             o las vueltas, pero no ambas.
           */
           if(bothFilled){
-            swal("¿Tramos o vueltas?", "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas");
+            swal(
+              "¿Tramos o vueltas?", 
+              "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas",
+              "warning");
             console.log(valuesRef1);
           }else{
+            // Si los tramos estan llenos entonces las vueltas van en ceros
+            if(valuesRef1['tramo_desde']!=="-" && valuesRef1['tramo_hasta']!=="-"){
+              valuesRef1['num_vuelta'] = '0';
+              valuesRef1['num_ida'] = '0';
+              valuesRef1['num_regreso'] = '0';
+            }
             // cuando en una afectación sólo hay incumplimiento
             const km = setKilometrajeCalculado(valuesRef1);
             valuesRef1["kilometraje"] = km;
@@ -174,32 +196,60 @@ export const FormDesincorporaciones = () => {
               setRefresh(prevValRefr => {
                 return prevValRefr + 1;
               });
+              // Reseteamos modelos
+              valuesDes = ModelDesincorporacion;
+              valuesRef1 = ModelReferencias;   
+              valuesRef2 = ModelReferencias;   
             });
-            alert(`Kilometraje incumplido >: ${km}`);
+            alert(`KILOMETRAJE INCUMPLIDO >: ${km}`);
             console.log(folio_with_ref);
           }          
 
         } else if (isValidFolio && isValidApo && isValidIncum) {
           // cuando en una afectación hay incumplimiento y cumplimiento
-          const km1 = setKilometrajeCalculado(valuesRef1);
-          const km2 = setKilometrajeCalculado(valuesRef2);
-          // Asignación de kilometraje
-          valuesRef1["kilometraje"] = km1;
-          valuesRef2["kilometraje"] = km2;
-          // Tipo de folio
-          valuesRef1["tipo"] = "Incumplido";
-          valuesRef2["tipo"] = "Apoyo";
-          // Combinamos los folio con sus referencias asociadas
-          const folio_with_refs = [valuesDes,valuesRef1,valuesRef2];                   
-          // Realizar POST de folio
-          httpPostData("/desincorporaciones/datos-afectacion2", folio_with_refs)
-          .then(() =>{
-            setRefresh(prevValRefr => {
-              return prevValRefr + 1;
-            });
-          });               
-          alert(`Kilometraje calculado >: Incum ${km1} Cump ${km2}`);
-          console.log(folio_with_refs);                    
+          const bothFilled = validateIncumByTramos(valuesRef1);
+          /* 
+            Validamos que el usuario solo haya llenado los tramos
+            o las vueltas, pero no ambas.
+          */
+          if(bothFilled){
+            swal(
+              "¿Tramos o vueltas?", 
+              "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas",
+              "warning");
+            console.log(valuesRef1);
+          }else{
+            // Si los tramos estan llenos entonces las vueltas van en ceros
+             if(valuesRef1['tramo_desde']!=="-" && valuesRef1['tramo_hasta']!=="-"){
+              valuesRef1['num_vuelta'] = '0';
+              valuesRef1['num_ida'] = '0';
+              valuesRef1['num_regreso'] = '0';
+            }            
+            // Se calccula el KM
+            const km1 = setKilometrajeCalculado(valuesRef1);
+            const km2 = setKilometrajeCalculado(valuesRef2);
+            // Asignación de kilometraje
+            valuesRef1["kilometraje"] = km1;
+            valuesRef2["kilometraje"] = km2;
+            // Tipo de folio
+            valuesRef1["tipo"] = "Incumplido";
+            valuesRef2["tipo"] = "Apoyo";
+            // Combinamos los folio con sus referencias asociadas
+            const folio_with_refs = [valuesDes,valuesRef1,valuesRef2];                   
+            // Realizar POST de folio
+            httpPostData("/desincorporaciones/datos-afectacion2", folio_with_refs)
+            .then(() =>{
+              setRefresh(prevValRefr => {
+                return prevValRefr + 1;
+              });
+              // Reseteamos modelos
+              resetDes(ModelDesincorporacion);
+              resetRef1(ModelReferencias);
+              resetRef2(ModelReferencias);   
+            });               
+            alert(`KILOMETRAJE INCUMPLIDO >: ${km1} \n KILOMETRAJE CUMPLIDO >: ${km2}`);
+            console.log(folio_with_refs);                    
+          }
         } else {
           CustomSwalEmptyFrom();
           // alert("Campos vacios");

@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, hslToRgb } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Collapse from "@material-ui/core/Collapse";
 import Table from "@material-ui/core/Table";
@@ -31,7 +31,9 @@ const prepareEditFolio = async (idfolio) => {
   }
 };
 
-
+/* 
+  Elimina los registros por folio
+*/
 const DeleteFolio = async (idfolio) =>{
   await swal({
     title: "¿Seguro que deseas borrar la información?",

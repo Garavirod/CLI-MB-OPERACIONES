@@ -107,6 +107,8 @@ export const CerrarFolioForm = () => {
         }        
     });//then
       
+    }else if(edoFolio === "Abierto"){
+      swal("Estado del folio", "El folio no puede quedar abierto", "warning")
     }else{
       CustomSwalEmptyFrom();
     }
@@ -150,6 +152,7 @@ export const CerrarFolioForm = () => {
                         <DesincorporacionComp
                           active1={true} //Deshabilitamos todos los campos 'Desincoporacion'
                           active2={true} //Deshabilita el campo 'Tipo'
+                          active3={true}
                           valuesDes={valuesDes}
                           handleInputChangeDes={handleInputChangeDes}
                           resetDes={resetDes}
