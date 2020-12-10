@@ -27,13 +27,15 @@ export default function ListadatosSeguros() {
   const classes = useStyles();
   const { idEvento } = useParams();
 
-    // Preload
-    const [preload, setPreload] = useState(true);
+  // Preload
+  const [preload, setPreload] = useState(true);
+  //state para que useEffect se lance cada que haya un delete
+  const [valueToRefresh, setValToRef] = useState(true);
 
   const [data, setData] = useState([]);
   useEffect(() => {
     getdatosSeguros();
-  }, []);
+  }, [valueToRefresh]);
 
   const getdatosSeguros = async () => {
     const url = `/colisiones/seguro-list/${idEvento}`;
@@ -48,7 +50,7 @@ export default function ListadatosSeguros() {
   const deleteSeguro = async (idSeguro) => {
     const url = `/colisiones/delete-seguro/${idSeguro}`;
     CustomSwalDelete(url).then(() => {
-      getdatosSeguros();
+      setValToRef(prevVal => !prevVal);
     });
   };
 

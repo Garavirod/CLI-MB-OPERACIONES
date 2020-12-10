@@ -79,14 +79,14 @@ export const ColisionesByYearChart = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item lg={12}>
-          {/* Filtros */}
+        {/*<Grid item lg={12}>
+          {//Filtros }
           <Card>
             <CardContent>
               <Typography>Filtros</Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid>*/}
       </Grid>
     </Container>
   );

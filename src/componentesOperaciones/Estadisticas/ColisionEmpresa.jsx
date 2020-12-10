@@ -19,6 +19,7 @@ export default function ColisionEmpresa(){
                         "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
     
     const currentM = new Date().getMonth();
+    const currentY = new Date().getFullYear();
 
     const [countByMonth, setCountByMonth] = useState([]);
     const usedMNames = monthNames.slice(0,currentM+1);
@@ -29,49 +30,39 @@ export default function ColisionEmpresa(){
 
     /*
         recibe: array con todas las colisiones de la empresa
-        descr: filtra las colisiones por cada mes desde enero
-            hasta el mes presente
-        retorna: el array con las colisiones organizadas del mes 0 (enero)
+        descr: suma las colisiones por cada mes y se inserta dicho valor en
+            la posición del array que corresponda a su mes (0-mesPresente)
+        retorna: el array con la suma de colisiones por mes del mes 0 (enero)
             hasta el mes presente (currentM)
     */
-    function filterByMonth(arr){
-        let filtered = [];
-        for(let i=0; i <= currentM; i++){
-            const forMonthi = arr.filter(oneCol =>{
-                //console.log("onecol ", oneCol);
-                //sin el replace nos regresa un día antes al dado
-                const colsDate = new Date(oneCol.fecha.replace(/-/g, '\/').replace(/T.+/, ''));
-                //console.log("colsDate", colsDate);
-                const oneColMonth = colsDate.getMonth();
-                //console.log("es i ",i);
-                //console.log("es mes",oneColMonth);
-                return oneColMonth === i;
-            });
-            filtered.push(forMonthi);
-        }//for
-        return filtered;
-    }//filterByMonth
+    function sumByMonth(arr){
+        //Crea e inicializa arr acumulador con 0
+        let countsByMonth = new Array(currentM + 1).fill(0);
+        arr.map(oneCol => {
+            //sin el replace nos regresa un día antes al dado
+            const colsDate = new Date(oneCol.Colision.fecha.replace(/-/g, '\/').replace(/T.+/, ''));
+            const oneColMonth = colsDate.getMonth();
+            countsByMonth[oneColMonth] += 1; 
+        });
+        
+        return countsByMonth;
+    }//sumByMonth
 
-    async function getData(){
-        const url = `/colisiones/empresa-tiempo/${empresa}`;
-        //peticion de axios genérica por url
+    async function getColisiones(){
+        const url = `/colisiones/empresa-tiempo/${empresa}/${currentY}`;
         const data = await httpGetData(url);
         if (data && data.success) {
             const arrCols = data.data;
-            console.log("arr cols",arrCols);
-            const colsByMonth = filterByMonth(arrCols);
-            console.log("filtered by Month", colsByMonth);
-            const countColsByMonth = colsByMonth.map(ofOneMonth => {
-                return ofOneMonth.length;
-            });
-            console.log("countsByMonth", countColsByMonth);
+            //console.log("arr cols",arrCols);
+            const countColsByMonth = sumByMonth(arrCols);
+            //console.log("counts colis by Month", countColsByMonth);
             setCountByMonth(countColsByMonth);
             setShEmpresa(empresa);
         }
         else if(!data){
             CustomSwalError();
         }
-    }//getData
+    }//getColisiones
 
     //Se obtienen las empresas que han tenido colisiones
     const getEmpresas = async () => {
@@ -93,7 +84,6 @@ export default function ColisionEmpresa(){
     }//handleChange
 
     useEffect(() => {
-        //getData();
         getEmpresas();
     },[]);//useEffect
 
@@ -164,7 +154,7 @@ export default function ColisionEmpresa(){
                         </CardContent>
                         <CardActions>
                             <Button
-                                onClick={getData}
+                                onClick={getColisiones}
                                 type="submit"
                                 size="small"
                                 variant="contained"

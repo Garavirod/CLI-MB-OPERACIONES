@@ -21,13 +21,15 @@ import { PreloadData } from "../ui/PreloadData";
 export default function ListaDatosAutomovil() {  
   const { idEvento } = useParams();
 
-    // Preload
-    const [preload, setPreload] = useState(true);
+  // Preload
+  const [preload, setPreload] = useState(true);
+  //state para que useEffect se lance cada que haya un delete
+  const [valueToRefresh, setValToRef] = useState(true);
 
   const [data, setData] = useState([]);
   useEffect(() => {
     getdatosAutomovil();
-  }, []);
+  }, [valueToRefresh]);
 
   const getdatosAutomovil = async () => {
     const url = `/colisiones/automovil-list/${idEvento}`;
@@ -42,7 +44,7 @@ export default function ListaDatosAutomovil() {
   const deleteAutomovil = async (idAutomovil) => {
     const url = `/colisiones/delete-automovil/${idAutomovil}`;
     CustomSwalDelete(url).then(() => {
-      getdatosAutomovil();
+      setValToRef(prevVal => !prevVal);
     });
   };
 

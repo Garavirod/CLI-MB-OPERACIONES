@@ -28,10 +28,12 @@ export default function ListaEventos() {
 
   const [data, setData] = useState([]);
   const [preload, setPreload] = useState(true);
+  //state para que useEffect se lance cada que haya un delete
+  const [valueToRefresh, setValToRef] = useState(true);
 
   useEffect(() => {
     getEventos();
-  }, []);
+  }, [valueToRefresh]);
 
   const getEventos = async () => {
     const url = "/colisiones/colisiones-list";
@@ -49,7 +51,7 @@ export default function ListaEventos() {
   const deleteEvento = async (idevento) => {
     const url = `/colisiones/delete-colision/${idevento}`;
     CustomSwalDelete(url).then(() => {
-      getEventos();
+      setValToRef(prevVal => !prevVal);
     });
   };
 
@@ -59,9 +61,6 @@ export default function ListaEventos() {
       <Grid container spacing={3}>
         <Grid item lg={6}>
           <Link to={`/colisiones-form`}>Nuevo evento de colisión</Link>
-        </Grid>
-        <Grid item lg={6}>
-          <Link to={`/selec-grafica-colisiones`}>Gráficas Colisiones</Link>
         </Grid>
         <Grid item lg={12}>
           <Typography component="div" variant="h4">

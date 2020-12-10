@@ -21,6 +21,8 @@ function ListaEconomicoColisiones(){
     
     // Preload
     const [preload, setPreload] = useState(true);
+    //state para que useEffect se lance cada que haya un delete
+    const [valueToRefresh, setValToRef] = useState(true);
     
     const [data, setData] = useState([]);
 
@@ -41,13 +43,13 @@ function ListaEconomicoColisiones(){
     const deleteEconomico = async (idEconomico) => {
         const url = `/colisiones/delete-economico/${idEconomico}`;
         CustomSwalDelete(url).then(() => {
-            getEconomicosColisionados();
+            setValToRef(prevVal => !prevVal);
         });
       };
 
     useEffect(() => {
         getEconomicosColisionados();
-    }, []);
+    }, [valueToRefresh]);
 
 
     return (

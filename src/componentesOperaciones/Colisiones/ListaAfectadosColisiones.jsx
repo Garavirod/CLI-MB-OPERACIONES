@@ -32,11 +32,13 @@ export default function ListaAfectadosColisiones() {
 
   // Preload
   const [preload, setPreload] = useState(true);
-  
+  //state para que useEffect se lance cada que haya un delete
+  const [valueToRefresh, setValToRef] = useState(true);
+
   const [data, setData] = useState([]);
   useEffect(() => {
     getAfectados();
-  }, []);
+  }, [valueToRefresh]);
 
   const getAfectados = async () => {
     const url = `/colisiones/lesionados-list/${idEvento}`;
@@ -51,7 +53,7 @@ export default function ListaAfectadosColisiones() {
   const deleteLesionado = async (idLesionado) => {
     const url = `/colisiones/delete-lesionada/${idLesionado}`;
     CustomSwalDelete(url).then(() => {
-      getAfectados();
+      setValToRef(prevVal => !prevVal);
     });
   };
 
