@@ -68,7 +68,8 @@ export const FormDesincorporaciones = () => {
     let isValidIncum,isValidApo = false;
     // validamos la referencia
     switch (tipo) {
-      case "Incumplido":        
+      case "Incumplido":
+        valuesDes['edoFolio'] = "Abierto";        
         isValidIncum = validateRefApoInc(valuesRef1);
         /*
           Validamos si se ha lledo todo el formulario 
@@ -80,7 +81,10 @@ export const FormDesincorporaciones = () => {
             o las vueltas, pero no ambas.
           */
           if(bothFilled){
-            swal("¿Tramos o vueltas?", "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas");
+            swal(
+              "¿Tramos o vueltas?", 
+              "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas",
+              "warning");
           }else{
             // Si los tramos estan llenos entonces las vueltas van en ceros
             if(valuesRef1['tramo_desde']!=="-" && valuesRef1['tramo_hasta']!=="-"){
@@ -113,6 +117,7 @@ export const FormDesincorporaciones = () => {
         }              
         break;
       case "Apoyo":
+        valuesDes['edoFolio'] = "Cerrado";        
         isValidApo = validateRefApoInc(valuesRef2);
         if (isValidFolio && isValidApo) {
           const bothFilled = validateIncumByTramos(valuesRef2);
@@ -121,7 +126,10 @@ export const FormDesincorporaciones = () => {
             o las vueltas, pero no ambas.
           */
           if(bothFilled){
-            swal("¿Tramos o vueltas?", "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas");
+            swal(
+              "¿Tramos o vueltas?", 
+              "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas",
+              "warning");
           }else{
             // Si los tramos estan llenos entonces las vueltas van en ceros
             if(valuesRef2['tramo_desde']!=="-" && valuesRef2['tramo_hasta']!=="-"){
@@ -153,7 +161,8 @@ export const FormDesincorporaciones = () => {
           // alert("Campos vacios");
         }
         break;
-      case "Afectación":        
+      case "Afectación":
+        valuesDes['edoFolio'] = "Cerrado";        
         isValidIncum = validateRefApoInc(valuesRef1);
         isValidApo = validateForm(valuesRef2);
         if (isValidFolio && !isValidApo && isValidIncum) {
@@ -163,7 +172,10 @@ export const FormDesincorporaciones = () => {
             o las vueltas, pero no ambas.
           */
           if(bothFilled){
-            swal("¿Tramos o vueltas?", "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas");
+            swal(
+              "¿Tramos o vueltas?", 
+              "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas",
+              "warning");
             console.log(valuesRef1);
           }else{
             // Si los tramos estan llenos entonces las vueltas van en ceros
@@ -201,7 +213,10 @@ export const FormDesincorporaciones = () => {
             o las vueltas, pero no ambas.
           */
           if(bothFilled){
-            swal("¿Tramos o vueltas?", "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas");
+            swal(
+              "¿Tramos o vueltas?", 
+              "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas",
+              "warning");
             console.log(valuesRef1);
           }else{
             // Si los tramos estan llenos entonces las vueltas van en ceros

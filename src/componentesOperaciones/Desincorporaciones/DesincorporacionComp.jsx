@@ -55,6 +55,7 @@ export const DesincorporacionComp = (props) => {
   const [estacioneslinea, setEstacionLinea] = useState([]);
   const [empresaeconomico, setEmpresaEco] = useState("");  
   const [motivos, setMotivos] = useState([]);
+  
 
   // desestructurando el values del hook
   const {
@@ -74,6 +75,13 @@ export const DesincorporacionComp = (props) => {
     tipo,
     edoFolio,
   } = valuesDes;
+
+  const handlechangeTipoFolio = (name) =>{
+    if(name === "Apoyo"){
+      valuesDes['edoFolio']="Cerrado";
+    }
+  }
+
 
   // Cada vez que cambie el estado de la linea, se tren todas las estaciones
   useEffect(() => {
@@ -410,31 +418,36 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} xs={6}>
           {/* ESTADO FOLIO */}
-          <FormControl className={classes.formControl} disabled={active3}>
-            <FormLabel>Estado de foilo</FormLabel>
-            <RadioGroup
-              aria-label="gender"
-              value={edoFolio}
-              onChange={handleInputChangeDes}
-              name="edoFolio"
-            >
-              <FormControlLabel
-                value="Abierto"
-                control={<Radio />}
-                label="Abierto"
-              />
-              <FormControlLabel
-                value="Cerrado"
-                control={<Radio />}
-                label="Cerrado"
-              />
-              <FormControlLabel
-                value="Cerrado sin incorporar"
-                control={<Radio />}
-                label="Cerrado sin incorporar"
-              />
-            </RadioGroup>
-          </FormControl>
+          {
+            (active3) &&
+            (
+              <FormControl className={classes.formControl}>
+                <FormLabel>Estado de foilo</FormLabel>
+                <RadioGroup
+                  aria-label="gender"
+                  value={edoFolio}
+                  onChange={handleInputChangeDes}
+                  name="edoFolio"
+                >
+                  <FormControlLabel
+                    value="Abierto"
+                    control={<Radio />}
+                    label="Abierto"
+                  />
+                  <FormControlLabel
+                    value="Cerrado"
+                    control={<Radio />}
+                    label="Cerrado"
+                  />
+                  <FormControlLabel
+                    value="Cerrado sin incorporar"
+                    control={<Radio />}
+                    label="Cerrado sin incorporar"
+                  />
+                </RadioGroup>
+              </FormControl>
+            )
+          }          
         </Grid>
       </Grid>
     </Container>

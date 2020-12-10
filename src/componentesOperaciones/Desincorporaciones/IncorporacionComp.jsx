@@ -311,7 +311,15 @@ export const IncorporacionComp = (props) => {
               label="Odómetro"
               name="odometro"
               value={odometro}
+              type="number"
               onChange={handleInputChangeInc}
+              inputProps={{
+                step: 0.001,
+                min: 0,
+                max:90000000,                
+                type: "number",
+                "aria-labelledby": "input-slider",
+              }}
             />
           </FormControl>
         </Grid>
