@@ -303,7 +303,7 @@ export const EditarFolio = () => {
                 <CardContent>
                   <Grid container spacing={2}>
                     {/* FORMULARIO DE DESINCORPORACIONES */}
-                    <Grid item lg={6}>
+                    <Grid item lg={6} className="animate__animated animate__fadeInLeft">
                       <DesincorporacionComp
                         valuesDes={valuesDes}
                         handleInputChangeDes={handleInputChangeDes}
@@ -313,7 +313,7 @@ export const EditarFolio = () => {
                       />
                     </Grid>
                     {/* FROMULARIO DE REFERENCIAS (CUMPLIMIENTOS E INCUMPLIMIENTOS) */}
-                    <Grid item lg={12}>
+                    <Grid item lg={12} className="animate__animated animate__fadeInRight">
                       {tipo === "Afectación" ? (
                         <Grid container spacing={3}>
                           <Grid item lg={6}>
