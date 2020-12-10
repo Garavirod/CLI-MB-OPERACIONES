@@ -26,7 +26,6 @@ import {
   CustomSwalEmptyFrom,
   CustomSwalError,
 } from "../../functions/customSweetAlert";
-import { Ref } from "yup";
 import { validateFormExcept } from "../../functions/validateFrom";
 import { setKilometrajeCalculado } from "../../helpers/utils";
 
@@ -80,7 +79,7 @@ export const EditarFolio = () => {
     odometro: odometro,
     credencial: credencial,
     nombre: nombre,
-    fecha: fecha,
+    fecha: fecha.slice(0,10),
     hora: hora,
     jornada: jornada,
     observaciones: observaciones,
@@ -269,22 +268,9 @@ export const EditarFolio = () => {
           <Grid item lg={12}>
             <Alert severity="warning">
               <Grid container spacing={2}>
-                <Grid item lg={6}>
-                  Usted está visualizando la infrormación del folio:{" "}
-                  {idFoliotoUpdate}
-                </Grid>
-                <Grid item lg={6}>
-                  <Typography
-                    variant="h6"
-                    component="h4"
-                    className={classes.headerText}
-                  >
-                    <Link className="" to={"/reportes"}>
-                      <ArrowBackIcon />
-                      cerrar folio sin guardar
-                    </Link>
-                  </Typography>
-                </Grid>
+                <Grid item lg={12}>
+                  SECCIÓN DE EDICIÓN DE FOLIOS              
+                </Grid>                
               </Grid>
             </Alert>
           </Grid>
@@ -309,8 +295,24 @@ export const EditarFolio = () => {
                         handleInputChangeDes={handleInputChangeDes}
                         resetDes={resetDes}                        
                         active2={true} //Deshabilitamos 'Tipo'
-                        active3={true} //Deshabilitamos 'EdoFolio'
+                        active3={false} //Deshabilitamos 'EdoFolio'
                       />
+                    </Grid>
+                    <Grid item lg={6} className="animate__animated animate__fadeInRight">
+                      <Typography variant="h4">Folio</Typography>
+                      <Typography color="secondary">{idFoliotoUpdate}</Typography>
+                      <Typography variant="h4">Estado del folio</Typography>
+                      <Typography color="secondary">{edoFolio}</Typography>
+                      <br/>
+                      <Typography
+                        variant="h6"
+                        component="h4"                      
+                      >
+                        <Link className="" to={"/reportes"}>
+                          Cerrar sin guardar
+                          <ArrowBackIcon />
+                        </Link>
+                      </Typography>
                     </Grid>
                     {/* FROMULARIO DE REFERENCIAS (CUMPLIMIENTOS E INCUMPLIMIENTOS) */}
                     <Grid item lg={12} className="animate__animated animate__fadeInRight">
@@ -362,15 +364,15 @@ export const EditarFolio = () => {
                     </Grid>
                   </Grid>
                 </CardContent>
-                <CardActions>
+                <CardActions style={{'margin':10}}>
                   <Button
                     type="submit"
                     size="small"
                     variant="contained"
                     color="primary"
                   >
-                    Guardar
-                  </Button>                  
+                    Guardar cambios
+                  </Button>           
                 </CardActions>
               </form>
             </Grid>

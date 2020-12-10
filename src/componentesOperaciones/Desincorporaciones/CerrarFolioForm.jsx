@@ -230,10 +230,7 @@ export const CerrarFolioForm = () => {
                   color="primary"
                 >
                   Guardar folio
-                </Button>
-                <Button size="small" variant="contained" color="primary">
-                  Nuevo folio
-                </Button>
+                </Button>                
               </CardActions>
             </form>
           </Grid>
