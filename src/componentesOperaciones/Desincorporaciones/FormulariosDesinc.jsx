@@ -128,7 +128,7 @@ export const FormDesincorporaciones = () => {
           if(bothFilled){
             swal(
               "¿Tramos o vueltas?", 
-              "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas",
+              "Selecioanr entre tramos o número de vueltas a la ruta, pero no ambas",
               "warning");
           }else{
             // Si los tramos estan llenos entonces las vueltas van en ceros

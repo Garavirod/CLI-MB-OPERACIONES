@@ -51,7 +51,7 @@ export const MenuAccidentesScreen = () => {
       <div className={classes.root}>
         <Grid container spacing={3}>
           {Menu.map((sec) => (
-            <Grid key={sec.id} item lg={4} xs={12} md={12} className="animate__animated animate__fadeInDown">
+            <Grid key={sec.id} item lg={4} xs={12} md={12} className="animate__animated animate__fadeInUp">
               <Paper className={classes.paper}>
                 <div>
                   <CardSection

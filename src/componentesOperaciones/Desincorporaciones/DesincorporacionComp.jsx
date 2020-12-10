@@ -76,11 +76,7 @@ export const DesincorporacionComp = (props) => {
     edoFolio,
   } = valuesDes;
 
-  const handlechangeTipoFolio = (name) =>{
-    if(name === "Apoyo"){
-      valuesDes['edoFolio']="Cerrado";
-    }
-  }
+
 
 
   // Cada vez que cambie el estado de la linea, se tren todas las estaciones
@@ -127,7 +123,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* LINEA */}
-          <FormControl className={classes.formControl} disabled={active1}>
+          <FormControl className={classes.formControl} disabled={active1} required>
             <InputLabel>Linea</InputLabel>
             <Select                            
               native
@@ -148,7 +144,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* SOLIICITA */}
-          <FormControl className={classes.formControl} disabled={active1}>
+          <FormControl className={classes.formControl} disabled={active1} required>
             <InputLabel>Solicita</InputLabel>
             <Select
               native
@@ -169,7 +165,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* INFROMA */}
-          <FormControl className={classes.formControl} disabled={active1}>
+          <FormControl className={classes.formControl} disabled={active1} required>
             <InputLabel>Informa</InputLabel>
             <Select
               native
@@ -190,7 +186,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* ESTACIÓN */}
-          <FormControl className={classes.formControl} disabled={active1}>
+          <FormControl className={classes.formControl} disabled={active1} required>
             <InputLabel>Estación</InputLabel>
             <Select
               native
@@ -211,7 +207,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* ECONÓMICO */}
-          <FormControl className={classes.formControl} disabled={active1}>
+          <FormControl className={classes.formControl} disabled={active1} required>
             <InputLabel>Económico</InputLabel>
             <Select
               native
@@ -241,7 +237,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={3} md={6} sm={6} xs={12}>
           {/* MOTIVO */}
-          <FormControl className={classes.formControl} disabled={active1}>
+          <FormControl className={classes.formControl} disabled={active1} required>
             <InputLabel>Motivo</InputLabel>
             <Select
               native
@@ -264,6 +260,7 @@ export const DesincorporacionComp = (props) => {
           {/* ODÓMETRO */}
           <FormControl className={classes.formControl}>
             <TextField
+              required
               disabled={active1}
               type="number"
               id="standard-required"
@@ -285,6 +282,7 @@ export const DesincorporacionComp = (props) => {
           {/* CREDENCIAL */}
           <FormControl className={classes.formControl}>
             <TextField
+              required
               disabled={active1}
               id="standard-required"
               label="Credencial"
@@ -298,6 +296,7 @@ export const DesincorporacionComp = (props) => {
           {/* NOMBRE */}
           <FormControl className={classes.formControl}>
             <TextField
+              required
               disabled={active1}
               id="standard-required"
               label="Nombre"
@@ -311,6 +310,7 @@ export const DesincorporacionComp = (props) => {
           {/* FECHA */}
           <FormControl className={classes.formControl}>
             <TextField
+              required
               disabled={active1}
               id="date"
               name="fecha"
@@ -329,6 +329,7 @@ export const DesincorporacionComp = (props) => {
           {/* HORA */}
           <FormControl className={classes.formControl}>
             <TextField
+              required
               disabled={active1}
               id="time"
               name="hora"
@@ -348,7 +349,7 @@ export const DesincorporacionComp = (props) => {
         </Grid>
         <Grid item lg={4}>
           {/* JORNADA */}
-          <FormControl className={classes.formControl} disabled={active1}>
+          <FormControl className={classes.formControl} disabled={active1} required>
             <InputLabel>Jornada</InputLabel>
             <Select
               native

@@ -216,7 +216,7 @@ export default function Referencia(props) {
             {/* VUELTAS */}
             <Grid item lg={4} md={4} sm={12} xs={12}>
               <FormControl className={classes.formControl}>
-                <TextField
+                <TextField                  
                   disabled={active}
                   id="camporetrazo"
                   label="Vueltas"
@@ -241,7 +241,7 @@ export default function Referencia(props) {
             {/* IDAS */}
             <Grid item lg={4} md={4} sm={12} xs={12}>
               <FormControl className={classes.formControl}>
-                <TextField
+                <TextField                  
                   disabled={active}
                   id="camporetrazo"
                   label="Idas"

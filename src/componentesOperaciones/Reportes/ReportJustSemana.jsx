@@ -248,10 +248,6 @@ export const ReportJustSemana = () => {
                 <Tab label="Incumplimientos" {...a11yProps(INCUMP)} />
                 <Tab label="Cumplimientos" {...a11yProps(CUMPLI)} />
                 <Tab label="Afectaciones" {...a11yProps(AFECTA)} />
-                <Tab label="Item Four" {...a11yProps(3)} />
-                <Tab label="Item Five" {...a11yProps(4)} />
-                <Tab label="Item Six" {...a11yProps(5)} />
-                <Tab label="Item Seven" {...a11yProps(6)} />
               </Tabs>
             </AppBar>
             {/* INCUMPLIMIENTOS */}

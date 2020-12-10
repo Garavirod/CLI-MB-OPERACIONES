@@ -31,10 +31,11 @@ export const validateFormExcept = (obj, arr) =>{
     return isValid;
 }
 
-/* 
-    Vaida si una desincorporación es por tamos o vueltas
-*/
 
+/* 
+    Verifica si tanto los campos de tramos y los campos 
+    de vuletas están llenos.
+*/
 export const validateIncumByTramos = (obj) =>{
     /* Si ambos están llenos */
     if(
@@ -46,12 +47,24 @@ export const validateIncumByTramos = (obj) =>{
             obj['num_regreso'] !== ""
         )
     ){
+        if (
+            (
+    
+                (obj['tramo_desde']!=="-" && obj['tramo_hasta']!=="-") &&
+                (
+                    parseInt(obj['num_vuelta']) === 0 &&
+                    parseInt(obj['num_ida']) === 0 &&
+                    parseInt(obj['num_regreso']) === 0
+                )
+            )
+        ){
+            return false;
+        }
         return true;
     }
     return false;
 
 }
-
 
 export const validateRefApoInc = (obj) =>{
     if(
@@ -62,6 +75,7 @@ export const validateRefApoInc = (obj) =>{
         )
         &&
         (
+                    
             (
 
                 (obj['tramo_desde']==="-" || obj['tramo_hasta']==="-") &&
@@ -98,10 +112,12 @@ export const validateRefApoInc = (obj) =>{
              
         )
         
-    ){
+    ){        
         return true;
+    }else{
+
+        return false;
     }
-    return false;
 
 }
 

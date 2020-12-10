@@ -19,7 +19,7 @@ import Referencia from "./Referencia";
 import { Link } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
 import { useState } from "react";
-import { validateForm } from "../../functions/validateFrom";
+import { validateForm, validateRefApoInc, validateIncumByTramos } from "../../functions/validateFrom";
 import { httpPostData } from "../../functions/httpRequest";
 import swal from "sweetalert";
 import {
@@ -151,107 +151,212 @@ export const EditarFolio = () => {
     // validamos la referencia
     switch (tipo) {
       case "Incumplido":
-        isValidIncum = validateForm(valuesRef1);
+        isValidIncum = validateRefApoInc(valuesRef1);
         if (isValidFolio && isValidIncum) {
-          const km = setKilometrajeCalculado(valuesRef1);
-          valuesRef1["kilometraje"] = km;
-          valuesRef1["tipo"] = "Incumplido";
-          // Combinamos el folio con la referencia asociada
-          const folio_with_ref = { ...valuesDes, ...valuesRef1 };
-          alert(`Kilometraje incumplido >: ${km}`);
-          console.log(folio_with_ref);
-          //Realizar el POST de Folio completo
-          await httpPostData(
-            `/desincorporaciones/update-folio-cumpinc/${idFoliotoUpdate}`,
-            folio_with_ref
-          ).then((resp) => {
-            if (resp.success) {
-              swal(
-                "Información grabada",
-                "Los cambios han sido actaulizados exitosamente",
-                "success"
-              ).then(() => {
-                localStorage.removeItem("folioDesincData");
-                window.location.assign("/reportes");
-              });
+          const bothFilled = validateIncumByTramos(valuesRef1);
+          /* 
+            Validamos que el usuario solo haya llenado los tramos
+            o las vueltas, pero no ambas.
+          */
+          if(bothFilled){
+            swal(
+              "¿Tramos o vueltas?", 
+              "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas",
+              "warning");
+          }else{
+            
+            // Si los tramos estan llenos entonces las vueltas van en ceros
+            if(valuesRef1['tramo_desde']!=="-" && valuesRef1['tramo_hasta']!=="-"){
+              valuesRef1['num_vuelta'] = '0';
+              valuesRef1['num_ida'] = '0';
+              valuesRef1['num_regreso'] = '0';
             }
-          })
-          .catch(()=>{
-            CustomSwalError();
-          });
+            /* Se calcula el kilometraje */
+            const km = setKilometrajeCalculado(valuesRef1);
+            valuesRef1["kilometraje"] = km;
+            valuesRef1["tipo"] = "Incumplido";
+            // Combinamos el folio con la referencia asociada
+            const folio_with_ref = { ...valuesDes, ...valuesRef1 };
+            alert(`KILOMETRAJE INCUMPLIDO >: ${km}`);
+            console.log(folio_with_ref);
+            //Realizar el POST de Folio completo
+            await httpPostData(
+              `/desincorporaciones/update-folio-cumpinc/${idFoliotoUpdate}`,
+              folio_with_ref
+            ).then((resp) => {
+              if (resp.success) {
+                swal(
+                  "Información grabada",
+                  "Los cambios han sido actaulizados exitosamente",
+                  "success"
+                ).then(() => {
+                  localStorage.removeItem("folioDesincData");
+                  window.location.assign("/reportes");
+                });
+              }
+            })
+            .catch(()=>{
+              CustomSwalError();
+            });
+          }
           
         } else {
           CustomSwalEmptyFrom();
         }
         break;
       case "Apoyo":
-        isValidApo = validateForm(valuesRef2);
+        isValidApo = validateRefApoInc(valuesRef2);
         if (isValidFolio && isValidApo) {
-          const km = setKilometrajeCalculado(valuesRef2);
-          valuesRef2["kilometraje"] = km;
-          valuesRef2["tipo"] = "Apoyo";
-          alert(`Kilometraje cumplido >: ${km}`);
-          // combinamos el folio con la referencia asocaida
-          const folio_with_ref = { ...valuesDes, ...valuesRef2 };
-          console.log(folio_with_ref);
-          //Realizar el POST de Folio completo
-          await httpPostData(
-            `/desincorporaciones/update-folio-cumpinc/${idFoliotoUpdate}`,
-            folio_with_ref
-          ).then((resp) => {
-            if (resp.success) {
-              swal(
-                "Información grabada",
-                "Los cambios han sido actaulizados exitosamente",
-                "success"
-              ).then(() => {
-                localStorage.removeItem("folioDesincData");
-                window.location.assign("/reportes");
-              });
+          const bothFilled = validateIncumByTramos(valuesRef2);
+          /* 
+            Validamos que el usuario solo haya llenado los tramos
+            o las vueltas, pero no ambas.
+          */
+          if(bothFilled){
+            swal(
+              "¿Tramos o vueltas?", 
+              "Selecioanr entre tramos o número de vueltas a la ruta, pero no ambas",
+              "warning");
+          }else{
+            // Si los tramos estan llenos entonces las vueltas van en ceros
+            if(valuesRef2['tramo_desde']!=="-" && valuesRef2['tramo_hasta']!=="-"){
+              valuesRef2['num_vuelta'] = '0';
+              valuesRef2['num_ida'] = '0';
+              valuesRef2['num_regreso'] = '0';
             }
-          })
-          .catch(()=>{
-            CustomSwalError();
-          });
+            const km = setKilometrajeCalculado(valuesRef2);
+            valuesRef2["kilometraje"] = km;
+            valuesRef2["tipo"] = "Apoyo";
+            alert(`KILOMETRAJE CUMPLIDO >: ${km}`);
+            // combinamos el folio con la referencia asocaida
+            const folio_with_ref = { ...valuesDes, ...valuesRef2 };
+            console.log(folio_with_ref);
+            //Realizar el POST de Folio completo
+            await httpPostData(
+              `/desincorporaciones/update-folio-cumpinc/${idFoliotoUpdate}`,
+              folio_with_ref
+            ).then((resp) => {
+              if (resp.success) {
+                swal(
+                  "Información grabada",
+                  "Los cambios han sido actaulizados exitosamente",
+                  "success"
+                ).then(() => {
+                  localStorage.removeItem("folioDesincData");
+                  window.location.assign("/reportes");
+                });
+              }
+            })
+            .catch(()=>{
+              CustomSwalError();
+            });
+          }
         } else {
           CustomSwalEmptyFrom();
         }
         break;
       case "Afectación":
-        isValidIncum = validateForm(valuesRef1);
+        isValidIncum = validateRefApoInc(valuesRef1);
         isValidApo = validateForm(valuesRef2);
         if (isValidFolio && !isValidApo && isValidIncum) {
-          // cuando en una afectación sólo hay incumplimiento
-          const km = setKilometrajeCalculado(valuesRef1);
-          valuesRef1["kilometraje"] = km;
-          valuesRef1["tipo"] = "Incumplido";
-          // Combinamos el folio con la referencia asociada
-          const folio_with_ref = { ...valuesDes, ...valuesRef1 };
-          //Realizar el POST de Folio completo
-          httpPostData("/desincorporaciones/datos-afectacion", folio_with_ref);
-          alert(`Kilometraje incumplido >: ${km}`);
-          console.log(folio_with_ref);
-          localStorage.removeItem("folioDesincData");
+          const bothFilled = validateIncumByTramos(valuesRef1);
+          /* 
+            Validamos que el usuario solo haya llenado los tramos
+            o las vueltas, pero no ambas.
+          */
+          if(bothFilled){
+            swal(
+              "¿Tramos o vueltas?", 
+              "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas",
+              "warning");
+            console.log(valuesRef1);
+          }else{
+            // Si los tramos estan llenos entonces las vueltas van en ceros
+            if(valuesRef1['tramo_desde']!=="-" && valuesRef1['tramo_hasta']!=="-"){
+              valuesRef1['num_vuelta'] = '0';
+              valuesRef1['num_ida'] = '0';
+              valuesRef1['num_regreso'] = '0';
+            }
+            // cuando en una afectación sólo hay incumplimiento
+            const km = setKilometrajeCalculado(valuesRef1);
+            valuesRef1["kilometraje"] = km;
+            valuesRef1["tipo"] = "Incumplido";
+            // Combinamos el folio con la referencia asociada
+            const folio_with_ref = { ...valuesDes, ...valuesRef1 };
+            alert(`KILOMETRAJE INCUMPLIDO >: ${km}`);
+            //Realizar el POST de Folio completo
+            await httpPostData("/desincorporaciones/datos-afectacion", folio_with_ref)
+            .then((resp) => {
+              if (resp.success) {
+                swal(
+                  "Información grabada",
+                  "Los cambios han sido actaulizados exitosamente",
+                  "success"
+                ).then(() => {
+                  console.log(folio_with_ref);
+                  localStorage.removeItem("folioDesincData");
+                  window.location.assign("/reportes");
+                });
+              }
+            })
+            .catch(()=>{
+              CustomSwalError();
+            });            
+
+          }
         } else if (isValidFolio && isValidApo && isValidIncum) {
-          // cuando en una afectación hay incumplimiento y cumplimiento
-          const km1 = setKilometrajeCalculado(valuesRef1);
-          const km2 = setKilometrajeCalculado(valuesRef2);
-          // Asignación de kilometraje
-          valuesRef1["kilometraje"] = km1;
-          valuesRef2["kilometraje"] = km2;
-          // Tipo de folio
-          valuesRef1["tipo"] = "Incumplido";
-          valuesRef2["tipo"] = "Apoyo";
-          // Combinamos los folio con sus referencias asociadas
-          const folio_with_refs = [valuesDes, valuesRef1, valuesRef2];
-          // Realizar POST de folio
-          httpPostData(
-            "/desincorporaciones/datos-afectacion2",
-            folio_with_refs
-          );
-          alert(`Kilometraje calculado >: Incum ${km1} Cump ${km2}`);
-          console.log(folio_with_refs);
-          localStorage.removeItem("folioDesincData");
+          const bothFilled = validateIncumByTramos(valuesRef1);
+          /* 
+            Validamos que el usuario solo haya llenado los tramos
+            o las vueltas, pero no ambas.
+          */
+          if(bothFilled){
+            swal(
+              "¿Tramos o vueltas?", 
+              "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas",
+              "warning");
+            console.log(valuesRef1);
+          }else{
+            // Si los tramos estan llenos entonces las vueltas van en ceros
+            if(valuesRef1['tramo_desde']!=="-" && valuesRef1['tramo_hasta']!=="-"){
+              valuesRef1['num_vuelta'] = '0';
+              valuesRef1['num_ida'] = '0';
+              valuesRef1['num_regreso'] = '0';
+            } 
+            // cuando en una afectación hay incumplimiento y cumplimiento
+            const km1 = setKilometrajeCalculado(valuesRef1);
+            const km2 = setKilometrajeCalculado(valuesRef2);
+            // Asignación de kilometraje
+            valuesRef1["kilometraje"] = km1;
+            valuesRef2["kilometraje"] = km2;
+            // Tipo de folio
+            valuesRef1["tipo"] = "Incumplido";
+            valuesRef2["tipo"] = "Apoyo";
+            // Combinamos los folio con sus referencias asociadas
+            const folio_with_refs = [valuesDes, valuesRef1, valuesRef2];
+            // Realizar POST de folio
+            alert(`KILOMETRAJE INCUMPLIDO >: ${km1} \n KILOMETRAJE CUMPLIDO >: ${km2}`);
+            await httpPostData(
+              "/desincorporaciones/datos-afectacion2",
+              folio_with_refs
+            )
+            .then((resp) => {
+              if (resp.success) {
+                swal(
+                  "Información grabada",
+                  "Los cambios han sido actaulizados exitosamente",
+                  "success"
+                ).then(() => {
+                  console.log(folio_with_refs);
+                  localStorage.removeItem("folioDesincData");
+                  window.location.assign("/reportes");
+                });
+              }
+            })
+            .catch(()=>{
+              CustomSwalError();
+            });                   
+          }
         } else {
           CustomSwalEmptyFrom();
         }
