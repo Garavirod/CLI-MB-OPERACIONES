@@ -9,9 +9,11 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import FolderIcon from "@material-ui/icons/Folder";
+import DeleteIcon from "@material-ui/icons/Delete";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import { httpGetData } from "../../functions/httpRequest";
+import { httpGetData, httpDeleteData } from "../../functions/httpRequest";
 import { swal } from "sweetalert";
+import { CustomSwalError, CustomSwalDelete } from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,6 +40,7 @@ export function TabListComponent(props) {
 
   const [data, setData] = useState([]);
   const [tag, setTag] = useState("");
+  const [reload, setReaload] = useState(false);
 
   // Carga los datos dependiendo la etiqueta (folios/incump/cumpl)
   const getDatabyLabel = async (label) => {
@@ -93,11 +96,23 @@ export function TabListComponent(props) {
     window.location.replace("/cerrar-folio");
   } //cerrarFOlio
 
+  // elimina el folio de la lsta de folios abiertos
+  const DeleteFolio = async (idfolio) =>{       
+    const url = `desincorporaciones/delete-folio/${idfolio}`;
+    CustomSwalDelete(url).then(()=>{
+      // window.location.replace("/BitacoraDR");
+      setReaload(call=>!call);
+    })
+  }
 
   const { typeList, valueToRefr } = props;
   useEffect(() => {
     getDatabyLabel(typeList);
   }, [valueToRefr]);
+
+  useEffect(() => {
+    getDatabyLabel(typeList);
+  }, [reload]);
 
   const classes = useStyles();
 
@@ -133,6 +148,15 @@ export function TabListComponent(props) {
                     }}
                   >
                     <VisibilityIcon />
+                  </IconButton>
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => {
+                      DeleteFolio(it.id);
+                    }}
+                  >
+                    <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
               ) : null}
