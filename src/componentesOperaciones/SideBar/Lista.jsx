@@ -21,7 +21,7 @@ const Lista = () => {
             <Router>
 
             <List component="nav">
-                <ListItem button >
+                {/* <ListItem button >
                     <ListItemIcon>
                         <ListAltIcon className={classes.icon}/>
                         <a href="/JustificacionSemana">
@@ -43,7 +43,7 @@ const Lista = () => {
                                 />
                         </a>
                     </ListItemIcon>
-                </ListItem>
+                </ListItem> */}
 
                 <ListItem button>
                     <ListItemIcon>
@@ -63,7 +63,7 @@ const Lista = () => {
                         <a href="/reportes">
                         <ListItemText
                                     disableTypography
-                                    primary={<Typography variant="h5" style={{ color: '#FFFFFF' }}>Reportes</Typography>}
+                                    primary={<Typography variant="h5" style={{ color: '#FFFFFF' }}>Km realizado</Typography>}
                                 />
                         </a>
                     </ListItemIcon>

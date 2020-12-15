@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 const Menu = [
   {
     id:1,
-    tagname: "Acidentes y colisiones",
+    tagname: "Accidentes y colisiones",
     descripcion:
       "En esta sección se pueden llevar a cabo los registros de los eventos que abarcan colisiones o accidentes",
     imgName: "crash",
