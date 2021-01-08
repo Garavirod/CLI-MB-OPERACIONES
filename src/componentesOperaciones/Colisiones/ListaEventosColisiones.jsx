@@ -16,12 +16,21 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import RowColision from "./RowColision";
 import { CustomSwalError } from "../../functions/customSweetAlert";
+import { ButtonGroup } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
-const useStyles = makeStyles({
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+
+const useStyles = makeStyles((theme) => ({
+  pagination: {
+    margin: "auto",
+    textAlign: "center",
+  },
   table: {
     minWidth: 650,
   },
-});
+}));
 
 export default function ListaEventos() {
   const classes = useStyles();
@@ -30,20 +39,53 @@ export default function ListaEventos() {
   const [preload, setPreload] = useState(true);
   //state para que useEffect se lance cada que haya un delete
   const [valueToRefresh, setValToRef] = useState(true);
+  //
+  const [limit] = useState(15); //mínima catidad de registros a pedir
+  const [skip, setSkip] = useState(0); //cantidad de saltos a pedir
+  const [disabledNext, setDisabledNext] = useState(false);
+  const [disabledPrev, setDisabledPrev] = useState(true);
+
+
+  // nextSkip
+  const Skip = (skp) =>{
+    switch (skp) {
+      case 'next':
+        setSkip(skip + limit);             
+        break;
+      case 'prev':
+        setSkip(skip - limit);                        
+        break;
+      default:
+        break;
+    }
+  }
 
   useEffect(() => {
     getEventos();
   }, [valueToRefresh]);
 
+  useEffect(() => {    
+    if(skip===0)
+      setDisabledPrev(true);
+    else
+      setDisabledPrev(false);
+    getEventos();
+  }, [skip]);
+
   const getEventos = async () => {
-    const url = "/colisiones/colisiones-list";
+    setPreload(true);
+    const url = `/colisiones/colisiones-list?limit=${limit}&skip=${skip}`;
     //peticion de axios genérica por url
-    const _data = await httpGetData(url);
-    if (_data && _data.success) {
-      setData(_data.data);
+    const _data = await httpGetData(url);    
+    if (_data.success) {      
+      if(_data.data.length !== 0){ //si hay datos
+        setData(_data.data);
+        setDisabledNext(false);
+      }else{
+        setDisabledNext(true);
+      }
       setPreload(false);
-    }
-    else if(!_data){
+    } else if (!_data) {
       CustomSwalError();
     }
   };
@@ -51,10 +93,9 @@ export default function ListaEventos() {
   const deleteEvento = async (idevento) => {
     const url = `/colisiones/delete-colision/${idevento}`;
     CustomSwalDelete(url).then(() => {
-      setValToRef(prevVal => !prevVal);
+      setValToRef((prevVal) => !prevVal);
     });
   };
-
 
   return (
     <div>
@@ -83,14 +124,25 @@ export default function ListaEventos() {
                   <TableCell align="center">Intersección</TableCell>
                   <TableCell align="center">Colonia</TableCell>
                   <TableCell align="center">Borrar</TableCell>
-               
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.map((row) => <RowColision row={row} deleteEvento={deleteEvento} />)}
+                {data.map((row) => (
+                  <RowColision
+                    key={row.id}
+                    row={row}
+                    deleteEvento={deleteEvento}
+                  />
+                ))}
               </TableBody>
             </Table>
           </TableContainer>
+        </Grid>
+        <Grid item lg={12} className={classes.pagination}>
+          <ButtonGroup disableElevation variant="contained" color="primary">
+            <Button disabled={disabledPrev} onClick={()=>Skip("prev")} startIcon={<ArrowBackIosIcon />}>Previo</Button>
+            <Button disabled={disabledNext} onClick={()=>Skip("next")} endIcon={<ArrowForwardIosIcon />}>Siguiente</Button>
+          </ButtonGroup>
         </Grid>
       </Grid>
     </div>

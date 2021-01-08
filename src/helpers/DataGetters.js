@@ -388,7 +388,7 @@ export const getDistanciasByRuta = (ruta) =>{
                         Acumulado:1.82
                     },{
                         Estacion:'Euzkaro',
-                        Acumulado:22.29
+                        Acumulado:2.29
                     },{
                         Estacion:'Potrero',
                         Acumulado:3.10
