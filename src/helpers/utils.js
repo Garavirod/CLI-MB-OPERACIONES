@@ -6,12 +6,11 @@ export const setFechaActual = () =>{
     let month = (f.getMonth()+1).toString();
     let year = (f.getFullYear()).toString();
 
-    if( parseInt(day) <10 ){
+    if( parseInt(day) < 10 ){
         day = `0${day}`;
-    }else if (parseInt(month) <10){
-        month = `0${month}`;
+    }if (parseInt(month) < 10){
+        month = `0${month}`;               
     }
-
     return `${year}-${month}-${day}`;
 }
 
@@ -23,7 +22,7 @@ export const setHoraActual = () =>{
 
     if( parseInt(hr) <10 ){
         hr = "0"+hr;
-    }else if (parseInt(min) < 10){
+    }if (parseInt(min) < 10){
         min = "0"+min;
     }
 

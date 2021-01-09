@@ -20,10 +20,9 @@ import { Link } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
 import { useState } from "react";
 import { validateForm } from "../../functions/validateFrom";
-import {httpPostData} from "../../functions/httpRequest";
-import swal from 'sweetalert';
+import { httpPostData } from "../../functions/httpRequest";
+import swal from "sweetalert";
 import { CustomSwalEmptyFrom } from "../../functions/customSweetAlert";
-
 
 const useStyles = makeStyles((theme) => ({
   conatiner: {
@@ -36,19 +35,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const CerrarFolioForm = () => {
-  
   const folioSt = JSON.parse(localStorage.getItem("folio"));
   const apoyo = JSON.parse(localStorage.getItem("apoyo"));
   const incumplimiento = JSON.parse(localStorage.getItem("incumplido"));
 
-
-  const {id:idFolio}  = folioSt;
+  const { id: idFolio } = folioSt;
   const classes = useStyles();
   const [cumplimientos] = useState(apoyo);
   const [incumplimientos] = useState(incumplimiento);
   const [folio] = useState(folioSt);
   const { tipo } = folio;
-
 
   //Modelo y estructura de una Desincorporación
   const [valuesDes, handleInputChangeDes, resetDes] = useForm(folio);
@@ -59,12 +55,12 @@ export const CerrarFolioForm = () => {
   );
 
   // Modelo y estructura de una Referencia para un cumplimiento
-  const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(incumplimientos);
+  const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(
+    incumplimientos
+  );
 
   // Modelo y estructura de una Referencia para un Incumplimiento
-  const [valuesRef2, handleInputChangeRef2, resetRef2] = useForm(
-    cumplimientos
-  );
+  const [valuesRef2, handleInputChangeRef2, resetRef2] = useForm(cumplimientos);
 
   const registraIncorporacion = async (e) => {
     const urlUpdate = "/desincorporaciones/update-desincorporacion";
@@ -75,47 +71,46 @@ export const CerrarFolioForm = () => {
     //console.log("values desinc");
     //console.log(valuesDes);
     console.log(valuesInco);
-    const {edoFolio} = valuesDes;
-    if(edoFolio === "Cerrado sin incorporar"){
-      await httpPostData(urlUpdate, valuesDes)
-        .then(resp =>{
-            if(resp.success){
-              swal("Información grabada", "Los cambios han sido grabados exitosamente", "success")
-              .then(()=>{
-                localStorage.removeItem("apoyo");
-                localStorage.removeItem("incumplido");
-                window.location.replace(urlDesinc);
-              });
-            }
-        });//then
-    }
-    
-    else if (edoFolio === "Cerrado" && validateForm(valuesInco)){
-      console.log(valuesDes);
-      console.log(valuesRef1);
-      console.log(valuesRef2);
-      console.log(valuesInco);
-      await httpPostData(urlIncorpora, valuesInco)
-      .then(resp =>{
-        if(resp.success){
-          swal("Información grabada", "Los cambios han sido grabados exitosamente", "success")
-          .then(()=>{
+    const { edoFolio } = valuesDes;
+    if (edoFolio === "Cerrado sin incorporar") {
+      await httpPostData(urlUpdate, valuesDes).then((resp) => {
+        if (resp.success) {
+          swal(
+            "Información grabada",
+            "Los cambios han sido grabados exitosamente",
+            "success"
+          ).then(() => {
             localStorage.removeItem("apoyo");
             localStorage.removeItem("incumplido");
             window.location.replace(urlDesinc);
           });
-        }        
-    });//then
-      
-    }else if(edoFolio === "Abierto"){
-      swal("Estado del folio", "El folio no puede quedar abierto", "warning")
-    }else{
+        }
+      }); //then
+    } else if (edoFolio === "Cerrado" && validateForm(valuesInco)) {
+      console.log(valuesDes);
+      console.log(valuesRef1);
+      console.log(valuesRef2);
+      console.log(valuesInco);
+      await httpPostData(urlIncorpora, valuesInco).then((resp) => {
+        if (resp.success) {
+          swal(
+            "Información grabada",
+            "Los cambios han sido grabados exitosamente",
+            "success"
+          ).then(() => {
+            localStorage.removeItem("apoyo");
+            localStorage.removeItem("incumplido");
+            window.location.replace(urlDesinc);
+          });
+        }
+      }); //then
+    } else if (edoFolio === "Abierto") {
+      swal("Estado del folio", "El folio no puede quedar abierto", "warning");
+    } else {
       CustomSwalEmptyFrom();
     }
-
   };
 
-  
   return (
     <Container maxWidth="lg" className={classes.conatiner}>
       <Card>
@@ -148,7 +143,11 @@ export const CerrarFolioForm = () => {
                   <Grid item lg={6}>
                     {/* FORMULARIO DE DESINCORPORACIONES */}
                     <Grid container spacing={2}>
-                      <Grid item lg={12} className="animate__animated animate__fadeInLeft">
+                      <Grid
+                        item
+                        lg={12}
+                        className="animate__animated animate__fadeInLeft"
+                      >
                         <DesincorporacionComp
                           active1={true} //Deshabilitamos todos los campos 'Desincoporacion'
                           active2={true} //Deshabilita el campo 'Tipo'
@@ -158,7 +157,11 @@ export const CerrarFolioForm = () => {
                           resetDes={resetDes}
                         />
                       </Grid>
-                      <Grid item lg={12} className="animate__animated animate__fadeInUp">
+                      <Grid
+                        item
+                        lg={12}
+                        className="animate__animated animate__fadeInUp"
+                      >
                         {/* FROMULARIO DE REFERENCIAS */}
                         {tipo === "Afectación" ? (
                           <div>
@@ -178,7 +181,6 @@ export const CerrarFolioForm = () => {
                               handleInputChangeRef={handleInputChangeRef2}
                               resetRef={resetRef2}
                               active={true}
-
                             />
                           </div>
                         ) : tipo === "Incumplido" ? (
@@ -189,7 +191,6 @@ export const CerrarFolioForm = () => {
                             handleInputChangeRef={handleInputChangeRef1}
                             resetRef={resetRef1}
                             active={true}
-
                           />
                         ) : tipo === "Apoyo" ? (
                           <Referencia
@@ -199,7 +200,6 @@ export const CerrarFolioForm = () => {
                             handleInputChangeRef={handleInputChangeRef2}
                             resetRef={resetRef2}
                             active={true}
-
                           />
                         ) : (
                           <></>
@@ -210,7 +210,11 @@ export const CerrarFolioForm = () => {
                   <Grid item lg={6}>
                     <Grid container spacing={2}>
                       {/* FORMULARIO DE INCORPORACIONES */}
-                      <Grid item lg={12} className="animate__animated animate__fadeInRight">
+                      <Grid
+                        item
+                        lg={12}
+                        className="animate__animated animate__fadeInRight"
+                      >
                         <IncorporacionComp
                           valuesInco={valuesInco}
                           valuesDes={valuesDes}
@@ -218,6 +222,32 @@ export const CerrarFolioForm = () => {
                           resetInc={resetInc}
                         />
                       </Grid>
+                      {valuesDes.edoFolio === "Cerrado sin incorporar" && (
+                        <Grid item lg={12}>
+                          <Typography
+                            color="primary"
+                            className="animate__animated animate__fadeInRight"
+                          >
+                            <b>"Cerrado sin incorporar" :</b> <br />
+                            No se tomarán en cuanta los datos que escriba en el
+                            formulario (Incorporación / salida) al presionar el
+                            botón "Guardar Folio".
+                          </Typography>
+                        </Grid>
+                      )}
+
+                      {valuesDes.edoFolio === "Cerrado" && (
+                        <Grid item lg={12}>
+                          <Typography
+                            color="primary"
+                            className="animate__animated animate__fadeInRight"
+                          >
+                            <b>"Cerrado" :</b> <br />
+                            Proceda a llenar los campos del formulario
+                            (Incorporación / salida).
+                          </Typography>
+                        </Grid>
+                      )}
                     </Grid>
                   </Grid>
                 </Grid>
@@ -230,7 +260,7 @@ export const CerrarFolioForm = () => {
                   color="primary"
                 >
                   Guardar folio
-                </Button>                
+                </Button>
               </CardActions>
             </form>
           </Grid>
