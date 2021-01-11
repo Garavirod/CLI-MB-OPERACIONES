@@ -15,7 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import RowColision from "./RowColision";
-import { CustomSwalError } from "../../functions/customSweetAlert";
+import { CustomSwalErrorOnLoad } from "../../functions/customSweetAlert";
 import { ButtonGroup } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
@@ -42,6 +42,7 @@ export default function ListaEventos() {
   //
   const [limit] = useState(15); //mínima catidad de registros a pedir
   const [skip, setSkip] = useState(0); //cantidad de saltos a pedir
+  /* Botones de paginación */
   const [disabledNext, setDisabledNext] = useState(false);
   const [disabledPrev, setDisabledPrev] = useState(true);
 
@@ -53,7 +54,12 @@ export default function ListaEventos() {
         setSkip(skip + limit);             
         break;
       case 'prev':
-        setSkip(skip - limit);                        
+        if(disabledNext){ //si esta desbilitado el botón "Siguiiente"
+          setSkip(skip - (limit*2)); //Restamos 2 veces 'limit' por el último agregado   
+          setDisabledNext(false);
+        }else{
+          setSkip(skip - limit);                        
+        }
         break;
       default:
         break;
@@ -63,8 +69,9 @@ export default function ListaEventos() {
   useEffect(() => {
     getEventos();
   }, [valueToRefresh]);
-
+  
   useEffect(() => {    
+    console.log("SKIPS >: ",skip);
     if(skip===0)
       setDisabledPrev(true);
     else
@@ -80,13 +87,12 @@ export default function ListaEventos() {
     if (_data.success) {      
       if(_data.data.length !== 0){ //si hay datos
         setData(_data.data);
-        setDisabledNext(false);
-      }else{
-        setDisabledNext(true);
+      }else{ //si ya no hay más datos       
+        setDisabledNext(true); //Desabilitamos el botón de "siguiente"
       }
       setPreload(false);
-    } else if (!_data) {
-      CustomSwalError();
+    } else {
+      CustomSwalErrorOnLoad();
     }
   };
 
