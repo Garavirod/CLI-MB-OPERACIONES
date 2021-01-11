@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,24 +9,14 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
 import { CustomSwalDelete } from "../../functions/customSweetAlert";
-import { httpGetData } from "../../functions/httpRequest";
 import { PreloadData } from "../ui/PreloadData";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import RowColision from "./RowColision";
-import { CustomSwalErrorOnLoad } from "../../functions/customSweetAlert";
-import { ButtonGroup } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import { Paginaton } from "../ui/Paginaton";
 
 const useStyles = makeStyles((theme) => ({
-  pagination: {
-    margin: "auto",
-    textAlign: "center",
-  },
   table: {
     minWidth: 650,
   },
@@ -39,67 +29,17 @@ export default function ListaEventos() {
   const [preload, setPreload] = useState(true);
   //state para que useEffect se lance cada que haya un delete
   const [valueToRefresh, setValToRef] = useState(true);
-  //
-  const [limit] = useState(15); //mínima catidad de registros a pedir
-  const [skip, setSkip] = useState(0); //cantidad de saltos a pedir
-  /* Botones de paginación */
-  const [disabledNext, setDisabledNext] = useState(false);
-  const [disabledPrev, setDisabledPrev] = useState(true);
 
-
-  // nextSkip
-  const Skip = (skp) =>{
-    switch (skp) {
-      case 'next':
-        setSkip(skip + limit);             
-        break;
-      case 'prev':
-        if(disabledNext){ //si esta desbilitado el botón "Siguiiente"
-          setSkip(skip - (limit*2)); //Restamos 2 veces 'limit' por el último agregado   
-          setDisabledNext(false);
-        }else{
-          setSkip(skip - limit);                        
-        }
-        break;
-      default:
-        break;
-    }
-  }
-
-  useEffect(() => {
-    getEventos();
-  }, [valueToRefresh]);
+  // ENDPOINTS
+  const [endpointGetData] = useState('/colisiones/colisiones-list');
+  const [endpointDeleteData] = useState('/colisiones/delete-colision');
   
-  useEffect(() => {    
-    console.log("SKIPS >: ",skip);
-    if(skip===0)
-      setDisabledPrev(true);
-    else
-      setDisabledPrev(false);
-    getEventos();
-  }, [skip]);
 
-  const getEventos = async () => {
-    setPreload(true);
-    const url = `/colisiones/colisiones-list?limit=${limit}&skip=${skip}`;
-    //peticion de axios genérica por url
-    const _data = await httpGetData(url);    
-    if (_data.success) {      
-      if(_data.data.length !== 0){ //si hay datos
-        setData(_data.data);
-      }else{ //si ya no hay más datos       
-        setDisabledNext(true); //Desabilitamos el botón de "siguiente"
-      }
-      setPreload(false);
-    } else {
-      CustomSwalErrorOnLoad();
-    }
-  };
-
+  // Función para eliminar un evento basado en su id
   const deleteEvento = async (idevento) => {
-    const url = `/colisiones/delete-colision/${idevento}`;
+    const url = `${endpointDeleteData}/${idevento}`;
     CustomSwalDelete(url).then(() => {
-      setValToRef((prevVal) => !prevVal);
+      setValToRef((prevVal) => !prevVal); //cambiamos el valor de refres
     });
   };
 
@@ -144,12 +84,13 @@ export default function ListaEventos() {
             </Table>
           </TableContainer>
         </Grid>
-        <Grid item lg={12} className={classes.pagination}>
-          <ButtonGroup disableElevation variant="contained" color="primary">
-            <Button disabled={disabledPrev} onClick={()=>Skip("prev")} startIcon={<ArrowBackIosIcon />}>Previo</Button>
-            <Button disabled={disabledNext} onClick={()=>Skip("next")} endIcon={<ArrowForwardIosIcon />}>Siguiente</Button>
-          </ButtonGroup>
-        </Grid>
+        {/* Pagination component */}
+        <Paginaton 
+          setData={setData}
+          setPreload={setPreload}
+          endpoint={endpointGetData}
+          refreshOnChange={valueToRefresh}
+        />
       </Grid>
     </div>
   );

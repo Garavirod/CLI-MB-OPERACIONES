@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1,    
   },
   paper: {
     padding: theme.spacing(2),
@@ -93,7 +93,7 @@ export const EventosFormColisiones = () => {
   };
 
   return (
-    <div className={classes.root} className="animate__animated animate__fadeInRight">
+    <div className={classes.root, "animate__animated animate__fadeInRight"}>
       <Grid container spacing={2}>
         {/* header */}
         <Grid item lg={12}>

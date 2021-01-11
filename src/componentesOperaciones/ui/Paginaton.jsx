@@ -1,7 +1,13 @@
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { CustomSwalErrorOnLoad } from "../../functions/customSweetAlert";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import { ButtonGroup } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import { httpGetData } from "../../functions/httpRequest";
+
 
 const useStyles = makeStyles((theme) => ({
   pagination: {
@@ -11,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Paginaton = (props) => {
-    /* 
+  /* 
         Properties 
         
     */
@@ -23,14 +29,11 @@ export const Paginaton = (props) => {
   const [disabledPrev, setDisabledPrev] = useState(true);
 
   useEffect(() => {
-    console.log("SKIPS >: ",skip);
-    if(skip===0)
-      setDisabledPrev(true);
-    else
-      setDisabledPrev(false);    
+    console.log("SKIPS >: ", skip);
+    if (skip === 0) setDisabledPrev(true);
+    else setDisabledPrev(false);
     getData();
-  }, [skip,refreshOnChange]);
-
+  }, [skip, refreshOnChange]);
 
   // SKIPERS
   const Skip = (skp) => {
@@ -39,7 +42,7 @@ export const Paginaton = (props) => {
         setSkip(skip + limit); //agrega al skip los siguientes elementos de la pagina
         break;
       case "prev":
-          //si esta desbilitado el botón "Siguiente"
+        //si esta desbilitado el botón "Siguiente"
         if (disabledNext) {
           setSkip(skip - limit * 2); //Restamos 2 veces 'limit' por el último agregado
           setDisabledNext(false);
@@ -54,9 +57,10 @@ export const Paginaton = (props) => {
 
   /* Función que se encarga de hacer la peticoón y asignar la data */
   const getData = async () => {
+    /* Habilitamos preload si lo hay */    
     setPreload(true);
     //peticion de axios genérica por url
-    const _data = await httpGetData(endpoint);
+    const _data = await httpGetData(`${endpoint}?limit=${limit}&skip=${skip}`);
     if (_data.success) {
       if (_data.data.length !== 0) {
         //si hay datos
@@ -74,27 +78,25 @@ export const Paginaton = (props) => {
   const classes = useStyles();
 
   return (
-    <div>
-      <Grid container spacing={3}>
-        <Grid item lg={12} className={classes.pagination}>
-          <ButtonGroup disableElevation variant="contained" color="primary">
-            <Button
-              disabled={disabledPrev}
-              onClick={() => Skip("prev")}
-              startIcon={<ArrowBackIosIcon />}
-            >
-              Previo
-            </Button>
-            <Button
-              disabled={disabledNext}
-              onClick={() => Skip("next")}
-              endIcon={<ArrowForwardIosIcon />}
-            >
-              Siguiente
-            </Button>
-          </ButtonGroup>
-        </Grid>
+    <Grid container spacing={3}>
+      <Grid item lg={12} className={classes.pagination}>
+        <ButtonGroup disableElevation variant="contained" color="primary">
+          <Button
+            disabled={disabledPrev}
+            onClick={() => Skip("prev")}
+            startIcon={<ArrowBackIosIcon />}
+          >
+            Previo
+          </Button>
+          <Button
+            disabled={disabledNext}
+            onClick={() => Skip("next")}
+            endIcon={<ArrowForwardIosIcon />}
+          >
+            Siguiente
+          </Button>
+        </ButtonGroup>
       </Grid>
-    </div>
+    </Grid>
   );
 };
