@@ -27,10 +27,12 @@ import Box from "@material-ui/core/Box";
 import ListadatosSeguros from "./ListaDatosSeguro";
 import ListaTraslado from "./ListaTrasladoHospital";
 import ListaAmbulancia from "./ListaAmbulancia";
+import { Paginaton } from "../ui/Paginaton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
+    marginBottom:5
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -120,26 +122,15 @@ export const AccordionComponent = () => {
   const [reloadSeguro, setReloadSeguro] = useState(false);
   const [reloadTraslado, setReloadTraslado] = useState(false);
   const [reloadAmbulancia, setReloadAmbulancia] = useState(false);
+  // ENDPOINTS
+  const [endpointGetData] = useState('/lesionados/eventos');
+
+
   // Tab States
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  useEffect(() => {
-    getEventos();
-  }, [realodEventos]);
-
-  const getEventos = async () => {
-    const url = "/lesionados/eventos";
-    //peticion de axios genérica por url
-    setPreload(true);
-    const _data = await httpGetData(url);
-    if (_data.success) {
-      setData(_data.data);
-      setPreload(false);
-    }
   };
 
   const DeleteEvento = async (idEvento) => {
@@ -155,7 +146,7 @@ export const AccordionComponent = () => {
         const r = httpDeleteData(url);
         if (r) {
           swal("Información eliminada", { icon: "success" });
-          setRealoadEventos((callback) => !callback);
+          setRealoadEventos(callback => !callback);
         } else {
           CustomSwalError();
         }
@@ -302,6 +293,13 @@ export const AccordionComponent = () => {
           <Divider />
         </Accordion>
       ))}
+      {/* Pagination component */}
+      <Paginaton 
+          setData={setData}
+          setPreload={setPreload}
+          endpoint={endpointGetData}
+          refreshOnChange={realodEventos}
+        />
     </div>
   );
 };

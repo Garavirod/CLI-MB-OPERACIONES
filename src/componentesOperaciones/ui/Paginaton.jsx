@@ -19,6 +19,15 @@ const useStyles = makeStyles((theme) => ({
 export const Paginaton = (props) => {
   /* 
         Properties 
+        setData: asigandor de datos al state del compoennete padre
+
+        setPreload: habilita el preload del componente padre al hacer consulta
+
+        endpoit: url raíz de la peitción GET
+
+        refreshOnChange: Variable del state que indiqua si hubo elimancion o nuevo registro
+        de haber cambio se vuele a realizar la petición GET
+
         
     */
   const { setData, setPreload, endpoint, refreshOnChange } = props;
@@ -62,7 +71,13 @@ export const Paginaton = (props) => {
     //peticion de axios genérica por url
     const _data = await httpGetData(`${endpoint}?limit=${limit}&skip=${skip}`);
     if (_data.success) {
-      if (_data.data.length !== 0) {
+      console.log(_data);
+      const numItemsInQuery = _data.data.length;
+      if ( numItemsInQuery !== 0) {
+        // Si el numero de elementos del array es menor que el limit
+        if(numItemsInQuery < limit){
+          setDisabledNext(true); //No permitir que incremenete los saltos
+        }
         //si hay datos
         setData(_data.data);
       } else {
