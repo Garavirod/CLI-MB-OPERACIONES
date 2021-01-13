@@ -13,7 +13,8 @@ import { CustomSwalSave, CustomSwalError} from "../functions/customSweetAlert";
 export const  httpGetData = async(endpoint) =>{
     const response = await axios.get(endpoint)
     .then(res=>{
-        return {success:true, data: res.data.data};
+        return res.data;
+        //return {success:true, data: res.data.data};
     })
     .catch(err=>{
         console.log("Error al cargar los datos de >: "+endpoint+" error "+err);

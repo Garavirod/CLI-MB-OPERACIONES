@@ -8,6 +8,7 @@ import { ButtonGroup } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { httpGetData } from "../../functions/httpRequest";
 
+const maxElements = 15;
 
 const useStyles = makeStyles((theme) => ({
   pagination: {
@@ -31,33 +32,24 @@ export const Paginaton = (props) => {
         
     */
   const { setData, setPreload, endpoint, refreshOnChange } = props;
-  const [limit] = useState(15); //mínima catidad de registros a pedir
-  const [skip, setSkip] = useState(0); //cantidad de saltos a pedir
+  const [page, setPage] = useState(1); //página a pedir
+
   /* Botones de paginación */
   const [disabledNext, setDisabledNext] = useState(false);
   const [disabledPrev, setDisabledPrev] = useState(true);
 
   useEffect(() => {
-    console.log("SKIPS >: ", skip);
-    if (skip === 0) setDisabledPrev(true);
-    else setDisabledPrev(false);
     getData();
-  }, [skip, refreshOnChange]);
+  }, [page, refreshOnChange]);
 
   // SKIPERS
-  const Skip = (skp) => {
+  const handlePages = (skp) => {
     switch (skp) {
       case "next":
-        setSkip(skip + limit); //agrega al skip los siguientes elementos de la pagina
+        setPage(lastPage => lastPage += 1);
         break;
       case "prev":
-        //si esta desbilitado el botón "Siguiente"
-        if (disabledNext) {
-          setSkip(skip - limit * 2); //Restamos 2 veces 'limit' por el último agregado
-          setDisabledNext(false);
-        } else {
-          setSkip(skip - limit);
-        }
+          setPage(lastPage => lastPage -= 1);
         break;
       default:
         break;
@@ -69,18 +61,36 @@ export const Paginaton = (props) => {
     /* Habilitamos preload si lo hay */    
     setPreload(true);
     //peticion de axios genérica por url
-    const _data = await httpGetData(`${endpoint}?limit=${limit}&skip=${skip}`);
+    const _data = await httpGetData(`${endpoint}?page=${page}&&max=${maxElements}`);
     if (_data.success) {
-      console.log(_data);
       const numItemsInQuery = _data.data.length;
-      if ( numItemsInQuery !== 0) {
-        // Si el numero de elementos del array es menor que el limit
-        if(numItemsInQuery < limit){
-          setDisabledNext(true); //No permitir que incremenete los saltos
+      const totalCount = _data.count;
+      if ( numItemsInQuery !== 0)
+      {
+        // Si ya es lo último
+        if( (page * maxElements) >= totalCount)
+        {
+          setDisabledNext(true); //No permitir que incrementen los saltos
+        }
+        //está esta validación para que no tnga que re-render si ya está en false
+        else if(disabledNext)
+        {
+          setDisabledNext(false);
+        }
+        if(page == 1)
+        {
+          setDisabledPrev(true);
+        }
+        if(page > 1 && disabledPrev)
+        {
+          setDisabledPrev(false);
         }
         //si hay datos
         setData(_data.data);
-      } else {
+      }
+      else
+      {
+        console.log("entra a ya no hay más datos");
         //si ya no hay más datos
         setDisabledNext(true); //Desabilitamos el botón de "siguiente"
       }
@@ -98,14 +108,14 @@ export const Paginaton = (props) => {
         <ButtonGroup disableElevation variant="contained" color="primary">
           <Button
             disabled={disabledPrev}
-            onClick={() => Skip("prev")}
+            onClick={() => handlePages("prev")}
             startIcon={<ArrowBackIosIcon />}
           >
             Previo
           </Button>
           <Button
             disabled={disabledNext}
-            onClick={() => Skip("next")}
+            onClick={() => handlePages("next")}
             endIcon={<ArrowForwardIosIcon />}
           >
             Siguiente
