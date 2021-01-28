@@ -6,10 +6,14 @@
 
 export const validateForm = (objectData) =>{
     let isValid = true;
-    for (const item of Object.values(objectData)){
-        if(item === ""){
-            isValid = false;
-            break;
+    if (Object.keys(objectData).length === 0 && objectData.constructor === Object){
+        isValid = false;
+    }else{
+        for (const item of Object.values(objectData)){
+            if(item === ""){
+                isValid = false;
+                break;
+            }
         }
     }
     return isValid;

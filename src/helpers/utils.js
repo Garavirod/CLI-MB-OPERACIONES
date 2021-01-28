@@ -40,11 +40,11 @@ const kilometrajeByTramos = (tramo1,tramo2, distancias) =>{
     // El incumplimiento o cumplimiento fue por tramos
     let [_distE1] = distancias.filter(e=> e['Estacion'] === tramo1);
     let [_distE2] = distancias.filter(e=> e['Estacion'] === tramo2);
-    console.log("OBJ E1",_distE1);
-    console.log("OBJ E2",_distE2);       
+    /* console.log("OBJ E1",_distE1);
+    console.log("OBJ E2",_distE2);   */     
     // Si la estacion es la ultima (penúltima array), se considera la distancia del retorno (última array)
     if (_distE2 === distancias[distancias.length - 2]){
-
+        console.log("??",distancias[distancias.length - 1]);
         _distE2 = distancias[distancias.length - 1] 
     }
     // Retorna la direferecnia de los kilometrajes de la estacion origen y destino

@@ -14,11 +14,10 @@ import { useForm } from "../../hooks/useForm";
 import { DesincorporacionComp } from "./DesincorporacionComp";
 import { IncorporacionComp } from "./IncorporacionComp";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { ModelIncorporacion } from "../../models/ModelsIncorporacion";
+import { ModelIncorporacion, ModelReferencias } from "../../models/ModelsIncorporacion";
 import Referencia from "./Referencia";
 import { Link } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
-import { useState } from "react";
 import { validateForm, validateRefApoInc, validateIncumByTramos } from "../../functions/validateFrom";
 import { httpPostData } from "../../functions/httpRequest";
 import swal from "sweetalert";
@@ -41,11 +40,13 @@ const useStyles = makeStyles((theme) => ({
 
 export const EditarFolio = () => {
   const classes = useStyles();
+  
+
   const folioDesinc = JSON.parse(localStorage.getItem("folioDesincData"));
   let Ref1 = {};
   let Ref2 = {};
   // localStorage.removeItem("folioDesinc");
-  console.log(folioDesinc);
+  console.log("STORAGE ",folioDesinc);
   const {
     id: idFoliotoUpdate,
     credencial,
@@ -66,6 +67,10 @@ export const EditarFolio = () => {
     tipo,
     Cumplimiento_Incumplimientos,
   } = folioDesinc;
+
+/* ID de los incumpliemntos serán necesrios cuando se intente actualizar una afectacion compuesta (apoyo e e incumpliento) */
+const idAfectacionR1 = Cumplimiento_Incumplimientos[0]?.id || 0;
+const idAfectacionR2 = Cumplimiento_Incumplimientos[1]?.id || 0;
 
   //
   const DesIncData = {
@@ -120,12 +125,14 @@ export const EditarFolio = () => {
       break;
     case "Apoyo":
       Ref2 = getReferecncias(0);
+      break;
     default:
       if (Cumplimiento_Incumplimientos.length > 1) {
         Ref1 = getReferecncias(0);
         Ref2 = getReferecncias(1);
       } else {
         Ref1 = getReferecncias(0);
+        Ref2 = ModelReferencias;
       }
       break;
   }
@@ -137,13 +144,16 @@ export const EditarFolio = () => {
   const [valuesRef1, handleInputChangeRef1, resetRef1] = useForm(Ref1);
 
   // // Modelo y estructura de una Referencia para un Incumplimiento
-  let [valuesRef2, handleInputChangeRef2, resetRef2] = useForm(Ref2);
+  const [valuesRef2, handleInputChangeRef2, resetRef2] = useForm(Ref2);
+
+  /* console.log(valuesDes);
+  console.log(valuesRef1);
+  */
+  console.log(" ----- ",Ref2); 
+  console.log(" ----- ",valuesRef2); 
 
   const SendDataEdited = async (e) => {
     e.preventDefault();
-    console.log(valuesDes);
-    console.log(valuesRef1);
-    console.log(valuesRef2);
     // Validamos el folio de la desincorporación
     const isValidFolio = validateFormExcept(valuesDes, ["observaciones"]);
     let isValidIncum,
@@ -282,10 +292,10 @@ export const EditarFolio = () => {
             valuesRef1["kilometraje"] = km;
             valuesRef1["tipo"] = "Incumplido";
             // Combinamos el folio con la referencia asociada
-            const folio_with_ref = { ...valuesDes, ...valuesRef1 };
+            const folio_with_ref = [valuesDes, valuesRef1]
             alert(`KILOMETRAJE INCUMPLIDO >: ${km}`);
             //Realizar el POST de Folio completo
-            await httpPostData("/desincorporaciones/datos-afectacion", folio_with_ref)
+            await httpPostData(`/desincorporaciones/update-afectacion-simple/${idFoliotoUpdate}`, folio_with_ref)
             .then((resp) => {
               if (resp.success) {
                 swal(
@@ -315,7 +325,6 @@ export const EditarFolio = () => {
               "¿Tramos o vueltas?", 
               "Los incumplimientos sólo pueden ser por tramos o por número de vueltas a la ruta, pero no ambas",
               "warning");
-            console.log(valuesRef1);
           }else{
             // Si los tramos estan llenos entonces las vueltas van en ceros
             if(valuesRef1['tramo_desde']!=="-" && valuesRef1['tramo_hasta']!=="-"){
@@ -334,10 +343,11 @@ export const EditarFolio = () => {
             valuesRef2["tipo"] = "Apoyo";
             // Combinamos los folio con sus referencias asociadas
             const folio_with_refs = [valuesDes, valuesRef1, valuesRef2];
+            console.log("ESTO SE MANDA", folio_with_refs);
             // Realizar POST de folio
             alert(`KILOMETRAJE INCUMPLIDO >: ${km1} \n KILOMETRAJE CUMPLIDO >: ${km2}`);
             await httpPostData(
-              "/desincorporaciones/datos-afectacion2",
+              `/desincorporaciones/update-afectacion-compuesta/?idFolio=${idFoliotoUpdate}&idR1=${idAfectacionR1}&idR2=${idAfectacionR2}`,
               folio_with_refs
             )
             .then((resp) => {
@@ -346,8 +356,7 @@ export const EditarFolio = () => {
                   "Información grabada",
                   "Los cambios han sido actaulizados exitosamente",
                   "success"
-                ).then(() => {
-                  console.log(folio_with_refs);
+                ).then(() => {                  
                   localStorage.removeItem("folioDesincData");
                   window.location.assign("/reportes");
                 });
