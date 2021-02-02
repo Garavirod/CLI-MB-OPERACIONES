@@ -46,8 +46,14 @@ export const CerrarFolioForm = () => {
   const [folio] = useState(folioSt);
   const { tipo } = folio;
 
+  /*Para que se pueda ver el valor de la fecha en el input */
+  const folioConFecha = {
+    ...folio,
+    fecha: folio.fecha.slice(0,10)
+  }
+
   //Modelo y estructura de una Desincorporación
-  const [valuesDes, handleInputChangeDes, resetDes] = useForm(folio);
+  const [valuesDes, handleInputChangeDes, resetDes] = useForm(folioConFecha);
 
   // Modelo y estructura de una Incorporación
   const [valuesInco, handleInputChangeInc, resetInc] = useForm(
