@@ -46,9 +46,9 @@ export const CustomSwalError = () =>{
 }
 
 
-export const CustomSwalErrorOnLoad = () =>{    
+export const CustomSwalErrorOnLoad = (eTitle) =>{    
   swal({
-      title: "Error al cargar los datos",
+      title: eTitle || "Error al cargar los datos",
       text: "Intente nuevamente",
       icon: "error",
       //buttons: true,

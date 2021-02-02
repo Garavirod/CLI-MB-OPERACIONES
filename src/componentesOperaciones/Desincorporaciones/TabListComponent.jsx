@@ -55,7 +55,7 @@ export function TabListComponent(props) {
           const folios = [...resp.data];
           console.log(folios);
           setData(folios);
-        } else CustomSwalErrorOnLoad();
+        } else CustomSwalErrorOnLoad("Error al obtener folios abiertos");
         break;
       case "Incumplimeintos":
         setTag("Incumplimiento");
@@ -75,7 +75,7 @@ export function TabListComponent(props) {
       //es un array con su cumplimiento o incumpmimiento (ambos si fue una afectación)
       return resp.data;
     } else
-      CustomSwalErrorOnLoad();
+      CustomSwalErrorOnLoad("Error al obtener folio");
       return null;
       /*swal(
         "Error",
