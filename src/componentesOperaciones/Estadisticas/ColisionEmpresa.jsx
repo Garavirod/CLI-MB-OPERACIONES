@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Bar} from 'react-chartjs-2';
 import { httpGetData } from "../../functions/httpRequest";
-import { CustomSwalError } from "../../functions/customSweetAlert";
+import { CustomSwalErrorOnLoad } from "../../functions/customSweetAlert";
 import { Container,
     Grid,
     Card,
@@ -60,7 +60,7 @@ export default function ColisionEmpresa(){
             setShEmpresa(empresa);
         }
         else if(!data){
-            CustomSwalError();
+            CustomSwalErrorOnLoad();
         }
     }//getColisiones
 
@@ -74,7 +74,7 @@ export default function ColisionEmpresa(){
             //console.log(_data.data);
         }
         else if(!_data){
-            CustomSwalError();
+            CustomSwalErrorOnLoad();
         }
     };//getEmpresas
 

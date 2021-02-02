@@ -51,7 +51,7 @@ export const CustomSwalErrorOnLoad = () =>{
       title: "Error al cargar los datos",
       text: "Intente nuevamente",
       icon: "error",
-      buttons: true,
+      //buttons: true,
       dangerMode: true,
     });      
 }

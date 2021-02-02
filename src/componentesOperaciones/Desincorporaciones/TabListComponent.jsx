@@ -13,7 +13,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import { httpGetData, httpDeleteData } from "../../functions/httpRequest";
 import { swal } from "sweetalert";
-import { CustomSwalError, CustomSwalDelete } from "../../functions/customSweetAlert";
+import { CustomSwalDelete, CustomSwalErrorOnLoad } from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,11 +49,13 @@ export function TabListComponent(props) {
       case "Folios abiertos":
         setTag("Folio");
         const resp = await httpGetData(urlAbiertos);
-        if (resp.success) {
+        console.log("resp",resp);
+        if (resp && resp.success) {
+          console.log("resp.succes", resp.success);
           const folios = [...resp.data];
           console.log(folios);
           setData(folios);
-        } else swal("Error", "Error al obtener Folios", "error");
+        } else CustomSwalErrorOnLoad();
         break;
       case "Incumplimeintos":
         setTag("Incumplimiento");
