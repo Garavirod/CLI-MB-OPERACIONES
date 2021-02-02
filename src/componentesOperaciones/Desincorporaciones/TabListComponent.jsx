@@ -71,31 +71,36 @@ export function TabListComponent(props) {
   const getCumpIncum = async (idFolio) => {
     const urlConFolio = urlCumIncum + idFolio;
     const resp = await httpGetData(urlConFolio);
-    if (resp.success) {
+    if (resp && resp.success) {
       //es un array con su cumplimiento o incumpmimiento (ambos si fue una afectación)
       return resp.data;
     } else
-      swal(
+      CustomSwalErrorOnLoad();
+      return null;
+      /*swal(
         "Error",
         "Error al obtener Cumplimientos o Incumplimientos",
         "error"
-      );
+      );*/
   }; //getCumplimiento
 
   async function sendCerrarFolio(folio) {
     console.log(folio);
     localStorage.setItem("folio", JSON.stringify(folio));
     await getCumpIncum(folio.id).then((cumpIncums) => {
-      /*sólo deben haber máximo 2 por Folio;
-      cuando fue afectación y hubo cumpl e incum*/
-      cumpIncums.map((oneCumIncum) => {
-        const { tipo } = oneCumIncum;
-        if (tipo === "Incumplido")
-          localStorage.setItem("incumplido", JSON.stringify(oneCumIncum));
-        else localStorage.setItem("apoyo", JSON.stringify(oneCumIncum));
-      }); //map
+      if(cumpIncums)
+      {
+        /*sólo deben haber máximo 2 por Folio;
+        cuando fue afectación y hubo cumpl e incum*/
+        cumpIncums.map((oneCumIncum) => {
+          const { tipo } = oneCumIncum;
+          if (tipo === "Incumplido")
+            localStorage.setItem("incumplido", JSON.stringify(oneCumIncum));
+          else localStorage.setItem("apoyo", JSON.stringify(oneCumIncum));
+        }); //map
+        window.location.replace("/cerrar-folio");
+      }
     }); //then
-    window.location.replace("/cerrar-folio");
   } //cerrarFOlio
 
   // elimina el folio de la lsta de folios abiertos
