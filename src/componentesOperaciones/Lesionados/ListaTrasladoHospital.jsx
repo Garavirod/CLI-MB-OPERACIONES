@@ -9,7 +9,7 @@ import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import { httpGetData } from "../../functions/httpRequest";
-import { CustomSwalDelete } from "../../functions/customSweetAlert";
+import { CustomSwalDelete, CustomSwalErrorOnLoad } from "../../functions/customSweetAlert";
 import Grid from "@material-ui/core/Grid";
 import { PreloadData } from "../ui/PreloadData";
 
@@ -30,10 +30,12 @@ export default function ListaTraslado(props) {
     //peticion de axios genérica por url
     setPreload(true);
     const _data = await httpGetData(url);
-    if (_data.success){
+    if (_data && _data.success){
       setData(_data.data);
       setPreload(false);
-    } 
+    }
+    else
+      CustomSwalErrorOnLoad("Error al cargar traslados");
   };
 
   const deleteTraslado = async (traslado) => {

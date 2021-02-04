@@ -10,7 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import { useParams, Link } from "react-router-dom";
-import { CustomSwalDelete } from "../../functions/customSweetAlert";
+import { CustomSwalDelete,CustomSwalErrorOnLoad } from "../../functions/customSweetAlert";
 import { httpGetData } from "../../functions/httpRequest";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -41,10 +41,12 @@ export default function ListadatosSeguros() {
     const url = `/colisiones/seguro-list/${idEvento}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
-    if (_data.success){
+    if (_data && _data.success){
       setData(_data.data);
       setPreload(false);
     }
+    else
+    CustomSwalErrorOnLoad();
   };
 
   const deleteSeguro = async (idSeguro) => {

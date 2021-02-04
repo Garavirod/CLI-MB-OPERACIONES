@@ -11,7 +11,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import { useParams, Link } from "react-router-dom";
-import { CustomSwalDelete } from "../../functions/customSweetAlert";
+import { CustomSwalDelete,CustomSwalErrorOnLoad } from "../../functions/customSweetAlert";
 import { httpGetData } from "../../functions/httpRequest";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -44,10 +44,12 @@ export default function ListaAfectadosColisiones() {
     const url = `/colisiones/lesionados-list/${idEvento}`;
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
-    if (_data.success){
+    if (_data && _data.success){
       setData(_data.data);
       setPreload(false);
-    } 
+    }
+    else
+      CustomSwalErrorOnLoad();
   };
 
   const deleteLesionado = async (idLesionado) => {

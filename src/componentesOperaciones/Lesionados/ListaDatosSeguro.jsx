@@ -9,7 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
-import { CustomSwalDelete } from "../../functions/customSweetAlert";
+import { CustomSwalDelete, CustomSwalErrorOnLoad } from "../../functions/customSweetAlert";
 import { httpGetData } from "../../functions/httpRequest";
 import Grid from "@material-ui/core/Grid";
 import { PreloadData } from "../ui/PreloadData";
@@ -37,10 +37,12 @@ export default function ListadatosSeguros(props) {
     //peticion de axios genérica por url
     const _data = await httpGetData(url);
     setPreload(true);
-    if (_data.success){
+    if (_data && _data.success){
       setData(_data.data);
       setPreload(false);
     }
+    else
+      CustomSwalErrorOnLoad("Error al cargar seguros");
   };
 
   const deleteEvento = async (idSeguro) => {

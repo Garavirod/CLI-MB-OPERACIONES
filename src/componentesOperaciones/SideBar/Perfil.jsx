@@ -26,14 +26,14 @@ const Perfil = () => {
             <Avatar
         alt="Person"
         className={classes.avatar}
-        src="/images/avatars/2.jpg"
+        src="/images/avatars/avatar_1.png"
       />
       <Typography
         className={classes.name}
         style={{ color: '#FFFFFF' }}
         variant="h4"
       >
-        Gabriel Gaspar 
+        Nombre Apellido
       </Typography>
       <Typography 
       style={{ color: '#FFFFFF' }}
