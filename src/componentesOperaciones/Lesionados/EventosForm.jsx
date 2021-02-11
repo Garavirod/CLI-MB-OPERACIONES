@@ -44,8 +44,8 @@ export const EventosForm = (props) => {
   const initial_evento = {
     linea: "",
     estacion: "",
-    fecha: "2020-12-10",
-    hora: "12:00",
+    fecha: "",
+    hora: "",
     tipo_incidente: "",
     incidente: "",
     descripcion: "",
@@ -109,7 +109,7 @@ export const EventosForm = (props) => {
                 <Grid item lg={4}>
                   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="grouped-native-select">
-                      Linea
+                      Línea
                     </InputLabel>
                     <Select
                       native
@@ -119,15 +119,15 @@ export const EventosForm = (props) => {
                       onChange={handleInputChange}
                     >
                       <option defaultValue="" />
-                      <option value={1}>Liena 1</option>
-                      <option value={0}>Linea 2</option>
+                      <option value={1}>Línea 1</option>
+                      <option value={0}>Línea 2</option>
                     </Select>
                   </FormControl>
                 </Grid>
                 <Grid item lg={4}>
                   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="grouped-native-select">
-                      Estacion
+                      Estación
                     </InputLabel>
                     <Select
                       native
@@ -137,8 +137,8 @@ export const EventosForm = (props) => {
                       onChange={handleInputChange}
                     >
                       <option defaultValue="" />
-                      <option value={1}>Estacion 1</option>
-                      <option value={0}>Estacion 2</option>
+                      <option value={1}>Estación 1</option>
+                      <option value={0}>Estación 2</option>
                     </Select>
                   </FormControl>
                 </Grid>

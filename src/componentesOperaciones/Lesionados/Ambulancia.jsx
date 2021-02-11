@@ -45,8 +45,8 @@ export const FormDatosAmbulancia = (props) => {
   const classes = useStyles();
   // Objeto a mapear
   const initial_ambulancia = {
-    tiempoLLegada: "12:00", // hora
-    tiempoRespuesta: "00:00:00",
+    tiempoLLegada: "", // hora
+    tiempoRespuesta: "",
     ambulancia: "",
     ecoPlaca: "",
     paramedico: "",

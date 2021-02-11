@@ -61,8 +61,8 @@ export default function ListaAmbulancia(props) {
                 <TableCell align="center">Tiempo Llegada</TableCell>
                 <TableCell align="center">Tiempo Respuesta</TableCell>
                 <TableCell align="center">Ambulancia</TableCell>
-                <TableCell align="center">Economico Ambulancia</TableCell>
-                <TableCell align="center">Paramedico</TableCell>
+                <TableCell align="center">Económico Ambulancia</TableCell>
+                <TableCell align="center">Paramédico</TableCell>
                 <TableCell align="center">Diagnóstico</TableCell>
                 <TableCell align="center">Borrar</TableCell>
               </TableRow>

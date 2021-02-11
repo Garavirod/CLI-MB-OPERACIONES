@@ -44,8 +44,8 @@ export const FormDatosSeguro = (props) => {
   const { idEvento, setReloadSeguro } = props;
   // Objeto a mapear
   const initial_datosSeguroData = {
-    horaArribo: "12:00",
-    tiempoRespuesta: "00:00:00",
+    horaArribo: "",
+    tiempoRespuesta: "",
     seguro: "",
     corresponde: "",
     nombreAjustador: "",

@@ -60,8 +60,8 @@ export default function ListaTraslado(props) {
                 <TableRow>
                   <TableCell>ID</TableCell>
                   <TableCell align="center">Nombre hospital</TableCell>
-                  <TableCell align="center">Pase medico</TableCell>
-                  <TableCell align="center">Eliminar</TableCell>
+                  <TableCell align="center">Pase médico</TableCell>
+                  <TableCell align="center">Borrar</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

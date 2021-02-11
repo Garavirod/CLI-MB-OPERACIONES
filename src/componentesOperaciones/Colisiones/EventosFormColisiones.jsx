@@ -45,8 +45,8 @@ export const EventosFormColisiones = () => {
     motivo: "",
     interseccion: "",
     colonia: "",
-    fecha: "2020-12-10",
-    hora: "12:00",
+    fecha: "",
+    hora: "",
     
   };
 
@@ -169,7 +169,7 @@ export const EventosFormColisiones = () => {
                 <Grid item lg={4}>
                   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="grouped-native-select">
-                      motivo
+                      Motivo
                     </InputLabel>
                     <Select
                       native
@@ -191,7 +191,7 @@ export const EventosFormColisiones = () => {
                 <Grid item lg={4}>
                   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="grouped-native-select">
-                      Interseccion
+                      Intersección
                     </InputLabel>
                     <Select
                       native
