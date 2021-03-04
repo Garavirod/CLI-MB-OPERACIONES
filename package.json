@@ -15,6 +15,7 @@
     "chart.js": "^2.9.4",
     "formik": "^2.1.5",
     "jwt-decode": "^2.2.0",
+    "mapbox-gl": "^2.1.1",
     "material-ui-popup-state": "^1.6.1",
     "prop-types": "latest",
     "react": "^16.13.1",
@@ -48,5 +49,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "worker-loader": "^3.0.8"
+  }
 }

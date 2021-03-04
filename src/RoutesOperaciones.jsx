@@ -37,6 +37,8 @@ import { LesionAtropPieChart } from './componentesOperaciones/Estadisticas/Lesio
 import { ColisionesByYearChart } from './componentesOperaciones/Estadisticas/ColisionesByYearBarChart';
 import { Responsables } from './componentesOperaciones/Estadisticas/Responsables';
 
+import TestMap from './componentesOperaciones/Colisiones/TestMap';
+
 const Routes = () => {
     return ( 
         <Router>
@@ -57,7 +59,8 @@ const Routes = () => {
                 <PrivateRoute role="Operaciones" exact path="/add-register-traslado/:idAfectado/:idEvento" component={FormTraslado} />
                 {/* COLISIONES */}
                 <PrivateRoute role="Operaciones" path='/eventosColisiones/' component={ListaEventosColisiones}exact />
-                
+                <PrivateRoute role="Operaciones" path='/map' component={TestMap}exact />
+
                 {/*<PrivateRoute role="Operaciones" exact path="/add-registerColisiones/:idEvento" component={AddRegisterEventColisiones}/>*/}
                 
                 <PrivateRoute role="Operaciones" exact path="/afectadosColisiones/:idEvento" component={ListaAfectadosColisiones}/>
