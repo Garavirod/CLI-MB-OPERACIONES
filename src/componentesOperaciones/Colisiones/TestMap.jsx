@@ -25,7 +25,7 @@ const useStyles = makeStyles({
         left: 0,*/
         margin: '12px',
         borderRadius: '4px',
-        }
+    }
 });
 
 function TestMap(){
@@ -40,24 +40,28 @@ function TestMap(){
     const [zoom, setZoom] = useState(13);
 
     useEffect(() => {
+
         const map = new mapboxgl.Map({
             container: mapContainer.current,
             style: 'mapbox://styles/mapbox/streets-v11',
             center: [lng, lat],
             zoom: zoom,
         });
+        //var marker = new mapboxgl.Marker(, {anchor: 'bottom');
         var marker = new mapboxgl.Marker({
+            //anchor: 'bottom-left',
             //draggable: true
-            //offset: [0, -70/2]
+            offset: [.485 * 1000, -(15 + 165)],
         });
-            marker.setLngLat([lng, lat]);
+        marker.setLngLat([lng, lat]);
+
         map.on('click', function(e) {
             // The event object (e) contains information like the
             // coordinates of the point on the map that was clicked.
             console.log('A click event has occurred at ' + e.lngLat);
             setLng(e.lngLat.lng);
             setLat(e.lngLat.lat);
-            marker.setLngLat([lng, lat]);
+            marker.setLngLat([e.lngLat.lng, e.lngLat.lat]);
             var lngLat = marker.getLngLat();
             // Print the marker's longitude and latitude values in the console
             console.log('marker Longitude: ' + lngLat.lng + ', Latitude: ' + lngLat.lat );
@@ -76,15 +80,11 @@ function TestMap(){
                             <div className={classes.sidebar}>
                                 Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
                             </div>
-                            <div className= {classes.mapContainer} ref={mapContainer}/>
+                            <div id={"mapContainer"} className= {classes.mapContainer} ref={mapContainer}/>
                         </CardContent>
                     </Card>
                 </Grid>
             </Grid>
-            {/*<div >
-                
-                
-            </div>*/}
         </Container>
         
     );
