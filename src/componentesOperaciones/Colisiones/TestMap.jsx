@@ -7,12 +7,11 @@ import { Card, CardContent, Container, Grid } from '@material-ui/core';
 
 const useStyles = makeStyles({
     mapContainer: {
-        width: 1000,
-        /*position: 'absolute',
+        position: 'absolute',
         top: 0,
         right: 0,
         left: 0,
-        bottom: 0,*/
+        bottom: 0,
     },
     sidebar: {
         backgroundColor: 'rgba(35, 55, 75, 0.9)',
@@ -20,9 +19,9 @@ const useStyles = makeStyles({
         padding: '6px 12px',
         font: '15px/24px monospace',
         zIndex: 100,
-        /*position: 'absolute',
+        position: 'absolute',
         top: 0,
-        left: 0,*/
+        left: 0,
         margin: '12px',
         borderRadius: '4px',
     }
@@ -51,7 +50,7 @@ function TestMap(){
         var marker = new mapboxgl.Marker({
             //anchor: 'bottom-left',
             //draggable: true
-            offset: [.485 * 1000, -(15 + 165)],
+            //offset: [.485 * 1000, -(15 + 165)],
         });
         marker.setLngLat([lng, lat]);
 
