@@ -80,7 +80,7 @@ const Lista = () => {
                     </ListItemIcon>
                 </ListItem>
                 {/* to test map */}
-                <ListItem button>
+               {/*  <ListItem button>
                     <ListItemIcon>
                         <ListAltIcon className={classes.icon}/>
                         <a href="/map">
@@ -90,7 +90,7 @@ const Lista = () => {
                                     />
                         </a>
                     </ListItemIcon>
-                </ListItem>
+                </ListItem> */}
 
                 <ListItem button>
                     <ListItemIcon onClick={()=>Logout()}>

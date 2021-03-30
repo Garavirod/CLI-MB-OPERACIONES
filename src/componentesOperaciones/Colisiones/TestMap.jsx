@@ -4,7 +4,8 @@ import mapboxgl from 'mapbox-gl/dist/mapbox-gl-csp';
 import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardContent, Container, Grid } from '@material-ui/core';
-
+import swal from 'sweetalert';
+import { useParams } from 'react-router';
 const useStyles = makeStyles({
     mapContainer: {
         position: 'absolute',
@@ -38,6 +39,8 @@ function TestMap(){
     const [lat, setLat] = useState(19.504911);
     const [zoom, setZoom] = useState(13);
 
+    let {tagTipo} = useParams();
+
     useEffect(() => {
 
         const map = new mapboxgl.Map({
@@ -64,6 +67,25 @@ function TestMap(){
             var lngLat = marker.getLngLat();
             // Print the marker's longitude and latitude values in the console
             console.log('marker Longitude: ' + lngLat.lng + ', Latitude: ' + lngLat.lat );
+            // save coords on database related with event and colision
+            swal({
+                title: "¿Guardar punto seleccionado en el mapa?",
+                text: `Longitud ${lngLat.lng} Latitud ${lngLat.lat}`,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete) => {
+                if (willDelete) {
+                    localStorage.setItem('coords',JSON.stringify({lat:lngLat.lat,long:lngLat.lng}));
+                    window.location.href = "/colisiones-form";
+                  swal("Punto guardado exitosamente", {
+                    icon: "success",
+                  });
+                } else {
+                  swal("Punto no guardado");
+                }
+              });
         });
 
         marker.addTo(map);
@@ -72,7 +94,7 @@ function TestMap(){
     
     return (
         <Container component="main">
-            <Grid container spacing={4}>
+            <Grid container spacing={4}>                
                 <Grid item lg={12}>
                     <Card>
                         <CardContent>

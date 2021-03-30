@@ -76,6 +76,9 @@ export const EventosForm = (props) => {
   // console.log(values);
   // Valida el fromulario y de no haber campos vacios manda la infromacion al servidor
   const sendData = (e) => {
+
+   
+
     //Evita que la petición sea mandada por defecto en GET
     e.preventDefault();
     // Url de la API
@@ -245,7 +248,7 @@ export const EventosForm = (props) => {
                     value={descripcion}
                     onChange={handleInputChange}
                   />
-                </Grid>
+                </Grid>                
                 <Grid item lg={12}>
                   <Button
                     type="submit"
