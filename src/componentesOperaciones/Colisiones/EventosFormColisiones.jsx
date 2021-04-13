@@ -38,14 +38,14 @@ const useStyles = makeStyles((theme) => ({
 
 export const EventosFormColisiones = () => {
   const classes = useStyles();
-
+  const currentDate = new Date();
   // Objeto a mapear
   const initial_evento = {
     sentido: "",
     motivo: "",
     interseccion: "",
     colonia: "",
-    fecha: "2020-12-10",
+    fecha: currentDate.toISOString().slice(0, 10),//"2020-12-10",
     hora: "12:00",  
   };
 
@@ -84,6 +84,7 @@ export const EventosFormColisiones = () => {
           .then(resp =>{
               if(resp && resp.success)
               {
+                localStorage.removeItem('coords');
                 CustomSwalSave();
                 reset();
               }
