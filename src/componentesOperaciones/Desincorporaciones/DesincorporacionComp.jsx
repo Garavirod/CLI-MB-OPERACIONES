@@ -15,7 +15,6 @@ import {
   Container,
 } from "@material-ui/core";
 import {
-  getLineas,
   getJornadas,
   getSolicitudes,
   getEstacionesByLinea,
@@ -26,6 +25,7 @@ import {
 import { useState } from "react";
 import { useEffect } from "react";
 import { httpGetData } from "../../functions/httpRequest";
+import { CustomSwalErrorOnLoad } from "../../functions/customSweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +51,7 @@ export const DesincorporacionComp = (props) => {
     active3: Deshabilita los campos 'Edo folio'
   */
   const { valuesDes, handleInputChangeDes, active1=false, active2=false, active3=false } = props;
+  const [lineas, setLineas] = useState([]);
   // Estaciones por linea
   const [estacioneslinea, setEstacionLinea] = useState([]);
   const [empresaeconomico, setEmpresaEco] = useState("");  
@@ -76,9 +77,6 @@ export const DesincorporacionComp = (props) => {
     edoFolio,
   } = valuesDes;
 
-
-
-
   // Cada vez que cambie el estado de la linea, se tren todas las estaciones
   useEffect(() => {
     setEstacionLinea(getEstacionesByLinea(linea));
@@ -93,7 +91,17 @@ export const DesincorporacionComp = (props) => {
 
   useEffect(()=>{
     getMotivosList();
+    getLineas();
   },[]);
+
+  const getLineas = async() => {
+    const url = '/lineas/all-lineas';
+    const _data = await httpGetData(url);
+    if (_data.success)
+      setLineas(_data.data);
+    else
+      CustomSwalErrorOnLoad("Error al obtener líneas");
+  }//getLineas
 
   const getMotivosList =  async () =>{
     //folios-abiertos
@@ -105,7 +113,6 @@ export const DesincorporacionComp = (props) => {
   } 
 
   // Data inputs
-  const lineas = getLineas();
   const jornadas = getJornadas();
   const solicitudes = getSolicitudes();
   const infromantes = getInfromantes();  
