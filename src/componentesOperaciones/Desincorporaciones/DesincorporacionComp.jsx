@@ -17,7 +17,6 @@ import {
 import {
   getJornadas,
   getSolicitudes,
-  getEstacionesByLinea,
   getEconomicos,
   getInfromantes,
   getEmpresaByEco,
@@ -77,9 +76,9 @@ export const DesincorporacionComp = (props) => {
     edoFolio,
   } = valuesDes;
 
-  // Cada vez que cambie el estado de la linea, se tren todas las estaciones
+  // Cada vez que cambie el estado de la linea(Id_linea), se traen todas las estaciones
   useEffect(() => {
-    setEstacionLinea(getEstacionesByLinea(linea));
+    getEstacionesByLinea();
   }, [linea]);
 
   // Cada vez que el eco cambia de estado, busca la EO al que pertenece
@@ -93,6 +92,19 @@ export const DesincorporacionComp = (props) => {
     getMotivosList();
     getLineas();
   },[]);
+  
+  const getEstacionesByLinea = async () => {
+    if(linea !== "")
+    {
+      const url = `/lineas/estaciones-linea/${linea}`;
+      const _data = await httpGetData(url);
+      if (_data.success)
+        setEstacionLinea(_data.data);
+      else
+        CustomSwalErrorOnLoad("Error al obtener estaciones");
+    }
+  }//getEstacionesByLinea
+
 
   const getLineas = async() => {
     const url = '/lineas/all-lineas';
@@ -142,8 +154,8 @@ export const DesincorporacionComp = (props) => {
             >
               <option value={""}>...</option>
               {lineas.map((it) => (
-                <option key={it} value={it}>
-                  {it}
+                <option key={it.Id_linea} value={it.Id_linea}>
+                  {it.nombre_li}
                 </option>
               ))}
             </Select>
@@ -205,8 +217,8 @@ export const DesincorporacionComp = (props) => {
             >
               <option value={""}>...</option>
               {estacioneslinea.map((it) => (
-                <option key={it} value={it}>
-                  {it}
+                <option key={it.Id_estacion} value={it.Id_estacion}>
+                  {it.nombre_es}
                 </option>
               ))}
             </Select>
