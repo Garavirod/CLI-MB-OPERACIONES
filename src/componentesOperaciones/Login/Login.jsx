@@ -19,6 +19,8 @@ import pic2 from './image/mb2.jpg'
 import pic3 from './image/mb3.jpg'
 import pic4 from './image/mb4.jpg'
 import axios from 'axios'
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel"
 import { hasRole } from './../../functions';
 function Copyright() {
   return (
@@ -77,6 +79,16 @@ export default function SignInSide() {
 
   const handleInputChange = (e) => {
     user[e.target.name] = e.target.value;
+    console.log(user);
+  };
+
+  const handleSelChange = (e) => {
+    if(e.target.value =="Estaciones")
+    window.location.replace("http://10.138.0.10:3001/login");
+    else if(e.target.value =="Operaciones")
+    window.location.replace("http://10.138.0.10:3002/login");
+    else if(e.target.value =="Unidades")
+    window.location.replace("http://10.138.0.10:3000/");
     console.log(user);
   };
 
@@ -140,6 +152,27 @@ export default function SignInSide() {
                 Iniciar Sesión
               </Typography>
               <form className={classes.form} noValidate onSubmit={sendData}>
+
+              <InputLabel htmlFor="age-native-simple"> Area </InputLabel>
+                    <Select
+                      native
+                      defaultValue="Operaciones"
+                      onChange={handleSelChange}
+                      inputProps={{
+                        name: "area",
+                        id: "age-native-simple",
+                      }}
+                    >
+                      <option aria-label="None" value="" />
+                      
+                      <option value={"Estaciones"}>
+                        
+                          Estaciones Y Mantenimiento
+                        </option>
+                      <option value={"Operaciones"}>Operaciones</option>
+                      <option value={"Unidades"}>Unidades de Transporte</option>
+                    </Select>
+
                 <TextField
                   variant="outlined"
                   margin="normal"
