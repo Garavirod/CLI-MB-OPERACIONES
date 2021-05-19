@@ -13,7 +13,7 @@ import { CustomSwalSave, CustomSwalError, CustomSwalEmptyFrom } from "../../func
 import { validateForm } from "../../functions/validateFrom";
 import { httpPostData } from "../../functions/httpRequest";
 import { Link } from "react-router-dom";
-
+import swal from 'sweetalert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,16 +38,15 @@ const useStyles = makeStyles((theme) => ({
 
 export const EventosFormColisiones = () => {
   const classes = useStyles();
-
+  const currentDate = new Date();
   // Objeto a mapear
   const initial_evento = {
     sentido: "",
     motivo: "",
     interseccion: "",
     colonia: "",
-    fecha: "2020-12-10",
-    hora: "12:00",
-    
+    fecha: currentDate.toISOString().slice(0, 10),//"2020-12-10",
+    hora: "12:00",  
   };
 
   // Hook personalizado con el evento inicial
@@ -68,28 +67,34 @@ export const EventosFormColisiones = () => {
   const sendData = (e) => {
     //Evita que la petición sea mandada por defecto en GET
     e.preventDefault();
-    // Url de la API
-    const url = "/colisiones/datos-colision";    
-    if (validateForm(values)) {
-      // Petición axios genérica por url y data
-      httpPostData(url, values)
-        .then(resp =>{
-            if(resp && resp.success)
-            {
-              CustomSwalSave();
-              reset();
-            }
-            else
-              CustomSwalError();
-        });//then
-      /*const success = httpPostData(url, values);
-      if(success===true)
-        CustomSwalSave(); 
-      else
-        CustomSwalError();*/         
-    } else {
-      CustomSwalEmptyFrom();
-    }
+    // extraemos la coordenadas del storage
+    let coords = JSON.parse(localStorage.getItem('coords')) || null;
+    let values_with_coords = {};
+    //verifica si las corrdendas ya fueron agregadas
+    if(!coords){
+      swal("Coordenadas", "No se han agregado coordenadas del lugar de incidente", "info");      
+    }else{
+      values_with_coords = {...values, longitud:coords.long, latitud:coords.lat}
+      console.log(values_with_coords);
+      // Url de la API
+      const url = "/colisiones/datos-colision";    
+      if (validateForm(values_with_coords)) {
+        // Petición axios genérica por url y data
+        httpPostData(url, values_with_coords)
+          .then(resp =>{
+              if(resp && resp.success)
+              {
+                localStorage.removeItem('coords');
+                CustomSwalSave();
+                reset();
+              }
+              else
+                CustomSwalError();
+          });//then           
+      } else {
+        CustomSwalEmptyFrom();
+      }
+    }          
   };
 
   return (
@@ -102,6 +107,11 @@ export const EventosFormColisiones = () => {
         </Grid>
         <Grid item lg={12}>
           <Link to={"/eventosColisiones"}>Lista de eventos Colisiones</Link>
+        </Grid>
+
+        <Grid item lg={12}>
+          <h6>Agregar ubicación de colisión en mapa</h6>
+          <Link to={"/map"}>Ir a mapa</Link>
         </Grid>
 
         <Grid item lg={12}>

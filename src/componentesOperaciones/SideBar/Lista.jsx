@@ -79,6 +79,18 @@ const Lista = () => {
                         </a>
                     </ListItemIcon>
                 </ListItem>
+                {/* to test map */}
+               {/*  <ListItem button>
+                    <ListItemIcon>
+                        <ListAltIcon className={classes.icon}/>
+                        <a href="/map">
+                        <ListItemText
+                                    disableTypography
+                                    primary={<Typography variant="h5" style={{ color: '#FFFFFF' }}>Map test</Typography>}
+                                    />
+                        </a>
+                    </ListItemIcon>
+                </ListItem> */}
 
                 <ListItem button>
                     <ListItemIcon onClick={()=>Logout()}>
