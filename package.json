@@ -49,12 +49,5 @@
       "last 1 safari version"
     ]
   },
-<<<<<<< HEAD
   "proxy": "http://localhost:5002"
-=======
-  "proxy": "http://localhost:5000",
-  "devDependencies": {
-    "worker-loader": "^3.0.8"
-  }
->>>>>>> b63e91674fe883be9b115101111230db013ef6f1
 }
