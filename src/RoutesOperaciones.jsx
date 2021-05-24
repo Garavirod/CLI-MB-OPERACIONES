@@ -36,6 +36,7 @@ import { EstadisticasPage } from './componentesOperaciones/Estadisticas/Estadist
 import { LesionAtropPieChart } from './componentesOperaciones/Estadisticas/LesionAtropelladoPieChart';
 import { ColisionesByYearChart } from './componentesOperaciones/Estadisticas/ColisionesByYearBarChart';
 import { Responsables } from './componentesOperaciones/Estadisticas/Responsables';
+import {isLogin} from './functions';
 
 import TestMap from './componentesOperaciones/Colisiones/TestMap';
 
@@ -86,7 +87,7 @@ const Routes = () => {
                 <Route path="/denied" component={Denied} exact/>
                 <Route path="/RecuperarC" component={RecuperarC} exact/>
                 <Route path="/SignUp" component={Signup} exact/>
-                <Route path="/login" component={Login} exact/>
+                {!isLogin() && <Route path="/login" component={Login} exact/>}
                 <Route path="/registro" component={Registro} exact />                                                                                                            
             </div>
         </Router>
